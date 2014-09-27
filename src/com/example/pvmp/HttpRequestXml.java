@@ -7,17 +7,21 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Xml;
 
 
 		
 class HttpRequestXml {
 
-	private static final String test_url = 
-			"http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?sigla=PL&numero=&ano=2011&datApresentacaoIni=14/11/2011&datApresentacaoFim=16/11/2011&parteNomeAutor=&idTipoAutor=&siglaPartidoAutor=&siglaUFAutor=&generoAutor=&codEstado=&codOrgaoEstado=&emTramitacao=";
-	
 	public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
 	    Reader reader = null;
 	    reader = new InputStreamReader(stream, "UTF-8");        
@@ -27,7 +31,7 @@ class HttpRequestXml {
 	}	
 	
 	
-	public static String loadData() throws IOException{
+	public static String loadData(String test_url) throws IOException, XmlPullParserException{
 		
 		URL url = new URL(test_url);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -39,8 +43,23 @@ class HttpRequestXml {
 		Log.d(null,"The response is:" + response);
 		
 		InputStream is = connection.getInputStream();
-		String contentAsString = is.toString();
-		return contentAsString;
+		String name = parse(is);
+		Log.d("TESTE:" + name, "returning jsonList");
+		return name;
+	}
+	
+	private static String parse (InputStream in) throws XmlPullParserException, IOException {
+		try{
+			XmlPullParser parser = Xml.newPullParser();
+			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			parser.setInput(in,null);
+			parser.nextTag();
+			return parser.getName();
+		}
+		finally{
+			in.close();
+		}
+		
 	}
 	
 
