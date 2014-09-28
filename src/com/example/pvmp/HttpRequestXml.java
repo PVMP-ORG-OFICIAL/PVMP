@@ -42,8 +42,9 @@ class HttpRequestXml {
 	}	
 	
 	
-	public static void loadData(String test_url) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
+	public static String loadData(String test_url) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
 		
+		String test = "DAVID";
 		URL url = new URL(test_url);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setReadTimeout(100000);
@@ -56,18 +57,17 @@ class HttpRequestXml {
 		InputStream is = connection.getInputStream();
 		org.w3c.dom.Document name = parse(is);
 		org.w3c.dom.Element docEle = (org.w3c.dom.Element) name.getDocumentElement();
-		//org.w3c.dom.Element prop = (org.w3c.dom.Element) docEle.getElementsByTagName("proposicoes");
 		org.w3c.dom.NodeList nodeList = docEle.getChildNodes();
 		Log.d("SIZE:" + nodeList.getLength(),"node size");
 		for (int i = 0; i < nodeList.getLength(); i++){
-			//org.w3c.dom.Element el =  (org.w3c.dom.Element) nodeList.item(i);
-			//String id =  nodeList.item(i).getAttributes().getNamedItem("id").getTextContent();
 			if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE){
 				Element tmp = (Element) nodeList.item(i);
 				String id = tmp.getElementsByTagName("id").item(0).getTextContent();
-				Log.d("TESTE:" + id,"prop id");
+				test = id;
+				//Log.d("TESTE:" + id,"prop id");
 			}
 		}
+		return test;
 	}
 	
 	private static Document parse (InputStream in) throws XmlPullParserException, IOException, ParserConfigurationException, SAXException {
