@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import dao.PropositionDAO;
 
 
@@ -30,37 +31,30 @@ public class ParserActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_parser);
-		helper = new PropositionDAO(this);
+		//helper = new PropositionDAO(this);
 	}
 
-	public void salveProp(View view,Integer id){
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put("IDPROP", id);
-		db.insert("PVMP", null, values);
-	}
 	public void loadParser(View view){
 		ConnectivityManager connecManager = (ConnectivityManager)
-				getSystemService(Context.CONNECTIVITY_SERVICE);
+		getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connecManager.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
             new Download().execute();
         } else {
-            //textView.setText("No network connection available.");
+			Toast.makeText(getApplicationContext(), "Confira sua conexão", Toast.LENGTH_SHORT).show();
         }
 		
 	}
 
-	class Download extends AsyncTask<String, Void, String>{
+	class Download extends AsyncTask<String, Void, Integer>{
+		private Context context = getApplicationContext();
 		@Override
-		protected String doInBackground(String... params) {
-			String value = "David";
+		protected Integer doInBackground(String... params) {
+			Integer value = 0;
 			try{
-				value = HttpRequestXml.loadData(test_url);
+				value = HttpRequestXml.loadData(test_url,context);
 			}	
-			catch (IOException e ){
-				return "Error retriving data";
-			} catch (XmlPullParserException e) {
+			 catch (XmlPullParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ParserConfigurationException e) {
@@ -69,14 +63,18 @@ public class ParserActivity extends Activity {
 			} catch (SAXException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		return value;
 		}
+
 		
-		@Override
-		protected void onPostExecute(String result) {
-			Log.d("Show:" + result, "Current id");
+		protected void onPostExecute(Integer result) {
 		}
+
+
 	}
 	
 }
