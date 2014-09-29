@@ -12,21 +12,23 @@ public class PropositionDAO extends SQLiteOpenHelper {
 
 	public static final String TABLE_NAME = "PROPOSITION";
 	public static final String IDPROP = "IDPROP";
-	public static final Integer ANOPROP = 0;
+	public static final String ANOPROP = "ANOPROP";
 	public static final String EMENTAPROP = "EMENTAPROP";
 	public static final String AUTORPROP = "AUTORPROP";
 	/* TIPOPROP é a sigla da proposicao */
-	public static final String TIPOPROP = "TIPOPROP";
+	public static final String SIGLAPROP = "SIGLAPROP";
+	public static final String NUMEROPROP = "NUMEROPROP";
 	public static final String SITUACAOPROP = "SITUACAOPROP";
 	
 	public static final String CREATE_TABLE_PROPOSITION = 
 			"CREATE TABLE " + TABLE_NAME + "(" 
-		    + IDPROP + " INTEGER NOT NULL PRIMARY KEY," 
-			+ ANOPROP + "INTEGER NOT NULL,"
-			+ EMENTAPROP + "TEXT,"
-			+ AUTORPROP + "TEXT,"
-			+ TIPOPROP + "TEXT,"
-			+ SITUACAOPROP + "TEXT,"
+		    + IDPROP + " INTEGER NOT NULL PRIMARY KEY, " 
+			+ ANOPROP + " INTEGER NOT NULL, "
+			+ EMENTAPROP + " TEXT, "
+			+ AUTORPROP + " TEXT, "
+			+ SIGLAPROP + " TEXT, "
+			+ SITUACAOPROP + " TEXT, "
+			+ NUMEROPROP + " TEXT "
 			+ ");";
 	
 	public static final String BANCO_DADOS = "PVMP";
