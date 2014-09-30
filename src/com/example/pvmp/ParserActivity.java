@@ -50,7 +50,7 @@ public class ParserActivity extends Activity {
 		protected Integer doInBackground(String... params) {
 			Integer value = 0;
 			try{
-				value = HttpRequestXml.requestPlenario();
+				value = HttpRequestXml.requestPlenario(context);
 			}	
 			 catch (XmlPullParserException e) {
 				// TODO Auto-generated catch block
