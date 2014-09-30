@@ -22,8 +22,6 @@ import dao.PropositionDAO;
 
 public class ParserActivity extends Activity {
 
-	private static final String test_url = 
-			"http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?sigla=PL&numero=&ano=2011&datApresentacaoIni=14/11/2011&datApresentacaoFim=16/11/2011&parteNomeAutor=&idTipoAutor=&siglaPartidoAutor=&siglaUFAutor=&generoAutor=&codEstado=&codOrgaoEstado=&emTramitacao=";
 	
 	private PropositionDAO helper;
 		
@@ -52,7 +50,7 @@ public class ParserActivity extends Activity {
 		protected Integer doInBackground(String... params) {
 			Integer value = 0;
 			try{
-				value = HttpRequestXml.loadData(test_url,context);
+				value = HttpRequestXml.requestPlenario();
 			}	
 			 catch (XmlPullParserException e) {
 				// TODO Auto-generated catch block

@@ -7,9 +7,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,6 +44,11 @@ import android.util.Xml;
 import android.widget.Toast;
 
 class HttpRequestXml {
+
+	private static final String PROP_VOTADAS_PLENARIO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoesVotadasEmPlenario?";
+	private final static  String [] ANO_PROPOSICAO = {"2013","2014"};
+	public  final static  String [] TIPO_PROPOSICAO = {"PL","PLP","PDC","MPV","PEC"};
+
 	public static Context tmp_context = null;
 
 	public String readIt(InputStream stream, int len) throws IOException,
@@ -52,28 +60,28 @@ class HttpRequestXml {
 		return new String(buffer);
 	}
 
-	public void generateUrl() {
-
+	public static Integer requestPlenario() throws IOException, XmlPullParserException, ParserConfigurationException, SAXException {
+		
+		for(String ano:ANO_PROPOSICAO){
+			for(String tipo: TIPO_PROPOSICAO){
+				String plenario_url = PROP_VOTADAS_PLENARIO + "ano=" + ano + "&tipo="+tipo;
+				Log.d("URL:" + plenario_url, "URL");
+				Element plenario_element =  createConnection(plenario_url);
+				Log.d("Plenario:" + plenario_element.getChildNodes().getLength(), "Plenario");
+			}
+		}
+		return 1;
 	}
+	
+	
+	
+//	public HashMap<String, String> nameProposition(Element element){
+		
+//	}
+	
 
-	public static Integer loadData(String test_url, Context context)
-			throws IOException, XmlPullParserException,
-			ParserConfigurationException, SAXException {
-		tmp_context = context;
-		Integer test = 0;
-		URL url = new URL(test_url);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setReadTimeout(100000);
-		connection.setConnectTimeout(100000);
-		connection.setDoInput(true);
-		connection.connect();
-		int response = connection.getResponseCode();
-		Log.d(null, "The response is:" + response);
-
-		InputStream is = connection.getInputStream();
-		org.w3c.dom.Document name = parse(is);
-		org.w3c.dom.Element docEle = (org.w3c.dom.Element) name
-				.getDocumentElement();
+	public static Integer loadData(String s_url, Context context) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
+		Element docEle = createConnection(s_url) ;
 		org.w3c.dom.NodeList nodeList = docEle.getChildNodes();
 		Log.d("SIZE:" + nodeList.getLength(), "node size");
 		ArrayList<Proposition> tmp_propList = ParserHelper.propList(nodeList);
@@ -82,6 +90,20 @@ class HttpRequestXml {
 		return 1;
 	}
 
+	private static Element createConnection(String s_url) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
+		URL url = new URL(s_url);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setReadTimeout(100000);
+		connection.setConnectTimeout(100000);
+		connection.setDoInput(true);
+		connection.connect();
+		int response = connection.getResponseCode();
+		Log.d(null, "The response is:" + response);
+		InputStream is = connection.getInputStream();
+		org.w3c.dom.Document document = parse(is);
+		return document.getDocumentElement();
+		
+	}
 	private static Document parse(InputStream in)
 			throws XmlPullParserException, IOException,
 			ParserConfigurationException, SAXException {
