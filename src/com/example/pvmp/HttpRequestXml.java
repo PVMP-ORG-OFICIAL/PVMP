@@ -20,6 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import model.Proposition;
+import model.Voting;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -48,6 +49,7 @@ class HttpRequestXml {
 	private static final String PROP_VOTADAS_PLENARIO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoesVotadasEmPlenario?";
 	private static final String LISTAR_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?";
 	private static final String COMP_LISTAR_URL = "&datApresentacaoIni=&datApresentacaoFim=&parteNomeAutor=&idTipoAutor=&siglaPartidoAutor=&siglaUFAutor=&generoAutor=&codEstado=&codOrgaoEstado=&emTramitacao=";
+	private static final String OBTER_VOTACAO_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ObterVotacaoProposicao?";
 	private final static  String [] ANO_PROPOSICAO = {"2013","2014"};
 	public  final static  String [] TIPO_PROPOSICAO = {"PL","PLP","PDC","MPV","PEC"};
 
@@ -79,15 +81,18 @@ class HttpRequestXml {
 	public static void propositionList(ArrayList<HashMap<String, String>> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
 		
 	ArrayList<Proposition> propArrayObject = null;
+	ArrayList<Voting> votArrayObject = null;
 	   for(int i = 0; i < propList.size(); i++){
 		String ano = propList.get(i).get("ano");
 		String sigla = propList.get(i).get("sigla");
 		String numero = propList.get(i).get("numero");
 		String listPropUrl = LISTAR_PROPOSICAO + "sigla="+ sigla + "&numero="+numero + "&ano="+ano + COMP_LISTAR_URL;
-		Element element = createConnection(listPropUrl);
-		propArrayObject = ParserHelper.propList(element.getChildNodes());
-		saveProp(propArrayObject, tmp_context);
-
+		String listVotUrl = OBTER_VOTACAO_PROPOSICAO + "tipo="+ sigla + "&numero="+numero + "&ano="+ano;
+		Element propElement = createConnection(listPropUrl);
+		Element votElement = createConnection(listVotUrl);
+		propArrayObject = ParserHelper.propList(propElement.getChildNodes());
+		votArrayObject = ParserHelper.votingList(votElement.getChildNodes());
+		saveProp(propArrayObject,votArrayObject, tmp_context);
 	   }
 	}
 	
@@ -120,8 +125,9 @@ class HttpRequestXml {
 
 	}
 
-	public static void saveProp(ArrayList<Proposition> propList, Context context) {
+	public static void saveProp(ArrayList<Proposition> propList,ArrayList<Voting> votingList,Context context) {
 
+		saveVoting(votingList, propList.get(0).getIdProp(),context);
 		PropositionDAO helper = new PropositionDAO(context);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -150,6 +156,37 @@ class HttpRequestXml {
 					Log.d("prop ", "Proposição não salva");
 				}
 			}
+		}
+		db.close();
+	}
+	
+	
+	public static void saveVoting(ArrayList<Voting> votList,Integer idProp, Context context) {
+
+		PropositionDAO helper = new PropositionDAO(context);
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		for (int i = 0; i < votList.size(); i++) {
+			//Cursor c = db.rawQuery(
+			//		"SELECT * FROM VOTING WHERE CODSESSAO = ' "
+			//				+ votList.get(i).getCodSessaoVot() + "'", null);
+			Log.d("ENTROU2", "ENTROU2");
+			//if (c.getCount() == 0) {
+				values.put("DATA_VOTACAO", votList.get(i).getDataVot());
+				values.put("RESUMO", votList.get(i).getResumoVot());
+				values.put("CODSESSAO", votList.get(i).getCodSessaoVot());
+				values.put("IDPROP", idProp);
+				long log_res = db.insert("VOTING", null, values);
+				if (log_res != -1) {
+					// Toast.makeText(v, "Proposição salva",
+					// Toast.LENGTH_SHORT).show();
+					Log.d("prop ", "Votação salva");
+				} else {
+					// Toast.makeText(v, "Erro ao salvar",
+					// Toast.LENGTH_SHORT).show();
+					Log.d("prop ", "Votação não salva");
+				}
+		//	}
 		}
 		db.close();
 	}

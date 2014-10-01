@@ -1,13 +1,16 @@
 package helpers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import model.Proposition;
+import model.Voting;
 
 import android.content.Context;
 import android.util.Log;
@@ -92,5 +95,32 @@ public class ParserHelper {
     	return prop_hash;
     }
     
-    
+    public static ArrayList<Voting> votingList (NodeList votingList){
+		ArrayList<Voting> votList = new ArrayList<Voting>();
+		for (int i = 0; i < votingList.getLength(); i++){
+			if (votingList.item(i).getNodeType() == Node.ELEMENT_NODE){
+				Voting obj_voting = new Voting();
+
+				Element prop = (Element) votingList.item(i);
+				Log.d("Entrou aqui:" + prop.getNodeName(), "BLABLA");
+				if(prop.getElementsByTagName("Votacao").item(0) != null){
+				NamedNodeMap voting = prop.getElementsByTagName("Votacao").item(0).getAttributes();
+
+				String codSessao = voting.getNamedItem("codSessao").getTextContent();
+				String resumo = voting.getNamedItem("Resumo").getTextContent();
+				String data = voting.getNamedItem("Data").getTextContent();
+
+				obj_voting.setCodSessaoVot(Integer.parseInt(codSessao));
+				obj_voting.setResumoVot(resumo);
+				obj_voting.setDataVot(data);
+				
+				Log.d("Code:" + codSessao, "Vote");
+				Log.d("Resumo:" + resumo, "Vote");
+				Log.d("Data:" + data, "Vote");
+				votList.add(obj_voting);
+				}
+    }
+}
+		return votList;
+    }
 }
