@@ -20,6 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import model.Proposition;
+import model.Vote;
 import model.Voting;
 
 import org.w3c.dom.Document;
@@ -147,12 +148,8 @@ class HttpRequestXml {
 				values.put("SITUACAOPROP", propList.get(i).getSituacaoProp());
 				long log_res = db.insert("PROPOSITION", null, values);
 				if (log_res != -1) {
-					// Toast.makeText(v, "Proposição salva",
-					// Toast.LENGTH_SHORT).show();
 					Log.d("prop ", "Proposição salva");
 				} else {
-					// Toast.makeText(v, "Erro ao salvar",
-					// Toast.LENGTH_SHORT).show();
 					Log.d("prop ", "Proposição não salva");
 				}
 			}
@@ -163,31 +160,47 @@ class HttpRequestXml {
 	
 	public static void saveVoting(ArrayList<Voting> votList,Integer idProp, Context context) {
 
+		saveVote(votList.get(0).getVote(),context);
 		PropositionDAO helper = new PropositionDAO(context);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		for (int i = 0; i < votList.size(); i++) {
-			//Cursor c = db.rawQuery(
-			//		"SELECT * FROM VOTING WHERE CODSESSAO = ' "
-			//				+ votList.get(i).getCodSessaoVot() + "'", null);
+			Cursor c = db.rawQuery(
+					"SELECT * FROM VOTING WHERE CODSESSAO = ' "
+							+ votList.get(i).getCodSessaoVot() + "'", null);
 			Log.d("ENTROU2", "ENTROU2");
-			//if (c.getCount() == 0) {
+			if (c.getCount() == 0) {
 				values.put("DATA_VOTACAO", votList.get(i).getDataVot());
 				values.put("RESUMO", votList.get(i).getResumoVot());
 				values.put("CODSESSAO", votList.get(i).getCodSessaoVot());
 				values.put("IDPROP", idProp);
 				long log_res = db.insert("VOTING", null, values);
 				if (log_res != -1) {
-					// Toast.makeText(v, "Proposição salva",
-					// Toast.LENGTH_SHORT).show();
 					Log.d("prop ", "Votação salva");
 				} else {
-					// Toast.makeText(v, "Erro ao salvar",
-					// Toast.LENGTH_SHORT).show();
 					Log.d("prop ", "Votação não salva");
 				}
-		//	}
+			}
 		}
 		db.close();
+	}
+	
+	public static void saveVote (ArrayList<Vote> voteList,Context context){
+		PropositionDAO helper = new PropositionDAO(context);
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		for (int i = 0; i < voteList.size(); i++) {
+				values.put("VOTO", voteList.get(i).getVoto());
+				values.put("CODSESSAO", voteList.get(i).getCodSessao());
+				long log_res = db.insert("VOTE", null, values);
+				if (log_res != -1) {
+					Log.d("prop ", "Voto salva");
+				} else {
+					Log.d("prop ", "Voto não salva");
+				}
+		}
+		db.close();
+		
+		
 	}
 }

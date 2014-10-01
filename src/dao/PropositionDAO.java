@@ -32,13 +32,13 @@ public class PropositionDAO extends SQLiteOpenHelper {
 			+ ");";
 	
 	
-	public static final String VOT_TABLE_NAME = "VOTING";
+	public static final String VOTING_TABLE_NAME = "VOTING";
 	public static final String COD_SESSAO = "CODSESSAO";
 	public static final String RESUMO = "RESUMO";
 	public static final String DATA_VOTACAO = "DATA_VOTACAO";
 
 	public static final String CREATE_TABLE_VOTATING = 
-			"CREATE TABLE " + VOT_TABLE_NAME + "(" 
+			"CREATE TABLE " + VOTING_TABLE_NAME + "(" 
 		    + COD_SESSAO + " INTEGER NOT NULL PRIMARY KEY, " 
 			+ RESUMO + " TEXT, "
 			+ DATA_VOTACAO + " TEXT, "
@@ -47,6 +47,17 @@ public class PropositionDAO extends SQLiteOpenHelper {
 			+ ");";
 	
 	
+	public static final String VOTE_TABLE_NAME = "VOTE";
+	public static final String VOTO = "VOTO";
+	public static final String CREATE_TABLE_VOTE = 
+			"CREATE TABLE " + VOTE_TABLE_NAME + "(" 
+		    + VOTO + " TEXT, " 
+			+ COD_SESSAO + " INTEGER, "
+			+ "FOREIGN KEY(CODSESSAO) REFERENCES VOTING(CODSESSAO) "
+			+ ");";
+
+	
+
 	public static final String BANCO_DADOS = "PVMP";
 	private static int VERSAO = 1; 
 
@@ -61,6 +72,7 @@ public class PropositionDAO extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_PROPOSITION);
 		db.execSQL(CREATE_TABLE_VOTATING);
+		db.execSQL(CREATE_TABLE_VOTE);
 	}
 
 

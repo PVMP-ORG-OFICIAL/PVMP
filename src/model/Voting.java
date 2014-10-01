@@ -1,12 +1,21 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Voting {
 	
 	private Integer codSessaoVot;
 	private String resumoVot;
 	private String dataVot;
+	private ArrayList<Vote> vote;
 	
 	
+	public ArrayList<Vote> getVote() {
+		return vote;
+	}
+	public void setVote(ArrayList<Vote> vote) {
+		this.vote = vote;
+	}
 	public Integer getCodSessaoVot() {
 		return codSessaoVot;
 	}

@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import model.Proposition;
+import model.Vote;
 import model.Voting;
 
 import android.content.Context;
@@ -97,30 +98,52 @@ public class ParserHelper {
     
     public static ArrayList<Voting> votingList (NodeList votingList){
 		ArrayList<Voting> votList = new ArrayList<Voting>();
+		ArrayList<Vote> voteList = new ArrayList<Vote>();
+		
+		
 		for (int i = 0; i < votingList.getLength(); i++){
 			if (votingList.item(i).getNodeType() == Node.ELEMENT_NODE){
 				Voting obj_voting = new Voting();
 
 				Element prop = (Element) votingList.item(i);
-				Log.d("Entrou aqui:" + prop.getNodeName(), "BLABLA");
 				if(prop.getElementsByTagName("Votacao").item(0) != null){
 				NamedNodeMap voting = prop.getElementsByTagName("Votacao").item(0).getAttributes();
+				NodeList nodeVotacao = prop.getElementsByTagName("Votacao").item(0).getChildNodes();
+				Element nodeVote =  (Element) nodeVotacao.item(3);
 
 				String codSessao = voting.getNamedItem("codSessao").getTextContent();
 				String resumo = voting.getNamedItem("Resumo").getTextContent();
 				String data = voting.getNamedItem("Data").getTextContent();
+				voteList = objVoteList(codSessao,nodeVote);
 
 				obj_voting.setCodSessaoVot(Integer.parseInt(codSessao));
 				obj_voting.setResumoVot(resumo);
 				obj_voting.setDataVot(data);
+				obj_voting.setVote(voteList);
 				
-				Log.d("Code:" + codSessao, "Vote");
-				Log.d("Resumo:" + resumo, "Vote");
-				Log.d("Data:" + data, "Vote");
 				votList.add(obj_voting);
 				}
     }
 }
 		return votList;
     }
+   
+    private static ArrayList<Vote> objVoteList (String tmp_Sessao, Element tmp_Vote){
+		NodeList nodeVoteList = tmp_Vote.getChildNodes();
+		ArrayList<Vote> arrayVotelist = new ArrayList<>();
+
+		for (int i = 0; i < nodeVoteList.getLength(); i++){
+			if (nodeVoteList.item(i).getNodeType() == Node.ELEMENT_NODE){
+				Vote obj_vote = new Vote();
+				NamedNodeMap deputado = nodeVoteList.item(i).getAttributes();
+				String vote = deputado.getNamedItem("Voto").getTextContent();
+				obj_vote.setVoto(vote);
+				obj_vote.setCodSessao(Integer.parseInt(tmp_Sessao));
+				arrayVotelist.add(obj_vote);
+				Log.d("DEPUTADO :" + deputado.getNamedItem("Nome").getTextContent(),"VOTO");
+    }
+}
+		return arrayVotelist; 
+}
+
 }
