@@ -1,4 +1,4 @@
-package helpers;
+package parser.helpers;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -21,10 +21,6 @@ import org.w3c.dom.Element;
 
 
 public class ParserHelper {
-	
-	
-	private String OBTER_VOTACAO_PROPSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ObterVotacaoProposicao?";
-	
 	
 	public static ArrayList<Proposition> propList(NodeList  nodeList){
 		ArrayList<Proposition> propList = new ArrayList<Proposition>();
@@ -61,7 +57,6 @@ public class ParserHelper {
 				propList.add(prop);
 			}
 		}
-		Log.d("size" + propList.size(), "test");
 		return propList;
 	}
 	

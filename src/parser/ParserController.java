@@ -1,6 +1,5 @@
-package com.example.pvmp;
+package parser;
 
-import helpers.ParserHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,12 +39,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 
-import dao.PropositionDAO;
-import android.util.Log;
-import android.util.Xml;
-import android.widget.Toast;
+import parser.helpers.ParserHelper;
 
-class HttpRequestXml {
+import android.util.Log;
+
+public class ParserController {
 
 	private static final String PROP_VOTADAS_PLENARIO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoesVotadasEmPlenario?";
 	private static final String LISTAR_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?";
@@ -56,14 +54,6 @@ class HttpRequestXml {
 
 	public static Context tmp_context = null;
 
-	public String readIt(InputStream stream, int len) throws IOException,
-			UnsupportedEncodingException {
-		Reader reader = null;
-		reader = new InputStreamReader(stream, "UTF-8");
-		char[] buffer = new char[len];
-		reader.read(buffer);
-		return new String(buffer);
-	}
 
 	public static Integer requestPlenario(Context context) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException {
 		tmp_context = context;
@@ -79,7 +69,7 @@ class HttpRequestXml {
 		return 1;
 	}
 	
-	public static void propositionList(ArrayList<HashMap<String, String>> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
+	private static void propositionList(ArrayList<HashMap<String, String>> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
 		
 	ArrayList<Proposition> propArrayObject = null;
 	ArrayList<Voting> votArrayObject = null;
@@ -93,7 +83,7 @@ class HttpRequestXml {
 		Element votElement = createConnection(listVotUrl);
 		propArrayObject = ParserHelper.propList(propElement.getChildNodes());
 		votArrayObject = ParserHelper.votingList(votElement.getChildNodes());
-		saveProp(propArrayObject,votArrayObject, tmp_context);
+		DatabaseInterface.saveProp(propArrayObject,votArrayObject, tmp_context);
 	   }
 	}
 	
@@ -123,84 +113,5 @@ class HttpRequestXml {
 		} finally {
 			in.close();
 		}
-
-	}
-
-	public static void saveProp(ArrayList<Proposition> propList,ArrayList<Voting> votingList,Context context) {
-
-		saveVoting(votingList, propList.get(0).getIdProp(),context);
-		PropositionDAO helper = new PropositionDAO(context);
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		for (int i = 0; i < propList.size(); i++) {
-			Cursor c = db.rawQuery(
-					"SELECT * FROM PROPOSITION WHERE  IDPROP= ' "
-							+ propList.get(i).getIdProp() + "'", null);
-			Log.d("ENTROU2", "ENTROU2");
-			if (c.getCount() == 0) {
-				Log.d("ENTROU", "ENTROU");
-				values.put("IDPROP", propList.get(i).getIdProp());
-				values.put("ANOPROP", propList.get(i).getAnoProp());
-				values.put("AUTORPROP", propList.get(i).getAnoProp());
-				values.put("EMENTAPROP", propList.get(i).getEmentaProp());
-				values.put("SIGLAPROP", propList.get(i).getSiglaProp());
-				values.put("NUMEROPROP", propList.get(i).getNumeroProp());
-				values.put("SITUACAOPROP", propList.get(i).getSituacaoProp());
-				long log_res = db.insert("PROPOSITION", null, values);
-				if (log_res != -1) {
-					Log.d("prop ", "Proposição salva");
-				} else {
-					Log.d("prop ", "Proposição não salva");
-				}
-			}
-		}
-		db.close();
-	}
-	
-	
-	public static void saveVoting(ArrayList<Voting> votList,Integer idProp, Context context) {
-
-		saveVote(votList.get(0).getVote(),context);
-		PropositionDAO helper = new PropositionDAO(context);
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		for (int i = 0; i < votList.size(); i++) {
-			Cursor c = db.rawQuery(
-					"SELECT * FROM VOTING WHERE CODSESSAO = ' "
-							+ votList.get(i).getCodSessaoVot() + "'", null);
-			Log.d("ENTROU2", "ENTROU2");
-			if (c.getCount() == 0) {
-				values.put("DATA_VOTACAO", votList.get(i).getDataVot());
-				values.put("RESUMO", votList.get(i).getResumoVot());
-				values.put("CODSESSAO", votList.get(i).getCodSessaoVot());
-				values.put("IDPROP", idProp);
-				long log_res = db.insert("VOTING", null, values);
-				if (log_res != -1) {
-					Log.d("prop ", "Votação salva");
-				} else {
-					Log.d("prop ", "Votação não salva");
-				}
-			}
-		}
-		db.close();
-	}
-	
-	public static void saveVote (ArrayList<Vote> voteList,Context context){
-		PropositionDAO helper = new PropositionDAO(context);
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		for (int i = 0; i < voteList.size(); i++) {
-				values.put("VOTO", voteList.get(i).getVoto());
-				values.put("CODSESSAO", voteList.get(i).getCodSessao());
-				long log_res = db.insert("VOTE", null, values);
-				if (log_res != -1) {
-					Log.d("prop ", "Voto salva");
-				} else {
-					Log.d("prop ", "Voto não salva");
-				}
-		}
-		db.close();
-		
-		
 	}
 }

@@ -6,6 +6,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
+import parser.DatabaseInterface;
+import parser.ParserController;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,13 +20,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-import dao.PropositionDAO;
 
 
 public class ParserActivity extends Activity {
 
 	
-	private PropositionDAO helper;
+	private DatabaseInterface helper;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class ParserActivity extends Activity {
 		protected Integer doInBackground(String... params) {
 			Integer value = 0;
 			try{
-				value = HttpRequestXml.requestPlenario(context);
+				value = ParserController.requestPlenario(context);
 			}	
 			 catch (XmlPullParserException e) {
 				// TODO Auto-generated catch block
