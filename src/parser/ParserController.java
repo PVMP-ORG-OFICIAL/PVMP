@@ -1,6 +1,9 @@
 package parser;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,6 +21,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import model.Party;
 import model.Proposition;
 import model.Vote;
 import model.Voting;
@@ -30,6 +34,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -51,6 +56,7 @@ public class ParserController {
 	private static final String OBTER_VOTACAO_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ObterVotacaoProposicao?";
 	private final static  String [] ANO_PROPOSICAO = {"2013","2014"};
 	public  final static  String [] TIPO_PROPOSICAO = {"PL","PLP","PDC","MPV","PEC"};
+	private static final String PARTY_FILE = "party.txt";
 
 	public static Context tmp_context = null;
 
@@ -88,7 +94,9 @@ public class ParserController {
 	}
 	
 
-	private static Element createConnection(String s_url) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
+	private static Element createConnection(String s_url) 
+		throws IOException, XmlPullParserException, 
+			ParserConfigurationException, SAXException{
 		URL url = new URL(s_url);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setReadTimeout(100000);
@@ -114,4 +122,31 @@ public class ParserController {
 			in.close();
 		}
 	}
+
+    public static void importPartyFile (AssetManager getAssets, Context context) throws IOException{
+		tmp_context = context;
+    	try{
+    		InputStream inputStream =  getAssets.open(PARTY_FILE);
+    		if(inputStream != null){
+    		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+    		BufferedReader bufferR = new BufferedReader(inputStreamReader);
+    		String receiveString = "";
+    		StringBuilder stringBuilder = new StringBuilder();
+    		while ((receiveString = bufferR.readLine()) != null){
+    			Party party = new Party();
+    			Log.d("Completo:" + receiveString, "Test");
+    			String [] name = receiveString.split(" ");
+    			party.setNumPartido(Integer.parseInt(name[1]));
+    			party.setSiglaPartido(name[0]);
+    			DatabaseInterface.saveParty(party, tmp_context);
+			}
+    	}
+}
+    	catch (FileNotFoundException e){
+    		Log.e("", "File not found: " + e.toString());	
+    	}
+    	catch (IOException e){
+    		Log.e("", "Can not read file: " + e.toString());	
+    	}
+    }
 }

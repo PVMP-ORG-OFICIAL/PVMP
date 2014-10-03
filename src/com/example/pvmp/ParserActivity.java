@@ -8,6 +8,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import parser.DatabaseInterface;
 import parser.ParserController;
+import parser.helpers.ParserHelper;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -23,9 +24,6 @@ import android.widget.Toast;
 
 
 public class ParserActivity extends Activity {
-
-	
-	private DatabaseInterface helper;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,10 +36,12 @@ public class ParserActivity extends Activity {
 		ConnectivityManager connecManager = (ConnectivityManager)
 		getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connecManager.getActiveNetworkInfo();
+        new PartyFromFile().execute();
 		if (networkInfo != null && networkInfo.isConnected()) {
             new Download().execute();
         } else {
-			Toast.makeText(getApplicationContext(), "Confira sua conexão", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Confira sua conexão", 
+					Toast.LENGTH_SHORT).show();
         }
 		
 	}
@@ -69,12 +69,20 @@ public class ParserActivity extends Activity {
 			}
 		return value;
 		}
-
-		
-		protected void onPostExecute(Integer result) {
-		}
-
-
 	}
-	
+	class PartyFromFile extends AsyncTask<String, Void, Integer>{
+		@Override
+		protected Integer doInBackground(String... params) {
+			Integer value = 0;
+			Log.d("Teste", "Teste");
+			try {
+				ParserController.importPartyFile(getAssets(),getApplicationContext());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return value;
+		}
+	}
+
 }

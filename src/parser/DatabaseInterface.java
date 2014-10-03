@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 
+import model.Party;
 import model.Proposition;
 import model.Vote;
 import model.Voting;
@@ -29,7 +30,7 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	public static final String NUMEROPROP = "NUMEROPROP";
 	public static final String SITUACAOPROP = "SITUACAOPROP";
 	
-	public static final String CREATE_TABLE_PROPOSITION = 
+	public static final String CREATE_PROPPOSITION_TABLE = 
 			"CREATE TABLE " + PROP_TABLE_NAME + "(" 
 		    + IDPROP + " INTEGER NOT NULL PRIMARY KEY, " 
 			+ ANOPROP + " INTEGER NOT NULL, "
@@ -46,7 +47,7 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	public static final String RESUMO = "RESUMO";
 	public static final String DATA_VOTACAO = "DATA_VOTACAO";
 
-	public static final String CREATE_TABLE_VOTATING = 
+	public static final String CREATE_VOTATING_TABLE = 
 			"CREATE TABLE " + VOTING_TABLE_NAME + "(" 
 		    + COD_SESSAO + " INTEGER NOT NULL PRIMARY KEY, " 
 			+ RESUMO + " TEXT, "
@@ -58,7 +59,7 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	
 	public static final String VOTE_TABLE_NAME = "VOTE";
 	public static final String VOTO = "VOTO";
-	public static final String CREATE_TABLE_VOTE = 
+	public static final String CREATE_VOTE_TABLE = 
 			"CREATE TABLE " + VOTE_TABLE_NAME + "(" 
 		    + VOTO + " TEXT, " 
 			+ COD_SESSAO + " INTEGER, "
@@ -66,6 +67,14 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 			+ ");";
 
 	
+	public static final String PARTY_TABLE_NAME = "PARTY";
+	public static final String SIGLA = "SIGLA";
+	public static final String NUMERO = "NUMERO";
+	public static final String CREATE_PARTY_TABLE = 
+			"CREATE TABLE " + PARTY_TABLE_NAME + "(" 
+		    + NUMERO + " INTEGER NOT NULL PRIMARY KEY, " 
+			+ SIGLA + " TEXT "
+			+ ");";
 
 	public static final String BANCO_DADOS = "PVMP";
 	private static int VERSAO = 1; 
@@ -79,9 +88,10 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_TABLE_PROPOSITION);
-		db.execSQL(CREATE_TABLE_VOTATING);
-		db.execSQL(CREATE_TABLE_VOTE);
+		db.execSQL(CREATE_PROPPOSITION_TABLE);
+		db.execSQL(CREATE_VOTATING_TABLE);
+		db.execSQL(CREATE_VOTE_TABLE);
+		db.execSQL(CREATE_PARTY_TABLE);
 	}
 
 
@@ -165,7 +175,25 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 				}
 		}
 		db.close();
-		
-		
 	}
+
+	public static void saveParty(Party party,Context context){
+		DatabaseInterface helper = new DatabaseInterface(context);
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+			Cursor c = db.rawQuery(
+					"SELECT * FROM PARTY WHERE NUMERO = ' "
+							+ party.getNumPartido() + "'", null);
+			if (c.getCount() == 0) {
+				values.put("NUMERO", party.getNumPartido());
+				values.put("SIGLA", party.getSiglaPartido());
+				long log_res = db.insert("PARTY", null, values);
+				if (log_res != -1) {
+					Log.d("prop ", "Votação salva");
+				} else {
+					Log.d("prop ", "Votação não salva");
+				}
+			}
+		db.close();
+		}
 }

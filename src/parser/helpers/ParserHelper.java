@@ -66,14 +66,16 @@ public class ParserHelper {
     	HashMap<String, String> prop_hash = null; 
     	NodeList plenario = element.getChildNodes();
 
-       for (int i = 0; i<plenario.getLength(); i++){
-    	   if(element.getElementsByTagName("nomeProposicao").item(i) != null){
-    	   String nameProp = element.getElementsByTagName("nomeProposicao").item(i).getTextContent();
-    	   prop_hash = token(nameProp);
-    	   list_proposition.add(prop_hash);
-    	   }
-       }
-       return list_proposition;
+    	for (int i = 0; i<plenario.getLength(); i++){
+    		if(element.getElementsByTagName("nomeProposicao").item(i) != null){
+    			if (element.getElementsByTagName("nomeProposicao").item(i).getNodeType() == Node.ELEMENT_NODE){
+    				String nameProp = element.getElementsByTagName("nomeProposicao").item(i).getTextContent();
+    				prop_hash = token(nameProp);
+    				list_proposition.add(prop_hash);
+    			}
+    		}
+    	}
+    	return list_proposition;
     }
     
     private static HashMap<String, String> token(String nameProp){
@@ -92,53 +94,55 @@ public class ParserHelper {
     }
     
     public static ArrayList<Voting> votingList (NodeList votingList){
-		ArrayList<Voting> votList = new ArrayList<Voting>();
-		ArrayList<Vote> voteList = new ArrayList<Vote>();
-		
-		
-		for (int i = 0; i < votingList.getLength(); i++){
-			if (votingList.item(i).getNodeType() == Node.ELEMENT_NODE){
-				Voting obj_voting = new Voting();
+    	ArrayList<Voting> votList = new ArrayList<Voting>();
+    	ArrayList<Vote> voteList = new ArrayList<Vote>();
 
-				Element prop = (Element) votingList.item(i);
-				if(prop.getElementsByTagName("Votacao").item(0) != null){
-				NamedNodeMap voting = prop.getElementsByTagName("Votacao").item(0).getAttributes();
-				NodeList nodeVotacao = prop.getElementsByTagName("Votacao").item(0).getChildNodes();
-				Element nodeVote =  (Element) nodeVotacao.item(3);
+    	for (int i = 0; i < votingList.getLength(); i++){
+    		if(votingList.item(i) != null){
+    			if (votingList.item(i).getNodeType() == Node.ELEMENT_NODE){
+    				Voting obj_voting = new Voting();
+    				Element prop = (Element) votingList.item(i);
+    				if(prop.getElementsByTagName("Votacao").item(0) != null){
+    					NamedNodeMap voting = prop.getElementsByTagName("Votacao").item(0).getAttributes();
+    					NodeList nodeVotacao = prop.getElementsByTagName("Votacao").item(0).getChildNodes();
+    					Element nodeVote =  (Element) nodeVotacao.item(3);
 
-				String codSessao = voting.getNamedItem("codSessao").getTextContent();
-				String resumo = voting.getNamedItem("Resumo").getTextContent();
-				String data = voting.getNamedItem("Data").getTextContent();
-				voteList = objVoteList(codSessao,nodeVote);
+    					String codSessao = voting.getNamedItem("codSessao").getTextContent();
+    					String resumo = voting.getNamedItem("Resumo").getTextContent();
+    					String data = voting.getNamedItem("Data").getTextContent();
+    					voteList = objVoteList(codSessao,nodeVote);
 
-				obj_voting.setCodSessaoVot(Integer.parseInt(codSessao));
-				obj_voting.setResumoVot(resumo);
-				obj_voting.setDataVot(data);
-				obj_voting.setVote(voteList);
-				
-				votList.add(obj_voting);
-				}
+    					obj_voting.setCodSessaoVot(Integer.parseInt(codSessao));
+    					obj_voting.setResumoVot(resumo);
+    					obj_voting.setDataVot(data);
+    					obj_voting.setVote(voteList);
+
+    					votList.add(obj_voting);
+    				}
+    			}
+    		}
+    	}
+
+    	return votList;
     }
-}
-		return votList;
-    }
-   
+
     private static ArrayList<Vote> objVoteList (String tmp_Sessao, Element tmp_Vote){
-		NodeList nodeVoteList = tmp_Vote.getChildNodes();
-		ArrayList<Vote> arrayVotelist = new ArrayList<>();
+    	NodeList nodeVoteList = tmp_Vote.getChildNodes();
+    	ArrayList<Vote> arrayVotelist = new ArrayList<>();
 
-		for (int i = 0; i < nodeVoteList.getLength(); i++){
-			if (nodeVoteList.item(i).getNodeType() == Node.ELEMENT_NODE){
-				Vote obj_vote = new Vote();
-				NamedNodeMap deputado = nodeVoteList.item(i).getAttributes();
-				String vote = deputado.getNamedItem("Voto").getTextContent();
-				obj_vote.setVoto(vote);
-				obj_vote.setCodSessao(Integer.parseInt(tmp_Sessao));
-				arrayVotelist.add(obj_vote);
-				Log.d("DEPUTADO :" + deputado.getNamedItem("Nome").getTextContent(),"VOTO");
+    	for (int i = 0; i < nodeVoteList.getLength(); i++){
+    		if(nodeVoteList.item(i) != null){
+    			if (nodeVoteList.item(i).getNodeType() == Node.ELEMENT_NODE){
+    				Vote obj_vote = new Vote();
+    				NamedNodeMap deputado = nodeVoteList.item(i).getAttributes();
+    				String vote = deputado.getNamedItem("Voto").getTextContent();
+    				obj_vote.setVoto(vote);
+    				obj_vote.setCodSessao(Integer.parseInt(tmp_Sessao));
+    				arrayVotelist.add(obj_vote);
+    				Log.d("DEPUTADO :" + deputado.getNamedItem("Nome").getTextContent(),"VOTO");
+    			}
+    		}
+    	}
+    	return arrayVotelist; 
     }
-}
-		return arrayVotelist; 
-}
-
 }
