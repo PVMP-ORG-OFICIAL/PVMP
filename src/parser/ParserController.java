@@ -74,28 +74,28 @@ public class ParserController {
 		}
 		return 1;
 	}
-	
+
 	private static void propositionList(ArrayList<HashMap<String, String>> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
-		
-	ArrayList<Proposition> propArrayObject = null;
-	ArrayList<Voting> votArrayObject = null;
-	   for(int i = 0; i < propList.size(); i++){
-		String ano = propList.get(i).get("ano");
-		String sigla = propList.get(i).get("sigla");
-		String numero = propList.get(i).get("numero");
-		String listPropUrl = LISTAR_PROPOSICAO + "sigla="+ sigla + "&numero="+numero + "&ano="+ano + COMP_LISTAR_URL;
-		String listVotUrl = OBTER_VOTACAO_PROPOSICAO + "tipo="+ sigla + "&numero="+numero + "&ano="+ano;
-		Element propElement = createConnection(listPropUrl);
-		Element votElement = createConnection(listVotUrl);
-		propArrayObject = ParserHelper.propList(propElement.getChildNodes());
-		votArrayObject = ParserHelper.votingList(votElement.getChildNodes());
-		DatabaseInterface.saveProp(propArrayObject,votArrayObject, tmp_context);
-	   }
+
+		ArrayList<Proposition> propArrayObject = null;
+		ArrayList<Voting> votArrayObject = null;
+		for(int i = 0; i < propList.size(); i++){
+			String ano = propList.get(i).get("ano");
+			String sigla = propList.get(i).get("sigla");
+			String numero = propList.get(i).get("numero");
+			String listPropUrl = LISTAR_PROPOSICAO + "sigla="+ sigla + "&numero="+numero + "&ano="+ano + COMP_LISTAR_URL;
+			String listVotUrl = OBTER_VOTACAO_PROPOSICAO + "tipo="+ sigla + "&numero="+numero + "&ano="+ano;
+			Element propElement = createConnection(listPropUrl);
+			Element votElement = createConnection(listVotUrl);
+			propArrayObject = ParserHelper.returnPropList(propElement.getChildNodes());
+			votArrayObject = ParserHelper.returnVotingList(votElement.getChildNodes());
+			DatabaseInterface.saveProp(propArrayObject,votArrayObject, tmp_context);
+		}
 	}
-	
+
 
 	private static Element createConnection(String s_url) 
-		throws IOException, XmlPullParserException, 
+			throws IOException, XmlPullParserException, 
 			ParserConfigurationException, SAXException{
 		URL url = new URL(s_url);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -108,7 +108,7 @@ public class ParserController {
 		InputStream is = connection.getInputStream();
 		org.w3c.dom.Document document = parse(is);
 		return document.getDocumentElement();
-		
+
 	}
 	private static Document parse(InputStream in)
 			throws XmlPullParserException, IOException,
@@ -123,30 +123,29 @@ public class ParserController {
 		}
 	}
 
-    public static void importPartyFile (AssetManager getAssets, Context context) throws IOException{
+	public static void importPartyFile (AssetManager getAssets, Context context) throws IOException{
 		tmp_context = context;
-    	try{
-    		InputStream inputStream =  getAssets.open(PARTY_FILE);
-    		if(inputStream != null){
-    		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-    		BufferedReader bufferR = new BufferedReader(inputStreamReader);
-    		String receiveString = "";
-    		StringBuilder stringBuilder = new StringBuilder();
-    		while ((receiveString = bufferR.readLine()) != null){
-    			Party party = new Party();
-    			Log.d("Completo:" + receiveString, "Test");
-    			String [] name = receiveString.split(" ");
-    			party.setNumPartido(Integer.parseInt(name[1]));
-    			party.setSiglaPartido(name[0]);
-    			DatabaseInterface.saveParty(party, tmp_context);
+		try{
+			InputStream inputStream =  getAssets.open(PARTY_FILE);
+			if(inputStream != null){
+				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+				BufferedReader bufferR = new BufferedReader(inputStreamReader);
+				String receiveString = "";
+				StringBuilder stringBuilder = new StringBuilder();
+				while ((receiveString = bufferR.readLine()) != null){
+					Party party = new Party();
+					String [] name = receiveString.split(" ");
+					party.setNumPartido(Integer.parseInt(name[1]));
+					party.setSiglaPartido(name[0]);
+					DatabaseInterface.saveParty(party, tmp_context);
+				}
 			}
-    	}
-}
-    	catch (FileNotFoundException e){
-    		Log.e("", "File not found: " + e.toString());	
-    	}
-    	catch (IOException e){
-    		Log.e("", "Can not read file: " + e.toString());	
-    	}
-    }
+		}
+		catch (FileNotFoundException e){
+			Log.e("", "File not found: " + e.toString());	
+		}
+		catch (IOException e){
+			Log.e("", "Can not read file: " + e.toString());	
+		}
+	}
 }

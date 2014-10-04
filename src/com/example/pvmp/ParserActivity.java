@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 
 public class ParserActivity extends Activity {
-		
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,16 +34,16 @@ public class ParserActivity extends Activity {
 
 	public void loadParser(View view){
 		ConnectivityManager connecManager = (ConnectivityManager)
-		getSystemService(Context.CONNECTIVITY_SERVICE);
+				getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connecManager.getActiveNetworkInfo();
-        new PartyFromFile().execute();
+		new PartyFromFile().execute();
 		if (networkInfo != null && networkInfo.isConnected()) {
-            new Download().execute();
-        } else {
+			new Download().execute();
+		} else {
 			Toast.makeText(getApplicationContext(), "Confira sua conexão", 
 					Toast.LENGTH_SHORT).show();
-        }
-		
+		}
+
 	}
 
 	class Download extends AsyncTask<String, Void, Integer>{
@@ -54,7 +54,7 @@ public class ParserActivity extends Activity {
 			try{
 				value = ParserController.requestPlenario(context);
 			}	
-			 catch (XmlPullParserException e) {
+			catch (XmlPullParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ParserConfigurationException e) {
@@ -67,7 +67,7 @@ public class ParserActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		return value;
+			return value;
 		}
 	}
 	class PartyFromFile extends AsyncTask<String, Void, Integer>{

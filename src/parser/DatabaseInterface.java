@@ -30,19 +30,19 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	public static final String SIGLAPROP = "SIGLAPROP";
 	public static final String NUMEROPROP = "NUMEROPROP";
 	public static final String SITUACAOPROP = "SITUACAOPROP";
-	
+
 	public static final String CREATE_PROPPOSITION_TABLE = 
 			"CREATE TABLE " + PROP_TABLE_NAME + "(" 
-		    + IDPROP + " INTEGER NOT NULL PRIMARY KEY, " 
-			+ ANOPROP + " INTEGER NOT NULL, "
-			+ EMENTAPROP + " TEXT, "
-			+ AUTORPROP + " TEXT, "
-			+ SIGLAPROP + " TEXT, "
-			+ SITUACAOPROP + " TEXT, "
-			+ NUMEROPROP + " TEXT "
-			+ ");";
-	
-	
+					+ IDPROP + " INTEGER NOT NULL PRIMARY KEY, " 
+					+ ANOPROP + " INTEGER NOT NULL, "
+					+ EMENTAPROP + " TEXT, "
+					+ AUTORPROP + " TEXT, "
+					+ SIGLAPROP + " TEXT, "
+					+ SITUACAOPROP + " TEXT, "
+					+ NUMEROPROP + " TEXT "
+					+ ");";
+
+
 	public static final String VOTING_TABLE_NAME = "VOTING";
 	public static final String COD_SESSAO = "CODSESSAO";
 	public static final String RESUMO = "RESUMO";
@@ -50,23 +50,23 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 
 	public static final String CREATE_VOTATING_TABLE = 
 			"CREATE TABLE " + VOTING_TABLE_NAME + "(" 
-		    + COD_SESSAO + " INTEGER NOT NULL PRIMARY KEY, " 
-			+ RESUMO + " TEXT, "
-			+ DATA_VOTACAO + " TEXT, "
-			+ IDPROP + " INTEGER, "
-			+ "FOREIGN KEY(IDPROP) REFERENCES PROPOSITION(IDPROP) "
-			+ ");";
-	
-	
-	
+					+ COD_SESSAO + " INTEGER NOT NULL PRIMARY KEY, " 
+					+ RESUMO + " TEXT, "
+					+ DATA_VOTACAO + " TEXT, "
+					+ IDPROP + " INTEGER, "
+					+ "FOREIGN KEY(IDPROP) REFERENCES PROPOSITION(IDPROP) "
+					+ ");";
+
+
+
 	public static final String PARTY_TABLE_NAME = "PARTY";
 	public static final String SIGLA = "SIGLA";
 	public static final String NUMERO = "NUMERO";
 	public static final String CREATE_PARTY_TABLE = 
 			"CREATE TABLE " + PARTY_TABLE_NAME + "(" 
-		    + NUMERO + " INTEGER NOT NULL PRIMARY KEY, " 
-			+ SIGLA + " TEXT "
-			+ ");";
+					+ NUMERO + " INTEGER NOT NULL PRIMARY KEY, " 
+					+ SIGLA + " TEXT "
+					+ ");";
 
 	public static final String DEPUTY_TABLE_NAME = "DEPUTY";
 	public static final String NOME = "NOME";
@@ -74,33 +74,33 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	public static final String IDCADASTRO = "IDCADASTRO";
 	public static final String CREATE_DEPUTY_TABLE = 
 			"CREATE TABLE " + DEPUTY_TABLE_NAME + "(" 
-		    + IDCADASTRO + " INTEGER NOT NULL PRIMARY KEY, " 
-			+ UF + " TEXT, "
-			+ NOME + " TEXT "
-			+ ");";
-	
+					+ IDCADASTRO + " INTEGER NOT NULL PRIMARY KEY, " 
+					+ UF + " TEXT, "
+					+ NOME + " TEXT "
+					+ ");";
+
 	public static final String VOTE_TABLE_NAME = "VOTE";
 	public static final String VOTO = "VOTO";
 	public static final String CREATE_VOTE_TABLE = 
 			"CREATE TABLE " + VOTE_TABLE_NAME + "(" 
-		    + VOTO + " TEXT, " 
-			+ COD_SESSAO + " INTEGER, "
-			+ IDCADASTRO + " INTEGER, "
-			+ "FOREIGN KEY(CODSESSAO) REFERENCES VOTING(CODSESSAO), "
-			+ "FOREIGN KEY(IDCADASTRO) REFERENCES DEPUTY(IDCADASTRO) "
-			+ ");";
+					+ VOTO + " TEXT, " 
+					+ COD_SESSAO + " INTEGER, "
+					+ IDCADASTRO + " INTEGER, "
+					+ "FOREIGN KEY(CODSESSAO) REFERENCES VOTING(CODSESSAO), "
+					+ "FOREIGN KEY(IDCADASTRO) REFERENCES DEPUTY(IDCADASTRO) "
+					+ ");";
 
-	
-	
+
+
 	public static final String BANCO_DADOS = "PVMP";
 	private static int VERSAO = 1; 
 
-	
+
 	public DatabaseInterface(Context context) {
 		super(context, BANCO_DADOS, null, VERSAO);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -115,9 +115,9 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		
+
 	} 
-	
+
 	public static void saveProp(ArrayList<Proposition> propList,ArrayList<Voting> votingList,Context context) {
 
 		saveVoting(votingList, propList.get(0).getIdProp(),context);
@@ -148,8 +148,8 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 		}
 		db.close();
 	}
-	
-	
+
+
 	public static void saveVoting(ArrayList<Voting> votList, Integer idProp, Context context) {
 
 		saveDeputy(votList.get(0).getDeputy(),votList.get(0).getVote(), context);
@@ -175,47 +175,47 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 		}
 		db.close();
 	}
-	
+
 	public static void saveVote (ArrayList<Vote>vote,ArrayList<Deputy> deputy,Context context){
 
 		DatabaseInterface helper = new DatabaseInterface(context);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		for(int i = 0; i < vote.size(); i++){
-				values.put("VOTO", vote.get(i).getVoto());
-				values.put("CODSESSAO", vote.get(i).getCodSessao());
-				values.put("IDCADASTRO", deputy.get(i).getIdCadastro());
-				long log_res = db.insert("VOTE", null, values);
-				if (log_res != -1) {
-					Log.d("Voto", "Voto salvo");
-				} else {
-					Log.d("prop ", "Voto não salvo");
-				}
+			values.put("VOTO", vote.get(i).getVoto());
+			values.put("CODSESSAO", vote.get(i).getCodSessao());
+			values.put("IDCADASTRO", deputy.get(i).getIdCadastro());
+			long log_res = db.insert("VOTE", null, values);
+			if (log_res != -1) {
+				Log.d("Voto", "Voto salvo");
+			} else {
+				Log.d("prop ", "Voto não salvo");
+			}
 		}
 		db.close();
 	}
-	
+
 	public static void saveParty(Party party,Context context){
 		DatabaseInterface helper = new DatabaseInterface(context);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		ContentValues values = new ContentValues();
-			Cursor c = db.rawQuery(
-					"SELECT * FROM PARTY WHERE NUMERO = ' "
-							+ party.getNumPartido() + "'", null);
-			if (c.getCount() == 0) {
-				values.put("NUMERO", party.getNumPartido());
-				values.put("SIGLA", party.getSiglaPartido());
-				long log_res = db.insert("PARTY", null, values);
-				if (log_res != -1) {
-					Log.d("prop ", "Votação salva");
-				} else {
-					Log.d("prop ", "Votação não salva");
-				}
+		Cursor c = db.rawQuery(
+				"SELECT * FROM PARTY WHERE NUMERO = ' "
+						+ party.getNumPartido() + "'", null);
+		if (c.getCount() == 0) {
+			values.put("NUMERO", party.getNumPartido());
+			values.put("SIGLA", party.getSiglaPartido());
+			long log_res = db.insert("PARTY", null, values);
+			if (log_res != -1) {
+				Log.d("prop ", "Votação salva");
+			} else {
+				Log.d("prop ", "Votação não salva");
 			}
-		db.close();
 		}
-	
-	
+		db.close();
+	}
+
+
 	public static void saveDeputy(ArrayList<Deputy> deputy,ArrayList<Vote> voteList, Context context){
 		DatabaseInterface helper = new DatabaseInterface(context);
 		SQLiteDatabase db = helper.getWritableDatabase();

@@ -8,8 +8,15 @@ public class Voting {
 	private String resumoVot;
 	private String dataVot;
 	private ArrayList<Vote> vote;
+	private ArrayList<Deputy> deputy ;
 	
 	
+	public ArrayList<Deputy> getDeputy() {
+		return deputy;
+	}
+	public void setDeputy(ArrayList<Deputy> deputy) {
+		this.deputy = deputy;
+	}
 	public ArrayList<Vote> getVote() {
 		return vote;
 	}
