@@ -5,6 +5,7 @@ public class Deputy {
 	private Integer idCadastro;
 	private String nome;
 	private String uf;
+	private String partyName;
 	
 	
 	public Integer getIdCadastro() {
@@ -12,6 +13,12 @@ public class Deputy {
 	}
 	public void setIdCadastro(Integer idCadastro) {
 		this.idCadastro = idCadastro;
+	}
+	public String getPartyName() {
+		return partyName;
+	}
+	public void setPartyName(String partyName) {
+		this.partyName = partyName;
 	}
 	public String getNome() {
 		return nome;

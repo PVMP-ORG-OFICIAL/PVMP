@@ -67,16 +67,18 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 					+ NUMERO + " INTEGER NOT NULL PRIMARY KEY, " 
 					+ SIGLA + " TEXT "
 					+ ");";
-
 	public static final String DEPUTY_TABLE_NAME = "DEPUTY";
 	public static final String NOME = "NOME";
 	public static final String UF = "UF";
 	public static final String IDCADASTRO = "IDCADASTRO";
+	public static final String NUMPARTIDO = "NUMPARTIDO";
 	public static final String CREATE_DEPUTY_TABLE = 
 			"CREATE TABLE " + DEPUTY_TABLE_NAME + "(" 
 					+ IDCADASTRO + " INTEGER NOT NULL PRIMARY KEY, " 
 					+ UF + " TEXT, "
-					+ NOME + " TEXT "
+					+ NOME + " TEXT, "
+					+ NUMPARTIDO + " INTEGER NOT NULL, "
+					+"FOREIGN KEY(NUMPARTIDO) REFERENCES PARTY(NUMERO) "
 					+ ");";
 
 	public static final String VOTE_TABLE_NAME = "VOTE";
@@ -207,9 +209,9 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 			values.put("SIGLA", party.getSiglaPartido());
 			long log_res = db.insert("PARTY", null, values);
 			if (log_res != -1) {
-				Log.d("prop ", "Votação salva");
+				Log.d("prop ", "Partido salvo");
 			} else {
-				Log.d("prop ", "Votação não salva");
+				Log.d("prop ", "Partido não salvo");
 			}
 		}
 		db.close();
@@ -228,12 +230,18 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 				values.put("IDCADASTRO", deputy.get(i).getIdCadastro());
 				values.put("UF", deputy.get(i).getUf());
 				values.put("NOME", deputy.get(i).getNome());
+				Cursor partyID = db.rawQuery("SELECT NUMERO FROM PARTY WHERE SIGLA = '" 
+						+ deputy.get(i).getPartyName() + "'",null);
+				if(partyID.moveToFirst()){
+					values.put("NUMPARTIDO", partyID.getInt(0));
+				}
 				long log_res = db.insert("DEPUTY", null, values);
 				if (log_res != -1) {
 					Log.d("prop ", "Deputado salvo");
 				} else {
 					Log.d("prop ", "Deputado salvo");
 				}
+
 			}
 		}
 		db.close();

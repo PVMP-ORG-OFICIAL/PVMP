@@ -145,10 +145,8 @@ public class ParserHelper {
 					NamedNodeMap deputyNode = nodeDeputyList.item(i).getAttributes();
 					deputy.setNome(deputyNode.getNamedItem("Nome").getTextContent());
 					deputy.setUf(deputyNode.getNamedItem("UF").getTextContent());
-					String partido = fixPartyName(deputyNode.getNamedItem("Partido").getTextContent());
-					Log.d("Partido name:"+ "blabla" + partido + "blabla", "NAME");
-					Log.d("Partido size:"+ partido.length(), "SIZ");
-					deputy.setPartyName(deputyNode.getNamedItem("Partido").getTextContent());
+					String partido = removeEmptyChar(deputyNode.getNamedItem("Partido").getTextContent());
+					deputy.setPartyName(partido);
 					deputy.setIdCadastro(Integer.parseInt(deputyNode.getNamedItem("ideCadastro").getTextContent()));
 					deputyList.add(deputy);
 				}
@@ -157,11 +155,16 @@ public class ParserHelper {
 	return deputyList;
 	}
 	
-	private static String fixPartyName(String party){
+	private static String removeEmptyChar(String party){
+		Log.d("String:" + party, "String");
 		String space = " ";
 		Integer position = party.indexOf(space);
-		String new_party = party.substring(0, position);
-		return new_party;
+		if(position >= 0){
+			String new_party = party.substring(0, position);
+			return new_party;
+		}
+		else
+			return party;
 	}
 	
 
