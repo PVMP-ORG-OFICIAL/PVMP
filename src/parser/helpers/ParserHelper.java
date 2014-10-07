@@ -37,25 +37,25 @@ public class ParserHelper {
 				prop.setIdProp(Integer.parseInt(id));
 
 				String ano = tmp.getElementsByTagName("ano").item(0).getTextContent();
-				prop.setAnoProp(Integer.parseInt(ano));
+				prop.setYearProp(Integer.parseInt(ano));
 
 				String ementa = tmp.getElementsByTagName("txtEmenta").item(0).getTextContent();
-				prop.setEmentaProp(ementa);
+				prop.setMenuProp(ementa);
 
 				Element el_autor = (Element) tmp.getElementsByTagName("autor1").item(0);
 				String autor = el_autor.getElementsByTagName("txtNomeAutor").item(0).getTextContent();
-				prop.setAutorProp(autor);
+				prop.setAuthorProp(autor);
 
 				Element el_situacao = (Element) tmp.getElementsByTagName("situacao").item(0);
 				String situacao = el_situacao.getElementsByTagName("descricao").item(0).getTextContent();
-				prop.setSituacaoProp(situacao);
+				prop.setSituationProp(situacao);
 
 				Element el_tipoProp = (Element) tmp.getElementsByTagName("tipoProposicao").item(0);
 				String siglaProp = el_tipoProp.getElementsByTagName("sigla").item(0).getTextContent();
-				prop.setSiglaProp(siglaProp);
+				prop.setAccProp(siglaProp);
 
 				String numeroProp = tmp.getElementsByTagName("numero").item(0).getTextContent();
-				prop.setNumeroProp(numeroProp);
+				prop.setNumProp(numeroProp);
 
 				propList.add(prop);
 			}
@@ -119,9 +119,9 @@ public class ParserHelper {
 							voteList = returnObjVote(codSessao, nodeVote);
 						}
 
-						obj_voting.setCodSessaoVot(Integer.parseInt(codSessao));
-						obj_voting.setResumoVot(resumo);
-						obj_voting.setDataVot(data);
+						obj_voting.setCodSessionVot(Integer.parseInt(codSessao));
+						obj_voting.setSummaryVot(resumo);
+						obj_voting.setDateVot(data);
 						obj_voting.setVote(voteList);
 						obj_voting.setDeputy(deputyList);
 
@@ -143,11 +143,11 @@ public class ParserHelper {
 				if (nodeDeputyList.item(i).getNodeType() == Node.ELEMENT_NODE){
 					Deputy deputy = new Deputy();
 					NamedNodeMap deputyNode = nodeDeputyList.item(i).getAttributes();
-					deputy.setNome(deputyNode.getNamedItem("Nome").getTextContent());
+					deputy.setName(deputyNode.getNamedItem("Nome").getTextContent());
 					deputy.setUf(deputyNode.getNamedItem("UF").getTextContent());
 					String partido = removeEmptyChar(deputyNode.getNamedItem("Partido").getTextContent());
 					deputy.setPartyName(partido);
-					deputy.setIdCadastro(Integer.parseInt(deputyNode.getNamedItem("ideCadastro").getTextContent()));
+					deputy.setIdRegistrtion(Integer.parseInt(deputyNode.getNamedItem("ideCadastro").getTextContent()));
 					deputyList.add(deputy);
 				}
 			}
@@ -178,8 +178,8 @@ public class ParserHelper {
 					Vote obj_vote = new Vote();
 					NamedNodeMap nodeVote = nodeVoteList.item(i).getAttributes();
 					String vote = nodeVote.getNamedItem("Voto").getTextContent();
-					obj_vote.setVoto(vote);
-					obj_vote.setCodSessao(Integer.parseInt(tmp_Sessao));
+					obj_vote.setResVote(vote);
+					obj_vote.setCodSession(Integer.parseInt(tmp_Sessao));
 					arrayVotelist.add(obj_vote);
 				}
 			}

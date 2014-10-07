@@ -106,10 +106,10 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(CREATE_PARTY_TABLE);
 		db.execSQL(CREATE_PROPPOSITION_TABLE);
 		db.execSQL(CREATE_VOTATING_TABLE);
 		db.execSQL(CREATE_VOTE_TABLE);
-		db.execSQL(CREATE_PARTY_TABLE);
 		db.execSQL(CREATE_DEPUTY_TABLE);
 	}
 
@@ -134,12 +134,12 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 			if (c.getCount() == 0) {
 				Log.d("ENTROU", "ENTROU");
 				values.put("IDPROP", propList.get(i).getIdProp());
-				values.put("ANOPROP", propList.get(i).getAnoProp());
-				values.put("AUTORPROP", propList.get(i).getAnoProp());
-				values.put("EMENTAPROP", propList.get(i).getEmentaProp());
-				values.put("SIGLAPROP", propList.get(i).getSiglaProp());
-				values.put("NUMEROPROP", propList.get(i).getNumeroProp());
-				values.put("SITUACAOPROP", propList.get(i).getSituacaoProp());
+				values.put("ANOPROP", propList.get(i).getYearProp());
+				values.put("AUTORPROP", propList.get(i).getAuthorProp());
+				values.put("EMENTAPROP", propList.get(i).getMenuProp());
+				values.put("SIGLAPROP", propList.get(i).getAccProp());
+				values.put("NUMEROPROP", propList.get(i).getNumProp());
+				values.put("SITUACAOPROP", propList.get(i).getSituationProp());
 				long log_res = db.insert("PROPOSITION", null, values);
 				if (log_res != -1) {
 					Log.d("prop ", "Proposição salva");
@@ -161,11 +161,11 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 		for (int i = 0; i < votList.size(); i++) {
 			Cursor c = db.rawQuery(
 					"SELECT * FROM VOTING WHERE CODSESSAO = ' "
-							+ votList.get(i).getCodSessaoVot() + "'", null);
+							+ votList.get(i).getCodSessionVot() + "'", null);
 			if (c.getCount() == 0) {
-				values.put("DATA_VOTACAO", votList.get(i).getDataVot());
-				values.put("RESUMO", votList.get(i).getResumoVot());
-				values.put("CODSESSAO", votList.get(i).getCodSessaoVot());
+				values.put("DATA_VOTACAO", votList.get(i).getDateVot());
+				values.put("RESUMO", votList.get(i).getSummaryVot());
+				values.put("CODSESSAO", votList.get(i).getCodSessionVot());
 				values.put("IDPROP", idProp);
 				long log_res = db.insert("VOTING", null, values);
 				if (log_res != -1) {
@@ -178,46 +178,6 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public static void saveVote (ArrayList<Vote>vote,ArrayList<Deputy> deputy,Context context){
-
-		DatabaseInterface helper = new DatabaseInterface(context);
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		for(int i = 0; i < vote.size(); i++){
-			values.put("VOTO", vote.get(i).getVoto());
-			values.put("CODSESSAO", vote.get(i).getCodSessao());
-			values.put("IDCADASTRO", deputy.get(i).getIdCadastro());
-			long log_res = db.insert("VOTE", null, values);
-			if (log_res != -1) {
-				Log.d("Voto", "Voto salvo");
-			} else {
-				Log.d("prop ", "Voto não salvo");
-			}
-		}
-		db.close();
-	}
-
-	public static void saveParty(Party party,Context context){
-		DatabaseInterface helper = new DatabaseInterface(context);
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		Cursor c = db.rawQuery(
-				"SELECT * FROM PARTY WHERE NUMERO = ' "
-						+ party.getNumPartido() + "'", null);
-		if (c.getCount() == 0) {
-			values.put("NUMERO", party.getNumPartido());
-			values.put("SIGLA", party.getSiglaPartido());
-			long log_res = db.insert("PARTY", null, values);
-			if (log_res != -1) {
-				Log.d("prop ", "Partido salvo");
-			} else {
-				Log.d("prop ", "Partido não salvo");
-			}
-		}
-		db.close();
-	}
-
-
 	public static void saveDeputy(ArrayList<Deputy> deputy,ArrayList<Vote> voteList, Context context){
 		DatabaseInterface helper = new DatabaseInterface(context);
 		SQLiteDatabase db = helper.getWritableDatabase();
@@ -225,11 +185,11 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 		for(int i = 0; i < deputy.size(); i++){
 			Cursor c = db.rawQuery(
 					"SELECT * FROM DEPUTY WHERE IDCADASTRO = ' "
-							+ deputy.get(i).getIdCadastro() + "'", null);
+							+ deputy.get(i).getIdRegistrtion() + "'", null);
 			if (c.getCount() == 0) {
-				values.put("IDCADASTRO", deputy.get(i).getIdCadastro());
+				values.put("IDCADASTRO", deputy.get(i).getIdRegistrtion());
 				values.put("UF", deputy.get(i).getUf());
-				values.put("NOME", deputy.get(i).getNome());
+				values.put("NOME", deputy.get(i).getName());
 				Cursor partyID = db.rawQuery("SELECT NUMERO FROM PARTY WHERE SIGLA = '" 
 						+ deputy.get(i).getPartyName() + "'",null);
 				if(partyID.moveToFirst()){
@@ -246,5 +206,45 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 		}
 		db.close();
 		saveVote(voteList,deputy,context);
+	}
+	
+	
+	public static void saveVote (ArrayList<Vote>vote,ArrayList<Deputy> deputy,Context context){
+
+		DatabaseInterface helper = new DatabaseInterface(context);
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		for(int i = 0; i < vote.size(); i++){
+			values.put("VOTO", vote.get(i).getResVote());
+			values.put("CODSESSAO", vote.get(i).getCodSession());
+			values.put("IDCADASTRO", deputy.get(i).getIdRegistrtion());
+			long log_res = db.insert("VOTE", null, values);
+			if (log_res != -1) {
+				Log.d("Voto", "Voto salvo");
+			} else {
+				Log.d("prop ", "Voto não salvo");
+			}
+		}
+		db.close();
+	}
+
+	public static void saveParty(Party party,Context context){
+		DatabaseInterface helper = new DatabaseInterface(context);
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		Cursor c = db.rawQuery(
+				"SELECT * FROM PARTY WHERE NUMERO = ' "
+						+ party.getNumParty() + "'", null);
+		if (c.getCount() == 0) {
+			values.put("NUMERO", party.getNumParty());
+			values.put("SIGLA", party.getAccParty());
+			long log_res = db.insert("PARTY", null, values);
+			if (log_res != -1) {
+				Log.d("prop ", "Partido salvo");
+			} else {
+				Log.d("prop ", "Partido não salvo");
+			}
+		}
+		db.close();
 	}
 }

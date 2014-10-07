@@ -135,8 +135,8 @@ public class ParserController {
 				while ((receiveString = bufferR.readLine()) != null){
 					Party party = new Party();
 					String [] name = receiveString.split(" ");
-					party.setNumPartido(Integer.parseInt(name[1]));
-					party.setSiglaPartido(name[0]);
+					party.setNumParty(Integer.parseInt(name[1]));
+					party.setAccParty(name[0]);
 					DatabaseInterface.saveParty(party, tmp_context);
 				}
 			}

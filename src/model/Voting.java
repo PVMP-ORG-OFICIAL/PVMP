@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 public class Voting {
 	
-	private Integer codSessaoVot;
-	private String resumoVot;
-	private String dataVot;
+	private Integer codSessionVot;
+	/* resumo */
+	private String summaryVot;
+	private String dateVot;
 	private ArrayList<Vote> vote;
 	private ArrayList<Deputy> deputy ;
 	
@@ -23,23 +24,22 @@ public class Voting {
 	public void setVote(ArrayList<Vote> vote) {
 		this.vote = vote;
 	}
-	public Integer getCodSessaoVot() {
-		return codSessaoVot;
+	public Integer getCodSessionVot() {
+		return codSessionVot;
 	}
-	public void setCodSessaoVot(Integer codSessaoVot) {
-		this.codSessaoVot = codSessaoVot;
+	public void setCodSessionVot(Integer codSessionVot) {
+		this.codSessionVot = codSessionVot;
 	}
-	public String getResumoVot() {
-		return resumoVot;
+	public String getSummaryVot() {
+		return summaryVot;
 	}
-	public void setResumoVot(String resumoVot) {
-		this.resumoVot = resumoVot;
+	public void setSummaryVot(String summaryVot) {
+		this.summaryVot = summaryVot;
 	}
-	public String getDataVot() {
-		return dataVot;
+	public String getDateVot() {
+		return dateVot;
 	}
-	public void setDataVot(String dataVot) {
-		this.dataVot = dataVot;
+	public void setDateVot(String dateVot) {
+		this.dateVot = dateVot;
 	}
-
 }

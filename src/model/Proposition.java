@@ -4,25 +4,20 @@ package model;
 public class Proposition {
 	
 	private Integer idProp;
-	private Integer anoProp;
-	private String situacaoProp;
-	private String ementaProp;
-	private String autorProp;
-	private String siglaProp;
-	private String numeroProp;
+	private Integer yearProp;
+	/* menu => ementa */
+	private String menuProp;
+	private String authorProp;
+	private String accProp;
+	private String numProp;
+	private String situationProp;
 	
 	
-	public String getSiglaProp() {
-		return siglaProp;
+	public String getSituationProp() {
+		return situationProp;
 	}
-	public void setSiglaProp(String siglaProp) {
-		this.siglaProp = siglaProp;
-	}
-	public String getNumeroProp() {
-		return numeroProp;
-	}
-	public void setNumeroProp(String numeroProp) {
-		this.numeroProp = numeroProp;
+	public void setSituationProp(String situationProp) {
+		this.situationProp = situationProp;
 	}
 	public Integer getIdProp() {
 		return idProp;
@@ -30,28 +25,34 @@ public class Proposition {
 	public void setIdProp(Integer idProp) {
 		this.idProp = idProp;
 	}
-	public Integer getAnoProp() {
-		return anoProp;
+	public Integer getYearProp() {
+		return yearProp;
 	}
-	public void setAnoProp(Integer anoProp) {
-		this.anoProp = anoProp;
+	public void setYearProp(Integer yearProp) {
+		this.yearProp = yearProp;
 	}
-	public String getEmentaProp() {
-		return ementaProp;
+	public String getMenuProp() {
+		return menuProp;
 	}
-	public String getSituacaoProp() {
-		return situacaoProp;
+	public void setMenuProp(String menuProp) {
+		this.menuProp = menuProp;
 	}
-	public void setSituacaoProp(String situacaoProp) {
-		this.situacaoProp = situacaoProp;
+	public String getAuthorProp() {
+		return authorProp;
 	}
-	public void setEmentaProp(String ementaProp) {
-		this.ementaProp = ementaProp;
+	public void setAuthorProp(String authorProp) {
+		this.authorProp = authorProp;
 	}
-	public String getAutorProp() {
-		return autorProp;
+	public String getAccProp() {
+		return accProp;
 	}
-	public void setAutorProp(String autorProp) {
-		this.autorProp = autorProp;
+	public void setAccProp(String accProp) {
+		this.accProp = accProp;
+	}
+	public String getNumProp() {
+		return numProp;
+	}
+	public void setNumProp(String numProp) {
+		this.numProp = numProp;
 	}
 }

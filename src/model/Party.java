@@ -2,20 +2,21 @@ package model;
 
 public class Party {
 	
-	private String siglaPartido;
-	private Integer numPartido;
+	private String accParty;
+	private Integer numParty;
 	
 	
-	public String getSiglaPartido() {
-		return siglaPartido;
+	public String getAccParty() {
+		return accParty;
 	}
-	public void setSiglaPartido(String siglaPartido) {
-		this.siglaPartido = siglaPartido;
+	public void setAccParty(String accParty) {
+		this.accParty = accParty;
 	}
-	public Integer getNumPartido() {
-		return numPartido;
+	public Integer getNumParty() {
+		return numParty;
 	}
-	public void setNumPartido(Integer numPartido) {
-		this.numPartido = numPartido;
+	public void setNumParty(Integer numParty) {
+		this.numParty = numParty;
 	}
+	
 }

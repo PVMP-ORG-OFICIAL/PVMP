@@ -2,23 +2,20 @@ package model;
 
 public class Vote {
 	
-	private String voto;
-	private Integer codSessao;
-
-	public Integer getCodSessao() {
-		return codSessao;
+	private String resVote;
+	private Integer codSession;
+	public String getResVote() {
+		return resVote;
+	}
+	public void setResVote(String resVote) {
+		this.resVote = resVote;
+	}
+	public Integer getCodSession() {
+		return codSession;
+	}
+	public void setCodSession(Integer codSession) {
+		this.codSession = codSession;
 	}
 
-	public void setCodSessao(Integer codSessao) {
-		this.codSessao = codSessao;
-	}
-
-	public String getVoto() {
-		return voto;
-	}
-
-	public void setVoto(String voto) {
-		this.voto = voto;
-	}
 
 }
