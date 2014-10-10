@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Configure Button -->
+<selector xmlns:android = "http://schemas.android.com/apk/res/android">
+  <!-- Pressed button -->
+  <item android:state_pressed = "true" >
+    <shape android:shape  = "rectangle"  >
+      <corners android:radius = "3dp" />
+      <stroke 
+          android:width   = "1dp" 
+          android:color   = "#C53E2B"/>
+      <!-- Color inside of the button -->
+      <gradient  
+        android:angle   = "-90"  
+        android:startColor= "#A11005" 
+        android:endColor  = "#D62608"  />           
+    </shape>
+  </item>
+  
+  <item android:state_focused = "true">
+    <shape android:shape = "rectangle"  >
+      <corners android:radius = "3dp" />
+      <stroke 
+        android:width = "1dp" 
+        android:color = "#C53E2B" />
+      <solid  
+        android:color = "#E0341E"/>      
+    </shape>
+  </item>
+
+  <item >
+    <shape android:shape = "rectangle">
+      <corners android:radius = "3dp"/>
+        <stroke 
+          android:width = "1dp" 
+          android:color = "#C53E2B" />
+        <gradient  
+          android:angle = "-90"  
+          android:startColor = "#ff6c52" 
+          android:endColor   = "#e0341e" />
+      </shape>
+  </item>
+</selector>

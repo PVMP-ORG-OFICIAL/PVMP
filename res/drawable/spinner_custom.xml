@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!-- Round shape for spinner -->
+<shape
+  xmlns:android   = "http://schemas.android.com/res/apk/android"
+  android:shape   = "rectangle"
+  android:padding = "5dp">
+
+  <corners
+    android:bottomRightRadius = "7dp"
+    android:bottomLeftRadius  = "7dp"
+    android:topRightRadius    = "7dp"
+    android:topLeftRadius     = "7dp"/>
+
+</shape>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PVMP</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_login">Entrar</string>
+    <string name="text_register">Cadastrar</string>
+    <string name="text_guest">Entrar como Visitante</string>
+    <string name="text_username">Usuário</string>
+    <string name="text_password">Senha</string>
+    <string name="text_name">Nome</string>
+    <string name="text_email">Email</string>
+    <string name="text_age">Idade</string>
+    <string name="text_sex">Sexo</string>
+    <string name="text_sex_male">Masculino</string>
+    <string name="text_sex_female">Feminino</string>
+    <string name="text_education">Escolaridade</string>
+    <string name="text_elementary_school">Fundamental</string>
+    <string name="text_high_school">Médio</string>
+    <string name="text_graduated">Superior</string>
+    <string name="text_user_info">Informações</string>
+    <string name="text_update">Atualizar</string>
+    <string name="text_edit">Editar</string>
+    <string name="text_exclude">Excluir</string>
+    <string name="text_nothing"></string>
+    <string name="text_old_password">Senha Atual</string>
+    <string name="text_new_password">Nova Senha</string>
+    <string name="text_save">Salvar</string>
+    <string name="textView_errorLogin">Usuario e/ou Senha incorreto(s).</string>
+    
+    <!-- Field hint -->
+    <string name="text_name_hint">Inserir o seu nome</string>
+    <string name="text_email_hint">Inserir o seu email</string>
+    <string name="text_password_hint">No mínimo 6 caracteres</string>
+    <string name="text_user_hint">Nome de usuário</string>
+   
+	<!-- Menu strings  -->
+	<string name="drawer_open">Slider menu aberto</string>
+	<string name="drawer_close">Slider menu fechado</string>
+
+    <string-array name="nav_drawer_items">
+        <item> Proposições </item>
+        <item> Partidos </item>
+        <item> Feedback </item>
+        <item> Configurações de Conta </item>
+        <item> Sair </item>
+    </string-array>
+    
+	<!-- Navigation Drawer item Icons -->
+	<!-- Keep them in order as the title are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_proposition</item>
+        <item>@drawable/ic_partido</item>
+        <item>@drawable/ic_feedback</item>
+        <item>@drawable/ic_settings</item>
+        <item>@drawable/ic_logout</item>
+    </array>
+	
+	<!-- Content Description -->
+	<string name="desc_list_item_icon">Item Icon</string>
+	<string name="passwordWarning">Caso não queira mudar sua senha, deixe os campos de senha em branco.</string>
+</resources>
