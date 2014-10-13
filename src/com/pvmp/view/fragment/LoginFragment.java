@@ -1,3 +1,7 @@
+/**
+* @file LoginFragment.java
+* @brief
+*/
 package com.pvmp.view.fragment;
 
 import android.app.Fragment;
@@ -12,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
-import com.pvmp.MainActivity;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.PVMPView;
@@ -20,6 +23,10 @@ import com.pvmp.util.Util;
 
 import com.pvmp.R;
 
+/**
+* @class LoginFragment
+* @brief
+*/
 public class LoginFragment extends Fragment
 {
 

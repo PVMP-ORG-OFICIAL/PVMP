@@ -1,3 +1,7 @@
+/**
+* @file User.java
+* @brief 
+*/
 package com.pvmp.models;
 
 import java.io.Serializable;
@@ -6,9 +10,12 @@ import android.content.Context;
 
 import com.pvmp.dao.UserDAO;
 
-public class User implements Serializable {
-	private static final long serialVersionUID = -6329621094685424751L;
-	
+/**
+* @class User
+* @brief
+*/
+public class User implements Serializable 
+{	
 	private String username;
 	private String password;
 	private String name;
@@ -19,7 +26,8 @@ public class User implements Serializable {
 	private static UserDAO userDao;
 	private String defaultUser;
 	
-	public User () {
+	public User()
+	{
 		this.name = null;
 		this.username = null;
 		this.password = null;
@@ -30,118 +38,197 @@ public class User implements Serializable {
 		this.defaultUser = null;
 	}
 	
-	public User(String name, String username, String password, String email
-			, int age, String education, String sex, String defaultUser){
-		this.name = name;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.age = age;
-		this.education = education;
-		this.sex = sex;
-		this.defaultUser = defaultUser;
+	/**
+	* @param _name
+	* @param _username
+	* @param _password
+	* @param _email
+	* @param _age
+	* @param _education 
+	* @param _sex
+	* @param _defaultUser
+	* @brief
+	*/
+	public User(String _name, String _username, String _password, String _email, 
+		int _age, String _education, String _sex, String _defaultUser)
+	{
+		this.name = _name;
+		this.username = _username;
+		this.password = _password;
+		this.email = _email;
+		this.age = _age;
+		this.education = _education;
+		this.sex = _sex;
+		this.defaultUser = _defaultUser;
     }
 	
-	public String getName() {
-        
-        return name;
-    }
+	public String getName() 
+	{      
+		return name;
+  }
 	
-	public String getUsername() {
-        
-        return this.username;
-    }
+	public String getUsername() 
+	{
+		return this.username;
+	}
 
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return this.password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String _password)
+	{
+		this.password = _password;
+		return;
 	}
 
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String _email) 
+	{
+		this.email = _email;
+		return;
 	}
 
-	public int getAge() {
+	public int getAge() 
+	{
 		return age;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setAge(int _age) 
+	{
+		this.age = _age;
+		return;
 	}
 
-	public String getEducation() {
+	public String getEducation() 
+	{
 		return education;
 	}
 
-	public void setEducation(String education) {
-		this.education = education;
+	public void setEducation(String _education) 
+	{
+		this.education = _education;
+		return;
 	}
 
-	public String getSex() {
+	public String getSex() 
+	{
 		return sex;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setSex(String _sex)
+	{
+		this.sex = _sex;
+		return;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String _name)
+	{
+		this.name = _name;
+		return;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String _username)
+	{
+		this.username = _username;
+		return;
 	}
 	
-	public User verifyExistingUser (String username, String password, Context context) {
+	/**
+	* @param _username
+	* @param _password
+	* @param _context
+	* @brief
+	* @return
+	*/
+	public User verifyExistingUser (String _username, String _password, Context _context) 
+	{
 		User user = new User();
-		userDao = UserDAO.getInstance(context);
-		user = userDao.selectByUsername(username);
+		userDao = UserDAO.getInstance(_context);
+		user = userDao.selectByUsername(_username);
 		
-		if (user.getUsername() != null && user.getPassword().equals(password)) 
+		if (user.getUsername() != null && user.getPassword().equals(_password)) 
+		{
 			return user;
+		}
 		return null;
 	}
 	
-	public static boolean validateExistingEmail (String email, Context context){
+	/**
+	* @param _email
+	* @param _context
+	* @return 
+	* @brief 
+	*/
+	public static boolean validateExistingEmail (String _email, Context _context)
+	{
 		User user = new User();
-		userDao = UserDAO.getInstance(context);
-		user = userDao.selectByEmail(email);
+		userDao = UserDAO.getInstance(_context);
+		user = userDao.selectByEmail(_email);
 		
 		if (user.getEmail() == null)
+		{
 			return true;
+		}
+
 		return false;
 	}
 	
-	public static boolean validateExistingUser (String username, Context context){
+	/**
+	* @param _username
+	* @param _context
+	* @return
+	* @brief 
+	*/
+	public static boolean validateExistingUser (String _username, Context _context)
+	{
 		User user = new User();
-		userDao = UserDAO.getInstance(context);
-		user = userDao.selectByUsername(username);
+		userDao = UserDAO.getInstance(_context);
+		user = userDao.selectByUsername(_username);
 		
 		if (user.getUsername() == null)
+		{
 			return true;
+		}
 		return false;
 	}
-	
-	public static boolean validatePassword (String password) {
-		if(password != null && password.length()>=6 && password.length()<=15)
+
+	/**
+	* @param _passowrd
+	* @return
+	* @brief 
+	*/
+	public static boolean validatePassword (String _password)
+	{
+		if(_password != null && _password.length() >= 6 && _password.length() <= 15)
+		{
 			return true;
+		}
 		return false;
 	}
-	
-	public static boolean validateNameFormat (String name) {
-		if(name.matches("[a-zA-Z ]+")) {
-			for (int i = 0; i < name.length(); i++) {
-				if (name.charAt(i) == ' ' && i != (name.length() - 1)) {
-					if (name.charAt(i+1) == ' ')
+
+	/**
+	*	@param _name
+	* @return
+	* @brief 
+	*/
+	public static boolean validateNameFormat (String _name) 
+	{
+		if (_name.matches("[a-zA-Z ]+")) 
+		{
+			for (int i = 0; i < _name.length(); i++) 
+			{
+				if (_name.charAt(i) == ' ' && i != (_name.length() - 1)) 
+				{
+					if (_name.charAt(i+1) == ' ')
+					{
 						return false;
+					}
 				}
 			}
 			return true;
@@ -149,88 +236,182 @@ public class User implements Serializable {
 		return false;
 	}
 	
-	public static boolean validateNameSize (String name) {
-		if(name.length() > 2 && name.length() < 51)
+	/**
+	* @param _name
+	* @return 
+	* @brief
+	*/
+	public static boolean validateNameSize (String _name)
+	{
+		if(_name.length() > 2 && _name.length() < 51)
+		{
 			return true;
+		}
 		return false;
 	}
-	
-	public static boolean validateEmailFormat (String email) {
-		if(email != null && (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
-			return true;	
-		return false;
-	}
-	
-	public static boolean validateEmailSize (String email) {
-		if (email.length() < 40)
+
+	/**
+	* @param _email
+	* @return
+	* @brief 
+	*/
+	public static boolean validateEmailFormat (String _email) 
+	{
+		if(_email != null && (android.util.Patterns.EMAIL_ADDRESS.matcher(_email).matches()))
+		{
 			return true;
+		}
 		return false;
 	}
 	
-	public static boolean validateAge (int age) {
-		if(age >= 10 && age <= 99)
+	/**
+	* @param _email
+	* @return 
+	* @brief
+	*/
+	public static boolean validateEmailSize (String _email)
+	{
+		if (_email.length() < 40)
+		{ 
 			return true;
+		}
 		return false;
 	}
 	
-	public static boolean validateUsernameSize (String username) {
-		if (username.length() >= 3 && username.length() <= 15)
+	/**
+	* @param _age
+	* @return 
+	* @brief 
+	*/
+	public static boolean validateAge (int _age)
+	{
+		if(_age >= 10 && _age <= 99)
+		{
 			return true;
+		}
 		return false;
 	}
 	
-	public static boolean validateUsernameFirstLetter (String username) {
-		return (Character.isLetter(username.charAt(0)));
-	}
-	
-	public static boolean validateUsernameFormat (String username) {
-		if (username.matches("[a-zA-Z0-9]+"))
+	/**
+	* @param _username
+	* @return
+	* @brief
+	*/
+	public static boolean validateUsernameSize (String _username) 
+	{
+		if (_username.length() >= 3 && _username.length() <= 15)
+		{
 			return true;
+		}
+
 		return false;
 	}
 	
-	public static int validationResult (User user, Context context) {		
-		if (!User.validateNameFormat(user.getName()))
+	/**
+	* @param _username
+	* @return 
+	* @brief
+	*/
+	public static boolean validateUsernameFirstLetter (String _username)
+	{
+		return (Character.isLetter(_username.charAt(0)));
+	}
+	
+	/**
+	* @param _username
+	* @return 
+	* @brief 
+	*/
+	public static boolean validateUsernameFormat (String _username) 
+	{
+		if (_username.matches("[a-zA-Z0-9]+"))
+		{ 
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	* @param _user
+	* @param _context
+	* @return
+	* @brief 
+	*/
+	public static int validationResult (User _user, Context _context) 
+	{
+		if (!User.validateNameFormat(_user.getName()))
+		{ 
 			return 1;
+		}
 		
-		if (!User.validateNameSize(user.getName()))
+		if (!User.validateNameSize(_user.getName()))
+		{
 			return 2;
+		}
 		
-		if (!User.validateEmailFormat(user.getEmail()))
+		if (!User.validateEmailFormat(_user.getEmail()))
+		{
 			return 3;
+		}
 		
-		if (!User.validateEmailSize(user.getEmail()))
+		if (!User.validateEmailSize(_user.getEmail()))
+		{
 			return 4;
+		}
 		
-		if (!User.validateAge(user.getAge()))
+		if (!User.validateAge(_user.getAge()))
+		{
 			return 5;
+		}
 		
-		if (!User.validatePassword(user.getPassword()))
+		if (!User.validatePassword(_user.getPassword()))
+		{
 			return 6;
+		}
 		
-		if(!User.validateExistingEmail(user.getEmail(), context)) 
+		if(!User.validateExistingEmail(_user.getEmail(), _context))
+		{
 			return 7;
+		}
 		
-		if (!User.validateExistingUser(user.getUsername(), context))
+		if (!User.validateExistingUser(_user.getUsername(), _context))
+		{
 			return 8;
+		}
 		
-		if (!User.validateUsernameSize(user.getUsername()))
+		if (!User.validateUsernameSize(_user.getUsername()))
+		{
 			return 9;
+		}
 		
-		if (!User.validateUsernameFirstLetter(user.getUsername()))
+		if (!User.validateUsernameFirstLetter(_user.getUsername()))
+		{
 			return 10;
+		}
 		
-		if(!User.validateUsernameFormat(user.getUsername()))
+		if(!User.validateUsernameFormat(_user.getUsername()))
+		{
 			return 11;
+		}
 		
 		return 0;
 	}
 
-	public String getDefaultUser() {
+	/**
+	* @return
+	* @brief
+	*/
+	public String getDefaultUser() 
+	{
 		return defaultUser;
 	}
 
-	public void setDefaultUser(String defaultUser) {
-		this.defaultUser = defaultUser;
+	/**
+	* @param _defaultUser
+	* @brief 
+	*/
+	public void setDefaultUser(String _defaultUser)
+	{
+		this.defaultUser = _defaultUser;
 	}
 }

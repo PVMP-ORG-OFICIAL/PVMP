@@ -1,8 +1,6 @@
-/*
-  *This class is responsible for managing the Activity UserRegister. 
-  * This activity is the screen where the user will hold its registration on the app, 
-  * Providing your data and when clicked the "Register" button, this data is 
-  * Saved in the bank and he is directed to the main screen.
+/**
+	* @file UserRegisterFragment
+	* @brief 
  */
 package com.pvmp.view.fragment;
 
@@ -18,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
-import com.pvmp.MainActivity;
 import com.pvmp.util.Util;
 import com.pvmp.models.User;
 import com.pvmp.view.ErrorHandlingUtil;
@@ -27,6 +24,10 @@ import com.pvmp.controller.PVMPController;
 
 import com.pvmp.R;
 
+/**
+* @class UserRegisterFragment
+* @brief 
+*/
 public class UserRegisterFragment extends Fragment
 {	
 	private EditText name;
@@ -37,8 +38,8 @@ public class UserRegisterFragment extends Fragment
 	private EditText userName;
 	private EditText userPassword;
 	private static User userBuild;
-	private PVMPView mainActivity;
-	public Context context;
+	private PVMPView mainActivity; /**<*/
+	public Context context; /**<*/
 	private Button register;
 
 	private PVMPController controller;
@@ -61,6 +62,10 @@ public class UserRegisterFragment extends Fragment
 		return rootView;
 	}
 	
+	/**
+	* @param _view
+	* @brief 
+	*/
 	public void buildObjectFromView (View _view)
 	{
 		this.name = (EditText) _view.findViewById(R.id.name);
@@ -101,7 +106,10 @@ public class UserRegisterFragment extends Fragment
 			return;
 		}
 	}
-	
+
+	/**
+	* @brief
+	*/
 	public void getDataFromFragment() 
 	{
 		String education = null;

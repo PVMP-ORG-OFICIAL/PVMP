@@ -1,3 +1,7 @@
+/**
+* @file NavigationDrawerAdapter.java
+* @brief 
+*/
 package com.pvmp.view.adapter;
 
 import java.util.ArrayList;
@@ -14,11 +18,20 @@ import android.content.Context;
 import com.pvmp.R;
 import com.pvmp.view.model.NavigationDrawerItem;
 
+/**
+* @class
+* @brief
+*/
 public class NavigationDrawerAdapter extends BaseAdapter
 {
 	private Context context;
 	private ArrayList<NavigationDrawerItem> navigationDrawerItems;
 
+	/**
+	* @param _context
+	* @param _navigationDrawerItems
+	* @brief 
+	*/
 	public NavigationDrawerAdapter(Context _context, ArrayList<NavigationDrawerItem> _navigationDrawerItems)
 	{
 		this.context = _context;

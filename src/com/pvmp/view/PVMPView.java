@@ -1,3 +1,10 @@
+/**
+* @file PVMPView.java
+* @brief
+* @see
+* @see http://developer.android.com/training/implementing-navigation/nav-drawer.html
+* @see http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/
+*/
 package com.pvmp.view;
 
 import java.util.ArrayList;
@@ -40,13 +47,17 @@ import com.pvmp.controller.ControllerInterface;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.R;
 
+/**
+* @class PVMPView
+* @brief
+*/
 public class PVMPView extends Activity implements ViewObserverInterface 
 {
-	private static User user;
+	private static User user;	/**< */
 
-	private DrawerLayout mainDrawerLayout;
-	private ListView mainDrawerList;
-	private ActionBarDrawerToggle mainDrawerToggle;
+	private DrawerLayout mainDrawerLayout; /**< */
+	private ListView mainDrawerList; /**< */
+	private ActionBarDrawerToggle mainDrawerToggle; /**< */
 
 	//Navigation drawer application title
 	private CharSequence mainDrawerTitle;
@@ -64,25 +75,24 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	//Controller and Model reference
 	private ControllerInterface controller;
 	private ModelSubjectInterface model;
-	
+
+	public PVMPView()
+	{}
 
 	@Override
 	public void onCreate(Bundle _savedInstanceState) 
 	{
-		super.onCreate(_savedInstanceState);
 		Util.debug("+++ DO THE MAGIC! +++");
-		this.controller.openSession();
+		super.onCreate(_savedInstanceState);
 
 		//Extra data
-		Util.debug("PVMPView: Add object parameter");
-		this.controller = (PVMPController) getIntent().getSerializableExtra("PVMPController");
-		this.model = (PVMPmodel) getIntent().getSerializableExtra("PVMPmodel");
-		Util.debug("PVMPView: Try to setup controller");
-		this.controller.setModel(this.model);
+		Util.debug("PVMPView: Add object parameter - Controller");
+		this.controller = new PVMPController(this);
 		this.controller.setView(this);
-		Util.debug("PVMPView: after set controller");
+		
+		//Start the party!!! 
+		this.controller.openSession();
 
-		super.onCreate(_savedInstanceState);
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
 		this.mainTitle = mainDrawerTitle = getTitle();
@@ -102,7 +112,8 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.mainDrawerList.setAdapter(this.adapter);
 
 		//Enabling action bar app icon and behaveing it a toggle button
-		this.enableScreenInteraction(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
 
 		mainDrawerToggle = new ActionBarDrawerToggle(this, this.mainDrawerLayout, 
 				R.drawable.ic_drawer,
@@ -251,6 +262,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	@Override
 	public void displayFragment(int _position)
 	{
+		Util.debug("PVMPView: Start display fragment");
 		Fragment fragment = null;
 		switch(_position)
 		{
@@ -282,6 +294,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				break;
 		}
 
+		Util.debug("MainActivity: Create a HOME ");
 		if(fragment != null)
 		{
 			FragmentManager fragmentManager = getFragmentManager();
@@ -318,6 +331,8 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		{
 			//Display view for selected navigation item
 			displayFragment(_position);
+
+			return;
 		}
 	}
 }

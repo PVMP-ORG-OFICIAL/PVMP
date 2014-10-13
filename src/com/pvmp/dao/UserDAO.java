@@ -5,11 +5,19 @@
  */
 
 
+/*
+
+======== ATTENTION: THIS CLASS MUST TO DIE!!!! REPLACE IT FOR REAL DAO! ==========
+Obs.: Based on that, I will not refactoring it.
+
+*/
+
 package com.pvmp.dao;
 
 import com.pvmp.database.PersistenceHelper;
 
 import com.pvmp.models.User;
+import com.pvmp.util.Util;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -47,7 +55,11 @@ public class UserDAO {
 	
 	public static UserDAO getInstance(Context context) {
 		if(instance == null)
+		{
+			Util.debug("UserDAO: Try to get data");
 			instance = new UserDAO(context.getApplicationContext());
+			Util.debug("UserDAO: Returned");
+		}
 		return instance;
 	}
 	

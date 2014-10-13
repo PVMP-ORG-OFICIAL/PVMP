@@ -1,3 +1,7 @@
+/**
+* @file EditSettingsFragment.java
+* @brief
+*/
 package com.pvmp.view.fragment;
 
 import android.content.Context;
@@ -15,14 +19,18 @@ import com.pvmp.dao.UserDAO;
 import com.pvmp.models.User;
 import com.pvmp.R;
 
+/**
+* @class
+* @brief
+*/
 public class EditSettingsFragment extends Fragment{
 
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+	public View onCreateView(LayoutInflater _inflater, ViewGroup _container,
+            Bundle _savedInstanceState) 
+	{
+		View rootView = _inflater.inflate(R.layout.fragment_home, _container, false);
          
-        return rootView;
-    }
+		return rootView;
+  }
 }

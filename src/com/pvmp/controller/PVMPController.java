@@ -1,17 +1,24 @@
+/**
+* @file PVMPController.java
+* @brief
+*/
 package com.pvmp.controller;
 
-import java.io.Serializable;
+import android.content.Context;
 
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.PVMPView;
 import com.pvmp.util.Util;
+import com.pvmp.models.PVMPmodel;
 
+/**
+* @class PVMPController
+* @brief
+*/
 public class PVMPController implements ControllerInterface
 {
-	private static final long serialVersionUID = 1577583808128983752L;
-	
 	ViewObserverInterface view;
 	ModelSubjectInterface model;
 
@@ -19,15 +26,28 @@ public class PVMPController implements ControllerInterface
 	{
 	}
 
-	public PVMPController(ModelSubjectInterface _model)
+	/**
+	* @param _context
+	* @brief 
+	*/
+	public PVMPController(Context _context)
 	{
+		this.model = new PVMPmodel(_context);
 	}
 
+	/**
+	* @param _view
+	* @brief 
+	*/
 	public void setView(ViewObserverInterface _view)
 	{
 		this.view = _view;
 	}
 
+	/**
+	* @param _model
+	* @brief 
+	*/
 	public void setModel(ModelSubjectInterface _model)
 	{
 		this.model = _model;
@@ -38,6 +58,8 @@ public class PVMPController implements ControllerInterface
 	{
 			User user = this.model.getDefaultUser();
 			
+			Util.debug("PVMPController: start openApplication.");
+
 			//Verify if has user default
 			if (user != null)
 			{
@@ -65,10 +87,12 @@ public class PVMPController implements ControllerInterface
 	{
 		Util.debug("PVMPController: Prepare for register new user.");
 		this.model.saveUser(_user);
+		Util.debug("PVMPController: User saved on database, change view now");
 		this.view.enableDrawer(true);
 		this.view.enableScreenInteraction(true);
 		this.view.displayFragment(ViewObserverInterface.HOME);
-	
+		Util.debug("PVMPController: finish register");
+
 		return;
 	}
 
@@ -77,6 +101,10 @@ public class PVMPController implements ControllerInterface
 	{
 		Util.debug("PVMPController: openSession");
 		User user = this.model.getDefaultUser();
+		if(user == null)
+		{
+			Util.debug("PVMPController: getDefaultUser Problem");
+		}
 
 		return user;
 	}

@@ -5,6 +5,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
+/*
+
+========= ATTENTION: THIS CLASS MUST TO DIE OR CHANGE! BASED ON THAT, I WILL NOT REFACTORING ==========
+
+*/
+
 public class PersistenceHelper extends SQLiteOpenHelper{
 
 	public static final String DATABASE_NAME = "PVMP_DATABASE";

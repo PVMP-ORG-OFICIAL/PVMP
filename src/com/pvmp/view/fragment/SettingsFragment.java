@@ -1,3 +1,7 @@
+/**
+* @file SettingsFragment.java
+* @brief
+*/
 package com.pvmp.view.fragment;
 
 import android.app.Fragment;
@@ -8,15 +12,20 @@ import android.view.ViewGroup;
 
 import com.pvmp.R;
 
+/**
+*	@class SettingsFragment
+* @brief
+*/
 public class SettingsFragment extends Fragment 
 {
-	public SettingsFragment(){}
+	public SettingsFragment()
+	{}
 
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) 
+    public View onCreateView(LayoutInflater _inflater, ViewGroup _container,
+            Bundle _savedInstanceState) 
     {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = _inflater.inflate(R.layout.fragment_home, _container, false);
          
         return rootView;
     }

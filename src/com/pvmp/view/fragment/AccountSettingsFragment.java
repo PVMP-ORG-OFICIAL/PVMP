@@ -1,3 +1,7 @@
+/**
+* @file AccountSettingsFragment.java
+* @brief
+*/
 package com.pvmp.view.fragment;
 
 import android.os.Bundle;
@@ -12,6 +16,10 @@ import android.widget.TextView;
 import com.pvmp.models.User;
 import com.pvmp.R;
 
+/**
+* @class
+* @brief
+*/
 public class AccountSettingsFragment extends Fragment 
 {
 	public AccountSettingsFragment()

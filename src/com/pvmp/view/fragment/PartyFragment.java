@@ -1,3 +1,7 @@
+/**
+* @file PartyFragment.java
+* @brief 
+*/
 package com.pvmp.view.fragment;
 
 import android.app.Fragment;
@@ -8,6 +12,10 @@ import android.view.ViewGroup;
 
 import com.pvmp.R;
 
+/**
+* @class
+* @brief
+*/
 public class PartyFragment extends Fragment 
 {
 	public PartyFragment()

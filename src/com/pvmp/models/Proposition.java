@@ -3,7 +3,8 @@ package com.pvmp.models;
 import java.util.Date;
 import java.util.List;
 
-public class Proposition {
+public class Proposition 
+{
 	
 	private String name;
 	private String proposer;
@@ -12,7 +13,8 @@ public class Proposition {
 	private String summary;
 	private List <Vote> votes;
 	
-	public Proposition (){
+	public Proposition ()
+	{
 		this.name=null;
 		this.proposer=null;
 		this.situation=null;
@@ -21,54 +23,63 @@ public class Proposition {
 		this.votes=null;		
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 
-	public String getProposer() {
+	public String getProposer() 
+	{
 		return proposer;
 	}
 
-	public void setProposer(String proposer) {
+	public void setProposer(String proposer) 
+	{
 		this.proposer = proposer;
 	}
 
-	public String getSituation() {
+	public String getSituation()
+	{
 		return situation;
 	}
 
-	public void setSituation(String situation) {
+	public void setSituation(String situation) 
+	{
 		this.situation = situation;
 	}
 
-	public Date getPropositionDate() {
+	public Date getPropositionDate() 
+	{
 		return propositionDate;
 	}
 
-	public void setPropositionDate(Date propositionDate) {
+	public void setPropositionDate(Date propositionDate) 
+	{
 		this.propositionDate = propositionDate;
 	}
 
-	public String getSummary() {
+	public String getSummary() 
+	{
 		return summary;
 	}
 
-	public void setSummary(String summary) {
+	public void setSummary(String summary) 
+	{
 		this.summary = summary;
 	}
 
-	public List<Vote> getVotes() {
+	public List<Vote> getVotes() 
+	{
 		return votes;
 	}
 
-	public void setVotes(List<Vote> votes) {
+	public void setVotes(List<Vote> votes) 
+	{
 		this.votes = votes;
 	}
-	
-	
-
 }
