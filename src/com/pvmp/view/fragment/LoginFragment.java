@@ -41,7 +41,9 @@ public class LoginFragment extends Fragment
 	private Button buttonGuest;
 
 	public LoginFragment()
-	{}
+	{
+		//Please, never add any code here. 		
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater _inflater, ViewGroup _containter, Bundle _savedInstanceState)
