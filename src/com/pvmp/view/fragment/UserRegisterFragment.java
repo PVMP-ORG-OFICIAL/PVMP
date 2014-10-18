@@ -55,8 +55,11 @@ public class UserRegisterFragment extends Fragment
 		View rootView = _inflater.inflate(R.layout.user_register_fragment, _containter, false);
 		this.mainActivity = (PVMPView) getActivity();
 		this.context = mainActivity.getApplicationContext();
+		
+		this.controller = new PVMPController(context);
+		controller.setView(UserRegisterFragment.this.mainActivity);
 
-		this.userBuild = new User();
+		userBuild = new User();
 		
 		buildObjectFromView(rootView);
 		return rootView;
@@ -94,6 +97,7 @@ public class UserRegisterFragment extends Fragment
 			switch(validationResult) 
 			{
 				case 0:	
+					userBuild.setDefaultUser("S");
 					controller.registerUser(userBuild);
 					ErrorHandlingUtil.showToast("Cadastro realizado com sucesso!", context);
 					return;
@@ -115,18 +119,18 @@ public class UserRegisterFragment extends Fragment
 		String education = null;
 		String sex = null;
 		
-		this.userBuild.setName(this.name.getText().toString());
-		this.userBuild.setEmail(this.userEmail.getText().toString());
+		userBuild.setName(this.name.getText().toString());
+		userBuild.setEmail(this.userEmail.getText().toString());
 		if (this.userAge.getText().toString().equals(""))
 		{
-			this.userBuild.setAge(0);
+			userBuild.setAge(0);
 		}
 		else
 		{
-			this.userBuild.setAge(Integer.parseInt(this.userAge.getText().toString()));
+			userBuild.setAge(Integer.parseInt(this.userAge.getText().toString()));
 		}
-		this.userBuild.setUsername(this.userName.getText().toString());
-		this.userBuild.setPassword(this.userPassword.getText().toString());
+		userBuild.setUsername(this.userName.getText().toString());
+		userBuild.setPassword(this.userPassword.getText().toString());
 	
 		switch (this.education.getCheckedRadioButtonId()) 
 		{
@@ -140,7 +144,7 @@ public class UserRegisterFragment extends Fragment
 				education = "Superior";
 				break;
 		}
-		this.userBuild.setEducation(education);
+		userBuild.setEducation(education);
 		
 		switch(this.sex.getCheckedRadioButtonId()) 
 		{
@@ -151,7 +155,7 @@ public class UserRegisterFragment extends Fragment
 				sex = "Feminino";
 				break;
 		}
-		this.userBuild.setSex(sex);
+		userBuild.setSex(sex);
 
 		return;
 	}
