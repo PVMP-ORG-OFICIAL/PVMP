@@ -8,7 +8,8 @@ import java.util.Locale;
 
 /**
  *  @class Filter
- *  @brief
+ *  @brief Class responsible for receive some commands, transform them into SQL language
+ *  	   expressions and give (or return) a SQL concatenated expression.
  * */
 public final class Filter extends Expression 
 {
@@ -22,24 +23,6 @@ public final class Filter extends Expression
 		this.operator = _operator;
 	}
 	
-	/*
-	 * Instead of making 3 constructors to handle 3 different types of _value,
-	 * 3 setValue were made, with different type parameters. This way, repeating
-	 * the set of the variable and the operator wont be needed. The way of thinking
-	 * might be changed, it was just a first way found to end the problem.
-	 */
-	public void setValue(Object _value) {
-		this.value = this.transform(_value);
-	}
-	
-	public void setValue(int[] _value) {
-		this.value = this.transform(_value);
-	}
-	
-	public void setValue(String[] _value) {
-		this.value = this.transform(_value);
-	}
-
 	@Override
 	public String dumpExpression() 
 	{
@@ -124,4 +107,23 @@ public final class Filter extends Expression
 		}
 		return null;
 	}
+	
+	/*
+	 * Instead of making 3 constructors to handle 3 different types of _value,
+	 * 3 setValue were made, with different type parameters. This way, repeating
+	 * the set of the variable and the operator wont be needed. The way of thinking
+	 * might be changed, it was just a first solution found to solve the problem.
+	 */
+	public void setValue(Object _value) {
+		this.value = this.transform(_value);
+	}
+	
+	public void setValue(int[] _value) {
+		this.value = this.transform(_value);
+	}
+	
+	public void setValue(String[] _value) {
+		this.value = this.transform(_value);
+	}
+
 }
