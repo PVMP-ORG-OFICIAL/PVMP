@@ -57,7 +57,7 @@ public class Criteria extends Expression
 	/**
 	 * @param _expression
 	 * @param _operator
-	 * @brief Method responsible for recursively add expression and operators to arrays
+	 * @brief Method responsible for recursively add expressions and operators to arrays
 	 * 		  that will be transformed in a SQL command by the method dumpExpression()
 	 */
 	public void add(Expression _expression, String _operator) {
