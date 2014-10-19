@@ -39,7 +39,7 @@ public final class Filter extends Expression
 	 * */
 	
 	//Expected form: ('value1', 'value2', 'value3',...)
-	public String transform(String[] _value)
+	private String transform(String[] _value)
 	{
 		String result = "(";
 		
@@ -60,7 +60,7 @@ public final class Filter extends Expression
 	}
 	
 	//Expected form: (value1, value2, value3,...)
-	public String transform(int[] _value)
+	private String transform(int[] _value)
 	{
 		String result = "(";
 		
@@ -79,7 +79,7 @@ public final class Filter extends Expression
 		return result;
 	}
 	
-	public String transform(Object _value)
+	private String transform(Object _value)
 	{
 		if (_value == null)
 		{

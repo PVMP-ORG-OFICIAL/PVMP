@@ -26,19 +26,24 @@ public class FilterTest extends TestCase
 		
 		this.f1 = new Filter("DATA", "=");
 		this.f1.setValue("2007-06-02");
+		
 		this.f2 = new Filter("ANO", ">");
 		this.f2.setValue(2010);
+		
 		this.f3 = new Filter("VOTO", "IN");
 		this.f3.setValue(votes);
+		
 		this.f4 = new Filter("ESTADO", "=");
 		this.f4.setValue(true);
+		
 		this.f5 = new Filter("ESTADO", "IS NOT");
 		this.f5.setValue("null");
+		
 		this.f6 = new Filter("ANO", "IN");
 		this.f6.setValue(years);
 	}
 	
-	public void testDumpExpression () {
+	public void testDumpExpression() {
 		try 
 		{
 			assertEquals(this.f1.dumpExpression(), "DATA = '2007-06-02'");
