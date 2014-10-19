@@ -16,6 +16,7 @@ public class Criteria extends Expression
 
 	private ArrayList<Expression> expressions;
 	private ArrayList<String> operators;
+	private ArrayList<String> properties;
 	
 	public Criteria() 
 	{
@@ -60,9 +61,9 @@ public class Criteria extends Expression
 	 * @brief Method responsible for recursively add expressions and operators to arrays
 	 * 		  that will be transformed in a SQL command by the method dumpExpression()
 	 */
-	public void add(Expression _expression, String _operator) {
+	public void add(Expression _expression, String _operator) 
+	{
 		this.operators.add(_operator);
 		this.expressions.add(_expression);
 	}
-
 }

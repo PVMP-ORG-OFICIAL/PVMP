@@ -31,6 +31,11 @@ public abstract class SqlInstructionQuery
 		return this.entity;
 	}
 	
+	/**
+	 * Method that will generate the instruction based from which "child class" it 
+	 * is called. For example, if it is being called by SqlSelect class, it will
+	 * generate a full SQL Select instruction based on criteria(s) and entities.
+	 * */
 	public abstract String getInstruction();
 
 }
