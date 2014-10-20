@@ -96,6 +96,10 @@ public class PVMPController implements ControllerInterface
 		return;
 	}
 	
+	public void editUser(User _user){
+		this.model.editUser(_user);
+	}
+	
 
 	@Override
 	public User openSession()

@@ -28,6 +28,9 @@ public interface ControllerInterface
 	* @param _user
 	* @brief 
 	*/
+	
+	public void editUser(User _user);
+	
 	public void registerUser(User _user);
 
 	/**

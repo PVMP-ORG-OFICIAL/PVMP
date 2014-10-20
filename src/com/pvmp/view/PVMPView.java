@@ -91,7 +91,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.controller.setView(this);
 		
 		//Start the party!!! 
-		this.controller.openSession();
+		user = this.controller.openSession();
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
@@ -279,6 +279,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				fragment = new SettingsFragment();
 				break;
 			case LOGOUT:
+				if (user != null) {
+					user.setDefaultUser("N");
+					this.controller.editUser(user);
+				}
 				fragment = new LoginFragment();
 				break;
 			case LOGIN:
@@ -334,9 +338,5 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 			return;
 		}
-	}
-	
-	public User getUser() {
-		return user;
 	}
 }
