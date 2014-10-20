@@ -335,4 +335,8 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			return;
 		}
 	}
+	
+	public User getUser() {
+		return user;
+	}
 }
