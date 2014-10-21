@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
+import com.pvmp.controller.PVMPController;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.PVMPView;
@@ -34,11 +35,15 @@ public class LoginFragment extends Fragment
 	private EditText password;
 	private TextView errorLogin;
 	private PVMPView mainActivity;
-	//private User userToBeLogged;
+	private User userToBeLogged;
 	private Context context;
 	private Button buttonLogin;
 	private Button buttonRegister;
 	private Button buttonGuest;
+
+	private PVMPController controller;
+	
+	
 
 	public LoginFragment()
 	{
@@ -54,6 +59,9 @@ public class LoginFragment extends Fragment
 		View rootView = _inflater.inflate(R.layout.login_fragment, _containter, false);
 		mainActivity = (PVMPView) getActivity();
 		context = mainActivity.getApplicationContext();
+		this.userToBeLogged = new User();
+		this.controller = new PVMPController(context);
+		controller.setView(LoginFragment.this.mainActivity);
 		//Initialize the elements
 		this.initializeDataField(rootView);
 
@@ -84,6 +92,18 @@ public class LoginFragment extends Fragment
 		public void onClick(View _view)
 		{
 			Util.debug("ENTRAR PUSHED!!!"); 
+			String username = userName.getText().toString();
+			String password_ = password.getText().toString();
+			userToBeLogged = userToBeLogged.verifyExistingUser(username, password_, context);
+			
+			if(userToBeLogged != null){
+				userToBeLogged.setDefaultUser("S");
+				controller.editUser(userToBeLogged);
+				mainActivity.displayFragment(ViewObserverInterface.HOME);
+			}
+			else
+				userToBeLogged = new User();
+			
 		}
 	}
 
@@ -104,4 +124,6 @@ public class LoginFragment extends Fragment
 			Util.debug("VISISTANTE PUSHED!!!");
 		}
 	}
+	
+
 }
