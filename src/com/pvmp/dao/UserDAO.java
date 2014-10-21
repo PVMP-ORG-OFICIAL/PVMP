@@ -45,7 +45,7 @@ public class UserDAO {
 			+ COLUMN_SEX + " VARCHAR(9) NOT NULL,"
 			+ COLUMN_DEFAULT + " VARCHAR(1) NOT NULL"
 			+ ");";
-	
+	 
 	public static final String SCRIPT_TABLE_DELETION = 
 			"DROP TABLE IF EXISTS " + TABLE_NAME;
 	

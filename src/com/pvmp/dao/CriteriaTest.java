@@ -22,7 +22,8 @@ public class CriteriaTest extends TestCase
 	private Filter f5;
 	
 	@Override
-	public void setUp () throws Exception {
+	public void setUp () throws Exception 
+	{
 		this.c1 = new Criteria();
 		this.c2 = new Criteria();
 		this.c3 = new Criteria();
@@ -61,7 +62,8 @@ public class CriteriaTest extends TestCase
 		
 	}
 	
-	public void testDumpExpression() {
+	public void testDumpExpression() 
+	{
 		try 
 		{
 			assertEquals("((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16))", this.c3.dumpExpression());

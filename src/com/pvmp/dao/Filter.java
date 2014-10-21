@@ -8,7 +8,7 @@ import java.util.Locale;
 
 /**
  *  @class Filter
- *  @brief Class responsible for receive some commands, transform them into SQL language
+ *  @brief Class responsible for receiving some commands, transforming them into SQL language
  *  	   expressions and give (or return) a SQL concatenated expression.
  * */
 public final class Filter extends Expression 
