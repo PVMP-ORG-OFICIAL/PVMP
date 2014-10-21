@@ -16,7 +16,7 @@ public class Criteria extends Expression
 
 	private ArrayList<Expression> expressions;
 	private ArrayList<String> operators;
-	private ArrayList<String> properties;
+	//private ArrayList<String> properties;
 	
 	public Criteria() 
 	{

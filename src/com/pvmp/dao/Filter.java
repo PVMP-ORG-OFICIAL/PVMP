@@ -114,15 +114,18 @@ public final class Filter extends Expression
 	 * the set of the variable and the operator wont be needed. The way of thinking
 	 * might be changed, it was just a first solution found to solve the problem.
 	 */
-	public void setValue(Object _value) {
+	public void setValue(Object _value) 
+	{
 		this.value = this.transform(_value);
 	}
 	
-	public void setValue(int[] _value) {
+	public void setValue(int[] _value) 
+	{
 		this.value = this.transform(_value);
 	}
 	
-	public void setValue(String[] _value) {
+	public void setValue(String[] _value) 
+	{
 		this.value = this.transform(_value);
 	}
 
