@@ -24,8 +24,9 @@ public class PVMPDatabase
 	{}
 	
 	/**
-	 * @param
-	 * @brief 
+	 * @param _context
+	 * @brief Constructor of the class. Need a context to start a PersistenceHelper
+	 * 		  instance.
 	 **/
 	private PVMPDatabase(Context _context) 
 	{
@@ -37,7 +38,7 @@ public class PVMPDatabase
 	 * @param _tableName
 	 * @param _values
 	 * @param _context
-	 * @brief ...
+	 * @brief Insert a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
 	public static void insertDB(String _tableName, ContentValues _values, Context _context)
 	{
@@ -59,10 +60,10 @@ public class PVMPDatabase
 	 * @param _whereClause
 	 * @param _whereArgs
 	 * @param _context
-	 * @brief 
+	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
 	 **/
 	public static void updateDB(String _tableName, ContentValues _values, String _whereClause,
-			String[] _whereArgs, Context _context)
+								Context _context)
 	{
 		if (_tableName == null || _values == null || _context == null)
 		{
@@ -71,7 +72,7 @@ public class PVMPDatabase
 		}
 		
 		database = getWritePVMP(_context);
-		database.update(_tableName, _values, _whereClause, _whereArgs);
+		database.update(_tableName, _values, _whereClause, null);
 	}
 	
 	/**
@@ -79,7 +80,7 @@ public class PVMPDatabase
 	 * @param _columnName
 	 * @param _whereArgs
 	 * @param _context
-	 * @brief 
+	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
 	public static void deleteDB(String _tableName, String _columnName, 
 			String[] _whereArgs, Context _context)
@@ -87,7 +88,7 @@ public class PVMPDatabase
 		if (_tableName == null || _columnName == null || _context == null 
 				|| _whereArgs == null)
 		{
-			Util.debug("PVMPDatabase: updateDB deu treta.");
+			Util.debug("PVMPDatabase: deleteDB deu treta.");
 			return;
 		}
 		
