@@ -21,9 +21,15 @@ public final class SqlSelect extends SqlInstructionQuery
 		this.criteria = null;
 	}
 	
+	/**
+	 * @param _column
+	 * @brief Add a column to the ArrayList that manages which columns should be selected on
+	 *        a Database Select action.
+	 * */
 	public void addColumn (String _column) {
 		this.columns.add(_column);
 	}
+	
 	@Override
 	public String getInstruction() 
 	{

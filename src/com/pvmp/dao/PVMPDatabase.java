@@ -10,6 +10,7 @@ import com.pvmp.util.Util;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -48,7 +49,7 @@ public class PVMPDatabase
 			return;
 		}
 		
-		database = getWritePVMP(_context);		
+		database = getWritablePVMP(_context);		
 		database.insert(_tableName, null, _values);
 		
 		return;
@@ -65,13 +66,14 @@ public class PVMPDatabase
 	public static void updateDB(String _tableName, ContentValues _values, String _whereClause,
 								Context _context)
 	{
-		if (_tableName == null || _values == null || _context == null)
+		if (_tableName == null || _values == null || _whereClause == null
+			|| _context == null)
 		{
 			Util.debug("PVMPDatabase: updateDB deu treta.");
 			return;
 		}
 		
-		database = getWritePVMP(_context);
+		database = getWritablePVMP(_context);
 		database.update(_tableName, _values, _whereClause, null);
 	}
 	
@@ -82,23 +84,36 @@ public class PVMPDatabase
 	 * @param _context
 	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
-	public static void deleteDB(String _tableName, String _columnName, 
-			String[] _whereArgs, Context _context)
+	public static void deleteDB(String _tableName, String _whereClause, Context _context)
 	{
-		if (_tableName == null || _columnName == null || _context == null 
-				|| _whereArgs == null)
+		if (_tableName == null || _whereClause == null || _context == null)
 		{
 			Util.debug("PVMPDatabase: deleteDB deu treta.");
 			return;
 		}
 		
-		database = getWritePVMP(_context);
-		database.delete(_tableName, _columnName + " = ?", _whereArgs);
+		database = getWritablePVMP(_context);
+		database.delete(_tableName, _whereClause, null);
 	}
 	
-	public static Cursor selectDB()
+	public static ContentValues selectDB(SqlSelect _queryExpression, Context _context)
 	{
-		return null;
+		if (_queryExpression == null || _context == null)
+		{
+			Util.debug("PVMPDatabase: selectDB deu treta.");
+			return null;
+		}
+		
+		database = getReadablePVMP(_context);
+		
+		Cursor cursor = database.rawQuery(_queryExpression.getInstruction(), null);
+		ContentValues contentValues = new ContentValues();
+
+        if (cursor.moveToFirst()) {
+        	DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
+        }
+        	
+		return contentValues;
 	}
 	
 	private static SQLiteDatabase getReadablePVMP(Context _context)
@@ -107,7 +122,7 @@ public class PVMPDatabase
 		return persistenceHelper.getReadableDatabase();
 	}
 	
-	private static SQLiteDatabase getWritePVMP(Context _context)
+	private static SQLiteDatabase getWritablePVMP(Context _context)
 	{
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
 		return persistenceHelper.getWritableDatabase();

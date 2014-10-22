@@ -16,23 +16,23 @@ public abstract class SqlInstructionQuery
 	protected Criteria criteria;
 	protected String entity;
 	
-	public void setCriteria (Criteria criteria)
+	public void setCriteria (Criteria _criteria)
 	{
-		this.criteria = criteria;
+		this.criteria = _criteria;
 	}
 	
-	final public void setEntity(String entity) 
+	public final void setEntity(String _entity) 
 	{
-		this.entity = entity;
+		this.entity = _entity;
 	}
 	
-	final public String getEntity()
+	public final String getEntity()
 	{
 		return this.entity;
 	}
 	
 	/**
-	 * Method that will generate the instruction based from which "child class" it 
+	 * @brief Method that will generate the instruction based from which "child class" it 
 	 * is called. For example, if it is being called by SqlSelect class, it will
 	 * generate a full SQL Select instruction based on criteria(s) and entities.
 	 * */
