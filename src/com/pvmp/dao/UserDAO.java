@@ -14,7 +14,6 @@ Obs.: Based on that, I will not refactoring it.
 
 package com.pvmp.dao;
 
-import com.pvmp.database.PersistenceHelper;
 
 import com.pvmp.models.User;
 import com.pvmp.util.Util;

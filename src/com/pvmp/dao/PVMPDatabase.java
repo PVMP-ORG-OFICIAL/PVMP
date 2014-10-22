@@ -4,7 +4,6 @@
  * */
 package com.pvmp.dao;
 
-import com.pvmp.database.PersistenceHelper;
 import com.pvmp.util.Util;
 
 import android.content.ContentValues;
@@ -96,6 +95,11 @@ public class PVMPDatabase
 		database.delete(_tableName, _whereClause, null);
 	}
 	
+	/**
+	 * @param _queryExpression 
+	 * @param _context
+	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
+	 * */
 	public static ContentValues selectDB(SqlSelect _queryExpression, Context _context)
 	{
 		if (_queryExpression == null || _context == null)
