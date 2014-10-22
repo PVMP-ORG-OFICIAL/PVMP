@@ -1,3 +1,6 @@
+/**
+ * @file CriteriaTest.java
+ * */
 package com.pvmp.dao;
 
 import junit.framework.TestCase;
@@ -9,67 +12,71 @@ import junit.framework.TestCase;
  * */
 public class CriteriaTest extends TestCase 
 {
-	
-	private Criteria c1;
-	private Criteria c2;
-	private Criteria c3;
-	private Criteria c4;
-	private Criteria c5;
-	private Filter f1;
-	private Filter f2;
-	private Filter f3;
-	private Filter f4;
-	private Filter f5;
+	private Criteria criteria1;
+	private Criteria criteria2;
+	private Criteria criteria3;
+	private Criteria criteria4;
+	private Criteria criteria5;
+	private Filter filter1;
+	private Filter filter2;
+	private Filter filter3;
+	private Filter filter4;
+	private Filter filter5;
 	
 	@Override
 	public void setUp () throws Exception 
 	{
-		this.c1 = new Criteria();
-		this.c2 = new Criteria();
-		this.c3 = new Criteria();
-		this.c4 = new Criteria();
-		this.c5 = new Criteria();
+		this.criteria1 = new Criteria();
+		this.criteria2 = new Criteria();
+		this.criteria3 = new Criteria();
+		this.criteria4 = new Criteria();
+		this.criteria5 = new Criteria();
 		
-		this.f1 = new Filter("SEXO", "=");
-		this.f1.setValue("F");
+		this.filter1 = new Filter("SEXO", "=");
+		this.filter1.setValue("F");
 		
-		this.f2 = new Filter("IDADE", ">");
-		this.f2.setValue(18);
+		this.filter2 = new Filter("IDADE", ">");
+		this.filter2.setValue(18);
 		
-		this.f3 = new Filter("SEXO", "=");
-		this.f3.setValue("M");
+		this.filter3 = new Filter("SEXO", "=");
+		this.filter3.setValue("M");
 		
-		this.f4 = new Filter("IDADE", "<");
-		this.f4.setValue(16);
+		this.filter4 = new Filter("IDADE", "<");
+		this.filter4.setValue(16);
 		
-		this.f5 = new Filter("IDADE", ">");
-		this.f5.setValue(60);
+		this.filter5 = new Filter("IDADE", ">");
+		this.filter5.setValue(60);
 		
-		this.c1.add(this.f1, Expression.AND_OPERATOR);
-		this.c1.add(this.f2, Expression.AND_OPERATOR);
+		this.criteria1.add(this.filter1, Expression.AND_OPERATOR);
+		this.criteria1.add(this.filter2, Expression.AND_OPERATOR);
 		
-		this.c2.add(this.f3, Expression.AND_OPERATOR);
-		this.c2.add(this.f4, Expression.AND_OPERATOR);
+		this.criteria2.add(this.filter3, Expression.AND_OPERATOR);
+		this.criteria2.add(this.filter4, Expression.AND_OPERATOR);
 		
-		this.c3.add(this.c1, Expression.OR_OPERATOR);
-		this.c3.add(this.c2, Expression.OR_OPERATOR);
+		this.criteria3.add(this.criteria1, Expression.OR_OPERATOR);
+		this.criteria3.add(this.criteria2, Expression.OR_OPERATOR);
 		
-		this.c4.add(f4, Expression.OR_OPERATOR);
-		this.c4.add(f5, Expression.OR_OPERATOR);
+		this.criteria4.add(filter4, Expression.OR_OPERATOR);
+		this.criteria4.add(filter5, Expression.OR_OPERATOR);
 		
-		this.c5.add(c3, Expression.AND_OPERATOR);
-		this.c5.add(c4, Expression.AND_OPERATOR);
+		this.criteria5.add(criteria3, Expression.AND_OPERATOR);
+		this.criteria5.add(criteria4, Expression.AND_OPERATOR);
 		
 	}
 	
+	/**
+	 * @brief Test if the method dumpExpression, of many Criteria objects
+	 * 		  instantiated on this.setUp(), will correctly return the desired
+	 * 		  sentence.
+	 * */
 	public void testDumpExpression() 
 	{
 		try 
 		{
-			assertEquals("((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16))", this.c3.dumpExpression());
-			assertEquals("(IDADE < 16 OR IDADE > 60)", this.c4.dumpExpression());
+			assertEquals("((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16))", this.criteria3.dumpExpression());
+			assertEquals("(IDADE < 16 OR IDADE > 60)", this.criteria4.dumpExpression());
 			assertEquals("(((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16)) AND (IDADE < 16 OR IDADE > 60))",
-					     this.c5.dumpExpression());
+					     this.criteria5.dumpExpression());
 		}
 		catch (Exception e)
 		{

@@ -1,3 +1,6 @@
+/**
+ * @file FilterTest.java
+ * */
 package com.pvmp.dao;
 
 import junit.framework.TestCase;
@@ -12,46 +15,51 @@ import junit.framework.TestCase;
 
 public class FilterTest extends TestCase 
 {
-	private Filter f1;
-	private Filter f2;
-	private Filter f3;
-	private Filter f4;
-	private Filter f5;
-	private Filter f6;
+	private Filter filterData;
+	private Filter filterYear1;
+	private Filter filterVote;
+	private Filter filterState1;
+	private Filter filterState2;
+	private Filter filterYear2;
 	
 	@Override
 	public void setUp() throws Exception {
 		String votes[] = {"Sim", "Nao"};
 		int years[] = {2005, 2008, 2013};
 		
-		this.f1 = new Filter("DATA", "=");
-		this.f1.setValue("2007-06-02");
+		this.filterData = new Filter("DATA", "=");
+		this.filterData.setValue("2007-06-02");
 		
-		this.f2 = new Filter("ANO", ">");
-		this.f2.setValue(2010);
+		this.filterYear1 = new Filter("ANO", ">");
+		this.filterYear1.setValue(2010);
 		
-		this.f3 = new Filter("VOTO", "IN");
-		this.f3.setValue(votes);
+		this.filterVote = new Filter("VOTO", "IN");
+		this.filterVote.setValue(votes);
 		
-		this.f4 = new Filter("ESTADO", "=");
-		this.f4.setValue(true);
+		this.filterState1 = new Filter("ESTADO", "=");
+		this.filterState1.setValue(true);
 		
-		this.f5 = new Filter("ESTADO", "IS NOT");
-		this.f5.setValue("null");
+		this.filterState2 = new Filter("ESTADO", "IS NOT");
+		this.filterState2.setValue("null");
 		
-		this.f6 = new Filter("ANO", "IN");
-		this.f6.setValue(years);
+		this.filterYear2 = new Filter("ANO", "IN");
+		this.filterYear2.setValue(years);
 	}
 	
+	/**
+	 * @brief Test if the method dumpExpression, of many Filter objects
+	 * 		  instantiated on this.setUp(), will correctly return the desired
+	 * 		  sentence.
+	 * */
 	public void testDumpExpression() {
 		try 
 		{
-			assertEquals(this.f1.dumpExpression(), "DATA = '2007-06-02'");
-			assertEquals(this.f2.dumpExpression(), "ANO > 2010");
-			assertEquals(this.f3.dumpExpression(), "VOTO IN ('Sim', 'Nao')");
-			assertEquals(this.f4.dumpExpression(), "ESTADO = TRUE");
-			assertEquals(this.f5.dumpExpression(), "ESTADO IS NOT NULL");
-			assertEquals(this.f6.dumpExpression(), "ANO IN (2005, 2008, 2013)");
+			assertEquals(this.filterData.dumpExpression(), "DATA = '2007-06-02'");
+			assertEquals(this.filterYear1.dumpExpression(), "ANO > 2010");
+			assertEquals(this.filterVote.dumpExpression(), "VOTO IN ('Sim', 'Nao')");
+			assertEquals(this.filterState1.dumpExpression(), "ESTADO = TRUE");
+			assertEquals(this.filterState2.dumpExpression(), "ESTADO IS NOT NULL");
+			assertEquals(this.filterYear2.dumpExpression(), "ANO IN (2005, 2008, 2013)");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
