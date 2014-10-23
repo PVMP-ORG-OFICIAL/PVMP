@@ -19,6 +19,7 @@ public interface ViewObserverInterface
 	public static final int REGISTER = 6;
 	public static final int VISITOR = 7;
 	public static final int HOME = 8;
+	public static final int EDIT = 9;
 
 	/**
 	* @param _codeFragment

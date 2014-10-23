@@ -32,6 +32,7 @@ import com.pvmp.models.User;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
 import com.pvmp.view.model.NavigationDrawerItem;
+import com.pvmp.view.fragment.AccountSettingsFragment;
 import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
 import com.pvmp.view.fragment.EditSettingsFragment;
@@ -293,6 +294,9 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				break;
 			case HOME:
 				fragment = new HomeFragment();
+				break;
+			case EDIT:
+				fragment = new EditSettingsFragment();
 				break;
 			default:
 				break;

@@ -19,6 +19,7 @@ import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.models.User;
 import com.pvmp.view.PVMPView;
+import com.pvmp.view.ViewObserverInterface;
 
 /**
 *	@class SettingsFragment
@@ -36,7 +37,7 @@ public class SettingsFragment extends Fragment
 	private Button buttonDelete;
 	private static User loggedUser;
 	private PVMPView mainActivity; /**<*/
-	public Context context; /**<*/
+	private Context context; /**<*/
 	
 	private PVMPController controller;
 	
@@ -72,6 +73,9 @@ public class SettingsFragment extends Fragment
 		this.sex = (TextView) _view.findViewById(R.id.textView_showSex);
 		this.userName = (TextView) _view.findViewById(R.id.textView_showUsername);
 		this.buttonEdit = (Button) _view.findViewById(R.id.button_edit);
+		this.buttonDelete = (Button) _view.findViewById(R.id.button_delete);
+		
+		this.buttonEdit.setOnClickListener(new HandleEdit());
 	}
 	
 	public void setScreenData(){
@@ -83,4 +87,23 @@ public class SettingsFragment extends Fragment
 		sex.setText(loggedUser.getSex());
 		userName.setText(loggedUser.getUsername());
 	}
+	
+	private class HandleEdit implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View _view)
+		{
+			mainActivity.displayFragment(ViewObserverInterface.EDIT);
+		}
+	}
+	
+	private class HandleDelete implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View _view)
+		{
+			
+		}
+	}
+	
 }

@@ -217,12 +217,15 @@ public class User extends DAOAbstract
 	* @return
 	* @brief 
 	*/
-	public static boolean validatePassword (String _password)
-	{
-		if(_password != null && _password.length() >= 6 && _password.length() <= 15)
-		{
+	public static boolean validatePasswordSize (String password) {
+		if(password != null && password.length()>=6 && password.length()<=15)
 			return true;
-		}
+		return false;
+	}
+	
+	public static boolean validatePasswordFormat (String password) {
+		if(password.matches("[a-zA-Z0-9]+"))
+			return true;
 		return false;
 	}
 
@@ -378,7 +381,7 @@ public class User extends DAOAbstract
 			return 5;
 		}
 		
-		if (!User.validatePassword(_user.getPassword()))
+		if (!User.validatePasswordSize(_user.getPassword()))
 		{
 			return 6;
 		}
