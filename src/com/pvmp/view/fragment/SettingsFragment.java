@@ -65,7 +65,8 @@ public class SettingsFragment extends Fragment
         return rootView;
     }
 	
-	public void takeDataFromView (View _view){
+	public void takeDataFromView (View _view)
+	{
 		this.name = (TextView) _view.findViewById(R.id.textView_showName);
 		this.userEmail = (TextView) _view.findViewById(R.id.textView_showEmail);
 		this.userAge = (TextView) _view.findViewById(R.id.textView_showAge);
@@ -78,7 +79,8 @@ public class SettingsFragment extends Fragment
 		this.buttonEdit.setOnClickListener(new HandleEdit());
 	}
 	
-	public void setScreenData(){
+	public void setScreenData()
+	{
 		
 		name.setText(loggedUser.getName());
 		userEmail.setText(loggedUser.getEmail());

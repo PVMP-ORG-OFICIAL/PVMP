@@ -4,31 +4,27 @@
 */
 package com.pvmp.view.fragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.EditText;
 import android.widget.Button;
-import android.view.View.OnClickListener;
-
-import com.pvmp.controller.PVMPController;
-import com.pvmp.models.User;
-import com.pvmp.view.ViewObserverInterface;
-import com.pvmp.view.PVMPView;
-import com.pvmp.util.Util;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.pvmp.R;
+import com.pvmp.controller.PVMPController;
+import com.pvmp.models.User;
+import com.pvmp.util.Util;
+import com.pvmp.view.PVMPView;
+import com.pvmp.view.ViewObserverInterface;
 
 /**
 * @class LoginFragment
 * @brief
 */
-public class LoginFragment extends Fragment
+public class LoginFragment extends FragmentView
 {
 
 	private EditText userName;
@@ -63,12 +59,13 @@ public class LoginFragment extends Fragment
 		this.controller = new PVMPController(context);
 		controller.setView(LoginFragment.this.mainActivity);
 		//Initialize the elements
-		this.initializeDataField(rootView);
+		this.buildScreenComponent(rootView);
 
 		return rootView;
 	}
 	
-	private void initializeDataField (View _view) 
+	@Override
+	public void buildScreenComponent (View _view) 
 	{
 		Util.debug("LoginFragment: Start initialize");
 		this.userName = (EditText) _view.findViewById(R.id.name);

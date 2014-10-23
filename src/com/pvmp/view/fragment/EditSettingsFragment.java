@@ -6,29 +6,25 @@ package com.pvmp.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.view.View.OnClickListener;
 
-import com.pvmp.controller.PVMPController;
-import com.pvmp.dao.UserDAO;
-import com.pvmp.models.User;
-import com.pvmp.view.PVMPView;
-import com.pvmp.view.ErrorHandlingUtil;
-import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.R;
+import com.pvmp.controller.PVMPController;
+import com.pvmp.models.User;
+import com.pvmp.view.ErrorHandlingUtil;
+import com.pvmp.view.PVMPView;
+import com.pvmp.view.ViewObserverInterface;
 
 /**
 * @class
 * @brief
 */
-public class EditSettingsFragment extends Fragment
+public class EditSettingsFragment extends FragmentView
 {
 	private EditText name;
 	private EditText userEmail;
@@ -62,13 +58,15 @@ public class EditSettingsFragment extends Fragment
 		
 		loggedUser = this.controller.openSession();
 		
-		takeDataFromView(rootView);
+		this.buildScreenComponent(rootView);
 		
 		
 		return rootView;
   }
 	
-	public void takeDataFromView (View _view){
+	@Override
+	public void buildScreenComponent (View _view)
+	{
 		this.name = (EditText) _view.findViewById(R.id.editText_editName);
 		this.userEmail = (EditText) _view.findViewById(R.id.editText_editEmail);
 		this.userAge = (EditText) _view.findViewById(R.id.editText_editAge);
