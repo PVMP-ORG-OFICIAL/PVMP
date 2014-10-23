@@ -61,7 +61,10 @@ public class EditSettingsFragment extends Fragment
 		controller.setView(EditSettingsFragment.this.mainActivity);
 		
 		loggedUser = this.controller.openSession();
-         
+		
+		takeDataFromView(rootView);
+		
+		
 		return rootView;
   }
 	
@@ -102,7 +105,10 @@ public class EditSettingsFragment extends Fragment
 				mainActivity.displayFragment(ViewObserverInterface.SETTING);
 			}
 		}
-	}
+		
+		
+	
+}
 	
 	public void saveUserEdition () {
 		loggedUser.setName(this.name.getText().toString());
@@ -112,26 +118,26 @@ public class EditSettingsFragment extends Fragment
 		else
 			loggedUser.setAge(Integer.parseInt(this.userAge.getText().toString()));		
 		
-		String education = null;
+		String education_ = null;
 		
 		switch (this.education.getCheckedRadioButtonId()) {
 			case R.id.radio_editElementarySchool:
-				education = "Fundamental";
+				education_ = "Fundamental";
 				break;
 			case R.id.radio_editHighSchool:
-				education = "Medio";
+				education_ = "Medio";
 				break;
 			case R.id.radio_editGraduated:
-				education = "Superior";
+				education_ = "Superior";
 				break;	
 		}
 		
-		loggedUser.setEducation(education);
+		loggedUser.setEducation(education_);
 	}
 	
 	public boolean passwordsVerification () {
-		String oldP = this.oldPassword.getText().toString();
-		String newP = this.newPassword.getText().toString();
+		String oldP = oldPassword.getText().toString();
+		String newP = newPassword.getText().toString();
 		
 		if (!oldP.equals("")) {
 			if (oldP.equals(loggedUser.getPassword())) {
@@ -139,29 +145,30 @@ public class EditSettingsFragment extends Fragment
 					if (User.validatePasswordFormat(newP))
 						return true;
 					else {
-						ErrorHandlingUtil.genericError(this.newPassword, "Sua senha deve ser formada apenas por letras e números.", context);
+						ErrorHandlingUtil.genericError(newPassword, "Sua senha deve ser formada apenas por letras e números.", context);
 						return false;
 					}
 					
 				}
 				else {
-					ErrorHandlingUtil.genericError(this.newPassword, "Sua senha deve ter de 6 a 15 caracteres.", context);
+					ErrorHandlingUtil.genericError(newPassword, "Sua senha deve ter de 6 a 15 caracteres.", context);
 					return false;
 				}
 			}
 			else {
-				ErrorHandlingUtil.genericError(this.oldPassword, "Senha antiga não correspondente.", context);
+				ErrorHandlingUtil.genericError(oldPassword, "Senha antiga não correspondente.", context);
 				return false;
 			}
 		}
 		else {
 			if(!newP.equals("")) {
-				ErrorHandlingUtil.genericError(this.oldPassword, "Senha antiga não correspondente.", context);
+				ErrorHandlingUtil.genericError(oldPassword, "Senha antiga não correspondente.", context);
 				return false;
 			}		
 		}
 		return true;
 	}
-	
-	
 }
+
+
+
