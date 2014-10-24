@@ -71,6 +71,7 @@ public class EditSettingsFragment extends FragmentView
 		this.userEmail = (EditText) _view.findViewById(R.id.editText_editEmail);
 		this.userAge = (EditText) _view.findViewById(R.id.editText_editAge);
 		this.education = (RadioGroup) _view.findViewById(R.id.radioGroup_editEducation);
+		this.sex = (RadioGroup) _view.findViewById(R.id.radiogroup_editSex);
 		this.oldPassword = (EditText) _view.findViewById(R.id.editText_oldPassword);
 		this.newPassword = (EditText) _view.findViewById(R.id.editText_newPassword);
 		this.buttonSave = (Button) _view.findViewById(R.id.button_save);
@@ -131,6 +132,20 @@ public class EditSettingsFragment extends FragmentView
 		}
 		
 		loggedUser.setEducation(education_);
+		
+		String sex_ = null;
+		
+		switch(this.sex.getCheckedRadioButtonId()) 
+		{
+			case R.id.radio_editMale:
+				sex_ = "Masculino";
+				break;
+			case R.id.radio_editFemale:
+				sex_ = "Feminino";
+				break;
+		}
+		
+		loggedUser.setSex(sex_);
 	}
 	
 	public boolean passwordsVerification () {

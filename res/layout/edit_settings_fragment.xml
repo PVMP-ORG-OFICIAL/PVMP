@@ -27,6 +27,10 @@
         android:ems="10"
         android:hint="@string/text_age"
         android:inputType="number" />
+    
+     <TextView
+		style = "@style/textInfo"
+		android:text = "@string/text_education"/>
 
     <RadioGroup
         android:id="@+id/radioGroup_editEducation"
@@ -50,6 +54,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_graduated" />
+    </RadioGroup>
+    
+     <TextView
+		style = "@style/textInfo"
+		android:text = "@string/text_sex"/>
+
+    <RadioGroup
+		android:id="@+id/radiogroup_editSex"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radio_editMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_sex_male" />
+
+        <RadioButton
+            android:id="@+id/radio_editFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_sex_female" />
     </RadioGroup>
 
     <EditText
