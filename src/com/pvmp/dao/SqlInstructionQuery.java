@@ -13,12 +13,12 @@ public abstract class SqlInstructionQuery
 {
 	
 	protected String finalExpression;
-	protected Criteria criteria;
+	protected Expression expression;
 	protected String entity;
 	
-	public void setCriteria (Criteria _criteria)
+	public void setExpression (Expression _expression)
 	{
-		this.criteria = _criteria;
+		this.expression = _expression;
 	}
 	
 	public final void setEntity(String _entity) 
@@ -34,7 +34,7 @@ public abstract class SqlInstructionQuery
 	/**
 	 * @brief Method that will generate the instruction based from which "child class" it 
 	 * is called. For example, if it is being called by SqlSelect class, a full SQL Select
-	 * instruction will be generated based on criteria(s) and entities.
+	 * instruction will be generated based on expression(s) and entities.
 	 * */
 	public abstract String getInstruction();
 

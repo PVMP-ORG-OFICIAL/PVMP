@@ -42,6 +42,7 @@ public class User extends DAOAbstract implements Serializable
 	
 	public User()
 	{
+		super();
 		this.TABLE_NAME = "USER";
 		this.name = null;
 		this.username = null;
@@ -67,6 +68,7 @@ public class User extends DAOAbstract implements Serializable
 	public User(String _name, String _username, String _password, String _email, 
 		int _age, String _education, String _sex, String _defaultUser)
 	{
+		super();
 		this.name = _name;
 		this.username = _username;
 		this.password = _password;
@@ -431,7 +433,7 @@ public class User extends DAOAbstract implements Serializable
 	}
 
 	@Override
-	protected ContentValues generateContentValues() 
+	public ContentValues generateContentValues() 
 	{
 		ContentValues values = new ContentValues();
 		
@@ -447,7 +449,7 @@ public class User extends DAOAbstract implements Serializable
 	}
 
 	@Override
-	protected User contentValuesToModel(ContentValues _contentValues) 
+	public User contentValuesToModel(ContentValues _contentValues) 
 	{
 		this.username = _contentValues.getAsString(COLUMN_USERNAME);
         this.password = _contentValues.getAsString(COLUMN_PASSWORD);

@@ -18,7 +18,7 @@ public final class SqlSelect extends SqlInstructionQuery
 	public SqlSelect () 
 	{
 		this.columns = new ArrayList<String>();
-		this.criteria = null;
+		this.expression = null;
 	}
 	
 	@Override
@@ -44,9 +44,9 @@ public final class SqlSelect extends SqlInstructionQuery
 		
 		expression += " FROM " + this.entity;
 		
-		if (this.criteria != null) 
+		if (this.expression != null) 
 		{
-			expression += " WHERE " + this.criteria.dumpExpression();
+			expression += " WHERE " + this.expression.dumpExpression();
 		}
 		
 		return expression;

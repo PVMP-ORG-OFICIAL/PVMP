@@ -41,7 +41,7 @@ public class SqlSelectTest extends TestCase {
 		this.sqlSelect.setEntity("USUARIO");
 		this.sqlSelect.addColumn("nome");
 		this.sqlSelect.addColumn("email");
-		this.sqlSelect.setCriteria(this.c2);
+		this.sqlSelect.setExpression(this.c2);
 		
 		this.c1.add(this.f1, Expression.AND_OPERATOR);
 		this.c1.add(this.f2, Expression.AND_OPERATOR);
@@ -61,7 +61,7 @@ public class SqlSelectTest extends TestCase {
 	@Test
 	public void testGetInstructionAllColumns () {
 		this.sqlSelect.setEntity("USUARIO");
-		this.sqlSelect.setCriteria(this.c2);
+		this.sqlSelect.setExpression(this.c2);
 		
 		this.c1.add(this.f1, Expression.AND_OPERATOR);
 		this.c1.add(this.f2, Expression.AND_OPERATOR);

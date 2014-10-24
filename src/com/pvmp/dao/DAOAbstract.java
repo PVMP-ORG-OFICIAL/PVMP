@@ -19,7 +19,7 @@ public abstract class DAOAbstract
 	
 	/**
 	 * @param _context
-	 * @brief Template method for Database Inserting of every class that will
+	 * @brief Template method for Database Inserting of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
 	protected final void insertDB(Context _context) 
@@ -36,7 +36,7 @@ public abstract class DAOAbstract
 	/**
 	 * @param _whereExpression
 	 * @param _context
-	 * @brief Template method for Database Updating of every class that will
+	 * @brief Template method for Database Updating of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
 	protected final void updateDB(Expression _whereExpression, Context _context) 
@@ -53,7 +53,7 @@ public abstract class DAOAbstract
 	/**
 	 * @param _whereExpression
 	 * @param _context
-	 * @brief Template method for Database Delete of every class that will
+	 * @brief Template method for Database Delete of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
 	protected final void deleteDB(Expression _whereExpression, Context _context) 
@@ -69,7 +69,7 @@ public abstract class DAOAbstract
 	/**
 	 * @param _queryExpression
 	 * @param _context
-	 * @brief Template method for Database Select of every class that will
+	 * @brief Template method for Database Select of every PVMP class that will
 	 *        extends from this abstract. Returns a ArrayList containing
 	 *        every row (might be seen as a Object) that obeys the Query Expression
 	 *        (_queryExpression).
@@ -98,11 +98,11 @@ public abstract class DAOAbstract
 	/**
 	 * @brief Returns a ContentValues object based on the current instance that calls it.
 	 * */
-	protected abstract ContentValues generateContentValues();
+	public abstract ContentValues generateContentValues();
 	
 	/**
 	 * @param _contentValues
 	 * @brief Returns an object of the class that calls it, based on some ContentValues.
 	 * */
-	protected abstract DAOAbstract contentValuesToModel(ContentValues _contentValues);
+	public abstract DAOAbstract contentValuesToModel(ContentValues _contentValues);
 }
