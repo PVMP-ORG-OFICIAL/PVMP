@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * @class PVMPDatabase
- * @brief Responsible for handling database operations.
+ * @brief Responsible for handling "heavy" database operations.
  * */
 public class PVMPDatabase 
 {
@@ -38,6 +38,7 @@ public class PVMPDatabase
 	 * @param _tableName
 	 * @param _values
 	 * @param _context
+	 * @throws Exception 
 	 * @brief Insert a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
 	public static void insertDB(String _tableName, ContentValues _values, Context _context)
@@ -45,7 +46,7 @@ public class PVMPDatabase
 		if (_tableName == null || _values == null || _context == null)
 		{
 			Util.debug("PVMPDatabase: insertDB deu treta.");
-			return;
+			throw new NullPointerException("Null value at PVMPDatabase.insertDB()");
 		}
 		
 		database = getWritablePVMP(_context);		
@@ -58,7 +59,6 @@ public class PVMPDatabase
 	 * @param _tableName
 	 * @param _values
 	 * @param _whereClause
-	 * @param _whereArgs
 	 * @param _context
 	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
 	 **/
@@ -69,7 +69,7 @@ public class PVMPDatabase
 			|| _context == null)
 		{
 			Util.debug("PVMPDatabase: updateDB deu treta.");
-			return;
+			throw new NullPointerException("Null value at PVMPDatabase.updateDB()");
 		}
 		
 		database = getWritablePVMP(_context);
@@ -79,7 +79,6 @@ public class PVMPDatabase
 	/**
 	 * @param _tableName 
 	 * @param _columnName
-	 * @param _whereArgs
 	 * @param _context
 	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
@@ -88,7 +87,7 @@ public class PVMPDatabase
 		if (_tableName == null || _whereClause == null || _context == null)
 		{
 			Util.debug("PVMPDatabase: deleteDB deu treta.");
-			return;
+			throw new NullPointerException("Null value at PVMPDatabase.deleteDB()");
 		}
 		
 		database = getWritablePVMP(_context);
@@ -105,7 +104,7 @@ public class PVMPDatabase
 		if (_queryExpression == null || _context == null)
 		{
 			Util.debug("PVMPDatabase: selectDB deu treta.");
-			return null;
+			throw new NullPointerException("Null value at PVMPDatabase.selectDB()");
 		}
 		
 		database = getReadablePVMP(_context);

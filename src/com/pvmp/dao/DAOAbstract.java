@@ -22,6 +22,11 @@ public abstract class DAOAbstract
 	 * */
 	public final void insertDB(Context _context) 
 	{
+		if (_context == null)
+		{
+			throw new NullPointerException("Null value at DAOAbstract.insertDB()");
+		}
+		
 		ContentValues _values = this.generateContentValues();
 		PVMPDatabase.insertDB(this.TABLE_NAME, _values, _context);
 	}
@@ -34,6 +39,10 @@ public abstract class DAOAbstract
 	 * */
 	public final void updateDB(Expression _whereExpression, Context _context) 
 	{
+		if (_whereExpression == null || _context == null)
+		{
+			throw new NullPointerException("Null value at DAOAbstract.updateDB()");
+		}
 		ContentValues _values = this.generateContentValues();
 		PVMPDatabase.updateDB(this.TABLE_NAME, _values, _whereExpression.dumpExpression(), _context);
 	}
@@ -45,7 +54,12 @@ public abstract class DAOAbstract
 	 *        extends from this abstract.
 	 * */
 	public final void deleteDB(Expression _whereExpression, Context _context) 
-	{
+	{	
+		if (_whereExpression == null || _context == null)
+		{
+			throw new NullPointerException("Null value at DAOAbstract.deleteDB()");
+		}
+		
 		PVMPDatabase.deleteDB(this.TABLE_NAME, _whereExpression.dumpExpression(), _context);
 	}
 	

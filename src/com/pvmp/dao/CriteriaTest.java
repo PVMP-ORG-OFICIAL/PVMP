@@ -24,7 +24,7 @@ public class CriteriaTest extends TestCase
 	private Filter filter5;
 	
 	@Override
-	public void setUp () throws Exception 
+	public void setUp () 
 	{
 		this.criteria1 = new Criteria();
 		this.criteria2 = new Criteria();
@@ -46,7 +46,15 @@ public class CriteriaTest extends TestCase
 		
 		this.filter5 = new Filter("IDADE", ">");
 		this.filter5.setValue(60);
-		
+	}
+	
+	/**
+	 * @brief Test if the method dumpExpression, of many Criteria objects
+	 * 		  instantiated on this.setUp(), will correctly return the desired
+	 * 		  sentence.
+	 * */
+	public void testDumpExpression() 
+	{
 		this.criteria1.add(this.filter1, Expression.AND_OPERATOR);
 		this.criteria1.add(this.filter2, Expression.AND_OPERATOR);
 		
@@ -62,25 +70,9 @@ public class CriteriaTest extends TestCase
 		this.criteria5.add(criteria3, Expression.AND_OPERATOR);
 		this.criteria5.add(criteria4, Expression.AND_OPERATOR);
 		
-	}
-	
-	/**
-	 * @brief Test if the method dumpExpression, of many Criteria objects
-	 * 		  instantiated on this.setUp(), will correctly return the desired
-	 * 		  sentence.
-	 * */
-	public void testDumpExpression() 
-	{
-		try 
-		{
-			assertEquals("((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16))", this.criteria3.dumpExpression());
-			assertEquals("(IDADE < 16 OR IDADE > 60)", this.criteria4.dumpExpression());
-			assertEquals("(((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16)) AND (IDADE < 16 OR IDADE > 60))",
-					     this.criteria5.dumpExpression());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		assertEquals("((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16))", this.criteria3.dumpExpression());
+		assertEquals("(IDADE < 16 OR IDADE > 60)", this.criteria4.dumpExpression());
+		assertEquals("(((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16)) AND (IDADE < 16 OR IDADE > 60))",
+				     this.criteria5.dumpExpression());
 	}
 }

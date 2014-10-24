@@ -24,7 +24,8 @@ public final class SqlSelect extends SqlInstructionQuery
 	/**
 	 * @param _column
 	 * @brief Add a column to the ArrayList that manages which columns should be selected on
-	 *        a Database Select action.
+	 *        a Database Select action. If all columns should be selected, you never call this method,
+	 *        because getInstruction will verify and add a "*" symbol to the expression.
 	 * */
 	public void addColumn (String _column) {
 		this.columns.add(_column);
@@ -35,20 +36,29 @@ public final class SqlSelect extends SqlInstructionQuery
 	{
 		String expression = "SELECT ";
 		
-		for (String column : this.columns) 
+		if (this.columns.size() == 0)
 		{
-			expression += column;
-			if (!column.equals(this.columns.get(this.columns.size() -1))) 
+			expression += "*";
+		}
+		else 
+		{
+			for (String column : this.columns) 
 			{
-				expression += ", ";
+				expression += column;
+				if (!column.equals(this.columns.get(this.columns.size() -1))) 
+				{
+					expression += ", ";
+				}
 			}
 		}
+		
 		expression += " FROM " + this.entity;
 		
 		if (this.criteria != null) 
 		{
 			expression += " WHERE " + this.criteria.dumpExpression();
 		}
+		
 		return expression;
 	}
 }

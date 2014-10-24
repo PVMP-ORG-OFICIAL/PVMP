@@ -63,6 +63,10 @@ public class Criteria extends Expression
 	 */
 	public void add(Expression _expression, String _operator) 
 	{
+		if (_expression == null || _operator == null) 
+		{
+			throw new NullPointerException("Null value at Criteria.add()");
+		}
 		this.operators.add(_operator);
 		this.expressions.add(_expression);
 	}

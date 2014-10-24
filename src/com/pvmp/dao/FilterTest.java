@@ -52,18 +52,12 @@ public class FilterTest extends TestCase
 	 * 		  sentence.
 	 * */
 	public void testDumpExpression() {
-		try 
-		{
-			assertEquals(this.filterData.dumpExpression(), "DATA = '2007-06-02'");
-			assertEquals(this.filterYear1.dumpExpression(), "ANO > 2010");
-			assertEquals(this.filterVote.dumpExpression(), "VOTO IN ('Sim', 'Nao')");
-			assertEquals(this.filterState1.dumpExpression(), "ESTADO = TRUE");
-			assertEquals(this.filterState2.dumpExpression(), "ESTADO IS NOT NULL");
-			assertEquals(this.filterYear2.dumpExpression(), "ANO IN (2005, 2008, 2013)");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertEquals(this.filterData.dumpExpression(), "DATA = '2007-06-02'");
+		assertEquals(this.filterYear1.dumpExpression(), "ANO > 2010");
+		assertEquals(this.filterVote.dumpExpression(), "VOTO IN ('Sim', 'Nao')");
+		assertEquals(this.filterState1.dumpExpression(), "ESTADO = TRUE");
+		assertEquals(this.filterState2.dumpExpression(), "ESTADO IS NOT NULL");
+		assertEquals(this.filterYear2.dumpExpression(), "ANO IN (2005, 2008, 2013)");
 	}
 
 }

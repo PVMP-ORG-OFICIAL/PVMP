@@ -41,6 +41,10 @@ public final class Filter extends Expression
 	//Expected form: ('value1', 'value2', 'value3',...)
 	private String transform(String[] _value)
 	{
+		if (_value == null) 
+		{
+			throw new NullPointerException("Null pointer at Filter.transform()");
+		}
 		String result = "(";
 		
 		for (int i = 0; i < _value.length; i++) 
@@ -62,6 +66,11 @@ public final class Filter extends Expression
 	//Expected form: (value1, value2, value3,...)
 	private String transform(int[] _value)
 	{
+		if (_value == null) 
+		{
+			throw new NullPointerException("Null pointer at Filter.transform()");
+		}
+		
 		String result = "(";
 		
 		for (int i = 0; i < _value.length; i++)
@@ -83,7 +92,7 @@ public final class Filter extends Expression
 	{
 		if (_value == null)
 		{
-			return null;
+			throw new NullPointerException("Null pointer at Filter.transform()");
 		}
 		
 		if (_value instanceof Integer)
