@@ -3,6 +3,8 @@
  * */
 package com.pvmp.dao;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 /**
@@ -53,6 +55,7 @@ public class CriteriaTest extends TestCase
 	 * 		  instantiated on this.setUp(), will correctly return the desired
 	 * 		  sentence.
 	 * */
+	@Test
 	public void testDumpExpression() 
 	{
 		this.criteria1.add(this.filter1, Expression.AND_OPERATOR);

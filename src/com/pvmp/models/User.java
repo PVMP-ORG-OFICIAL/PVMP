@@ -6,16 +6,30 @@ package com.pvmp.models;
 
 import java.io.Serializable;
 
+import android.content.ContentValues;
 import android.content.Context;
 
+import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.UserDAO;
 
 /**
 * @class User
 * @brief
 */
-public class User implements Serializable 
+public class User extends DAOAbstract implements Serializable 
 {	
+	private static final long serialVersionUID = 1L;
+	
+	// !--- DATABASE ATTRIBUTES ---! \\ 
+	public static final String COLUMN_USERNAME = "USERNAME";
+	public static final String COLUMN_PASSWORD = "PASSWORD";
+	public static final String COLUMN_NAME = "NAME";
+	public static final String COLUMN_EMAIL = "EMAIL";
+	public static final String COLUMN_AGE = "AGE";
+	public static final String COLUMN_EDUCATION = "EDUCATION";
+	public static final String COLUMN_SEX = "SEX";
+	
+	// !--- OTHER ATTRIBUTES ---! \\
 	private String username;
 	private String password;
 	private String name;
@@ -28,6 +42,7 @@ public class User implements Serializable
 	
 	public User()
 	{
+		this.TABLE_NAME = "USER";
 		this.name = null;
 		this.username = null;
 		this.password = null;
@@ -413,5 +428,35 @@ public class User implements Serializable
 	public void setDefaultUser(String _defaultUser)
 	{
 		this.defaultUser = _defaultUser;
+	}
+
+	@Override
+	protected ContentValues generateContentValues() 
+	{
+		ContentValues values = new ContentValues();
+		
+		values.put(COLUMN_USERNAME, this.username);
+		values.put(COLUMN_PASSWORD, this.password);
+		values.put(COLUMN_NAME, this.name);
+		values.put(COLUMN_EMAIL, this.email);
+		values.put(COLUMN_AGE, this.age);
+		values.put(COLUMN_EDUCATION, this.education);
+		values.put(COLUMN_SEX, this.sex);
+		
+		return values;
+	}
+
+	@Override
+	protected User contentValuesToModel(ContentValues _contentValues) 
+	{
+		this.username = _contentValues.getAsString(COLUMN_USERNAME);
+        this.password = _contentValues.getAsString(COLUMN_PASSWORD);
+        this.name = _contentValues.getAsString(COLUMN_NAME);
+        this.email = _contentValues.getAsString(COLUMN_EMAIL);
+        this.age = _contentValues.getAsInteger(COLUMN_AGE);
+        this.education = _contentValues.getAsString(COLUMN_EDUCATION);
+        this.sex = _contentValues.getAsString(COLUMN_SEX);
+        
+        return this;
 	}
 }

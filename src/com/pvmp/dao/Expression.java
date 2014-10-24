@@ -17,7 +17,6 @@ public abstract class Expression
     {}
 	
 	/**
-	 * @return String (?)
 	 * @brief Method responsible for returning a SQL expression as a String
 	 **/
 	public abstract String dumpExpression();

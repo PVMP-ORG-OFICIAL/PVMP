@@ -4,6 +4,8 @@
  * */
 package com.pvmp.dao;
 
+import java.util.ArrayList;
+
 import com.pvmp.util.Util;
 
 import android.content.ContentValues;
@@ -97,34 +99,48 @@ public class PVMPDatabase
 	/**
 	 * @param _queryExpression 
 	 * @param _context
-	 * @brief Update a row on the Database. Already initiate a WritableDatabase inside.
+	 * @brief Update a row on the Database. Already initiate a ReadableDatabase inside.
 	 * */
-	public static ContentValues selectDB(SqlSelect _queryExpression, Context _context)
-	{
+	public static ArrayList<ContentValues> selectDB(SqlSelect _queryExpression, Context _context)
+	{	
 		if (_queryExpression == null || _context == null)
 		{
 			Util.debug("PVMPDatabase: selectDB deu treta.");
 			throw new NullPointerException("Null value at PVMPDatabase.selectDB()");
 		}
 		
+		ContentValues contentValues;
+		ArrayList<ContentValues> arrayContentValues = new ArrayList<ContentValues>();
 		database = getReadablePVMP(_context);
 		
 		Cursor cursor = database.rawQuery(_queryExpression.getInstruction(), null);
-		ContentValues contentValues = new ContentValues();
 
-        if (cursor.moveToFirst()) {
-        	DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
+        if (cursor.moveToFirst()) 
+        {
+        	do 
+        	{	
+        		contentValues = new ContentValues();
+        		DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
+        		arrayContentValues.add(contentValues);
+        	}while (cursor.moveToNext());
         }
         	
-		return contentValues;
+		return arrayContentValues;
 	}
-	
+	/**
+	 * @param _context
+	 * @brief Returns a Persistence Helper Readable Database.
+	 * */
 	private static SQLiteDatabase getReadablePVMP(Context _context)
 	{
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
 		return persistenceHelper.getReadableDatabase();
 	}
 	
+	/**
+	 * @param _context
+	 * @brief Returns a Persistence Helper Writable Database.
+	 * */
 	private static SQLiteDatabase getWritablePVMP(Context _context)
 	{
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);

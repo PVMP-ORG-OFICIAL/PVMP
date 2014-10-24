@@ -33,8 +33,8 @@ public abstract class SqlInstructionQuery
 	
 	/**
 	 * @brief Method that will generate the instruction based from which "child class" it 
-	 * is called. For example, if it is being called by SqlSelect class, it will
-	 * generate a full SQL Select instruction based on criteria(s) and entities.
+	 * is called. For example, if it is being called by SqlSelect class, a full SQL Select
+	 * instruction will be generated based on criteria(s) and entities.
 	 * */
 	public abstract String getInstruction();
 

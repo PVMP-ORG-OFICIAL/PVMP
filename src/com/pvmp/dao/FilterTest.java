@@ -3,6 +3,8 @@
  * */
 package com.pvmp.dao;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 /**
@@ -51,6 +53,7 @@ public class FilterTest extends TestCase
 	 * 		  instantiated on this.setUp(), will correctly return the desired
 	 * 		  sentence.
 	 * */
+	@Test
 	public void testDumpExpression() {
 		assertEquals(this.filterData.dumpExpression(), "DATA = '2007-06-02'");
 		assertEquals(this.filterYear1.dumpExpression(), "ANO > 2010");

@@ -1,5 +1,7 @@
 package com.pvmp.dao;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 public class SqlSelectTest extends TestCase {
@@ -33,6 +35,7 @@ public class SqlSelectTest extends TestCase {
 	 * @brief Tests if the SQL Instruction "Select" is being generated in the correct way by a sqlSelect
 	 *        object.
 	 * */
+	@Test
 	public void testGetInstruction ()
 	{
 		this.sqlSelect.setEntity("USUARIO");
@@ -55,6 +58,7 @@ public class SqlSelectTest extends TestCase {
 	 *        that indicates all the columns should be selected. This happens by not adding any column
 	 *        to the sqlSelect object.
 	 * */
+	@Test
 	public void testGetInstructionAllColumns () {
 		this.sqlSelect.setEntity("USUARIO");
 		this.sqlSelect.setCriteria(this.c2);

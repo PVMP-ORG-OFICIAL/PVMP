@@ -21,16 +21,6 @@ public final class SqlSelect extends SqlInstructionQuery
 		this.criteria = null;
 	}
 	
-	/**
-	 * @param _column
-	 * @brief Add a column to the ArrayList that manages which columns should be selected on
-	 *        a Database Select action. If all columns should be selected, you never call this method,
-	 *        because getInstruction will verify and add a "*" symbol to the expression.
-	 * */
-	public void addColumn (String _column) {
-		this.columns.add(_column);
-	}
-	
 	@Override
 	public String getInstruction() 
 	{
@@ -60,5 +50,22 @@ public final class SqlSelect extends SqlInstructionQuery
 		}
 		
 		return expression;
+	}
+	
+	/**
+	 * @param _column
+	 * @brief Add a column to the ArrayList that manages which columns should be selected on
+	 *        a Database Select action. If all columns should be selected, you never call this method,
+	 *        because getInstruction will verify and add a "*" symbol to the expression.
+	 * */
+	public void addColumn (String _column) {
+		this.columns.add(_column);
+	}
+	
+	/**
+	 * @brief Returns the ArrayList with all the columns that should be selected.
+	 * */
+	public ArrayList<String> returnColumns () {
+		return this.columns;
 	}
 }
