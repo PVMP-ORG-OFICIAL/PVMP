@@ -18,6 +18,7 @@ import android.test.RenamingDelegatingContext;
  * @class PVMPDatabaseTest
  * @brief Responsible for testing the class PVMPDatabase.
  * */
+//Might be renamed to DAOAbstract
 public class PVMPDatabaseTest extends AndroidTestCase 
 {
 	//private ContentValues values;
