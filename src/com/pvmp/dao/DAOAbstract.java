@@ -66,6 +66,15 @@ public abstract class DAOAbstract
 		PVMPDatabase.deleteDB(this.TABLE_NAME, _whereExpression.dumpExpression(), _context);
 	}
 	
+	/**
+	 * @param _queryExpression
+	 * @param _context
+	 * @brief Template method for Database Select of every class that will
+	 *        extends from this abstract. Returns a ArrayList containing
+	 *        every row (might be seen as a Object) that obeys the Query Expression
+	 *        (_queryExpression).
+	 * */
+	//Study a way to make it or contentValuesToModel static, so every object returned won't depend of a single instance.
 	protected final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context) 
 	{
 		if (_queryExpression == null || _context == null)
