@@ -164,7 +164,7 @@ public class EditSettingsFragment extends FragmentView
 				education_ = "Fundamental";
 				break;
 			case R.id.radio_editHighSchool:
-				education_ = "Medio";
+				education_ = "Ensino Medio";
 				break;
 			case R.id.radio_editGraduated:
 				education_ = "Superior";
