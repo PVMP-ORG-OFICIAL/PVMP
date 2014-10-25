@@ -9,7 +9,9 @@ import java.util.Date;
 
 import android.content.Context;
 
+import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
+import com.pvmp.dao.SqlSelect;
 import com.pvmp.dao.UserDAO;
 import com.pvmp.util.Util;
 
@@ -59,7 +61,25 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public User getUser(String _userName)
 	{
-		User user = userDAO.selectByUsername(_userName);
+		if (_userName == null)
+		{
+			throw new NullPointerException("Null value at PVMPmodel.getUser()");
+		}
+		
+		SqlSelect selectExpression = new SqlSelect();
+		ArrayList<DAOAbstract> users = new ArrayList<DAOAbstract>();
+		
+		Filter usernameFilter = new Filter("USERNAME", "=");
+		usernameFilter.setValue(_userName);
+		
+		User user = new User();
+		
+		selectExpression.setEntity(user.TABLE_NAME);
+		
+		users = user.selectDB(selectExpression, this.context);
+		
+		user = (User) users.get(0);
+		
 		return user;
 	}
 
@@ -69,14 +89,14 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public void saveUser(User _user)
 	{
-			if(_user == null)
-			{
-				return;
-			}
-
-			_user.insertDB(this.context);
-
+		if(_user == null)
+		{
 			return;
+		}
+
+		_user.insertDB(this.context);
+
+		return;
 	}
 
 	/**
