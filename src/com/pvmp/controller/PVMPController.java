@@ -60,7 +60,7 @@ public class PVMPController implements ControllerInterface
 			Util.debug("PVMPController: start openApplication.");
 
 			//Verify if has user default
-			if (user != null)
+			if (user.getAge() !=0 )
 			{
 				Util.debug("PVMPController: go to HOME");
 				this.view.displayFragment(ViewObserverInterface.HOME);
@@ -87,8 +87,6 @@ public class PVMPController implements ControllerInterface
 		Util.debug("PVMPController: Prepare for register new user.");
 		this.model.saveUser(_user);
 		Util.debug("PVMPController: User saved on database, change view now");
-		this.view.enableDrawer(true);
-		this.view.enableScreenInteraction(true);
 		this.view.displayFragment(ViewObserverInterface.HOME);
 		Util.debug("PVMPController: finish register");
 
@@ -111,6 +109,7 @@ public class PVMPController implements ControllerInterface
 		User user = this.model.getDefaultUser();
 		if(user == null)
 		{
+			
 			Util.debug("PVMPController: getDefaultUser Problem");
 		}
 

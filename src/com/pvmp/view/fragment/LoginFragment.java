@@ -54,6 +54,8 @@ public class LoginFragment extends FragmentView
 		View rootView = _inflater.inflate(R.layout.login_fragment, _containter, false);
 		mainActivity = (PVMPView) getActivity();
 		context = mainActivity.getApplicationContext();
+		mainActivity.enableDrawer(false);
+		mainActivity.enableScreenInteraction(false);
 		this.userToBeLogged = new User();
 		this.controller = new PVMPController(context);
 		controller.setView(LoginFragment.this.mainActivity);
