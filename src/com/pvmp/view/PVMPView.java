@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -276,11 +277,11 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				fragment = new SettingsFragment();
 				break;
 			case LOGOUT:
-				if (user != null) {
+				if (user != null) 
+				{
 					user.setDefaultUser("N");
 					this.controller.editUser(user);
 				}
-				
 				fragment = new LoginFragment();
 				break;
 			case LOGIN:
@@ -303,7 +304,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		if(fragment != null)
 		{
 			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			fragmentTransaction.replace(R.id.frame_container, fragment);
+			fragmentTransaction.addToBackStack(null);
+			fragmentTransaction.commit();
 			
 			//Update selected item and title, then close the drawer
 			this.mainDrawerList.setItemChecked(_position, true);
