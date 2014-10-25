@@ -49,8 +49,7 @@
 		    style="@style/textInput"
 		    android:drawableLeft="@drawable/ic_email"
 		    android:hint="@string/text_age_hint"
-		    android:inputType="number"
-		    android:text="@string/text_age_hint" />
+		    android:inputType="number" />
 
 		<!-- EDUCATION LEVEL -->
 		<LinearLayout 
