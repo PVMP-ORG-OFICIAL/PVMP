@@ -97,7 +97,7 @@ public final class Filter extends Expression
 		
 		if (_value instanceof Integer)
 		{
-			int value = (int)_value;
+			Integer value = (Integer)_value;
 			return Integer.toString(value);
 		}
 		else if (_value instanceof Boolean)
