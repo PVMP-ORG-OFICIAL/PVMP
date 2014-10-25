@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+	xmlns:android = "http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -41,6 +45,7 @@
             android:id="@+id/radio_editElementarySchool"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/text_elementary_school" />
 
         <RadioButton
@@ -69,6 +74,7 @@
             android:id="@+id/radio_editMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/text_sex_male" />
 
         <RadioButton
@@ -107,3 +113,4 @@
         android:text="@string/passwordWarning" />
 
 </LinearLayout>
+</ScrollView>

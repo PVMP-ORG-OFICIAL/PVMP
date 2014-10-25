@@ -4,7 +4,6 @@
  */
 package com.pvmp.view.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.os.Bundle;
@@ -15,10 +14,11 @@ import android.widget.RadioGroup;
 import android.widget.Button;
 
 
+import com.pvmp.util.ErrorHandlingUtil;
 import com.pvmp.util.Util;
 import com.pvmp.models.User;
-import com.pvmp.view.ErrorHandlingUtil;
 import com.pvmp.view.PVMPView;
+import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.controller.PVMPController;
 
 import com.pvmp.R;
@@ -27,7 +27,7 @@ import com.pvmp.R;
 * @class UserRegisterFragment
 * @brief 
 */
-public class UserRegisterFragment extends Fragment
+public class UserRegisterFragment extends FragmentView
 {	
 	private EditText name;
 	private EditText userEmail;
@@ -60,7 +60,7 @@ public class UserRegisterFragment extends Fragment
 
 		userBuild = new User();
 		
-		buildObjectFromView(rootView);
+		buildScreenComponent(rootView);
 		return rootView;
 	}
 	
@@ -68,7 +68,7 @@ public class UserRegisterFragment extends Fragment
 	* @param _view
 	* @brief 
 	*/
-	public void buildObjectFromView (View _view)
+	public void buildScreenComponent (View _view)
 	{
 		this.name = (EditText) _view.findViewById(R.id.name);
 		this.userEmail = (EditText) _view.findViewById(R.id.email);
@@ -89,7 +89,7 @@ public class UserRegisterFragment extends Fragment
 		@Override
 		public void onClick(View _view)
 		{
-			getDataFromFragment();
+			updateScreenComponent();
 			Util.debug("UserRegisterFragment: Register button clicked!!");
 			int validationResult = User.validationResult(userBuild, context);
 
@@ -98,22 +98,21 @@ public class UserRegisterFragment extends Fragment
 				case 0:	
 					userBuild.setDefaultUser("S");
 					controller.registerUser(userBuild);
-					ErrorHandlingUtil.showToast("Cadastro realizado com sucesso!", context);
+					ErrorHandlingUtil.showToast(ErrorHandlingUtil.SUCCESSFUL_REGISTER, context);
 					return;
-
+					
 				default:
 					ErrorHandlingUtil.displayRegisterError(userName, userEmail, name, userPassword, 
 							userAge, validationResult, context);
 				break;
 			}
-			return;
 		}
 	}
 
 	/**
 	* @brief
 	*/
-	public void getDataFromFragment() 
+	public void updateScreenComponent() 
 	{
 		String education = null;
 		String sex = null;

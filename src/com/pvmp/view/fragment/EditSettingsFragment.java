@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.models.User;
-import com.pvmp.view.ErrorHandlingUtil;
+import com.pvmp.util.ErrorHandlingUtil;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 
@@ -84,20 +84,24 @@ public class EditSettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			saveUserEdition();
+			updateScreenComponent();
 			
 			boolean passVerification = passwordsVerification();
 			int validationResult = User.validationResult(loggedUser, context);
 			
-			if (validationResult > 0 && validationResult < 6) {
+			if (validationResult > 0 && validationResult <= 6)
+			{
+				ErrorHandlingUtil.showToast(ErrorHandlingUtil.PASSWORD_SUCCESSFUL_CHANGE, context);
 				ErrorHandlingUtil.displayEditError(userEmail, userName,
 												  newPassword, userAge,
 												   validationResult, context);
 			}
-			else if (passVerification) {
-				if (!newPassword.getText().toString().equals("")) {
+			else if (passVerification)
+			{
+				if (!newPassword.getText().toString().equals(""))
+				{
 					loggedUser.setPassword(newPassword.getText().toString());
-					ErrorHandlingUtil.showToast("Senha alterada com sucesso.", context);
+					ErrorHandlingUtil.showToast(ErrorHandlingUtil.PASSWORD_SUCCESSFUL_CHANGE, context);
 				}
 				
 				controller.editUser(loggedUser);
@@ -109,7 +113,8 @@ public class EditSettingsFragment extends FragmentView
 	
 }
 	
-	public void saveUserEdition () {
+	public void updateScreenComponent () 
+	{
 		loggedUser.setName(this.name.getText().toString());
 		loggedUser.setEmail(this.userEmail.getText().toString());
 		if(this.userAge.getText().toString().equals(""))
@@ -119,7 +124,8 @@ public class EditSettingsFragment extends FragmentView
 		
 		String education_ = null;
 		
-		switch (this.education.getCheckedRadioButtonId()) {
+		switch (this.education.getCheckedRadioButtonId()) 
+		{
 			case R.id.radio_editElementarySchool:
 				education_ = "Fundamental";
 				break;
@@ -148,34 +154,43 @@ public class EditSettingsFragment extends FragmentView
 		loggedUser.setSex(sex_);
 	}
 	
-	public boolean passwordsVerification () {
+	public boolean passwordsVerification ()
+	{
 		String oldP = oldPassword.getText().toString();
 		String newP = newPassword.getText().toString();
 		
-		if (!oldP.equals("")) {
-			if (oldP.equals(loggedUser.getPassword())) {
-				if(User.validatePasswordSize(newP)) {
+		if (!oldP.equals(""))
+		{
+			if (oldP.equals(loggedUser.getPassword()))
+			{
+				if(User.validatePasswordSize(newP))
+				{
 					if (User.validatePasswordFormat(newP))
 						return true;
-					else {
-						ErrorHandlingUtil.genericError(newPassword, "Sua senha deve ser formada apenas por letras e números.", context);
+					else 
+					{
+						ErrorHandlingUtil.genericError(newPassword, ErrorHandlingUtil.PASSWORD_FORMAT, context);
 						return false;
 					}
 					
 				}
-				else {
-					ErrorHandlingUtil.genericError(newPassword, "Sua senha deve ter de 6 a 15 caracteres.", context);
+				else
+				{
+					ErrorHandlingUtil.genericError(newPassword, ErrorHandlingUtil.PASSWORD_LENGHT, context);
 					return false;
 				}
 			}
-			else {
-				ErrorHandlingUtil.genericError(oldPassword, "Senha antiga não correspondente.", context);
+			else 
+			{
+				ErrorHandlingUtil.genericError(oldPassword, ErrorHandlingUtil.PASSWORD_NOT_MATCH, context);
 				return false;
 			}
 		}
-		else {
-			if(!newP.equals("")) {
-				ErrorHandlingUtil.genericError(oldPassword, "Senha antiga não correspondente.", context);
+		else 
+		{
+			if(!newP.equals(""))
+			{
+				ErrorHandlingUtil.genericError(oldPassword, ErrorHandlingUtil.PASSWORD_NOT_MATCH, context);
 				return false;
 			}		
 		}
