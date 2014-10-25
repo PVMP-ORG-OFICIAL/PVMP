@@ -22,7 +22,7 @@ public abstract class DAOAbstract
 	 * @brief Template method for Database Inserting of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
-	protected final void insertDB(Context _context) 
+	public final void insertDB(Context _context) 
 	{
 		if (_context == null)
 		{
@@ -39,7 +39,7 @@ public abstract class DAOAbstract
 	 * @brief Template method for Database Updating of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
-	protected final void updateDB(Expression _whereExpression, Context _context) 
+	public final void updateDB(Expression _whereExpression, Context _context) 
 	{
 		if (_whereExpression == null || _context == null)
 		{
@@ -56,7 +56,7 @@ public abstract class DAOAbstract
 	 * @brief Template method for Database Delete of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
-	protected final void deleteDB(Expression _whereExpression, Context _context) 
+	public final void deleteDB(Expression _whereExpression, Context _context) 
 	{	
 		if (_whereExpression == null || _context == null)
 		{
@@ -75,7 +75,7 @@ public abstract class DAOAbstract
 	 *        (_queryExpression).
 	 * */
 	//Study a way to make it or contentValuesToModel static, so every object returned won't depend of a single instance.
-	protected final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context) 
+	public final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context) 
 	{
 		if (_queryExpression == null || _context == null)
 		{

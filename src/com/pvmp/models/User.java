@@ -4,8 +4,6 @@
 */
 package com.pvmp.models;
 
-import java.io.Serializable;
-
 import android.content.ContentValues;
 import android.content.Context;
 
@@ -16,10 +14,8 @@ import com.pvmp.dao.UserDAO;
 * @class User
 * @brief
 */
-public class User extends DAOAbstract implements Serializable 
+public class User extends DAOAbstract
 {	
-	private static final long serialVersionUID = 1L;
-	
 	// !--- DATABASE ATTRIBUTES ---! \\ 
 	public static final String COLUMN_USERNAME = "USERNAME";
 	public static final String COLUMN_PASSWORD = "PASSWORD";
@@ -28,6 +24,7 @@ public class User extends DAOAbstract implements Serializable
 	public static final String COLUMN_AGE = "AGE";
 	public static final String COLUMN_EDUCATION = "EDUCATION";
 	public static final String COLUMN_SEX = "SEX";
+	public static final String COLUMN_DEFAULT = "DEFAULTUSER";
 	
 	// !--- OTHER ATTRIBUTES ---! \\
 	private String username;
@@ -444,6 +441,7 @@ public class User extends DAOAbstract implements Serializable
 		values.put(COLUMN_AGE, this.age);
 		values.put(COLUMN_EDUCATION, this.education);
 		values.put(COLUMN_SEX, this.sex);
+		values.put(COLUMN_DEFAULT, this.defaultUser);
 		
 		return values;
 	}
