@@ -14,11 +14,10 @@ import android.widget.RadioGroup;
 import android.widget.Button;
 
 
-import com.pvmp.util.ErrorHandlingUtil;
+import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
 import com.pvmp.models.User;
 import com.pvmp.view.PVMPView;
-import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.controller.PVMPController;
 
 import com.pvmp.R;
@@ -98,11 +97,11 @@ public class UserRegisterFragment extends FragmentView
 				case 0:	
 					userBuild.setDefaultUser("S");
 					controller.registerUser(userBuild);
-					ErrorHandlingUtil.showToast(ErrorHandlingUtil.SUCCESSFUL_REGISTER, context);
+					MessageHandling.showToast(MessageHandling.SUCCESSFUL_REGISTER, context);
 					return;
 					
 				default:
-					ErrorHandlingUtil.displayRegisterError(userName, userEmail, name, userPassword, 
+					MessageHandling.displayRegisterError(userName, userEmail, name, userPassword, 
 							userAge, validationResult, context);
 				break;
 			}

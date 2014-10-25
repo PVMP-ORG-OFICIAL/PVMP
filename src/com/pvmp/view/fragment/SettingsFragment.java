@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.pvmp.R;
@@ -25,7 +23,7 @@ import com.pvmp.view.ViewObserverInterface;
 *	@class SettingsFragment
 * @brief
 */
-public class SettingsFragment extends Fragment 
+public class SettingsFragment extends FragmentView
 {
 	private TextView name;
 	private TextView userEmail;
@@ -59,13 +57,13 @@ public class SettingsFragment extends Fragment
 		
 		loggedUser = this.controller.openSession();
 		
-		takeDataFromView(rootView);
-		setScreenData();
+		this.buildScreenComponent(rootView);
+		this.updateScreenComponent();
          
         return rootView;
     }
 	
-	public void takeDataFromView (View _view)
+	public void buildScreenComponent (View _view)
 	{
 		this.name = (TextView) _view.findViewById(R.id.textView_showName);
 		this.userEmail = (TextView) _view.findViewById(R.id.textView_showEmail);
@@ -79,15 +77,15 @@ public class SettingsFragment extends Fragment
 		this.buttonEdit.setOnClickListener(new HandleEdit());
 	}
 	
-	public void setScreenData()
+	public void updateScreenComponent()
 	{
 		
-		name.setText(loggedUser.getName());
-		userEmail.setText(loggedUser.getEmail());
-		userAge.setText(Integer.toString((loggedUser.getAge())));
-		education.setText(loggedUser.getEducation());
-		sex.setText(loggedUser.getSex());
-		userName.setText(loggedUser.getUsername());
+		this.name.setText(loggedUser.getName());
+		this.userEmail.setText(loggedUser.getEmail());
+		this.userAge.setText(Integer.toString((loggedUser.getAge())));
+		this.education.setText(loggedUser.getEducation());
+		this.sex.setText(loggedUser.getSex());
+		this.userName.setText(loggedUser.getUsername());
 	}
 	
 	private class HandleEdit implements View.OnClickListener

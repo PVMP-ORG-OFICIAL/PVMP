@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 
 
-public class ErrorHandlingUtil {
+public class MessageHandling {
 	public static final String INVALID_NAME = "Nome inválido.";
 	public static final String NAME_LENGHT = "Seu nome deve ter de 3 a 50 caracteres.";
 	public static final String EMAIL_FORMAT = "Formato de email inválido.";
@@ -21,8 +21,11 @@ public class ErrorHandlingUtil {
 	public static final String USERNAME_LENGHT  = "Senha antiga não correspondente.";
 	public static final String USERNAME_FIRST_CHAR = "Seu nome de usuário deve começar com uma letra.";
 	public static final String USERNAME_FORMAT = "Seu nome de usuário deve ser composto apenas de letras e números.";
+	public static final String ERROR_LOGIN = "Nome de usuário e/ou senha não correspondem";
+	
 	public static final String SUCCESSFUL_REGISTER = "Cadastro realizado com sucesso!";
 	public static final String PASSWORD_SUCCESSFUL_CHANGE = "Senha alterada com sucesso.";
+	
 	public static void showToast (CharSequence text, Context context) {
 		int duration = Toast.LENGTH_LONG;
 
@@ -49,22 +52,22 @@ public class ErrorHandlingUtil {
 										 Context context) {
 		switch (validationResult) {
 			case 1:
-				ErrorHandlingUtil.genericError(et2, INVALID_NAME, context);
+				MessageHandling.genericError(et2, INVALID_NAME, context);
 				break;
 			case 2:
-				ErrorHandlingUtil.genericError(et2, NAME_LENGHT, context);
+				MessageHandling.genericError(et2, NAME_LENGHT, context);
 				break;
 			case 3:
-				ErrorHandlingUtil.genericError(et1, EMAIL_FORMAT, context);
+				MessageHandling.genericError(et1, EMAIL_FORMAT, context);
 				break;
 			case 4:				
-				ErrorHandlingUtil.genericError(et1, EMAIL_LENGHT, context);
+				MessageHandling.genericError(et1, EMAIL_LENGHT, context);
 				break;
 			case 5:
-				ErrorHandlingUtil.genericError(et4, AGE_RANGE, context);
+				MessageHandling.genericError(et4, AGE_RANGE, context);
 				break;
 			case 6:
-				ErrorHandlingUtil.genericError(et3, PASSWORD_LENGHT, context);
+				MessageHandling.genericError(et3, PASSWORD_LENGHT, context);
 				break;
 		}
 	}
@@ -76,19 +79,19 @@ public class ErrorHandlingUtil {
 	    if (validationResult > 6) {
 			switch (validationResult) {
 				case 7:
-					ErrorHandlingUtil.genericError(et2, EXISTING_EMAIL, context);
+					MessageHandling.genericError(et2, EXISTING_EMAIL, context);
 					break;
 				case 8:
-					ErrorHandlingUtil.genericError(et1, EXISTING_USERNAME, context);
+					MessageHandling.genericError(et1, EXISTING_USERNAME, context);
 					break;
 				case 9:
-					ErrorHandlingUtil.genericError(et1, USERNAME_LENGHT, context);
+					MessageHandling.genericError(et1, USERNAME_LENGHT, context);
 					break;
 				case 10:
-					ErrorHandlingUtil.genericError(et1, USERNAME_FIRST_CHAR, context);
+					MessageHandling.genericError(et1, USERNAME_FIRST_CHAR, context);
 					break;
 				case 11:
-					ErrorHandlingUtil.genericError(et1, USERNAME_FORMAT, context);
+					MessageHandling.genericError(et1, USERNAME_FORMAT, context);
 					break;
 		    }
 	    }

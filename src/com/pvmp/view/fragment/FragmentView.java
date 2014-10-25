@@ -20,4 +20,5 @@ public abstract class FragmentView extends Fragment
 	 */
 	public abstract void buildScreenComponent(View _view);
 	
+	
 }

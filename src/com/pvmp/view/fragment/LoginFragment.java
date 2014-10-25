@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.models.User;
+import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
@@ -29,7 +29,6 @@ public class LoginFragment extends FragmentView
 
 	private EditText userName;
 	private EditText password;
-	private TextView errorLogin;
 	private PVMPView mainActivity;
 	private User userToBeLogged;
 	private Context context;
@@ -98,8 +97,10 @@ public class LoginFragment extends FragmentView
 				controller.editUser(userToBeLogged);
 				mainActivity.displayFragment(ViewObserverInterface.HOME);
 			}
-			else
+			else{
 				userToBeLogged = new User();
+				MessageHandling.showToast(MessageHandling.ERROR_LOGIN, context);
+			}
 			
 		}
 	}

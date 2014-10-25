@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.models.User;
-import com.pvmp.util.ErrorHandlingUtil;
+import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 
@@ -59,7 +59,7 @@ public class EditSettingsFragment extends FragmentView
 		loggedUser = this.controller.openSession();
 		
 		this.buildScreenComponent(rootView);
-		
+		this.initialUpdateScreenComponent();
 		
 		return rootView;
   }
@@ -77,6 +77,40 @@ public class EditSettingsFragment extends FragmentView
 		this.buttonSave = (Button) _view.findViewById(R.id.button_save);
 		
 		this.buttonSave.setOnClickListener(new HandleSave());
+		
+		return;
+	}
+	
+	public void initialUpdateScreenComponent()
+	{
+		this.name.setText(loggedUser.getName());
+		this.userEmail.setText(loggedUser.getEmail());
+		this.userAge.setText(Integer.toString(loggedUser.getAge()));
+		
+		switch(loggedUser.getEducation())
+		{
+			case "Fundamental":
+				this.education.check(R.id.radio_editElementarySchool);
+				break;
+			case "Ensino Medio":
+				this.education.check(R.id.radio_editHighSchool);
+				break;
+			case "Superior":
+				this.education.check(R.id.radio_editGraduated);
+				break;
+		}
+		
+		switch (loggedUser.getSex())
+		{
+			case "Masculino":
+				this.sex.check(R.id.radio_editMale);
+				break;
+			case "Feminino":
+				this.sex.check(R.id.radio_editFemale);
+				break;
+		}
+		
+		return;
 	}
 	
 	private class HandleSave implements View.OnClickListener
@@ -91,8 +125,8 @@ public class EditSettingsFragment extends FragmentView
 			
 			if (validationResult > 0 && validationResult <= 6)
 			{
-				ErrorHandlingUtil.showToast(ErrorHandlingUtil.PASSWORD_SUCCESSFUL_CHANGE, context);
-				ErrorHandlingUtil.displayEditError(userEmail, userName,
+				MessageHandling.showToast(MessageHandling.PASSWORD_SUCCESSFUL_CHANGE, context);
+				MessageHandling.displayEditError(userEmail, userName,
 												  newPassword, userAge,
 												   validationResult, context);
 			}
@@ -101,7 +135,7 @@ public class EditSettingsFragment extends FragmentView
 				if (!newPassword.getText().toString().equals(""))
 				{
 					loggedUser.setPassword(newPassword.getText().toString());
-					ErrorHandlingUtil.showToast(ErrorHandlingUtil.PASSWORD_SUCCESSFUL_CHANGE, context);
+					MessageHandling.showToast(MessageHandling.PASSWORD_SUCCESSFUL_CHANGE, context);
 				}
 				
 				controller.editUser(loggedUser);
@@ -169,20 +203,20 @@ public class EditSettingsFragment extends FragmentView
 						return true;
 					else 
 					{
-						ErrorHandlingUtil.genericError(newPassword, ErrorHandlingUtil.PASSWORD_FORMAT, context);
+						MessageHandling.genericError(newPassword, MessageHandling.PASSWORD_FORMAT, context);
 						return false;
 					}
 					
 				}
 				else
 				{
-					ErrorHandlingUtil.genericError(newPassword, ErrorHandlingUtil.PASSWORD_LENGHT, context);
+					MessageHandling.genericError(newPassword, MessageHandling.PASSWORD_LENGHT, context);
 					return false;
 				}
 			}
 			else 
 			{
-				ErrorHandlingUtil.genericError(oldPassword, ErrorHandlingUtil.PASSWORD_NOT_MATCH, context);
+				MessageHandling.genericError(oldPassword, MessageHandling.PASSWORD_NOT_MATCH, context);
 				return false;
 			}
 		}
@@ -190,7 +224,7 @@ public class EditSettingsFragment extends FragmentView
 		{
 			if(!newP.equals(""))
 			{
-				ErrorHandlingUtil.genericError(oldPassword, ErrorHandlingUtil.PASSWORD_NOT_MATCH, context);
+				MessageHandling.genericError(oldPassword, MessageHandling.PASSWORD_NOT_MATCH, context);
 				return false;
 			}		
 		}
