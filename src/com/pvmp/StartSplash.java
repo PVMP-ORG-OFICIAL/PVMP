@@ -18,7 +18,6 @@ import com.pvmp.util.Util;
 **/
 public class StartSplash extends Activity 
 {
-
 	@Override
 	public void onCreate(Bundle _savedInstanceState) 
 	{
@@ -51,6 +50,7 @@ public class StartSplash extends Activity
 					Intent intent = new Intent("com.pvmp.view.PVMPView");
 					Util.debug("StartSplash: StartActivity");
 					startActivity(intent);
+					finish();
 				}
 			}
 
