@@ -32,6 +32,8 @@ public interface ControllerInterface
 	public void editUser(User _user);
 	
 	public void registerUser(User _user);
+	
+	public void deleteUser(User _user);
 
 	/**
 	* @return 

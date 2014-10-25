@@ -4,7 +4,6 @@
 */
 package com.pvmp.view.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.EditText;
 
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.models.User;
+import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 
@@ -31,11 +32,13 @@ public class SettingsFragment extends FragmentView
 	private TextView education;
 	private TextView sex;
 	private TextView userName;
+	private EditText passwordConfirm;
 	private Button buttonEdit;
 	private Button buttonDelete;
 	private static User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
+	boolean firstTime = true;
 	
 	private PVMPController controller;
 	
@@ -71,10 +74,12 @@ public class SettingsFragment extends FragmentView
 		this.education = (TextView) _view.findViewById(R.id.textView_showEducation);
 		this.sex = (TextView) _view.findViewById(R.id.textView_showSex);
 		this.userName = (TextView) _view.findViewById(R.id.textView_showUsername);
+		this.passwordConfirm = (EditText) _view.findViewById(R.id.editText_passwordConfirm);
 		this.buttonEdit = (Button) _view.findViewById(R.id.button_edit);
 		this.buttonDelete = (Button) _view.findViewById(R.id.button_delete);
 		
 		this.buttonEdit.setOnClickListener(new HandleEdit());
+		this.buttonDelete.setOnClickListener(new HandleDelete());
 	}
 	
 	public void updateScreenComponent()
@@ -102,7 +107,22 @@ public class SettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			
+			String password = passwordConfirm.getText().toString(); 
+			if(firstTime){	
+				passwordConfirm.setVisibility(1);
+				MessageHandling.showToast(MessageHandling.PASSWORD_CONFIRM_TO_DELETE, context);
+				firstTime = false;
+			}
+			else if(loggedUser.getPassword().equals(password))
+			{
+				controller.deleteUser(loggedUser);
+				MessageHandling.showToast(MessageHandling.SUCCESSFUL_DELETE, context);
+				mainActivity.displayFragment(ViewObserverInterface.LOGIN);
+			}
+			else
+			{
+				MessageHandling.showToast(MessageHandling.PASSWORD_NOT_MATCH, context);
+			}
 		}
 	}
 	

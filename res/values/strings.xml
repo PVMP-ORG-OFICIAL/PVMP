@@ -32,7 +32,7 @@
     <!-- Field hint -->
     <string name="text_name_hint">Inserir o seu nome</string>
     <string name="text_email_hint">Inserir o seu email</string>
-    <string name="text_password_hint">No mínimo 6 caracteres</string>
+    <string name="text_password_hint">Insira sua senha</string>
     <string name="text_user_hint">Nome de usuário</string>
    
 	<!-- Menu strings  -->

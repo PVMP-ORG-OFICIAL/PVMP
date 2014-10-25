@@ -98,24 +98,6 @@
         android:text="@string/text_nothing"
         android:textSize="19sp" />
 
-    <Button
-        android:id="@+id/button_delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="26dp"
-        android:onClick="clickDelete"
-        android:text="@string/text_exclude" />
-
-    <Button
-        android:id="@+id/button_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_delete"
-        android:layout_alignParentLeft="true"
-        android:text="@string/text_edit" />
-
     <TextView
         android:id="@+id/textView_showEducation"
         android:layout_width="wrap_content"
@@ -147,5 +129,39 @@
         android:layout_toRightOf="@+id/textView_education"
         android:text="@string/text_nothing"
         android:textSize="19sp" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_showUsername"
+        android:layout_marginTop="36dp"
+        android:text="@string/text_edit" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_edit"
+        android:layout_marginTop="14dp"
+        android:onClick="clickDelete"
+        android:text="@string/text_exclude" />
+
+    <EditText
+        android:id="@+id/editText_passwordConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_delete"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/text_password_hint"
+        android:inputType="textPassword"
+        android:visibility="invisible" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

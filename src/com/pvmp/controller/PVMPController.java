@@ -100,6 +100,10 @@ public class PVMPController implements ControllerInterface
 		this.model.editUser(_user);
 	}
 	
+	public void deleteUser(User _user){
+		this.model.removeUser(_user);
+	}
+	
 
 	@Override
 	public User openSession()
