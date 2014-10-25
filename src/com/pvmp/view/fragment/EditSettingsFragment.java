@@ -31,7 +31,6 @@ public class EditSettingsFragment extends FragmentView
 	private EditText userAge;
 	private RadioGroup education;
 	private RadioGroup sex;
-	private EditText userName;
 	private EditText oldPassword;
 	private EditText newPassword;
 	private Button buttonSave;
@@ -125,8 +124,7 @@ public class EditSettingsFragment extends FragmentView
 			
 			if (validationResult > 0 && validationResult <= 6)
 			{
-				MessageHandling.showToast(MessageHandling.PASSWORD_SUCCESSFUL_CHANGE, context);
-				MessageHandling.displayEditError(userEmail, userName,
+				MessageHandling.displayEditError(userEmail, name,
 												  newPassword, userAge,
 												   validationResult, context);
 			}

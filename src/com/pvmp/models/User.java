@@ -3,7 +3,6 @@
 * @brief 
 */
 package com.pvmp.models;
-
 import android.content.ContentValues;
 import android.content.Context;
 
@@ -14,7 +13,7 @@ import com.pvmp.dao.UserDAO;
 * @class User
 * @brief
 */
-public class User extends DAOAbstract
+public class User  
 {	
 	// !--- DATABASE ATTRIBUTES ---! \\ 
 	public static final String COLUMN_USERNAME = "USERNAME";

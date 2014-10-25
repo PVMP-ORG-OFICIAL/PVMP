@@ -25,7 +25,6 @@ import android.widget.ListView;
 
 import com.pvmp.util.Util;
 import com.pvmp.models.User;
-import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
 import com.pvmp.view.model.NavigationDrawerItem;
 import com.pvmp.view.fragment.HomeFragment;
@@ -47,14 +46,14 @@ import com.pvmp.R;
 */
 public class PVMPView extends Activity implements ViewObserverInterface 
 {
-	private static User user;	/**< */
+	private static User user;/**< */
 
 	private DrawerLayout mainDrawerLayout; /**< */
 	private ListView mainDrawerList; /**< */
 	private ActionBarDrawerToggle mainDrawerToggle; /**< */
 
 	//Navigation drawer application title
-	private CharSequence mainDrawerTitle;
+	private CharSequence mainDrawerTitle; 
 
 	//Used to store app title
 	private CharSequence mainTitle;
@@ -68,7 +67,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 	//Controller and Model reference
 	private ControllerInterface controller;
-	private ModelSubjectInterface model;
+	//private ModelSubjectInterface model; <-Still not using
 
 	public PVMPView()
 	{}
@@ -89,7 +88,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
-		this.mainTitle = mainDrawerTitle = getTitle();
+		this.mainTitle = mainDrawerTitle  = getTitle();
 
 		//Load Slide menu items
 		this.navigationMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);

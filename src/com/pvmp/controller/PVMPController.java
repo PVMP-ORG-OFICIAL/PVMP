@@ -9,7 +9,6 @@ import android.content.Context;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
-import com.pvmp.view.PVMPView;
 import com.pvmp.util.Util;
 import com.pvmp.models.PVMPmodel;
 

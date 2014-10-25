@@ -4,7 +4,6 @@
 */
 package com.pvmp.models;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,7 +28,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	public PVMPmodel(Context _context)
 	{
 		this.context = _context;
-		this.userDAO = UserDAO.getInstance(this.context);
+		userDAO = UserDAO.getInstance(this.context);
 		this.observers = new ArrayList<ListenerObserverInterface>();
 	}
 
@@ -46,7 +45,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	public User getDefaultUser()
 	{
 		Util.debug("PVMPmodel: Try to get default user from database");
-		User user = this.userDAO.selectByDefault("S");
+		User user = userDAO.selectByDefault("S");
 		Util.debug("PVMPmodel: After access dao");
 		return user;
 	}
@@ -58,7 +57,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public User getUser(String _userName)
 	{
-		User user = this.userDAO.selectByUsername(_userName);
+		User user = userDAO.selectByUsername(_userName);
 		return user;
 	}
 
@@ -73,7 +72,7 @@ public class PVMPmodel implements ModelSubjectInterface
 				return;
 			}
 
-			this.userDAO.save(_user);
+			userDAO.save(_user);
 
 			return;
 	}
@@ -84,7 +83,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public void removeUser(User _user)
 	{
-		this.userDAO.delete(_user);
+		userDAO.delete(_user);
 		return;
 	}
 
@@ -94,7 +93,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public void editUser(User _user)
 	{
-		this.userDAO.edit(_user);
+		userDAO.edit(_user);
 
 		return;
 	}

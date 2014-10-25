@@ -9,10 +9,8 @@ package com.pvmp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.content.Context;
 
 import com.pvmp.util.Util;
-import com.pvmp.view.PVMPView;
 
 /**
 * @class StartSplash
