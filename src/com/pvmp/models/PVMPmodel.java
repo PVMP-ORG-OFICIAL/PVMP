@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
+
+import com.pvmp.dao.Filter;
 import com.pvmp.dao.UserDAO;
 import com.pvmp.util.Util;
 
@@ -72,7 +74,7 @@ public class PVMPmodel implements ModelSubjectInterface
 				return;
 			}
 
-			userDAO.save(_user);
+			_user.insertDB(this.context);
 
 			return;
 	}
@@ -83,7 +85,16 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public void removeUser(User _user)
 	{
-		userDAO.delete(_user);
+		if(_user == null) 
+		{
+			return;
+		}
+		
+		Filter deleteFilter = new Filter("USERNAME", "=");
+		deleteFilter.setValue(_user.getUsername());
+		
+		_user.deleteDB(deleteFilter, this.context);
+			
 		return;
 	}
 
@@ -93,7 +104,15 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public void editUser(User _user)
 	{
-		userDAO.edit(_user);
+		if(_user == null)
+		{
+			return;
+		}
+		
+		Filter editFilter = new Filter("USERNAME", "=");
+		editFilter.setValue(_user.getUsername());
+		
+		_user.updateDB(editFilter, this.context);
 
 		return;
 	}

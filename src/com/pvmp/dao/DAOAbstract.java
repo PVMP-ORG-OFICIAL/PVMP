@@ -29,8 +29,8 @@ public abstract class DAOAbstract
 			throw new NullPointerException("Null value at DAOAbstract.insertDB()");
 		}
 		
-		ContentValues _values = this.generateContentValues();
-		PVMPDatabase.insertDB(this.TABLE_NAME, _values, _context);
+		ContentValues values = this.generateContentValues();
+		PVMPDatabase.insertDB(this.TABLE_NAME, values, _context);
 	}
 	
 	/**
@@ -46,8 +46,8 @@ public abstract class DAOAbstract
 			throw new NullPointerException("Null value at DAOAbstract.updateDB()");
 		}
 		
-		ContentValues _values = this.generateContentValues();
-		PVMPDatabase.updateDB(this.TABLE_NAME, _values, _whereExpression.dumpExpression(), _context);
+		ContentValues values = this.generateContentValues();
+		PVMPDatabase.updateDB(this.TABLE_NAME, values, _whereExpression.dumpExpression(), _context);
 	}
 	
 	/**

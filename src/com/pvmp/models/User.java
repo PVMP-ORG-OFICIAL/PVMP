@@ -13,7 +13,7 @@ import com.pvmp.dao.UserDAO;
 * @class User
 * @brief
 */
-public class User  
+public class User extends DAOAbstract 
 {	
 	// !--- DATABASE ATTRIBUTES ---! \\ 
 	public static final String COLUMN_USERNAME = "USERNAME";
