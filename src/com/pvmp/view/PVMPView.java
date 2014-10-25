@@ -280,6 +280,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 					user.setDefaultUser("N");
 					this.controller.editUser(user);
 				}
+				
 				fragment = new LoginFragment();
 				break;
 			case LOGIN:
@@ -320,8 +321,14 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	{
 		if (_range < 5 && _range >= 0)
 		{
+			if(_range == 4)
+			{
+				setTitle(getTitle());
+				return;
+			}
 			setTitle(this.navigationMenuTitles[_range]);
 			return;
+			
 		}
 		this.setTitle(getTitle());
 		return;
