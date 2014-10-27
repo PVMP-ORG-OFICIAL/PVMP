@@ -19,7 +19,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.View;
 
-public class DatabaseInterface extends SQLiteOpenHelper {
+public class DatabaseInterface extends SQLiteOpenHelper 
+{
 
 	public static final String PROP_TABLE_NAME = "PROPOSITION";
 	public static final String IDPROP = "IDPROP";
@@ -98,58 +99,62 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	private static int VERSAO = 1; 
 
 
-	public DatabaseInterface(Context context) {
+	public DatabaseInterface(Context context) 
+	{
 		super(context, BANCO_DADOS, null, VERSAO);
 		// TODO Auto-generated constructor stub
 	}
 
 
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_PARTY_TABLE);
-		db.execSQL(CREATE_PROPPOSITION_TABLE);
-		db.execSQL(CREATE_VOTATING_TABLE);
-		db.execSQL(CREATE_VOTE_TABLE);
-		db.execSQL(CREATE_DEPUTY_TABLE);
-	}
+  @Override
+  public void onCreate(SQLiteDatabase db) 
+  {
+    db.execSQL(CREATE_PARTY_TABLE);
+    db.execSQL(CREATE_PROPPOSITION_TABLE);
+    db.execSQL(CREATE_VOTATING_TABLE);
+    db.execSQL(CREATE_VOTE_TABLE);
+    db.execSQL(CREATE_DEPUTY_TABLE);
+  }
 
 
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
+  {
 		// TODO Auto-generated method stub
 
 	} 
 
-	public static void saveProp(ArrayList<Proposition> propList,ArrayList<Voting> votingList,Context context) {
+	public static void saveProp(ArrayList<Proposition> propList,ArrayList<Voting> votingList,Context context) 
+  {
 
-		saveVoting(votingList, propList.get(0).getIdProp(),context);
-		DatabaseInterface helper = new DatabaseInterface(context);
-		SQLiteDatabase db = helper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		for (int i = 0; i < propList.size(); i++) {
-			Cursor c = db.rawQuery(
-					"SELECT * FROM PROPOSITION WHERE  IDPROP= ' "
-							+ propList.get(i).getIdProp() + "'", null);
-			Log.d("ENTROU2", "ENTROU2");
-			if (c.getCount() == 0) {
-				Log.d("ENTROU", "ENTROU");
-				values.put("IDPROP", propList.get(i).getIdProp());
-				values.put("ANOPROP", propList.get(i).getYearProp());
-				values.put("AUTORPROP", propList.get(i).getAuthorProp());
-				values.put("EMENTAPROP", propList.get(i).getMenuProp());
-				values.put("SIGLAPROP", propList.get(i).getAccProp());
-				values.put("NUMEROPROP", propList.get(i).getNumProp());
-				values.put("SITUACAOPROP", propList.get(i).getSituationProp());
-				long log_res = db.insert("PROPOSITION", null, values);
-				if (log_res != -1) {
-					Log.d("prop ", "Proposição salva");
-				} else {
-					Log.d("prop ", "Proposição não salva");
-				}
-			}
-		}
-		db.close();
-	}
+    saveVoting(votingList, propList.get(0).getIdProp(),context);
+    DatabaseInterface helper = new DatabaseInterface(context);
+    SQLiteDatabase db = helper.getWritableDatabase();
+    ContentValues values = new ContentValues();
+    for(int i = 0; i < propList.size(); i++) {
+      Cursor c = db.rawQuery(
+          "SELECT * FROM PROPOSITION WHERE  IDPROP= ' "
+          + propList.get(i).getIdProp() + "'", null);
+      Log.d("ENTROU2", "ENTROU2");
+      if (c.getCount() == 0) {
+        Log.d("ENTROU", "ENTROU");
+        values.put("IDPROP", propList.get(i).getIdProp());
+        values.put("ANOPROP", propList.get(i).getYearProp());
+        values.put("AUTORPROP", propList.get(i).getAuthorProp());
+        values.put("EMENTAPROP", propList.get(i).getMenuProp());
+        values.put("SIGLAPROP", propList.get(i).getAccProp());
+        values.put("NUMEROPROP", propList.get(i).getNumProp());
+        values.put("SITUACAOPROP", propList.get(i).getSituationProp());
+        long log_res = db.insert("PROPOSITION", null, values);
+        if (log_res != -1) {
+          Log.d("prop ", "Proposição salva");
+        } else {
+          Log.d("prop ", "Proposição não salva");
+        }
+      }
+    }
+    db.close();
+  }
 
 
 	public static void saveVoting(ArrayList<Voting> votList, Integer idProp, Context context) {

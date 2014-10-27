@@ -54,6 +54,7 @@ public class ParserController {
 	private static final String LISTAR_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?";
 	private static final String COMP_LISTAR_URL = "&datApresentacaoIni=&datApresentacaoFim=&parteNomeAutor=&idTipoAutor=&siglaPartidoAutor=&siglaUFAutor=&generoAutor=&codEstado=&codOrgaoEstado=&emTramitacao=";
 	private static final String OBTER_VOTACAO_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ObterVotacaoProposicao?";
+	private static final String CATEGORIA_PROPOSICAO = "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ObterProposicaoPorID?";
 	private final static  String [] ANO_PROPOSICAO = {"2013","2014"};
 	public  final static  String [] TIPO_PROPOSICAO = {"PL","PLP","PDC","MPV","PEC"};
 	private static final String PARTY_FILE = "party.txt";
@@ -61,19 +62,20 @@ public class ParserController {
 	public static Context tmp_context = null;
 
 
-	public static Integer requestPlenario(Context context) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException {
-		tmp_context = context;
-		for(String ano:ANO_PROPOSICAO){
-			for(String tipo:TIPO_PROPOSICAO){
-				String plenario_url = PROP_VOTADAS_PLENARIO + "ano=" + ano + "&tipo="+tipo;
-				Element plenario_element =  createConnection(plenario_url);
-				Log.d("Ano da Requisicao:" + ano, "URL");
-				propositionList(ParserHelper.nameProposition(plenario_element));
-				//Log.d("Plenario:" + plenario_element.getChildNodes().getLength(), "Plenario");
-			}
-		}
-		return 1;
-	}
+  public static Integer requestPlenario(Context context) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException 
+  {
+    tmp_context = context;
+    for(String ano:ANO_PROPOSICAO){
+      for(String tipo:TIPO_PROPOSICAO){
+        String plenario_url = PROP_VOTADAS_PLENARIO + "ano=" + ano + "&tipo="+tipo;
+        Element plenario_element =  createConnection(plenario_url);
+        Log.d("Ano da Requisicao:" + ano, "URL");
+        propositionList(ParserHelper.nameProposition(plenario_element));
+        //Log.d("Plenario:" + plenario_element.getChildNodes().getLength(), "Plenario");
+      }
+    }
+    return 1;
+  }
 
 	private static void propositionList(ArrayList<HashMap<String, String>> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException{
 
@@ -88,10 +90,21 @@ public class ParserController {
 			Element propElement = createConnection(listPropUrl);
 			Element votElement = createConnection(listVotUrl);
 			propArrayObject = ParserHelper.returnPropList(propElement.getChildNodes());
+			propositionCategories(propArrayObject);
 			votArrayObject = ParserHelper.returnVotingList(votElement.getChildNodes());
 			DatabaseInterface.saveProp(propArrayObject,votArrayObject, tmp_context);
 		}
 	}
+
+  private static void propositionCategories(ArrayList<Proposition> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException
+  {
+    for(int i = 0; i < propList.size(); i++){
+      String categoryUrl = CATEGORIA_PROPOSICAO + "IdProp=" +  propList.get(i).getIdProp();
+      Element categoryElement = createConnection(categoryUrl);
+      ParserHelper.setCategory(categoryElement,propList.get(i));
+      //propList.set(i, propObj);
+    }
+  }
 
 
 	private static Element createConnection(String s_url) 

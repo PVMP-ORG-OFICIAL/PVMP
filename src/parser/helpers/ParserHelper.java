@@ -63,6 +63,12 @@ public class ParserHelper {
 		return propList;
 	}
 
+	public static void setCategory(Element category, Proposition propObj){
+		Log.d("DEBUG", "category: " + category.getElementsByTagName("tema").item(0).getTextContent());
+	}
+
+
+
 	public static ArrayList<HashMap<String, String>> nameProposition (Element element){
 
 		ArrayList<HashMap<String, String>>  list_proposition = new ArrayList<>(); 
@@ -152,9 +158,9 @@ public class ParserHelper {
 				}
 			}
 		}
-	return deputyList;
+		return deputyList;
 	}
-	
+
 	private static String removeEmptyChar(String party){
 		Log.d("String:" + party, "String");
 		String space = " ";
@@ -166,7 +172,7 @@ public class ParserHelper {
 		else
 			return party;
 	}
-	
+
 
 	private static ArrayList<Vote> returnObjVote (String tmp_Sessao, Element tmp_Vote){
 		NodeList nodeVoteList = tmp_Vote.getChildNodes();
@@ -186,5 +192,4 @@ public class ParserHelper {
 		}
 		return arrayVotelist; 
 	}
-
 }

@@ -11,6 +11,7 @@ public class Proposition {
 	private String accProp;
 	private String numProp;
 	private String situationProp;
+	private String categoryProp;
 	
 	
 	public String getSituationProp() {
@@ -54,5 +55,11 @@ public class Proposition {
 	}
 	public void setNumProp(String numProp) {
 		this.numProp = numProp;
+	}
+	public String getCategoryProp() {
+		return categoryProp;
+	}
+	public void setCategoryProp(String categoryProp) {
+		this.categoryProp = categoryProp;
 	}
 }
