@@ -277,6 +277,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				fragment = new SettingsFragment();
 				break;
 			case LOGOUT:
+				this.updateUser(this.controller.openSession());
 				if (user != null) 
 				{
 					user.setDefaultUser("N");
