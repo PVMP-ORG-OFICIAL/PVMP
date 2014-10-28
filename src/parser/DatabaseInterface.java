@@ -23,26 +23,26 @@ public class DatabaseInterface extends SQLiteOpenHelper
 {
 
 	public static final String PROP_TABLE_NAME = "Proposition";
-	public static final String IDPROP = "IDPROP";
-	public static final String ANOPROP = "ANOPROP";
-	public static final String EMENTAPROP = "EMENTAPROP";
-	public static final String AUTORPROP = "AUTORPROP";
+	public static final String ID_PROP = "id";
+	public static final String ANO_PROP = "year";
+	public static final String EMENTA_PROP = "menu";
+	public static final String AUTHOR_PROP = "author";
 	/* TIPOPROP é a sigla da proposicao */
-	public static final String SIGLAPROP = "SIGLAPROP";
-	public static final String NUMEROPROP = "NUMEROPROP";
-	public static final String SITUACAOPROP = "SITUACAOPROP";
-	public static final String Category = "Category";
+	public static final String ACRONYM_PROP = "acronym";
+	public static final String NUMBER_PROP = "number";
+	public static final String SITUATITION_PROP = "situation";
+	public static final String CATEGORY_PROP = "Category";
 
 	public static final String CREATE_PROPPOSITION_TABLE = 
 			"CREATE TABLE " + PROP_TABLE_NAME + "(" 
-					+ IDPROP + " INTEGER NOT NULL PRIMARY KEY, " 
-					+ ANOPROP + " INTEGER NOT NULL, "
-					+ EMENTAPROP + " TEXT, "
-					+ AUTORPROP + " TEXT, "
-					+ SIGLAPROP + " TEXT, "
-					+ SITUACAOPROP + " TEXT, "
-					+ NUMEROPROP + " TEXT, "
-					+ Category + " TEXT "
+					+ ID_PROP + " INTEGER NOT NULL PRIMARY KEY, " 
+					+ ANO_PROP + " INTEGER NOT NULL, "
+					+ EMENTA_PROP + " TEXT, "
+					+ AUTHOR_PROP + " TEXT, "
+					+ ACRONYM_PROP + " TEXT, "
+					+ SITUATITION_PROP + " TEXT, "
+					+ NUMBER_PROP + " TEXT, "
+					+ CATEGORY_PROP + " TEXT "
 					+ ");";
 
 
@@ -56,7 +56,7 @@ public class DatabaseInterface extends SQLiteOpenHelper
 					+ COD_SESSAO + " INTEGER NOT NULL PRIMARY KEY, " 
 					+ RESUMO + " TEXT, "
 					+ DATA_VOTACAO + " TEXT, "
-					+ IDPROP + " INTEGER, "
+					+ ID_PROP + " INTEGER, "
 					+ "FOREIGN KEY(IDPROP) REFERENCES PROPOSITION(IDPROP) "
 					+ ");";
 
