@@ -90,20 +90,21 @@ public class ParserController {
 			Element propElement = createConnection(listPropUrl);
 			Element votElement = createConnection(listVotUrl);
 			propArrayObject = ParserHelper.returnPropList(propElement.getChildNodes());
-			propositionCategories(propArrayObject);
+			propArrayObject = propositionCategories(propArrayObject);
 			votArrayObject = ParserHelper.returnVotingList(votElement.getChildNodes());
 			DatabaseInterface.saveProp(propArrayObject,votArrayObject, tmp_context);
 		}
 	}
 
-  private static void propositionCategories(ArrayList<Proposition> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException
+  private static ArrayList<Proposition> propositionCategories(ArrayList<Proposition> propList) throws IOException, XmlPullParserException, ParserConfigurationException, SAXException
   {
     for(int i = 0; i < propList.size(); i++){
       String categoryUrl = CATEGORIA_PROPOSICAO + "IdProp=" +  propList.get(i).getIdProp();
       Element categoryElement = createConnection(categoryUrl);
-      ParserHelper.setCategory(categoryElement,propList.get(i));
-      //propList.set(i, propObj);
+      Proposition propObj = ParserHelper.setCategory(categoryElement,propList.get(i));
+      propList.set(i, propObj);
     }
+    return propList;
   }
 
 

@@ -22,7 +22,7 @@ import android.view.View;
 public class DatabaseInterface extends SQLiteOpenHelper 
 {
 
-	public static final String PROP_TABLE_NAME = "PROPOSITION";
+	public static final String PROP_TABLE_NAME = "Proposition";
 	public static final String IDPROP = "IDPROP";
 	public static final String ANOPROP = "ANOPROP";
 	public static final String EMENTAPROP = "EMENTAPROP";
@@ -31,6 +31,7 @@ public class DatabaseInterface extends SQLiteOpenHelper
 	public static final String SIGLAPROP = "SIGLAPROP";
 	public static final String NUMEROPROP = "NUMEROPROP";
 	public static final String SITUACAOPROP = "SITUACAOPROP";
+	public static final String Category = "Category";
 
 	public static final String CREATE_PROPPOSITION_TABLE = 
 			"CREATE TABLE " + PROP_TABLE_NAME + "(" 
@@ -40,7 +41,8 @@ public class DatabaseInterface extends SQLiteOpenHelper
 					+ AUTORPROP + " TEXT, "
 					+ SIGLAPROP + " TEXT, "
 					+ SITUACAOPROP + " TEXT, "
-					+ NUMEROPROP + " TEXT "
+					+ NUMEROPROP + " TEXT, "
+					+ Category + " TEXT "
 					+ ");";
 
 
@@ -145,6 +147,7 @@ public class DatabaseInterface extends SQLiteOpenHelper
         values.put("SIGLAPROP", propList.get(i).getAccProp());
         values.put("NUMEROPROP", propList.get(i).getNumProp());
         values.put("SITUACAOPROP", propList.get(i).getSituationProp());
+        values.put("Category", propList.get(i).getCategoryProp());
         long log_res = db.insert("PROPOSITION", null, values);
         if (log_res != -1) {
           Log.d("prop ", "Proposição salva");

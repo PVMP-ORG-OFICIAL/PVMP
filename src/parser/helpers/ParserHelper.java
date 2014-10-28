@@ -63,8 +63,9 @@ public class ParserHelper {
 		return propList;
 	}
 
-	public static void setCategory(Element category, Proposition propObj){
-		Log.d("DEBUG", "category: " + category.getElementsByTagName("tema").item(0).getTextContent());
+	public static Proposition setCategory(Element category, Proposition propObj){
+		propObj.setCategoryProp(category.getElementsByTagName("tema").item(0).getTextContent());
+		return propObj;
 	}
 
 
