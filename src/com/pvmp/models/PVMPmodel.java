@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
+import android.database.SQLException;
 
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
@@ -32,6 +33,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	public PVMPmodel(Context _context)
 	{
 		this.context = _context;
+		//must change to the new DAO
 		userDAO = UserDAO.getInstance(this.context);
 		this.observers = new ArrayList<ListenerObserverInterface>();
 	}
@@ -49,6 +51,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	public User getDefaultUser()
 	{
 		Util.debug("PVMPmodel: Try to get default user from database");
+		//must change to the new DAO
 		User user = userDAO.selectByDefault("S");
 		Util.debug("PVMPmodel: After access dao");
 		return user;
@@ -59,7 +62,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	* @return 
 	* @brief 
 	*/
-	public User getUser(String _userName)
+	public User getUser(String _columnName, String _userName)
 	{
 		if (_userName == null)
 		{
@@ -69,7 +72,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		SqlSelect selectExpression = new SqlSelect();
 		ArrayList<DAOAbstract> users = new ArrayList<DAOAbstract>();
 		
-		Filter usernameFilter = new Filter("USERNAME", "=");
+		Filter usernameFilter = new Filter(_columnName, "=");
 		usernameFilter.setValue(_userName);
 		
 		User user = new User();
@@ -93,9 +96,14 @@ public class PVMPmodel implements ModelSubjectInterface
 		{
 			return;
 		}
-
-		_user.insertDB(this.context);
-
+		
+		try {
+			_user.insertDB(this.context);
+		}
+		catch (SQLException sqlE) {
+			sqlE.printStackTrace();
+			throw new SQLException();
+		}
 		return;
 	}
 
