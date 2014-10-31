@@ -31,11 +31,12 @@ import com.pvmp.view.model.NavigationDrawerItem;
 import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
 import com.pvmp.view.fragment.EditSettingsFragment;
+import com.pvmp.view.fragment.PropositionFragment;
 import com.pvmp.view.fragment.UserRegisterFragment;
 import com.pvmp.view.fragment.FeedBackFragment;
 import com.pvmp.view.fragment.PartyFragment;
 import com.pvmp.view.fragment.SettingsFragment;
-import com.pvmp.view.fragment.PropositionFragment;
+import com.pvmp.view.fragment.CategoriesFragment;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.controller.ControllerInterface;
 import com.pvmp.controller.PVMPController;
@@ -150,7 +151,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		//Adding navigation drawer items to array
 		//Proposition
 		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[0], 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.PROPOSITION, -1)));
+			this.navigationMenuIcons.getResourceId(ViewObserverInterface.CATEGORY, -1)));
 		//Party
 		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[1], 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.PARTY, -1)));
@@ -262,10 +263,11 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	{
 		Util.debug("PVMPView: Start display fragment");
 		Fragment fragment = null;
+		
 		switch(_position)
 		{
-			case PROPOSITION:
-				fragment = new PropositionFragment();
+			case CATEGORY:
+				fragment = new CategoriesFragment();
 				break;
 			case PARTY:
 				fragment = new PartyFragment();
@@ -297,6 +299,9 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			case EDIT:
 				fragment = new EditSettingsFragment();
 				break;
+			case PROPOSITION:
+				fragment = new PropositionFragment();
+				break;
 			default:
 				break;
 		}
@@ -304,6 +309,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("MainActivity: Create a HOME ");
 		if(fragment != null)
 		{
+
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);

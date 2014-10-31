@@ -10,7 +10,7 @@ package com.pvmp.view;
 */
 public interface ViewObserverInterface
 {
-	public static final int PROPOSITION = 0;
+	public static final int CATEGORY = 0;
 	public static final int PARTY = 1;
 	public static final int FEEDBACK = 2;
 	public static final int SETTING = 3;
@@ -20,6 +20,7 @@ public interface ViewObserverInterface
 	public static final int VISITOR = 7;
 	public static final int HOME = 8;
 	public static final int EDIT = 9;
+	public static final int PROPOSITION = 10;
 
 	/**
 	* @param _codeFragment
