@@ -118,7 +118,7 @@ public class PVMPmodel implements ModelSubjectInterface
 			return;
 		}
 		
-		Filter deleteFilter = new Filter("USERNAME", "=");
+		Filter deleteFilter = new Filter(User.COLUMN_USERNAME, "=");
 		deleteFilter.setValue(_user.getUsername());
 		
 		_user.deleteDB(deleteFilter, this.context);
@@ -137,7 +137,7 @@ public class PVMPmodel implements ModelSubjectInterface
 			return;
 		}
 		
-		Filter editFilter = new Filter("USERNAME", "=");
+		Filter editFilter = new Filter(User.COLUMN_USERNAME, "=");
 		editFilter.setValue(_user.getUsername());
 		
 		_user.updateDB(editFilter, this.context);
