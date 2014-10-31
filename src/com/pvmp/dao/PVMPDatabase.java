@@ -43,18 +43,27 @@ public class PVMPDatabase
 	 * @throws Exception 
 	 * @brief Insert a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
-	public static void insertDB(String _tableName, ContentValues _values, Context _context)
+	public static long insertDB(String _tableName, ContentValues _values, Context _context)
 	{
-		if (_tableName == null || _values == null || _context == null)
+		long resultInsert;
+		
+		if (_tableName == null)
 		{
-			Util.debug("PVMPDatabase: insertDB deu treta.");
-			throw new NullPointerException("Null value at PVMPDatabase.insertDB()");
+			throw new NullPointerException("Null table name at PVMPDatabase.insertDB()");
+		}
+		if (_values == null)
+		{
+			throw new NullPointerException("Null values at PVMPDatabase.insertDB()");
+		}
+		if (_context == null)
+		{
+			throw new NullPointerException("Null context at PVMPDatabase.insertDB()");
 		}
 		
 		database = getWritablePVMP(_context);		
-		database.insert(_tableName, null, _values);
+		resultInsert = database.insert(_tableName, null, _values);
 		
-		return;
+		return resultInsert;
 	}
 	
 	/**
