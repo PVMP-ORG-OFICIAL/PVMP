@@ -13,6 +13,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 /**
  * @class PVMPDatabase
@@ -142,8 +143,16 @@ public class PVMPDatabase
 	 * */
 	private static SQLiteDatabase getReadablePVMP(Context _context)
 	{
+		SQLiteDatabase databaseToBeReturned = null;
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
-		return persistenceHelper.getReadableDatabase();
+		try 
+		{
+			databaseToBeReturned = persistenceHelper.getReadableDatabase();
+		}
+		catch (SQLiteException sqlE) {
+			sqlE.printStackTrace();
+		}
+		return databaseToBeReturned;
 	}
 	
 	/**
@@ -152,7 +161,15 @@ public class PVMPDatabase
 	 * */
 	private static SQLiteDatabase getWritablePVMP(Context _context)
 	{
+		SQLiteDatabase databaseToBeReturned = null;
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
-		return persistenceHelper.getWritableDatabase();
+		try 
+		{
+			databaseToBeReturned = persistenceHelper.getWritableDatabase();
+		}
+		catch (SQLiteException sqlE) {
+			sqlE.printStackTrace();
+		}
+		return databaseToBeReturned;
 	}
 }
