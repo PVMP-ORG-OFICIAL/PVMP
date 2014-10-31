@@ -23,7 +23,7 @@ public abstract class DAOAbstract
 	 * @brief Template method for Database Inserting of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
-	public final void insertDB(Context _context) 
+	public final void insertDB(Context _context) throws SQLiteException
 	{
 		if (_context == null)
 		{

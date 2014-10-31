@@ -9,6 +9,7 @@ import com.pvmp.controller.PVMPController;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
+import com.pvmp.models.PVMPmodel;
 import com.pvmp.models.User;
 
 import android.test.AndroidTestCase;
@@ -19,7 +20,7 @@ import android.test.RenamingDelegatingContext;
  * @brief Responsible for testing the class PVMPDatabase.
  * */
 //Might be renamed to DAOAbstract
-public class DatabaseTest extends AndroidTestCase
+public class DatabaseControllerTest extends AndroidTestCase
 {
 	private RenamingDelegatingContext context;
 	private User user;
@@ -28,6 +29,7 @@ public class DatabaseTest extends AndroidTestCase
 	private Filter whereFilter;
 	private ArrayList<DAOAbstract> users;
 	private PVMPController pvmpController;
+	private PVMPmodel pvmpModel;
 	
 	
 	@Override
@@ -39,6 +41,7 @@ public class DatabaseTest extends AndroidTestCase
 		this.context.makeExistingFilesAndDbsAccessible();
 		
 		this.pvmpController = new PVMPController(this.context);
+		this.pvmpModel = new PVMPmodel(this.context);
 		
 		this.user = new User("Joao", "juca123", "senha1234", "email", 19, "Superior", "M", "S");
 		this.user2 = new User();
@@ -56,29 +59,23 @@ public class DatabaseTest extends AndroidTestCase
 	}
 	
 	/**
-	 * @brief Tests if a instance is indeed inserted into the PVMPDatabase. The method insertDB()
-	 *        from DAOAbstract (which is the class that every Model class extends from) returns -1
-	 *        if something on the insert goes wrong.
+	 * @brief Tests if a instance is indeed inserted into the PVMPDatabase by the method registerUser()
+	 * 		  of PVMPController.
 	 * */
 	public void testInsertDB () 
 	{
-		
 		//insert the user in the DB.
-		this.user.insertDB(this.context);
-
+		this.pvmpController.registerUser(this.user);
 	}
 	
 	/**
-	 * @brief Tests if a instance is correctly select from the PVMPDatabase. The method selectDB returns
-	 * 		  an ArrayList that contains DAOAbstract derived instances that "obeyed" the "Where Clause".
-	 *        As expected, it just returned one instance (because the Where Clause is based on a Primary Key),
-	 *        and that instance is stored in "this.user2". After that, every attribute of user2 is compared
-	 *        with the this.user's attributes (which was inserted on the test above).
+	 * @brief Tests if a instance is correctly select from the PVMPDatabase. The method selectUser of
+	 * 		  PVMPController returns a user based on a attribute of its choice and the respective
+	 * 	      Column Name that it will be selected from. After that, every attribute of user2 is
+	 * 		  compared with the this.user's attributes (which was inserted on the test above.
 	 * */
 	public void testSelectDB () {
-		this.users = this.user.selectDB(this.queryExpression, this.context);
-		
-		this.user2 = (User) users.get(0);
+		this.user2 = this.pvmpModel.getUser("USERNAME", this.user.getUsername());
 		
 		//Need to find a better way to test it. like testing if the two instances (user and user2) are equal
 		assertEquals("Joao", user2.getName());
@@ -88,10 +85,9 @@ public class DatabaseTest extends AndroidTestCase
 		assertEquals(19, user2.getAge());
 		assertEquals("Superior", user2.getEducation());
 		assertEquals("M", user2.getSex());
-		assertEquals("S", user2.getDefaultUser());
 	}
 	/**
-	 * @brief Tests if the Database is updated by the DAOAbstract's updateDB(). After editing 
+	 * @brief Tests if the Database is updated by the PVMPController's editUser. After editing 
 	 * 		  some attributes of a instance, the method update it on the DB. Then, many asserts
 	 *        check if the attributes are the same.
 	 * */
@@ -102,7 +98,7 @@ public class DatabaseTest extends AndroidTestCase
 		this.user.setSex("F");
 		this.user.setEmail("email do juca");
 		
-		this.user.updateDB(this.whereFilter, this.context);
+		this.pvmpController.editUser(this.user);
 		
 		this.users = this.user.selectDB(this.queryExpression, this.context);
 		
@@ -122,7 +118,7 @@ public class DatabaseTest extends AndroidTestCase
 	 * */
 	public void testDeleteDB () 
 	{
-		this.user.deleteDB(this.whereFilter, this.context);
+		this.pvmpController.deleteUser(this.user);
 		
 		this.users = this.user.selectDB(this.queryExpression, this.context);
 		

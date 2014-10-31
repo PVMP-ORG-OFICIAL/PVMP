@@ -29,7 +29,7 @@ public interface ModelSubjectInterface
 	* @return 
 	* @brief
 	*/
-	public User getUser(String _userName);
+	public User getUser(String _columnName, String _userName);
 
 	/**
 	* @param _user

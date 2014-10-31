@@ -5,6 +5,7 @@
 package com.pvmp.controller;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteException;
 
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
@@ -85,12 +86,19 @@ public class PVMPController implements ControllerInterface
 	public void registerUser(User _user)
 	{
 		Util.debug("PVMPController: Prepare for register new user.");
-		this.model.saveUser(_user);
-		Util.debug("PVMPController: User saved on database, change view now");
-		this.view.displayFragment(ViewObserverInterface.HOME);
-		Util.debug("PVMPController: finish register");
+		try {
+			this.model.saveUser(_user);
+		}catch (SQLiteException sqlE) {
+			sqlE.printStackTrace();
+		}
 
 		return;
+	}
+	public void callDisplayFragment (int fragmentIndex)
+	{
+		Util.debug("PVMPController: User saved on database, change view now");
+		this.view.displayFragment(fragmentIndex);
+		Util.debug("PVMPController: finish register");
 	}
 	
 	public void editUser(User _user){
@@ -109,7 +117,6 @@ public class PVMPController implements ControllerInterface
 		User user = this.model.getDefaultUser();
 		if(user == null)
 		{
-			
 			Util.debug("PVMPController: getDefaultUser Problem");
 		}
 
