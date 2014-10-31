@@ -13,6 +13,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 /**
  * @class PVMPDatabase
@@ -43,10 +44,8 @@ public class PVMPDatabase
 	 * @throws Exception 
 	 * @brief Insert a row on the Database. Already initiate a WritableDatabase inside.
 	 * */
-	public static long insertDB(String _tableName, ContentValues _values, Context _context)
+	public static void insertDB(String _tableName, ContentValues _values, Context _context)
 	{
-		long resultInsert;
-		
 		if (_tableName == null)
 		{
 			throw new NullPointerException("Null table name at PVMPDatabase.insertDB()");
@@ -61,9 +60,14 @@ public class PVMPDatabase
 		}
 		
 		database = getWritablePVMP(_context);		
-		resultInsert = database.insert(_tableName, null, _values);
-		
-		return resultInsert;
+		try 
+		{
+			database.insertOrThrow(_tableName, null, _values);
+		}
+		catch (SQLiteException sqlE) {
+			sqlE.printStackTrace();
+			throw new SQLiteException();
+		}
 	}
 	
 	/**
@@ -142,8 +146,16 @@ public class PVMPDatabase
 	 * */
 	private static SQLiteDatabase getReadablePVMP(Context _context)
 	{
+		SQLiteDatabase databaseToBeReturned = null;
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
-		return persistenceHelper.getReadableDatabase();
+		try 
+		{
+			databaseToBeReturned = persistenceHelper.getReadableDatabase();
+		}
+		catch (SQLiteException sqlE) {
+			sqlE.printStackTrace();
+		}
+		return databaseToBeReturned;
 	}
 	
 	/**
@@ -152,7 +164,15 @@ public class PVMPDatabase
 	 * */
 	private static SQLiteDatabase getWritablePVMP(Context _context)
 	{
+		SQLiteDatabase databaseToBeReturned = null;
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
-		return persistenceHelper.getWritableDatabase();
+		try 
+		{
+			databaseToBeReturned = persistenceHelper.getWritableDatabase();
+		}
+		catch (SQLiteException sqlE) {
+			sqlE.printStackTrace();
+		}
+		return databaseToBeReturned;
 	}
 }

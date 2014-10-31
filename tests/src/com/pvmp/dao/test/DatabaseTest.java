@@ -5,6 +5,7 @@ package com.pvmp.dao.test;
 
 import java.util.ArrayList;
 
+import com.pvmp.controller.PVMPController;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
@@ -26,6 +27,7 @@ public class DatabaseTest extends AndroidTestCase
 	private SqlSelect queryExpression;
 	private Filter whereFilter;
 	private ArrayList<DAOAbstract> users;
+	private PVMPController pvmpController;
 	
 	
 	@Override
@@ -36,8 +38,11 @@ public class DatabaseTest extends AndroidTestCase
 		this.context = new RenamingDelegatingContext(getContext(), "test.");
 		this.context.makeExistingFilesAndDbsAccessible();
 		
+		this.pvmpController = new PVMPController(this.context);
+		
 		this.user = new User("Joao", "juca123", "senha1234", "email", 19, "Superior", "M", "S");
 		this.user2 = new User();
+		
 		
 		this.queryExpression = new SqlSelect();
 		
@@ -57,12 +62,10 @@ public class DatabaseTest extends AndroidTestCase
 	 * */
 	public void testInsertDB () 
 	{
-		long result;
 		
 		//insert the user in the DB.
-		result = this.user.insertDB(this.context);
-		
-		assertNotSame(-1, result);
+		this.user.insertDB(this.context);
+
 	}
 	
 	/**
