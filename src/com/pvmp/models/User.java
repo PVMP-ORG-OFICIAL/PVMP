@@ -16,14 +16,14 @@ import com.pvmp.dao.UserDAO;
 public class User extends DAOAbstract 
 {	
 	// !--- DATABASE ATTRIBUTES ---! \\ 
-	public static final String COLUMN_USERNAME = "USERNAME";
-	public static final String COLUMN_PASSWORD = "PASSWORD";
-	public static final String COLUMN_NAME = "NAME";
-	public static final String COLUMN_EMAIL = "EMAIL";
-	public static final String COLUMN_AGE = "AGE";
-	public static final String COLUMN_EDUCATION = "EDUCATION";
-	public static final String COLUMN_SEX = "SEX";
-	public static final String COLUMN_DEFAULT = "DEFAULTUSER";
+	public static final String COLUMN_USERNAME = "username";
+	public static final String COLUMN_PASSWORD = "password";
+	public static final String COLUMN_NAME = "name";
+	public static final String COLUMN_EMAIL = "email";
+	public static final String COLUMN_AGE = "age";
+	public static final String COLUMN_EDUCATION = "education";
+	public static final String COLUMN_SEX = "sex";
+	public static final String COLUMN_DEFAULT = "default_user";
 	
 	// !--- OTHER ATTRIBUTES ---! \\
 	private String username;
@@ -39,7 +39,7 @@ public class User extends DAOAbstract
 	public User()
 	{
 		super();
-		this.TABLE_NAME = "USER";
+		this.TABLE_NAME = "User";
 		this.name = null;
 		this.username = null;
 		this.password = null;
@@ -65,7 +65,7 @@ public class User extends DAOAbstract
 		int _age, String _education, String _sex, String _defaultUser)
 	{
 		super();
-		this.TABLE_NAME = "USER";
+		this.TABLE_NAME = "User";
 		this.name = _name;
 		this.username = _username;
 		this.password = _password;
@@ -459,6 +459,7 @@ public class User extends DAOAbstract
         this.age = _contentValues.getAsInteger(COLUMN_AGE);
         this.education = _contentValues.getAsString(COLUMN_EDUCATION);
         this.sex = _contentValues.getAsString(COLUMN_SEX);
+        this.defaultUser = _contentValues.getAsString(COLUMN_DEFAULT);
         
         return this;
 	}

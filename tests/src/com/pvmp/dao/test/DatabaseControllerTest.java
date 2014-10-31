@@ -49,7 +49,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 		
 		this.queryExpression = new SqlSelect();
 		
-		this.whereFilter = new Filter("USERNAME", "=");
+		this.whereFilter = new Filter(User.COLUMN_USERNAME, "=");
 		this.whereFilter.setValue("juca123");
 		
 		this.queryExpression.setExpression(this.whereFilter);
@@ -75,7 +75,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 	 * 		  compared with the this.user's attributes (which was inserted on the test above.
 	 * */
 	public void testSelectDB () {
-		this.user2 = this.pvmpModel.getUser("USERNAME", this.user.getUsername());
+		this.user2 = this.pvmpModel.getUser(User.COLUMN_USERNAME, this.user.getUsername());
 		
 		//Need to find a better way to test it. like testing if the two instances (user and user2) are equal
 		assertEquals("Joao", user2.getName());
