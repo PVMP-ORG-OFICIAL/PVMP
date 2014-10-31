@@ -22,15 +22,19 @@ public abstract class DAOAbstract
 	 * @brief Template method for Database Inserting of every PVMP class that will
 	 *        extends from this abstract.
 	 * */
-	public final void insertDB(Context _context) 
+	public final long insertDB(Context _context) 
 	{
+		long returnResult;
+		
 		if (_context == null)
 		{
 			throw new NullPointerException("Null value at DAOAbstract.insertDB()");
 		}
 		
 		ContentValues values = this.generateContentValues();
-		PVMPDatabase.insertDB(this.TABLE_NAME, values, _context);
+		returnResult = PVMPDatabase.insertDB(this.TABLE_NAME, values, _context);
+		
+		return returnResult;
 	}
 	
 	/**

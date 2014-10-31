@@ -65,6 +65,7 @@ public class User extends DAOAbstract
 		int _age, String _education, String _sex, String _defaultUser)
 	{
 		super();
+		this.TABLE_NAME = "USER";
 		this.name = _name;
 		this.username = _username;
 		this.password = _password;
