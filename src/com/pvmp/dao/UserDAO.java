@@ -25,14 +25,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UserDAO {
 	public static final String TABLE_NAME = "USER";
-	public static final String COLUMN_USERNAME = "USERNAME";
-	public static final String COLUMN_PASSWORD = "PASSWORD";
-	public static final String COLUMN_NAME = "NAME";
-	public static final String COLUMN_EMAIL = "EMAIL";
-	public static final String COLUMN_AGE = "AGE";
-	public static final String COLUMN_EDUCATION = "EDUCATION";
-	public static final String COLUMN_SEX = "SEX";
-	public static final String COLUMN_DEFAULT = "DEFAULTUSER";
+	public static final String COLUMN_USERNAME = "username";
+	public static final String COLUMN_PASSWORD = "password";
+	public static final String COLUMN_NAME = "name";
+	public static final String COLUMN_EMAIL = "email";
+	public static final String COLUMN_AGE = "age";
+	public static final String COLUMN_EDUCATION = "education";
+	public static final String COLUMN_SEX = "sex";
+	public static final String COLUMN_DEFAULT = "default_user";
 	public static final String SCRIPT_TABLE_CREATION_USER = 
 			"CREATE TABLE " + TABLE_NAME + "(" 
 		    + COLUMN_USERNAME + " VARCHAR(15) NOT NULL PRIMARY KEY,"

@@ -459,6 +459,7 @@ public class User extends DAOAbstract
         this.age = _contentValues.getAsInteger(COLUMN_AGE);
         this.education = _contentValues.getAsString(COLUMN_EDUCATION);
         this.sex = _contentValues.getAsString(COLUMN_SEX);
+        this.defaultUser = _contentValues.getAsString(COLUMN_DEFAULT);
         
         return this;
 	}
