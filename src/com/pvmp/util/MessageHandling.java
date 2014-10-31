@@ -28,12 +28,20 @@ public class MessageHandling {
 	public static final String PASSWORD_CONFIRM_TO_DELETE = "Digite sua senha para poder excluir.";
 	public static final String SUCCESSFUL_DELETE = "Conta excluida com sucesso.";
 	
+	private static Toast toast = null;
+	
 	public static void showToast (CharSequence text, Context context) {
 		int duration = Toast.LENGTH_LONG;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.show();
+		if (toast == null) 
+		{
+			toast = Toast.makeText(context, text, duration);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+		}
+		if(!toast.getView().isShown())
+		{
+			toast.setText(text);
+			toast.show();
+		}
 	}
 	
 	public static void requestAttention (EditText editText) {
