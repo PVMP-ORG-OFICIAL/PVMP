@@ -31,7 +31,7 @@ public class DatabaseInterface extends SQLiteOpenHelper
 	public static final String ACRONYM_PROP = "acronym";
 	public static final String NUMBER_PROP = "number";
 	public static final String SITUATITION_PROP = "situation";
-	public static final String CATEGORY_PROP = "Category";
+	public static final String CATEGORY_PROP = "category";
 
 	public static final String CREATE_PROPPOSITION_TABLE = 
 			"CREATE TABLE " + PROP_TABLE_NAME + "(" 
@@ -95,6 +95,26 @@ public class DatabaseInterface extends SQLiteOpenHelper
 					+ "FOREIGN KEY(id_registration) REFERENCES Deputy(id_registration) "
 					+ ");";
 
+	
+	public static final String USER_TABLE_NAME = "User";
+	public static final String NAME = "name";
+	public static final String USER_NAME = "user_name";
+	public static final String EMAIL = "email";
+	public static final String AGE = "age";
+	public static final String EDUCATION = "education";
+	public static final String SEX = "sex";
+	public static final String DEFAULT_USER = "default_User";
+	public static final String CREATE_USER_TABLE = 
+					"CREATE TABLE " + USER_TABLE_NAME + "(" 
+					+ USER_NAME + " TEXT, "
+					+ NAME + " TEXT, " 
+					+ EMAIL + " TEXT, "
+					+ AGE + " INTEGER, "
+					+ EDUCATION + " TEXT, "
+					+ SEX + " TEXT, "
+					+ DEFAULT_USER + " TEXT "
+					+ ");";
+
 
 
 	public static final String BANCO_DADOS = "PVMP";
@@ -111,6 +131,7 @@ public class DatabaseInterface extends SQLiteOpenHelper
   @Override
   public void onCreate(SQLiteDatabase db) 
   {
+    db.execSQL(CREATE_USER_TABLE);
     db.execSQL(CREATE_PARTY_TABLE);
     db.execSQL(CREATE_PROPPOSITION_TABLE);
     db.execSQL(CREATE_VOTATING_TABLE);
@@ -147,7 +168,7 @@ public class DatabaseInterface extends SQLiteOpenHelper
         values.put("acronym", propList.get(i).getAccProp());
         values.put("number", propList.get(i).getNumProp());
         values.put("situation", propList.get(i).getSituationProp());
-        values.put("Category", propList.get(i).getCategoryProp());
+        values.put("category", propList.get(i).getCategoryProp());
         long log_res = db.insert("Proposition", null, values);
         if (log_res != -1) {
           Log.d("prop ", "Proposição salva");
