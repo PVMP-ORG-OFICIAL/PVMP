@@ -54,15 +54,23 @@ public class CategoryDrawerAdapter extends AbstractDrawerAdapter
 		textTitle.setTextColor(Color.WHITE);
 		
 		if (_position == 0)
-			_convertView.setBackgroundColor(Color.parseColor("#33B5E5"));
+			_convertView.setBackgroundColor(Color.parseColor("#D7C797"));
 		else if (_position == 1)
-			_convertView.setBackgroundColor(Color.parseColor("#AA66CC"));
+			_convertView.setBackgroundColor(Color.parseColor("#845422"));
 		else if (_position == 2)
-			_convertView.setBackgroundColor(Color.parseColor("#99CC00"));
+			_convertView.setBackgroundColor(Color.parseColor("#EAD61C"));
 		else if (_position == 3)
-			_convertView.setBackgroundColor(Color.parseColor("#FFBB33"));
+			_convertView.setBackgroundColor(Color.parseColor("#A47C48"));
 		else if (_position == 4)
-			_convertView.setBackgroundColor(Color.parseColor("#FF4444"));
+			_convertView.setBackgroundColor(Color.parseColor("#000000"));
+		else if (_position == 5)
+			_convertView.setBackgroundColor(Color.parseColor("#D7C797"));
+		else if (_position == 6)
+			_convertView.setBackgroundColor(Color.parseColor("#845422"));
+		else if (_position == 7)
+			_convertView.setBackgroundColor(Color.parseColor("#EAD61C"));
+		else 
+			_convertView.setBackgroundColor(Color.parseColor("#A47C48"));
 
 		return _convertView;
 	}

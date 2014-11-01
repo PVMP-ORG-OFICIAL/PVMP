@@ -54,14 +54,14 @@ public class CategoriesFragment extends Fragment
 		this.adapter = new CategoryDrawerAdapter(mainActivity.getApplicationContext(), this.categoriesDrawerItems);
 		
 		this.categoriesList.setAdapter(this.adapter);
-		this.categoriesList.setBackgroundColor(Color.BLACK);
+		this.categoriesList.setBackgroundColor(Color.WHITE);
 		
 		return rootView;
 	}
 	
 	private void buildCategoriesNavigation(View _view)
 	{
-		this.navigationMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+		this.navigationMenuIcons = getResources().obtainTypedArray(R.array.category_drawer_icons);
 		this.categoriesList = (ListView) _view.findViewById(R.id.list_categories);
 		this.categoriesDrawerItems = new ArrayList<AbstractDrawerItem>();
 	}
@@ -70,20 +70,32 @@ public class CategoriesFragment extends Fragment
 	{
 		//Adding navigation drawer items to array
 		//Proposition
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Saude", 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.CATEGORY, -1)));
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Administração Pública", 
+			this.navigationMenuIcons.getResourceId(0, -1)));
 		//Party
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Educacao", 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.PARTY, -1)));
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Direitos Humanos", 
+			this.navigationMenuIcons.getResourceId(1, -1)));
+		//
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Educação", 
+			this.navigationMenuIcons.getResourceId(2, -1)));
 		//Feedback
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tecnologia", 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.FEEDBACK, -1)));
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Finanças Públicas", 
+			this.navigationMenuIcons.getResourceId(3, -1)));
 		//Settings
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Cultura", 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.SETTING, -1)));
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Organização Administrativa", 
+			this.navigationMenuIcons.getResourceId(4, -1)));
 		//Logout
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Transporte", 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.LOGOUT, -1)));
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Previdência Social", 
+			this.navigationMenuIcons.getResourceId(5, -1)));
+		//Proposition
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Relações Internacionais", 
+			this.navigationMenuIcons.getResourceId(6, -1)));
+		//Party
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tributação", 
+			this.navigationMenuIcons.getResourceId(7, -1)));
+		//Feedback
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Todas", 
+			this.navigationMenuIcons.getResourceId(8, -1)));
 
 		return;
 	}

@@ -23,9 +23,9 @@
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/list_item_title"
         android:shadowColor="#000000"
-    	android:shadowDx="5"
-    	android:shadowDy="5"
-  		android:shadowRadius="5"
+    	android:shadowDx="2"
+    	android:shadowDy="2"
+  		android:shadowRadius="2"
         android:gravity="center_vertical"
         android:paddingRight="40dp" />
     
