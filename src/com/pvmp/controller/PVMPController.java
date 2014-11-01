@@ -6,7 +6,9 @@ package com.pvmp.controller;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
+import com.pvmp.dao.PersistenceHelper;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
@@ -56,12 +58,11 @@ public class PVMPController implements ControllerInterface
 	@Override
 	public void openApplication()
 	{
-			User user = this.model.getUser("default_user", "S");
-			
+			User user = this.model.getUser("default_user","S");
 			Util.debug("PVMPController: start openApplication.");
 
 			//Verify if has user default
-			if (user != null)
+			if (user != null )
 			{
 				Util.debug("PVMPController: go to HOME");
 				this.view.displayFragment(ViewObserverInterface.CATEGORY);
@@ -114,7 +115,8 @@ public class PVMPController implements ControllerInterface
 	public User openSession()
 	{
 		Util.debug("PVMPController: openSession");
-		User user = this.model.getUser("default_user", "S");
+		PersistenceHelper.createDatabase();
+		User user = this.model.getUser("default_user","S");
 		if(user == null)
 		{
 			Util.debug("PVMPController: getDefaultUser Problem");

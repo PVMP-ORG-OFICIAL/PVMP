@@ -16,7 +16,7 @@ import com.pvmp.dao.UserDAO;
 public class User extends DAOAbstract 
 {	
 	// !--- DATABASE ATTRIBUTES ---! \\ 
-	public static final String COLUMN_USERNAME = "username";
+	public static final String COLUMN_USERNAME = "user_name";
 	public static final String COLUMN_PASSWORD = "password";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_EMAIL = "email";
@@ -202,8 +202,8 @@ public class User extends DAOAbstract
 	public static boolean validateExistingUser (String _username, Context _context)
 	{
 		User user = new User();
-		userDao = UserDAO.getInstance(_context);
-		user = userDao.selectByUsername(_username);
+		//userDao = UserDAO.getInstance(_context);
+		//user = userDao.selectByUsername(_username);
 		
 		if (user.getUsername() == null)
 		{
