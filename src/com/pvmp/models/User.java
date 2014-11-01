@@ -163,8 +163,8 @@ public class User extends DAOAbstract
 	public User verifyExistingUser (String _username, String _password, Context _context) 
 	{
 		User user = new User();
-		userDao = UserDAO.getInstance(_context);
-		user = userDao.selectByUsername(_username);
+		//userDao = UserDAO.getInstance(_context);
+		//user = userDao.selectByUsername(_username);
 		
 		if (user.getUsername() != null && user.getPassword().equals(_password)) 
 		{

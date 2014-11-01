@@ -17,30 +17,31 @@ public class PersistenceHelper extends SQLiteOpenHelper
 	public static final int VERSION = 1;
 	public static final String DATABASE_DIR = "/data/data/com.pvmp/databases/";
 	private static Context context;
-
+	private static int gambira;
 	
 	private static PersistenceHelper instance = null;
 	
 	private PersistenceHelper(Context _context) 
 	{
 		super(_context, DATABASE_NAME, null, VERSION);
-		this.context = _context;
-
+		context = _context;
 	}
 
 
 	public static void createDatabase()
 	{
-      Log.d("testeeee1","testeeeee1");
-	try{
-      Log.d("testeeee","testeeeee");
-			copyDatabase(context);
+		if (gambira == 0)
+		{
+			try 
+			{
+			  copyDatabase(context);
+			  gambira++;
+			}
+			 catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-	 catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
 	}
- }
 
 
   public static void copyDatabase(Context context) throws IOException
@@ -69,9 +70,9 @@ public class PersistenceHelper extends SQLiteOpenHelper
 	{
 		if(instance == null)
 		{
+			gambira = 0;
 			instance = new PersistenceHelper(context.getApplicationContext());
 		}
-		
 		return instance;
 	}
 
