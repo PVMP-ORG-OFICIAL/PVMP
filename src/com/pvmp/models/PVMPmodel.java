@@ -81,7 +81,10 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		users = user.selectDB(selectExpression, this.context);
 		
-		user = (User) users.get(0);
+		if (users.size() == 0)
+			user = null;
+		else
+			user = (User) users.get(0);
 		
 		return user;
 	}

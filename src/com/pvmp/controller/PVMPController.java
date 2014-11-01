@@ -101,11 +101,11 @@ public class PVMPController implements ControllerInterface
 		Util.debug("PVMPController: finish register");
 	}
 	
-	public void editUser(User _user){
+	public void editUser(User _user) {
 		this.model.editUser(_user);
 	}
 	
-	public void deleteUser(User _user){
+	public void deleteUser(User _user) {
 		this.model.removeUser(_user);
 	}
 	
@@ -114,7 +114,7 @@ public class PVMPController implements ControllerInterface
 	public User openSession()
 	{
 		Util.debug("PVMPController: openSession");
-		User user = this.model.getDefaultUser();
+		User user = this.model.getUser("default_user", "S");
 		if(user == null)
 		{
 			Util.debug("PVMPController: getDefaultUser Problem");
