@@ -8,7 +8,7 @@ public class PersistenceHelper extends SQLiteOpenHelper
 {
 
 	public static final String DATABASE_NAME = "PVMP_DATABASE";
-	public static final int VERSION = 3;
+	public static final int VERSION = 4;
 	
 	private static PersistenceHelper instance = null;
 	
