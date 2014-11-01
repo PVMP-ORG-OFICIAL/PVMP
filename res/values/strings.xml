@@ -64,8 +64,8 @@
         <item>@drawable/ic_bank_48</item>
         <item>@drawable/ic_flow_chart_48</item>
         <item>@drawable/ic_workers_48</item>
-        <item>@drawable/ic_lion_statue_48</item>
         <item>@drawable/ic_rel_48</item>
+        <item>@drawable/ic_lion_statue_48</item>
         <item>@drawable/ic_student_48</item>
     </array>
 	
