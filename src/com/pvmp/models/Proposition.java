@@ -1,8 +1,5 @@
 package com.pvmp.models;
 
-import java.util.Date;
-import java.util.List;
-
 import android.content.ContentValues;
 
 import com.pvmp.dao.DAOAbstract;

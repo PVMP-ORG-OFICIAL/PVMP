@@ -6,7 +6,6 @@ package com.pvmp.view.fragment;
 
 import java.util.ArrayList;
 
-import android.app.Fragment;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -92,10 +91,10 @@ public class CategoriesFragment extends FragmentView
 		this.categoriesDrawerItems.add(new CategoryDrawerItem("Previdência Social", 
 			this.navigationMenuIcons.getResourceId(5, -1)));
 		//Proposition
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tributação", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Relações Internacionais", 
 			this.navigationMenuIcons.getResourceId(6, -1)));
 		//Party
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Relações Internacionais", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tributação", 
 			this.navigationMenuIcons.getResourceId(7, -1)));
 		//Feedback
 		this.categoriesDrawerItems.add(new CategoryDrawerItem("Todas", 

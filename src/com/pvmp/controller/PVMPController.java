@@ -6,7 +6,6 @@ package com.pvmp.controller;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
 
 import com.pvmp.dao.PersistenceHelper;
 import com.pvmp.models.ModelSubjectInterface;
