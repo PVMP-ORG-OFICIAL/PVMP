@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import android.app.Fragment;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.pvmp.R;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
+import com.pvmp.view.model.CategoryDrawerItem;
 import com.pvmp.view.model.NavigationDrawerItem;
 
 /**
@@ -29,7 +31,7 @@ public class CategoriesFragment extends Fragment
 {
 	
 	private ListView categoriesList;
-	private ArrayList<NavigationDrawerItem> categoriesDrawerItems;
+	private ArrayList<CategoryDrawerItem> categoriesDrawerItems;
 	private NavigationDrawerAdapter adapter;
 	private PVMPView mainActivity;
 	private TypedArray navigationMenuIcons;
@@ -49,10 +51,11 @@ public class CategoriesFragment extends Fragment
 		this.navigationMenuIcons.recycle();
 		this.categoriesList.setOnItemClickListener(new CategoriesClickListener());
 		
-		this.adapter = new NavigationDrawerAdapter(mainActivity.getApplicationContext(), this.categoriesDrawerItems);
-		this.categoriesList.setAdapter(this.adapter);
+		this.adapter = new CategoryDrawerAdapter(mainActivity.getApplicationContext(), this.categoriesDrawerItems);
 		
-         
+		this.categoriesList.setAdapter(this.adapter);
+		this.categoriesList.setBackgroundColor(Color.BLACK);
+		
 		return rootView;
 	}
 	
