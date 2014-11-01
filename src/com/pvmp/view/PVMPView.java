@@ -27,6 +27,7 @@ import android.widget.ListView;
 import com.pvmp.util.Util;
 import com.pvmp.models.User;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
+import com.pvmp.view.model.AbstractDrawerItem;
 import com.pvmp.view.model.NavigationDrawerItem;
 import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
@@ -54,8 +55,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	private ListView mainDrawerList; /**< */
 	private ActionBarDrawerToggle mainDrawerToggle; /**< */
 
-	//Navigation drawer application title
-	private CharSequence mainDrawerTitle; 
+
 
 	//Used to store app title
 	private CharSequence mainTitle;
@@ -64,7 +64,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	private String[] navigationMenuTitles;
 	private TypedArray navigationMenuIcons;
 
-	private ArrayList<NavigationDrawerItem> navigationDrawerItems;
+	private ArrayList<AbstractDrawerItem> navigationDrawerItems;
 	private NavigationDrawerAdapter adapter;
 
 	//Controller and Model reference
@@ -90,7 +90,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
-		this.mainTitle = mainDrawerTitle  = getTitle();
+		this.mainTitle = getTitle();
 
 		//Load Slide menu items
 		this.navigationMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
@@ -106,7 +106,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.adapter = new NavigationDrawerAdapter(getApplicationContext(), this.navigationDrawerItems);
 		this.mainDrawerList.setAdapter(this.adapter);
 
-		//Enabling action bar app icon and behaveing it a toggle button
+		//Enabling action bar app icon and bringing it a toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
@@ -137,7 +137,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.navigationMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 		this.mainDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		this.mainDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-		this.navigationDrawerItems = new ArrayList<NavigationDrawerItem>();
+		this.navigationDrawerItems = new ArrayList<AbstractDrawerItem>();
 
 		return;
 	}

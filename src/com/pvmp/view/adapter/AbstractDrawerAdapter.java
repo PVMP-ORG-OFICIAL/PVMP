@@ -3,14 +3,13 @@ package com.pvmp.view.adapter;
 import java.util.ArrayList;
 
 import com.pvmp.view.model.AbstractDrawerItem;
-import com.pvmp.view.model.NavigationDrawerItem;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public abstract class AbstractBaseAdapter extends BaseAdapter {
+public abstract class AbstractDrawerAdapter extends BaseAdapter {
 
 	protected Context context;
 	protected ArrayList<AbstractDrawerItem> drawerItems;
@@ -20,7 +19,7 @@ public abstract class AbstractBaseAdapter extends BaseAdapter {
 	* @param _navigationDrawerItems
 	* @brief 
 	*/
-	public AbstractBaseAdapter(Context _context)
+	public AbstractDrawerAdapter(Context _context)
 	{
 		this.context = _context;
 	}

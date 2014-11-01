@@ -19,9 +19,9 @@ import android.widget.ListView;
 import com.pvmp.R;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
-import com.pvmp.view.adapter.NavigationDrawerAdapter;
+import com.pvmp.view.adapter.CategoryDrawerAdapter;
+import com.pvmp.view.model.AbstractDrawerItem;
 import com.pvmp.view.model.CategoryDrawerItem;
-import com.pvmp.view.model.NavigationDrawerItem;
 
 /**
 *	@class PropositionFragment
@@ -31,8 +31,8 @@ public class CategoriesFragment extends Fragment
 {
 	
 	private ListView categoriesList;
-	private ArrayList<CategoryDrawerItem> categoriesDrawerItems;
-	private NavigationDrawerAdapter adapter;
+	private ArrayList<AbstractDrawerItem> categoriesDrawerItems;
+	private CategoryDrawerAdapter adapter;
 	private PVMPView mainActivity;
 	private TypedArray navigationMenuIcons;
 	
@@ -63,26 +63,26 @@ public class CategoriesFragment extends Fragment
 	{
 		this.navigationMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 		this.categoriesList = (ListView) _view.findViewById(R.id.list_categories);
-		this.categoriesDrawerItems = new ArrayList<NavigationDrawerItem>();
+		this.categoriesDrawerItems = new ArrayList<AbstractDrawerItem>();
 	}
 	
 	private void buildListItemNavigation()
 	{
 		//Adding navigation drawer items to array
 		//Proposition
-		this.categoriesDrawerItems.add(new NavigationDrawerItem("Saude", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Saude", 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.CATEGORY, -1)));
 		//Party
-		this.categoriesDrawerItems.add(new NavigationDrawerItem("Educacao", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Educacao", 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.PARTY, -1)));
 		//Feedback
-		this.categoriesDrawerItems.add(new NavigationDrawerItem("Tecnologia", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tecnologia", 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.FEEDBACK, -1)));
 		//Settings
-		this.categoriesDrawerItems.add(new NavigationDrawerItem("Cultura", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Cultura", 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.SETTING, -1)));
 		//Logout
-		this.categoriesDrawerItems.add(new NavigationDrawerItem("Transporte", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Transporte", 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.LOGOUT, -1)));
 
 		return;
