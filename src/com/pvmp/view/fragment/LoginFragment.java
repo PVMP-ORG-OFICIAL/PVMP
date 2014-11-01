@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -95,6 +96,9 @@ public class LoginFragment extends FragmentView
 			userToBeLogged = userToBeLogged.verifyExistingUser(username, password_, context);
 			
 			if(userToBeLogged != null){
+				InputMethodManager imm = (InputMethodManager)mainActivity.getSystemService(
+               		 Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
 				userToBeLogged.setDefaultUser("S");
 				controller.editUser(userToBeLogged);
 				mainActivity.displayFragment(ViewObserverInterface.CATEGORY);
@@ -106,6 +110,8 @@ public class LoginFragment extends FragmentView
 			
 		}
 	}
+	
+	
 
 	private class HandleRegister implements View.OnClickListener
 	{

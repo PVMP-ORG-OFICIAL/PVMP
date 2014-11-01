@@ -27,7 +27,7 @@ import com.pvmp.view.model.CategoryDrawerItem;
 *	@class PropositionFragment
 * @brief
 */
-public class CategoriesFragment extends Fragment 
+public class CategoriesFragment extends FragmentView
 {
 	
 	private ListView categoriesList;
@@ -45,7 +45,7 @@ public class CategoriesFragment extends Fragment
 		View rootView = _inflater.inflate(R.layout.categories_fragment, _container, false);
 		
 		mainActivity = (PVMPView) getActivity();
-		this.buildCategoriesNavigation(rootView);
+		this.buildScreenComponent(rootView);
 		this.buildListItemNavigation();
 		
 		this.navigationMenuIcons.recycle();
@@ -62,7 +62,8 @@ public class CategoriesFragment extends Fragment
 		return rootView;
 	}
 	
-	private void buildCategoriesNavigation(View _view)
+	@Override
+	public void buildScreenComponent(View _view) 
 	{
 		this.navigationMenuIcons = getResources().obtainTypedArray(R.array.category_drawer_icons);
 		this.categoriesList = (ListView) _view.findViewById(R.id.list_categories);
@@ -91,10 +92,10 @@ public class CategoriesFragment extends Fragment
 		this.categoriesDrawerItems.add(new CategoryDrawerItem("Previdência Social", 
 			this.navigationMenuIcons.getResourceId(5, -1)));
 		//Proposition
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Relações Internacionais", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tributação", 
 			this.navigationMenuIcons.getResourceId(6, -1)));
 		//Party
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tributação", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("Relações Internacionais", 
 			this.navigationMenuIcons.getResourceId(7, -1)));
 		//Feedback
 		this.categoriesDrawerItems.add(new CategoryDrawerItem("Todas", 
