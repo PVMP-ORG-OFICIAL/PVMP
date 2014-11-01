@@ -86,25 +86,39 @@ public class EditSettingsFragment extends FragmentView
 		this.userEmail.setText(loggedUser.getEmail());
 		this.userAge.setText(Integer.toString(loggedUser.getAge()));
 		
-		switch(loggedUser.getEducation())
+		char education;
+		if(loggedUser.getEducation() == "Fundamental")
+			education = 'F';
+		else if(loggedUser.getEducation() == "Ensino Médio")
+			education = 'M';
+		else
+			education = 'S';
+		
+		switch(education)
 		{
-			case "Fundamental":
+			case 'F':
 				this.education.check(R.id.radio_editElementarySchool);
 				break;
-			case "Ensino Medio":
+			case 'M':
 				this.education.check(R.id.radio_editHighSchool);
 				break;
-			case "Superior":
+			case 'S':
 				this.education.check(R.id.radio_editGraduated);
 				break;
 		}
 		
-		switch (loggedUser.getSex())
+		char sex;
+		if(loggedUser.getSex() == "Masculino")
+			sex = 'M';
+		else
+			sex = 'F';
+		
+		switch (sex)
 		{
-			case "Masculino":
+			case 'M':
 				this.sex.check(R.id.radio_editMale);
 				break;
-			case "Feminino":
+			case 'F':
 				this.sex.check(R.id.radio_editFemale);
 				break;
 		}
