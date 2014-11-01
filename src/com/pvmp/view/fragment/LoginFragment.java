@@ -97,7 +97,7 @@ public class LoginFragment extends FragmentView
 			if(userToBeLogged != null){
 				userToBeLogged.setDefaultUser("S");
 				controller.editUser(userToBeLogged);
-				mainActivity.displayFragment(ViewObserverInterface.HOME);
+				mainActivity.displayFragment(ViewObserverInterface.CATEGORY);
 			}
 			else{
 				userToBeLogged = new User();

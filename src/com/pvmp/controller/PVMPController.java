@@ -56,15 +56,15 @@ public class PVMPController implements ControllerInterface
 	@Override
 	public void openApplication()
 	{
-			User user = this.model.getDefaultUser();
+			User user = this.model.getUser("default_user", "S");
 			
 			Util.debug("PVMPController: start openApplication.");
 
 			//Verify if has user default
-			if (user.getAge() !=0 )
+			if (user != null)
 			{
 				Util.debug("PVMPController: go to HOME");
-				this.view.displayFragment(ViewObserverInterface.HOME);
+				this.view.displayFragment(ViewObserverInterface.CATEGORY);
 				return;
 			}
 			Util.debug("PVMPController: go to LOGIN");

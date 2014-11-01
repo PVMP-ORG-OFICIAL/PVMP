@@ -98,7 +98,7 @@ public class UserRegisterFragment extends FragmentView
 				case 0:	
 					userBuild.setDefaultUser("S");
 					controller.registerUser(userBuild);
-					controller.callDisplayFragment(ViewObserverInterface.HOME);
+					controller.callDisplayFragment(ViewObserverInterface.CATEGORY);
 					MessageHandling.showToast(MessageHandling.SUCCESSFUL_REGISTER, context);
 					return;
 					

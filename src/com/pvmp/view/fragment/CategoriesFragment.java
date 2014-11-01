@@ -56,6 +56,9 @@ public class CategoriesFragment extends Fragment
 		this.categoriesList.setAdapter(this.adapter);
 		this.categoriesList.setBackgroundColor(Color.WHITE);
 		
+		mainActivity.enableDrawer(true);
+		mainActivity.enableScreenInteraction(true);
+		
 		return rootView;
 	}
 	

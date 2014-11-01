@@ -38,8 +38,6 @@ public class HomeFragment extends Fragment
 				
 				this.mainActivity.updateUser(controller.openSession()); 
         View rootView = _inflater.inflate(R.layout.fragment_home, _container, false);
-        mainActivity.enableDrawer(true);
-		mainActivity.enableScreenInteraction(true);
         
         
         return rootView;
