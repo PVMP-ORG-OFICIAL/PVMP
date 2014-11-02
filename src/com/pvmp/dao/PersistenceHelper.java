@@ -1,5 +1,6 @@
 package com.pvmp.dao;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,8 +8,8 @@ import java.io.OutputStream;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class PersistenceHelper extends SQLiteOpenHelper 
 {
@@ -17,7 +18,6 @@ public class PersistenceHelper extends SQLiteOpenHelper
 	public static final int VERSION = 1;
 	public static final String DATABASE_DIR = "/data/data/com.pvmp/databases/";
 	private static Context context;
-	private static int gambira;
 	
 	private static PersistenceHelper instance = null;
 	
@@ -26,51 +26,52 @@ public class PersistenceHelper extends SQLiteOpenHelper
 		super(_context, DATABASE_NAME, null, VERSION);
 		context = _context;
 	}
+	
+	private static boolean doesDatabaseExist () {
+		File dbFile = context.getDatabasePath(DATABASE_NAME);
+		return dbFile.exists();
+	}
 
 
 	public static void createDatabase()
 	{
-		if (gambira == 0)
-		{
+		if (doesDatabaseExist() == false) {
 			try 
 			{
-			  copyDatabase(context);
-			  gambira++;
+				copyDatabase(context);
 			}
-			 catch (IOException e) {
+			catch (IOException e) 
+			{
 				e.printStackTrace();
 			}
 		}
 	}
 
 
-  public static void copyDatabase(Context context) throws IOException
-  {
-      Log.d("entrouuuu","entrouu");
-      int length;
-      InputStream myInput;
-      myInput = context.getAssets().open(DATABASE_NAME);
-      String moveBDtoDir = DATABASE_DIR + DATABASE_NAME;
-      OutputStream moveLikeStream = new FileOutputStream(moveBDtoDir);
-      byte[] buffer = new byte[1024];
-
-      while ((length = myInput.read(buffer)) > 0)
-      {
-    	Log.d("log","size + " + length);
-        moveLikeStream.write(buffer,0,length);
-      }
-
-      moveLikeStream.flush();
-      moveLikeStream.close();
-      myInput.close();
-  }
+	public static void copyDatabase(Context context) throws IOException
+	{
+		int length;
+		InputStream myInput;
+		myInput = context.getAssets().open(DATABASE_NAME);
+		String moveBDtoDir = DATABASE_DIR + DATABASE_NAME;
+		OutputStream moveLikeStream = new FileOutputStream(moveBDtoDir);
+		byte[] buffer = new byte[1024];
+	
+		while ((length = myInput.read(buffer)) > 0)
+		{
+			moveLikeStream.write(buffer,0,length);
+		}
+		
+		moveLikeStream.flush();
+		moveLikeStream.close();
+		myInput.close();
+  	}
 
 	
 	public static PersistenceHelper getInstance(Context context) 
 	{
 		if(instance == null)
 		{
-			gambira = 0;
 			instance = new PersistenceHelper(context.getApplicationContext());
 		}
 		return instance;
