@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/account_settings_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/text_name"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_showName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView_username"
+        android:text="@string/text_nothing"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textView_showEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_email"
+        android:layout_alignBottom="@+id/textView_email"
+        android:layout_toRightOf="@+id/textView_username"
+        android:text="@string/text_nothing"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textView_showSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_sex"
+        android:layout_alignBottom="@+id/textView_sex"
+        android:layout_alignLeft="@+id/textView_showAge"
+        android:text="@string/text_nothing"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textView_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_email"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_age"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_education"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_showAge"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_education"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_education"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_sex"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_sex"
+				android:layout_marginTop="15dp"
+        android:text="@string/text_username"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_showAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_age"
+        android:layout_alignBottom="@+id/textView_age"
+        android:layout_toRightOf="@+id/textView_username"
+        android:text="@string/text_nothing"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textView_showEducation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_education"
+        android:layout_alignBottom="@+id/textView_education"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/textView_education"
+        android:text="@string/text_nothing"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_showName"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_email"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_showUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_username"
+        android:layout_alignBottom="@+id/textView_username"
+        android:layout_toRightOf="@+id/textView_education"
+        android:text="@string/text_nothing"
+        android:textSize="19sp" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_showUsername"
+        android:layout_marginTop="36dp"
+        android:text="@string/text_edit" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_edit"
+        android:layout_marginTop="14dp"
+        android:onClick="clickDelete"
+        android:text="@string/text_exclude" />
+
+    <EditText
+        android:id="@+id/editText_passwordConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_delete"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/text_password_hint"
+        android:inputType="textPassword"
+        android:visibility="invisible" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>
