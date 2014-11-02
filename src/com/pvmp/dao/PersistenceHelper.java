@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.pvmp.util.Util;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class PersistenceHelper extends SQLiteOpenHelper 
@@ -35,13 +36,16 @@ public class PersistenceHelper extends SQLiteOpenHelper
 
 	public static void createDatabase()
 	{
+		Util.debug("PersistenceHelper: createDatabase (fora do if)");
 		if (doesDatabaseExist() == false) {
 			try 
 			{
+				Util.debug("PersistenceHelper: createDatabase (dentro do if)");
 				copyDatabase(context);
 			}
 			catch (IOException e) 
 			{
+				Util.debug("PersistenceHelper: createDatabase (dentro do if) (dentro do catch)");
 				e.printStackTrace();
 			}
 		}

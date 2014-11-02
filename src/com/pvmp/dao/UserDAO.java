@@ -52,15 +52,7 @@ public class UserDAO {
 	
 	private static UserDAO instance = null;
 	
-	public static UserDAO getInstance(Context context) {
-		if(instance == null)
-		{
-			Util.debug("UserDAO: Try to get data");
-			instance = new UserDAO(context.getApplicationContext());
-			Util.debug("UserDAO: Returned");
-		}
-		return instance;
-	}
+	
 	
 	private UserDAO(Context context) {
 		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(context);

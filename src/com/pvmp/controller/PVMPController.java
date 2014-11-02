@@ -22,6 +22,7 @@ public class PVMPController implements ControllerInterface
 {
 	ViewObserverInterface view;
 	ModelSubjectInterface model;
+	PersistenceHelper persistenceHelper;
 
 	public PVMPController()
 	{
@@ -57,22 +58,22 @@ public class PVMPController implements ControllerInterface
 	@Override
 	public void openApplication()
 	{
-			User user = this.model.getUser("default_user","S");
-			Util.debug("PVMPController: start openApplication.");
+		User user = this.model.getUser("default_user","S");
+		Util.debug("PVMPController: start openApplication.");
 
-			//Verify if has user default
-			if (user != null )
-			{
-				Util.debug("PVMPController: go to HOME");
-				this.view.displayFragment(ViewObserverInterface.CATEGORY);
-				return;
-			}
-			Util.debug("PVMPController: go to LOGIN");
-			this.view.enableDrawer(false);
-			this.view.enableScreenInteraction(false);
-			this.view.displayFragment(ViewObserverInterface.LOGIN);
-			
+		//Verify if has user default
+		if (user != null)
+		{
+			Util.debug("PVMPController: go to HOME");
+			this.view.displayFragment(ViewObserverInterface.CATEGORY);
 			return;
+		}
+		Util.debug("PVMPController: go to LOGIN");
+		this.view.enableDrawer(false);
+		this.view.enableScreenInteraction(false);
+		this.view.displayFragment(ViewObserverInterface.LOGIN);
+		
+		return;
 	}
 
 	@Override

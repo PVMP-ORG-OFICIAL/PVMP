@@ -12,8 +12,8 @@ import android.database.SQLException;
 
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
+import com.pvmp.dao.PersistenceHelper;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.dao.UserDAO;
 
 /**
 * @class PVMPModel
@@ -21,9 +21,9 @@ import com.pvmp.dao.UserDAO;
 */
 public class PVMPmodel implements ModelSubjectInterface
 {
-	static UserDAO userDAO; /**< */
-	ArrayList<ListenerObserverInterface> observers;
-	Context context;
+	private PersistenceHelper persistenceHelper; /**< */
+	private ArrayList<ListenerObserverInterface> observers;
+	private Context context;
 
 	/**
 	* @param _context
@@ -33,7 +33,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	{
 		this.context = _context;
 		//must change to the new DAO
-		userDAO = UserDAO.getInstance(this.context);
+		persistenceHelper = PersistenceHelper.getInstance(this.context);
 		this.observers = new ArrayList<ListenerObserverInterface>();
 	}
 
