@@ -104,10 +104,11 @@ public abstract class DAOAbstract
 		Util.debug("Content size: " + arrayContentValues.size());
 		while(i < arrayContentValues.size()) 
 		{
-			Util.debug("Caller: "+this.getClass());
+			Util.debug("Caller: "+this.getClass().getSimpleName());
 			/* Creata a factory pattern here */
-			Proposition prop = new Proposition();
-			arrayModels.add(prop.contentValuesToModel(arrayContentValues.get(i)));
+			LegislativeFactory factory = new LegislativeFactory();
+			DAOAbstract legislativeObject = factory.getLegislative(this.getClass().getSimpleName());
+			arrayModels.add(legislativeObject.contentValuesToModel(arrayContentValues.get(i)));
 			i++;
 		}
 		

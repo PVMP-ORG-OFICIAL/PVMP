@@ -52,9 +52,6 @@ public class Proposition extends DAOAbstract
 		this.category = category;
 	}
 
-	public Proposition(){}
-
-
 	public String getAuthor() {
 		return author;
 	}
