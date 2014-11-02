@@ -14,7 +14,6 @@ import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.dao.UserDAO;
-import com.pvmp.util.Util;
 
 /**
 * @class PVMPModel
@@ -43,28 +42,15 @@ public class PVMPmodel implements ModelSubjectInterface
 		this.context = _context;
 		return;
 	}
-	
-	/**
-	* @return 
-	* @brief
-	*/
-	public User getDefaultUser()
-	{
-		Util.debug("PVMPmodel: Try to get default user from database");
-		//must change to the new DAO
-		User user = userDAO.selectByDefault("S");
-		Util.debug("PVMPmodel: After access dao");
-		return user;
-	}
 
 	/**
 	* @param _userName
 	* @return 
 	* @brief 
 	*/
-	public User getUser(String _columnName, String _userName)
+	public User getUser(String _columnName, String _attribute)
 	{
-		if (_userName == null)
+		if (_attribute == null)
 		{
 			throw new NullPointerException("Null value at PVMPmodel.getUser()");
 		}
@@ -73,11 +59,12 @@ public class PVMPmodel implements ModelSubjectInterface
 		ArrayList<DAOAbstract> users = new ArrayList<DAOAbstract>();
 		
 		Filter usernameFilter = new Filter(_columnName, "=");
-		usernameFilter.setValue(_userName);
+		usernameFilter.setValue(_attribute);
 		
 		User user = new User();
 		
 		selectExpression.setEntity(user.TABLE_NAME);
+		selectExpression.setExpression(usernameFilter);
 		
 		users = user.selectDB(selectExpression, this.context);
 		
@@ -87,7 +74,18 @@ public class PVMPmodel implements ModelSubjectInterface
 			user = (User) users.get(0);
 		
 		return user;
-
+	}
+	
+	public User verifyMatchingUserPassword (String _userName, String _password) 
+	{
+		User user = this.getUser("user_name", _userName);
+		
+		if (user != null) {
+			if(!_password.equals(user.getPassword())) {
+				user = null;
+			}
+		}
+		return user;
 	}
 
 	/**

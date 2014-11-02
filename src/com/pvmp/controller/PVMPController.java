@@ -109,7 +109,6 @@ public class PVMPController implements ControllerInterface
 		this.model.removeUser(_user);
 	}
 	
-
 	@Override
 	public User openSession()
 	{
@@ -121,6 +120,13 @@ public class PVMPController implements ControllerInterface
 			Util.debug("PVMPController: getDefaultUser Problem");
 		}
 
+		return user;
+	}
+	
+	public User verifyMatchingUserPassword (String _userName, String _password) 
+	{
+		User user = this.model.verifyMatchingUserPassword(_userName, _password);
+		
 		return user;
 	}
 }

@@ -19,18 +19,19 @@ import com.pvmp.models.Proposition;
 public interface ModelSubjectInterface
 {
 	/**
-	* @return 
-	* @brief
-	*/
-	public User getDefaultUser();
-
-	/**
 	* @param _userName
 	* @return 
 	* @brief
 	*/
 	public User getUser(String _columnName, String _userName);
 
+	/**
+	* @param _user
+	* @param _password
+	* @brief
+	*/
+	public User verifyMatchingUserPassword (String _userName, String _password);
+	
 	/**
 	* @param _user
 	* @brief
@@ -74,4 +75,6 @@ public interface ModelSubjectInterface
 	* @brief 
 	*/
 	public void removeObserver(ListenerObserverInterface _observer);
+	
+	
 }

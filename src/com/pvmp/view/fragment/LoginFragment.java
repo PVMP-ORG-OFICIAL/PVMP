@@ -28,8 +28,8 @@ import com.pvmp.view.ViewObserverInterface;
 public class LoginFragment extends FragmentView
 {
 
-	private EditText userName;
-	private EditText password;
+	private EditText editTextUsername;
+	private EditText editTextPassword;
 	private PVMPView mainActivity;
 	private User userToBeLogged;
 	private Context context;
@@ -70,8 +70,8 @@ public class LoginFragment extends FragmentView
 	public void buildScreenComponent (View _view) 
 	{
 		Util.debug("LoginFragment: Start initialize");
-		this.userName = (EditText) _view.findViewById(R.id.name);
-		this.password = (EditText) _view.findViewById(R.id.password);
+		this.editTextUsername = (EditText) _view.findViewById(R.id.name);
+		this.editTextPassword = (EditText) _view.findViewById(R.id.password);
 		//this.errorLogin 	= (TextView) _view.findViewById(R.id.textView_errorLogin);
 		this.buttonLogin 	= (Button) _view.findViewById(R.id.button_confirm);
 		this.buttonGuest 	= (Button) _view.findViewById(R.id.button_entry_guest);
@@ -91,14 +91,14 @@ public class LoginFragment extends FragmentView
 		public void onClick(View _view)
 		{
 			Util.debug("ENTRAR PUSHED!!!"); 
-			String username = userName.getText().toString();
-			String password_ = password.getText().toString();
-			userToBeLogged = userToBeLogged.verifyExistingUser(username, password_, context);
+			String username = editTextUsername.getText().toString();
+			String password = editTextPassword.getText().toString();
+			userToBeLogged = LoginFragment.this.controller.verifyMatchingUserPassword(username, password);
 			
 			if(userToBeLogged != null){
 				InputMethodManager imm = (InputMethodManager)mainActivity.getSystemService(
                		 Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(userName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 				userToBeLogged.setDefaultUser("S");
 				controller.editUser(userToBeLogged);
 				mainActivity.displayFragment(ViewObserverInterface.CATEGORY);

@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 
 import com.pvmp.dao.DAOAbstract;
-import com.pvmp.dao.UserDAO;
 
 /**
 * @class User
@@ -33,7 +32,7 @@ public class User extends DAOAbstract
 	private int age;
 	private String education;
 	private String sex;
-	private static UserDAO userDao;
+	private static PVMPmodel model;
 	private String defaultUser;
 	
 	public User()
@@ -154,26 +153,6 @@ public class User extends DAOAbstract
 	}
 	
 	/**
-	* @param _username
-	* @param _password
-	* @param _context
-	* @brief
-	* @return
-	*/
-	public User verifyExistingUser (String _username, String _password, Context _context) 
-	{
-		User user = new User();
-		//userDao = UserDAO.getInstance(_context);
-		//user = userDao.selectByUsername(_username);
-		
-		if (user.getUsername() != null && user.getPassword().equals(_password)) 
-		{
-			return user;
-		}
-		return null;
-	}
-	
-	/**
 	* @param _email
 	* @param _context
 	* @return 
@@ -181,11 +160,11 @@ public class User extends DAOAbstract
 	*/
 	public static boolean validateExistingEmail (String _email, Context _context)
 	{
+		model = new PVMPmodel(_context);
 		User user = new User();
-		userDao = UserDAO.getInstance(_context);
-		user = userDao.selectByEmail(_email);
+		user = model.getUser("email", _email);
 		
-		if (user.getEmail() == null)
+		if (user == null)
 		{
 			return true;
 		}
@@ -202,13 +181,13 @@ public class User extends DAOAbstract
 	public static boolean validateExistingUser (String _username, Context _context)
 	{
 		User user = new User();
-		//userDao = UserDAO.getInstance(_context);
-		//user = userDao.selectByUsername(_username);
+		user = model.getUser("user_name", _username);
 		
-		if (user.getUsername() == null)
+		if (user == null)
 		{
 			return true;
 		}
+		
 		return false;
 	}
 
