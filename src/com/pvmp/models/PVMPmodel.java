@@ -21,7 +21,6 @@ import com.pvmp.dao.SqlSelect;
 */
 public class PVMPmodel implements ModelSubjectInterface
 {
-	private PersistenceHelper persistenceHelper; /**< */
 	private ArrayList<ListenerObserverInterface> observers;
 	private Context context;
 
@@ -33,7 +32,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	{
 		this.context = _context;
 		//must change to the new DAO
-		persistenceHelper = PersistenceHelper.getInstance(this.context);
+		PersistenceHelper.getInstance(this.context);
 		this.observers = new ArrayList<ListenerObserverInterface>();
 	}
 
