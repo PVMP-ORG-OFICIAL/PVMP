@@ -25,6 +25,18 @@ public class Proposition extends DAOAbstract
 	private Integer number;
 	private String category;
 	
+	public Proposition () {
+		super();
+		this.TABLE_NAME = "Proposition";
+		this.id = null;
+		this.year = null;
+		this.menu = null;
+		this.acronym = null;
+		this.author = null;
+		this.situation = null;
+		this.number = null;
+		this.category = null;
+	}
 	
 	public Proposition(Integer id, String year, String menu, String acronym,
 			String author, String situation, Integer number, String category) {
