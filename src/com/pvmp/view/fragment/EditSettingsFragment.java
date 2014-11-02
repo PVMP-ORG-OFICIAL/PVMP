@@ -87,9 +87,9 @@ public class EditSettingsFragment extends FragmentView
 		this.userAge.setText(Integer.toString(loggedUser.getAge()));
 		
 		char education;
-		if(loggedUser.getEducation() == "Fundamental")
+		if(loggedUser.getEducation().equals("Fundamental"))
 			education = 'F';
-		else if(loggedUser.getEducation() == "Ensino Médio")
+		else if(loggedUser.getEducation().equals("Ensino Medio"))
 			education = 'M';
 		else
 			education = 'S';
@@ -108,7 +108,7 @@ public class EditSettingsFragment extends FragmentView
 		}
 		
 		char sex;
-		if(loggedUser.getSex() == "Masculino")
+		if(loggedUser.getSex().equals("Masculino"))
 			sex = 'M';
 		else
 			sex = 'F';
@@ -154,10 +154,7 @@ public class EditSettingsFragment extends FragmentView
 				mainActivity.displayFragment(ViewObserverInterface.SETTING);
 			}
 		}
-		
-		
-	
-}
+	}
 	
 	public void updateScreenComponent () 
 	{

@@ -84,7 +84,6 @@ public class SettingsFragment extends FragmentView
 	
 	public void updateScreenComponent()
 	{
-		
 		this.name.setText(loggedUser.getName());
 		this.userEmail.setText(loggedUser.getEmail());
 		this.userAge.setText(Integer.toString((loggedUser.getAge())));
