@@ -51,6 +51,10 @@ public class Proposition extends DAOAbstract
 		this.number = number;
 		this.category = category;
 	}
+
+	public Proposition(){}
+
+
 	public String getAuthor() {
 		return author;
 	}
@@ -117,7 +121,7 @@ public class Proposition extends DAOAbstract
 	}
 
 	@Override
-	public Proposition contentValuesToModel(ContentValues _contentValues) 
+	public  Proposition contentValuesToModel(ContentValues _contentValues) 
 	{
 		this.id = _contentValues.getAsInteger(COLUMN_ID_PROP);
         this.year = _contentValues.getAsString(COLUMN_YEAR);

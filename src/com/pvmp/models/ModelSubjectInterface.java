@@ -25,6 +25,9 @@ public interface ModelSubjectInterface
 	*/
 	public User getUser(String _columnName, String _userName);
 
+
+	public ArrayList<Proposition> getPropositions (String _columnName, String _userName);
+
 	/**
 	* @param _user
 	* @param _password

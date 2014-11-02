@@ -5,9 +5,13 @@ package com.pvmp.dao;
 
 import java.util.ArrayList;
 
+import com.pvmp.models.Proposition;
+import com.pvmp.util.Util;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
+import android.os.Debug;
 
 /**
  * @class DAOAbstract
@@ -76,28 +80,37 @@ public abstract class DAOAbstract
 	/**
 	 * @param _queryExpression
 	 * @param _context
+	 * @throws Throwable 
 	 * @brief Template method for Database Select of every PVMP class that will
 	 *        extends from this abstract. Returns a ArrayList containing
 	 *        every row (might be seen as a Object) that obeys the Query Expression
 	 *        (_queryExpression).
 	 * */
 	//Study a way to make it or contentValuesToModel static, so every object returned won't depend of a single instance.
-	public final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context) 
+	public final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context)  
 	{
 		if (_queryExpression == null || _context == null)
 		{
 			throw new NullPointerException("Null value at DAOAbstract.selectDB()");
 		}
-		
+
+
 		ArrayList<ContentValues> arrayContentValues = new ArrayList<ContentValues>();
 		ArrayList<DAOAbstract> arrayModels = new ArrayList<DAOAbstract>();
-		
+
 		arrayContentValues = PVMPDatabase.selectDB(_queryExpression, _context);
-		
-		for (int i = 0; i < arrayContentValues.size(); i++) 
+
+		int i = 0;
+		Util.debug("Content size: " + arrayContentValues.size());
+		while(i < arrayContentValues.size()) 
 		{
-			arrayModels.add(this.contentValuesToModel(arrayContentValues.get(i)));
+			Util.debug("Caller: "+this.getClass());
+			/* Creata a factory pattern here */
+			Proposition prop = new Proposition();
+			arrayModels.add(prop.contentValuesToModel(arrayContentValues.get(i)));
+			i++;
 		}
+		
 		
 		return arrayModels;
 	}

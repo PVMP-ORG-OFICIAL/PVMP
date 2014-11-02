@@ -14,6 +14,7 @@ import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.PersistenceHelper;
 import com.pvmp.dao.SqlSelect;
+import com.pvmp.util.Util;
 
 /**
 * @class PVMPModel
@@ -65,6 +66,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		selectExpression.setEntity(user.TABLE_NAME);
 		selectExpression.setExpression(usernameFilter);
 		
+		Util.debug("passou aqui");
 		users = user.selectDB(selectExpression, this.context);
 		
 		if(users.size() == 0)
@@ -73,6 +75,36 @@ public class PVMPmodel implements ModelSubjectInterface
 			user = (User) users.get(0);
 		
 		return user;
+	}
+	
+	/* Create a generic method to search in database */
+	public ArrayList<Proposition> getPropositions(String _columnName, String _value)
+	{
+		SqlSelect selectExpression = new SqlSelect();
+		ArrayList<DAOAbstract> abstractPropositions = new ArrayList<DAOAbstract>();
+		ArrayList<Proposition> propositions = new ArrayList<Proposition>();
+
+		Filter propositionsFilter = new Filter("Category", "=");
+		propositionsFilter.setValue("Segurança Pública");
+
+		Proposition proposition = new Proposition();
+
+		selectExpression.setEntity("Proposition");
+		selectExpression.setExpression(propositionsFilter);
+
+		abstractPropositions =  proposition.selectDB(selectExpression, this.context);
+
+		int i = 0;
+		while(i < abstractPropositions.size()){
+			propositions.add((Proposition) abstractPropositions.get(i));
+			i++;
+		}
+		Util.debug("Final size:" + propositions.size());
+		Proposition tmpProp =  propositions.get(0);
+		Proposition tmpProp2 =  propositions.get(1);
+		Util.debug("Prop1 :" + tmpProp.getId());
+		Util.debug("Prop2 :" + tmpProp2.getId());
+		return propositions;
 	}
 	
 	public User verifyMatchingUserPassword (String _userName, String _password) 
