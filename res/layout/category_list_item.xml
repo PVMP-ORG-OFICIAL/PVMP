@@ -29,12 +29,13 @@
         android:gravity="center_vertical"
         android:paddingRight="40dp" />
     
-    <ImageView android:id="@+id/white_right_arrow"
+    <ImageView android:id="@+id/arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
-        android:src="@drawable/arrow_black_48dp"/>
+        android:contentDescription="@string/desc_list_item_icon"
+        android:src="@drawable/white_right_arrow"/>
 
 </RelativeLayout>
