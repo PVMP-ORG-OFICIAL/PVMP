@@ -73,28 +73,28 @@ public class CategoriesFragment extends FragmentView
 	{
 		//Adding navigation drawer items to array
 		//Proposition
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Administração Pública", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("AdministraÃ§Ã£o PÃºblica", 
 			this.navigationMenuIcons.getResourceId(0, -1)));
 		//Party
 		this.categoriesDrawerItems.add(new CategoryDrawerItem("Direitos Humanos", 
 			this.navigationMenuIcons.getResourceId(1, -1)));
 		//
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Educação", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("EducacÃ£o", 
 			this.navigationMenuIcons.getResourceId(2, -1)));
 		//Feedback
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Finanças Públicas", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("FinanÃ§as PÃºblicas", 
 			this.navigationMenuIcons.getResourceId(3, -1)));
 		//Settings
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Organização Administrativa", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("OrganizaÃ§Ã£o Administrativa", 
 			this.navigationMenuIcons.getResourceId(4, -1)));
 		//Logout
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Previdência Social", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("PrevidÃªncia Social", 
 			this.navigationMenuIcons.getResourceId(5, -1)));
 		//Proposition
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Relações Internacionais", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("RelaÃ§Ãµes Internacionais", 
 			this.navigationMenuIcons.getResourceId(6, -1)));
 		//Party
-		this.categoriesDrawerItems.add(new CategoryDrawerItem("Tributação", 
+		this.categoriesDrawerItems.add(new CategoryDrawerItem("TributaÃ§Ã£o", 
 			this.navigationMenuIcons.getResourceId(7, -1)));
 		//Feedback
 		this.categoriesDrawerItems.add(new CategoryDrawerItem("Todas", 

@@ -29,14 +29,14 @@
 
   <item >
     <shape android:shape = "rectangle">
-      <corners android:radius = "3dp"/>
+      <corners android:radius = "50dp"/>
         <stroke 
           android:width = "1dp" 
-          android:color = "#C53E2B" />
+          android:color = "#4d7358" />
         <gradient  
           android:angle = "-90"  
-          android:startColor = "#ff6c52" 
-          android:endColor   = "#e0341e" />
+          android:startColor = "#8b9dc3" 
+          android:endColor   = "#3b5998" />
       </shape>
   </item>
 </selector>
