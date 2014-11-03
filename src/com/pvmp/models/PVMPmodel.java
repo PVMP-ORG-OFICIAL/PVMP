@@ -33,7 +33,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	{
 		this.context = _context;
 		//must change to the new DAO
-		PersistenceHelper.getInstance(this.context);
+		//PersistenceHelper.getInstance(this.context);
 		this.observers = new ArrayList<ListenerObserverInterface>();
 	}
 

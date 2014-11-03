@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
 
-import com.pvmp.dao.PersistenceHelper;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
@@ -25,7 +24,6 @@ public class PVMPController implements ControllerInterface
 {
 	ViewObserverInterface view;
 	ModelSubjectInterface model;
-	PersistenceHelper persistenceHelper;
 
 	public PVMPController()
 	{
@@ -118,9 +116,9 @@ public class PVMPController implements ControllerInterface
 	public User openSession()
 	{
 		Util.debug("PVMPController: openSession");
-		PersistenceHelper.createDatabase();
+		
 		/* the value argument,must come from category list */
-		ArrayList<Proposition> prop = this.model.getPropositions("Category","SeguranÃ§a PÃºblica");
+		//ArrayList<Proposition> prop = this.model.getPropositions("Category","Segurança Pública");
 		User user = this.model.getUser("default_user","S");
 		if(user == null)
 		{
