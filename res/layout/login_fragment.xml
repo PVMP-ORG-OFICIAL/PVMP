@@ -1,61 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<ScrollView
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	android:layout_width  = "fill_parent"
-	android:layout_height = "fill_parent"
-	android:orientation   = "vertical">
-	<!-- android:background	= "@drawable/path" -->
+	android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
 
-	<!-- TITLE -->
-	<TextView
-		style = "@style/title"
-		android:text = "@string/text_login"
-		android:layout_gravity = "center"/>
-
-		<!-- USER -->
+		<!-- android:background	= "@drawable/path" -->
+	
+		<!-- TITLE -->
 		<TextView
-			style = "@style/textInfo"
-			android:text  = "@string/text_username"/>
-		
-		<EditText
-		    android:id="@+id/name"
-		    style="@style/textInput"
-		    android:drawableLeft="@drawable/ic_name"
-		    android:hint="@string/text_user_hint" />
-		
-		<!-- PASSWORD -->
-		<TextView
-			style = "@style/textInfo"
-			android:text  = "@string/text_password"/>
-
-		<EditText
-			style = "@style/textInput"
-			android:id    = "@+id/password"
-			android:hint  = "@string/text_password_hint" 
-			android:inputType = "textPassword"
-			android:drawableLeft = "@drawable/ic_password"/>
-
-		<!-- CONFIRM BUTTON -->
-
-		<Button
-		    android:id="@+id/button_confirm"
-		    style="@style/defaultButton"
-		    android:layout_gravity="center"
-		    android:layout_marginTop="15dp"
-		    android:text="@string/text_login" />
+			style = "@style/title"
+			android:text = "@string/text_login"
+			android:layout_gravity = "center"/>
+	
+			<!-- USER -->
+			<TextView
+				style = "@style/textInfo"
+				android:text  = "@string/text_username"/>
 			
-		<Button
-			style="@style/defaultButton"
-			android:id  = "@+id/button_register"
-			android:layout_gravity = "center"
-			android:text  = "@string/text_register"
-			android:layout_marginTop = "15dp"/>
+			<EditText
+			    android:id="@+id/name"
+			    style="@style/textInput"
+			    android:drawableLeft="@drawable/ic_name"
+			    android:hint="@string/text_user_hint" />
 			
-		<Button
-			style="@style/defaultButton"
-			android:id  = "@+id/button_entry_guest"
-			android:layout_gravity = "center"
-			android:text  = "@string/text_guest"
-			android:layout_marginTop = "15dp"/>
-</LinearLayout>
+			<!-- PASSWORD -->
+			<TextView
+				style = "@style/textInfo"
+				android:text  = "@string/text_password"/>
+	
+			<EditText
+				style = "@style/textInput"
+				android:id    = "@+id/password"
+				android:hint  = "@string/text_password_hint" 
+				android:inputType = "textPassword"
+				android:drawableLeft = "@drawable/ic_password"/>
+	
+			<!-- CONFIRM BUTTON -->
+	
+			<Button
+			    android:id="@+id/button_confirm"
+			    style="@style/defaultButton"
+			    android:layout_width="165dp"
+			    android:layout_gravity="center"
+			    android:layout_marginTop="15dp"
+			    android:text="@string/text_login" />
+				
+			<Button
+				style="@style/defaultButton"
+				android:id  = "@+id/button_register"
+				android:layout_width="165dp"
+				android:layout_gravity = "center"
+				android:text  = "@string/text_register"
+				android:layout_marginTop = "15dp"/>
+				
+			<Button
+				style="@style/defaultButton"
+				android:id  = "@+id/button_entry_guest"
+				android:layout_width="165dp"
+				android:layout_gravity = "center"
+				android:text  = "@string/text_guest"
+				android:layout_marginTop = "15dp"/>
+	</LinearLayout>
+
+</ScrollView>
