@@ -5,13 +5,11 @@ package com.pvmp.dao;
 
 import java.util.ArrayList;
 
-import com.pvmp.models.Proposition;
 import com.pvmp.util.Util;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
-import android.os.Debug;
 
 /**
  * @class DAOAbstract
@@ -100,18 +98,11 @@ public abstract class DAOAbstract
 
 		arrayContentValues = PVMPDatabase.selectDB(_queryExpression, _context);
 
-		int i = 0;
-		Util.debug("Content size: " + arrayContentValues.size());
-		while(i < arrayContentValues.size()) 
+		for (int i = 0; i < arrayContentValues.size(); i++)
 		{
-			Util.debug("Caller: "+this.getClass().getSimpleName());
-			/* Creata a factory pattern here */
-			LegislativeFactory factory = new LegislativeFactory();
-			DAOAbstract legislativeObject = factory.getLegislative(this.getClass().getSimpleName());
+			DAOAbstract legislativeObject = LegislativeFactory.getLegislative(this.getClass().getSimpleName());
 			arrayModels.add(legislativeObject.contentValuesToModel(arrayContentValues.get(i)));
-			i++;
 		}
-		
 		
 		return arrayModels;
 	}

@@ -7,8 +7,7 @@
 
 /*
 
-======== ATTENTION: THIS CLASS MUST TO DIE!!!! REPLACE IT FOR REAL DAO! ==========
-Obs.: Based on that, I will not refactoring it.
+======== ATTENTION: THIS CLASS MUST DIE!!!! ========
 
 */
 

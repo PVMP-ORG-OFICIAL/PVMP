@@ -118,7 +118,7 @@ public class PVMPController implements ControllerInterface
 		Util.debug("PVMPController: openSession");
 		
 		/* the value argument,must come from category list */
-		//ArrayList<Proposition> prop = this.model.getPropositions("Category","Segurança Pública");
+		ArrayList<Proposition> prop = this.model.getPropositions("Category", "Segurança Pública");
 		User user = this.model.getUser("default_user","S");
 		if(user == null)
 		{

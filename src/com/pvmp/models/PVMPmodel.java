@@ -10,9 +10,10 @@ import java.util.Date;
 import android.content.Context;
 import android.database.SQLException;
 
+import com.pvmp.dao.Criteria;
 import com.pvmp.dao.DAOAbstract;
+import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
-import com.pvmp.dao.PersistenceHelper;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.util.Util;
 
@@ -50,7 +51,7 @@ public class PVMPmodel implements ModelSubjectInterface
 	*/
 	public User getUser(String _columnName, String _attribute)
 	{
-		if (_attribute == null)
+		if (_attribute == null || _columnName == null)
 		{
 			throw new NullPointerException("Null value at PVMPmodel.getUser()");
 		}
@@ -77,20 +78,38 @@ public class PVMPmodel implements ModelSubjectInterface
 		return user;
 	}
 	
-	/* Create a generic method to search in database */
+	/**
+	 * @param _columnName
+	 * @param _value
+	 * @brief Return an ArrayList of propositions based on a column of the Database and
+	 * 		  its respective "finder" (a.k.a _value).
+	 * */
 	public ArrayList<Proposition> getPropositions(String _columnName, String _value)
 	{
+		if (_columnName == null || _value == null)
+		{
+			throw new NullPointerException("Null value at PVMPmodel.getPropositions()");
+		}
+		
 		SqlSelect selectExpression = new SqlSelect();
 		ArrayList<DAOAbstract> abstractPropositions = new ArrayList<DAOAbstract>();
 		ArrayList<Proposition> propositions = new ArrayList<Proposition>();
-
-		Filter propositionsFilter = new Filter("Category", "=");
-		propositionsFilter.setValue("Segurança Pública");
-
+		Criteria filterConcatenator = new Criteria();
 		Proposition proposition = new Proposition();
+		
+		Filter propositionsFilterFullName = new Filter(_columnName, "=");
+		propositionsFilterFullName.setValue(_value);
+		
+		//Find propositions that have more than one category (based on one category)
+		Filter propositionsFilterLikeName = new Filter(_columnName, "LIKE");
+		propositionsFilterLikeName.setValue("%"+_value+"%");
+		
+		filterConcatenator.add(propositionsFilterFullName, Expression.OR_OPERATOR);
+		filterConcatenator.add(propositionsFilterLikeName, Expression.OR_OPERATOR);
+
 
 		selectExpression.setEntity("Proposition");
-		selectExpression.setExpression(propositionsFilter);
+		selectExpression.setExpression(filterConcatenator);
 
 		abstractPropositions =  proposition.selectDB(selectExpression, this.context);
 
@@ -104,6 +123,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		Proposition tmpProp2 =  propositions.get(1);
 		Util.debug("Prop1 :" + tmpProp.getId());
 		Util.debug("Prop2 :" + tmpProp2.getId());
+		
 		return propositions;
 	}
 	

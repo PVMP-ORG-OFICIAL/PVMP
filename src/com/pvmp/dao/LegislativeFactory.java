@@ -6,7 +6,7 @@ import com.pvmp.util.Util;
 
 public class LegislativeFactory {
 
-	public DAOAbstract getLegislative (String legislativeModel)
+	public static DAOAbstract getLegislative (String legislativeModel)
 	{
 		if(legislativeModel.equals("Proposition"))
 			return new Proposition();
