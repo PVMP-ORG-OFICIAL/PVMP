@@ -5,13 +5,61 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/category"
+    <ViewFlipper
+        android:id="@+id/proposition_flipper"
+        android:layout_width="fill_parent"
+        android:layout_height="300sp"
+        android:layout_margin="4dip" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="370dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/category2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/proposition_category"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="406dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/proposition_category"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+    </ViewFlipper>
+
+    <Button
+        android:id="@+id/button_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/proposition_category"
-        android:textSize="20sp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/proposition_flipper"
+        android:layout_marginBottom="26dp"
+        android:text="@string/button_next" />
+
+    <Button
+        android:id="@+id/button_previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_next"
+        android:layout_alignBottom="@+id/button_next"
+        android:layout_alignParentLeft="true"
+        android:text="@string/button_previous" />
 
 </RelativeLayout>

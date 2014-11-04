@@ -74,4 +74,6 @@
 	<string name="passwordWarning">Caso não queira mudar sua senha, deixe os campos de senha em branco.</string>
 	<string name="text_age_hint">Insira sua idade</string>
 	<string name="proposition_category"></string>
+	<string name="button_next">Proximo</string>
+	<string name="button_previous">Anterior</string>
 </resources>
