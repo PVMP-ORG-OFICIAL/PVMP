@@ -55,8 +55,6 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	private ListView mainDrawerList; /**< */
 	private ActionBarDrawerToggle mainDrawerToggle; /**< */
 
-
-
 	//Used to store app title
 	private CharSequence mainTitle;
 
@@ -309,7 +307,6 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("MainActivity: Create a HOME ");
 		if(fragment != null)
 		{
-
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);

@@ -5,7 +5,6 @@
 package com.pvmp.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -107,7 +106,6 @@ public class PVMPmodel implements ModelSubjectInterface
 		filterConcatenator.add(propositionsFilterFullName, Expression.OR_OPERATOR);
 		filterConcatenator.add(propositionsFilterLikeName, Expression.OR_OPERATOR);
 
-
 		selectExpression.setEntity("Proposition");
 		selectExpression.setExpression(filterConcatenator);
 
@@ -118,12 +116,7 @@ public class PVMPmodel implements ModelSubjectInterface
 			propositions.add((Proposition) abstractPropositions.get(i));
 			i++;
 		}
-		Util.debug("Final size:" + propositions.size());
-		Proposition tmpProp =  propositions.get(0);
-		Proposition tmpProp2 =  propositions.get(1);
-		Util.debug("Prop1 :" + tmpProp.getId());
-		Util.debug("Prop2 :" + tmpProp2.getId());
-		
+
 		return propositions;
 	}
 	
@@ -198,16 +191,6 @@ public class PVMPmodel implements ModelSubjectInterface
 		return;
 	}
 
-	/**
-	* @param _dataStart
-	* @param _totalSearch
-	* @return
-	* @brief
-	*/
-	public ArrayList<Proposition> getListPreposition(Date _dataStart, int _totalSearch)
-	{
-		return null;		
-	}
 
 	/**
 	* @param _observer

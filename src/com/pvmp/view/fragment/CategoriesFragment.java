@@ -16,6 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pvmp.R;
+import com.pvmp.controller.PVMPController;
+import com.pvmp.models.Proposition;
+import com.pvmp.util.Util;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.adapter.CategoryDrawerAdapter;
@@ -44,6 +47,7 @@ public class CategoriesFragment extends FragmentView
 	private CategoryDrawerAdapter adapter;
 	private PVMPView mainActivity;
 	private TypedArray navigationMenuIcons;
+	private PVMPController controller;
 	
 	public CategoriesFragment()
 	{}
@@ -53,7 +57,8 @@ public class CategoriesFragment extends FragmentView
 	{
 		View rootView = _inflater.inflate(R.layout.categories_fragment, _container, false);
 		
-		mainActivity = (PVMPView) getActivity();
+		this.mainActivity = (PVMPView) getActivity();
+		this.controller = new PVMPController(this.mainActivity.getApplicationContext());
 		this.buildScreenComponent(rootView);
 		this.buildListItemNavigation();
 		
@@ -65,8 +70,8 @@ public class CategoriesFragment extends FragmentView
 		this.categoriesList.setAdapter(this.adapter);
 		this.categoriesList.setBackgroundColor(Color.WHITE);
 		
-		mainActivity.enableDrawer(true);
-		mainActivity.enableScreenInteraction(true);
+		this.mainActivity.enableDrawer(true);
+		this.mainActivity.enableScreenInteraction(true);
 		
 		return rootView;
 	}
@@ -117,6 +122,18 @@ public class CategoriesFragment extends FragmentView
 		@Override
 		public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id)
 		{
+			PVMPController controller = CategoriesFragment.this.controller;
+			String title = CategoriesFragment.this.categoriesDrawerItems.get(_position).getTitle();
+			
+			ArrayList<Proposition> propositions = controller.getPropositions("Category", title);
+			
+			for (int i = 0; i < propositions.size(); i++) {
+				Proposition prop = new Proposition();
+				prop = propositions.get(i);
+				
+				Util.debug("Prop"+(i+1)+" :"+ prop.getId());
+			}
+			
 			mainActivity.displayFragment(ViewObserverInterface.PROPOSITION);
 			return;
 		}

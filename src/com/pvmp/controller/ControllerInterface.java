@@ -4,6 +4,10 @@
 */
 package com.pvmp.controller;
 
+
+import java.util.ArrayList;
+
+import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.models.ModelSubjectInterface;
@@ -52,4 +56,11 @@ public interface ControllerInterface
 	* @brief
 	*/
 	public void setView(ViewObserverInterface _view);
+	
+	/**
+	 * @param _columnName
+	 * @param _value
+	 * @brief
+	 * */
+	public ArrayList<Proposition> getPropositions (String _columnName, String _value);
 }

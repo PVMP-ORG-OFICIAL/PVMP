@@ -5,7 +5,6 @@
 package com.pvmp.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.Context;
 
@@ -58,14 +57,6 @@ public interface ModelSubjectInterface
 	* @brief
 	*/
 	public void setContext(Context _context);
-
-	/**
-	* @param _dataStart
-	* @param _totalSearch
-	* @return
-	* @brief
-	*/
-	public ArrayList<Proposition> getListPreposition(Date _dataStart, int _totalSearch);
 
 	/**
 	* @param _observer

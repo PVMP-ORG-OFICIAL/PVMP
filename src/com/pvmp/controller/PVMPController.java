@@ -70,6 +70,7 @@ public class PVMPController implements ControllerInterface
 			this.view.displayFragment(ViewObserverInterface.CATEGORY);
 			return;
 		}
+		
 		Util.debug("PVMPController: go to LOGIN");
 		this.view.enableDrawer(false);
 		this.view.enableScreenInteraction(false);
@@ -117,9 +118,8 @@ public class PVMPController implements ControllerInterface
 	{
 		Util.debug("PVMPController: openSession");
 		
-		/* the value argument,must come from category list */
-		ArrayList<Proposition> prop = this.model.getPropositions("Category", "Segurança Pública");
 		User user = this.model.getUser("default_user","S");
+		
 		if(user == null)
 		{
 			Util.debug("PVMPController: getDefaultUser Problem");
@@ -127,11 +127,34 @@ public class PVMPController implements ControllerInterface
 
 		return user;
 	}
-	
+	/**
+	 * @param _userName
+	 * @param _password
+	 * @brief
+	 * */
 	public User verifyMatchingUserPassword (String _userName, String _password) 
 	{
+		if (_userName == null || _password == null)
+		{
+			throw new NullPointerException ("Null pointer at PVMPController.verifyMatchingUserPassword().");
+		}
+
 		User user = this.model.verifyMatchingUserPassword(_userName, _password);
 		
 		return user;
+	}
+
+	@Override
+	public ArrayList<Proposition> getPropositions(String _columnName, String _value) {
+		if (_columnName == null || _value == null)
+		{
+			throw new NullPointerException ("Null pointer at PVMPController.getPropositions().");
+		}
+		
+		ArrayList<Proposition> propositions = new ArrayList<Proposition>();
+		
+		propositions = this.model.getPropositions(_columnName, _value);
+		
+		return propositions;
 	}
 }
