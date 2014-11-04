@@ -37,7 +37,7 @@ public class CategoriesFragment extends FragmentView
 	private final static String EDUCATION = "Educação";
 	private final static String PUBLIC_FINANCES = "Finanças Públicas";
 	private final static String ADMINISTRATIVE_ORGANIZATION = "Organização Administrativa";
-	private final static String SOCIAL_FORESIGHT = "Previdência Social";
+	private final static String SOCIAL_FORESIGHT = "Previdência e Assistência Social";
 	private final static String INTERNATIONAL_RELATIONS = "Relações Internacionais";
 	private final static String TAXATION = "Tributação";
 	private final static String ALL = "Todas";
@@ -140,6 +140,8 @@ public class CategoriesFragment extends FragmentView
 				p = propositions.get(i);
 				Util.debug("Prop"+(i+1)+" : "+p.getId());
 			}
+			
+			PVMPView.propositions = propositions;
 			
 			mainActivity.displayFragment(ViewObserverInterface.PROPOSITION);
 			return;

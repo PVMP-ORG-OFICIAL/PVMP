@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pvmp.util.Util;
+import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
 import com.pvmp.view.model.AbstractDrawerItem;
@@ -50,6 +51,8 @@ import com.pvmp.R;
 public class PVMPView extends Activity implements ViewObserverInterface 
 {
 	private static User user;/**< */
+	//Might change.
+	public static ArrayList<Proposition> propositions;
 
 	private DrawerLayout mainDrawerLayout; /**< */
 	private ListView mainDrawerList; /**< */
@@ -85,6 +88,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		
 		//Start the party!!! 
 		user = this.controller.openSession();
+		propositions = null;
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
