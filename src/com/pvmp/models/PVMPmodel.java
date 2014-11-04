@@ -85,7 +85,8 @@ public class PVMPmodel implements ModelSubjectInterface
 	 * */
 	public ArrayList<Proposition> getPropositions(String _columnName, String _value)
 	{
-		if (_columnName == null || _value == null)
+		//_value might be null
+		if (_columnName == null)
 		{
 			throw new NullPointerException("Null value at PVMPmodel.getPropositions()");
 		}
@@ -96,18 +97,22 @@ public class PVMPmodel implements ModelSubjectInterface
 		Criteria filterConcatenator = new Criteria();
 		Proposition proposition = new Proposition();
 		
-		Filter propositionsFilterFullName = new Filter(_columnName, "=");
-		propositionsFilterFullName.setValue(_value);
-		
-		//Find propositions that have more than one category (based on one category)
-		Filter propositionsFilterLikeName = new Filter(_columnName, "LIKE");
-		propositionsFilterLikeName.setValue("%"+_value+"%");
-		
-		filterConcatenator.add(propositionsFilterFullName, Expression.OR_OPERATOR);
-		filterConcatenator.add(propositionsFilterLikeName, Expression.OR_OPERATOR);
-
 		selectExpression.setEntity("Proposition");
-		selectExpression.setExpression(filterConcatenator);
+		
+		if (_value != null) 
+		{
+			Filter propositionsFilterFullName = new Filter(_columnName, "=");
+			propositionsFilterFullName.setValue(_value);
+			
+			//Find propositions that have more than one category (based on one category)
+			Filter propositionsFilterLikeName = new Filter(_columnName, "LIKE");
+			propositionsFilterLikeName.setValue("%"+_value+"%");
+		
+			filterConcatenator.add(propositionsFilterFullName, Expression.OR_OPERATOR);
+			filterConcatenator.add(propositionsFilterLikeName, Expression.OR_OPERATOR);
+			
+			selectExpression.setExpression(filterConcatenator);
+		}
 
 		abstractPropositions =  proposition.selectDB(selectExpression, this.context);
 

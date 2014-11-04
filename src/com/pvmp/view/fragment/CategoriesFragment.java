@@ -124,9 +124,22 @@ public class CategoriesFragment extends FragmentView
 		public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id)
 		{
 			PVMPController controller = CategoriesFragment.this.controller;
-			String title = CategoriesFragment.this.categoriesDrawerItems.get(_position).getTitle();
+			String title = null;
+			
+			if ( _position != 8)
+			{
+				title = CategoriesFragment.this.categoriesDrawerItems.get(_position).getTitle();
+			}
 			
 			ArrayList<Proposition> propositions = controller.getPropositions("Category", title);
+			
+			//debugger
+			for (int i = 0; i < propositions.size(); i++)
+			{
+				Proposition p = new Proposition();
+				p = propositions.get(i);
+				Util.debug("Prop"+(i+1)+" : "+p.getId());
+			}
 			
 			mainActivity.displayFragment(ViewObserverInterface.PROPOSITION);
 			return;

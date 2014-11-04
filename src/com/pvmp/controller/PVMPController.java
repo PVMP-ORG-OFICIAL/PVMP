@@ -146,7 +146,8 @@ public class PVMPController implements ControllerInterface
 
 	@Override
 	public ArrayList<Proposition> getPropositions(String _columnName, String _value) {
-		if (_columnName == null || _value == null)
+		//_value might be null
+		if (_columnName == null)
 		{
 			throw new NullPointerException ("Null pointer at PVMPController.getPropositions().");
 		}

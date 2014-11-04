@@ -5,8 +5,6 @@ package com.pvmp.dao;
 
 import java.util.ArrayList;
 
-import com.pvmp.util.Util;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
