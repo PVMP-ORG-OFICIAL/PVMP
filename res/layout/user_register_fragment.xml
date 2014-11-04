@@ -3,12 +3,13 @@
 <ScrollView
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#d2d2d2" >
+
 	<LinearLayout 
 	  android:layout_width  = "fill_parent"
 	  android:layout_height = "wrap_content"
-	  android:orientation   = "vertical"
-	  android:background="#ccec75">
+	  android:orientation   = "vertical" >
 		<!-- android:background	= "@drawable/path" -->
 
 		<!-- TITLE -->
@@ -146,9 +147,10 @@
 
 		<!-- CONFIRM BUTTON -->
 			<Button
-			style="@style/defaultButton"
 			android:id  = "@+id/confirm"
-			android:layout_gravity = "center"
+			style="@style/defaultButton"
+			android:layout_width="165dp"
+			android:layout_gravity="center"
 			android:text  = "@string/text_register"
 			android:layout_marginTop = "15dp"/>
 

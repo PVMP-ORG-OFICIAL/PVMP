@@ -2,8 +2,9 @@
 
 <ScrollView
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-    android:layout_height="match_parent">
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#d2d2d2" >
 
 	<LinearLayout
 	    android:layout_width="fill_parent"
@@ -25,6 +26,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
+	        android:layout_marginTop = "2dp"
 	        android:hint="@string/text_email"
 	        android:inputType="textEmailAddress" />
 	
@@ -34,17 +36,20 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
+	        android:layout_marginTop = "2dp"
 	        android:hint="@string/text_age"
 	        android:inputType="number" />
 	    
 	     <TextView
 			style = "@style/textInfo"
+			android:layout_marginTop = "2dp"
 			android:text = "@string/text_education"/>
 	
 	    <RadioGroup
 	        android:id="@+id/radioGroup_editEducation"
 	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" >
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop = "2dp" >
 	
 	        <RadioButton
 	            android:id="@+id/radio_editElementarySchool"
@@ -68,12 +73,14 @@
 	    
 	     <TextView
 			style = "@style/textInfo"
-			android:text = "@string/text_sex"/>
+			android:text = "@string/text_sex"
+			android:layout_marginTop = "2dp" />
 	
 	    <RadioGroup
 			android:id="@+id/radiogroup_editSex"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
+			android:layout_height="wrap_content" 
+			android:layout_marginTop = "2dp" >
 	
 	        <RadioButton
 	            android:id="@+id/radio_editMale"
@@ -95,6 +102,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
+	        android:layout_marginTop = "2dp"
 	        android:hint="@string/text_old_password"
 	        android:inputType="textPassword" />
 	
@@ -104,6 +112,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
+	        android:layout_marginTop = "2dp"
 	        android:hint="@string/text_new_password"
 	        android:inputType="textPassword" />
 	
@@ -113,12 +122,14 @@
 	        android:layout_width="165dp"
 	        android:layout_gravity = "center"
 	        android:layout_height="wrap_content"
+	        android:layout_marginTop = "2dp"
 	        android:text="@string/text_save" />
 	
 	    <TextView
 	        android:id="@+id/passwordWarning"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_marginTop = "2dp"
 	        android:text="@string/passwordWarning" />
 	
 	</LinearLayout>

@@ -74,7 +74,6 @@ public class SettingsFragment extends FragmentView
 		this.education = (TextView) _view.findViewById(R.id.textView_showEducation);
 		this.sex = (TextView) _view.findViewById(R.id.textView_showSex);
 		this.userName = (TextView) _view.findViewById(R.id.textView_showUsername);
-		this.passwordConfirm = (EditText) _view.findViewById(R.id.editText_passwordConfirm);
 		this.buttonEdit = (Button) _view.findViewById(R.id.button_edit);
 		this.buttonDelete = (Button) _view.findViewById(R.id.button_delete);
 		
