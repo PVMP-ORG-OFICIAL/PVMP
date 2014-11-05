@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -37,6 +38,7 @@ public class EditSettingsFragment extends FragmentView
 	private static User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
+	private InputMethodManager imm;
 	
 	private PVMPController controller;
 	
@@ -59,6 +61,9 @@ public class EditSettingsFragment extends FragmentView
 		
 		this.buildScreenComponent(rootView);
 		this.initialUpdateScreenComponent();
+		
+		imm = (InputMethodManager)mainActivity.getSystemService(
+         		 Context.INPUT_METHOD_SERVICE);
 		
 		return rootView;
   }
@@ -150,6 +155,7 @@ public class EditSettingsFragment extends FragmentView
 					MessageHandling.showToast(MessageHandling.PASSWORD_SUCCESSFUL_CHANGE, context);
 				}
 				
+				imm.hideSoftInputFromWindow(newPassword.getWindowToken(), 0);
 				controller.editUser(loggedUser);
 				mainActivity.displayFragment(ViewObserverInterface.SETTING);
 			}
