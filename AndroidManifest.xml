@@ -19,7 +19,8 @@
 
         <activity android:name="StartSplash"
                   android:label="@string/app_name"
-									android:noHistory="true">
+				  android:noHistory="true"
+				  android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +29,8 @@
         
 				<activity
 					android:label="@string/app_name"
-          android:name="com.pvmp.view.PVMPView">
+          			android:name="com.pvmp.view.PVMPView"
+          			android:configChanges="keyboardHidden|orientation" >
 						<intent-filter>
 							<action android:name="com.pvmp.view.PVMPView"/>
 							<category android:name="android.intent.category.DEFAULT" />

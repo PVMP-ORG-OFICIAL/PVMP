@@ -32,14 +32,14 @@ import com.pvmp.view.model.CategoryDrawerItem;
 public class CategoriesFragment extends FragmentView
 {
 	// --- CATEGORIES NAMES ATTRIBUTES --- \\
-	private final static String PUBLIC_ADMINISTRATION = "Administração Pública";
+	private final static String PUBLIC_ADMINISTRATION = "AdministraÃ§Ã£o PÃºblica";
 	private final static String HUMAN_RIGHTS = "Direitos Humanos";
-	private final static String EDUCATION = "Educação";
-	private final static String PUBLIC_FINANCES = "Finanças Públicas";
-	private final static String ADMINISTRATIVE_ORGANIZATION = "Organização Administrativa";
-	private final static String SOCIAL_FORESIGHT = "Previdência e Assistência Social";
-	private final static String INTERNATIONAL_RELATIONS = "Relações Internacionais";
-	private final static String TAXATION = "Tributação";
+	private final static String EDUCATION = "EducaÃ§Ã£o";
+	private final static String PUBLIC_FINANCES = "FinanÃ§as PÃºblicas";
+	private final static String ADMINISTRATIVE_ORGANIZATION = "OrganizaÃ§Ã£o Administrativa";
+	private final static String SOCIAL_FORESIGHT = "PrevidÃªncia e AssistÃªncia Social";
+	private final static String INTERNATIONAL_RELATIONS = "RelaÃ§Ãµes Internacionais";
+	private final static String TAXATION = "TributaÃ§Ã£o";
 	private final static String ALL = "Todas";
 	
 	// --- OTHER ATTRIBUTES --- \\
