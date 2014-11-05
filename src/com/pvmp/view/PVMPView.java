@@ -314,7 +314,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
-			fragmentTransaction.addToBackStack(null);
+			
+			if (_position != PROPOSITION)
+				fragmentTransaction.addToBackStack(null);
+			
 			fragmentTransaction.commit();
 			
 			//Update selected item and title, then close the drawer

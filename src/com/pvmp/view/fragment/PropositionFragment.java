@@ -26,7 +26,7 @@ public class PropositionFragment extends FragmentView
 	private Button nextButton;
 	private Button previousButton;
 	private int limit;
-	private int count = 0;
+	private int count;
 
 	@Override
 	public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) 
@@ -36,6 +36,7 @@ public class PropositionFragment extends FragmentView
 		this.view = (PVMPView) getActivity();
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
+		count = 0;
 		
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
