@@ -6,172 +6,154 @@
     android:layout_height="fill_parent"
     android:background="#d2d2d2" >
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+	<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <TextView
-		        android:id="@+id/textView_name"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:text="@string/text_name"
-		        android:textSize="19sp"
-		        android:textStyle="bold" />
+	    <TextView
+	        android:id="@+id/textView_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:text="@string/text_name"
+	        android:textSize="19sp"
+	        android:textStyle="bold" />
 	
-	    	<TextView
-		        android:id="@+id/textView_showName"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/text_nothing"
-		        android:textSize="19sp" />            
-        </TableRow>
+	    <TextView
+	        android:id="@+id/textView_showName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_toRightOf="@+id/textView_username"
+	        android:text="@string/text_nothing"
+	        android:textSize="19sp" />
+	
+	    <TextView
+	        android:id="@+id/textView_showEmail"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView_email"
+	        android:layout_alignBottom="@+id/textView_email"
+	        android:layout_toRightOf="@+id/textView_username"
+	        android:text="@string/text_nothing"
+	        android:textSize="19sp" />
+	
+	    <TextView
+	        android:id="@+id/textView_showSex"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView_sex"
+	        android:layout_alignBottom="@+id/textView_sex"
+	        android:layout_alignLeft="@+id/textView_showAge"
+	        android:text="@string/text_nothing"
+	        android:textSize="19sp" />
+	
+	    <TextView
+	        android:id="@+id/textView_age"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/textView_email"
+	        android:layout_marginTop="15dp"
+	        android:text="@string/text_age"
+	        android:textSize="19sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/textView_education"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/textView_showAge"
+	        android:layout_marginTop="15dp"
+	        android:text="@string/text_education"
+	        android:textSize="19sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/textView_sex"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/textView_education"
+	        android:layout_marginTop="15dp"
+	        android:text="@string/text_sex"
+	        android:textSize="19sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/textView_username"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/textView_sex"
+					android:layout_marginTop="15dp"
+	        android:text="@string/text_username"
+	        android:textSize="19sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/textView_showAge"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView_age"
+	        android:layout_alignBottom="@+id/textView_age"
+	        android:layout_toRightOf="@+id/textView_username"
+	        android:text="@string/text_nothing"
+	        android:textSize="19sp" />
+	
+	    <TextView
+	        android:id="@+id/textView_showEducation"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView_education"
+	        android:layout_alignBottom="@+id/textView_education"
+	        android:layout_marginLeft="20dp"
+	        android:layout_toRightOf="@+id/textView_education"
+	        android:text="@string/text_nothing"
+	        android:textSize="19sp" />
+	
+	    <TextView
+	        android:id="@+id/textView_email"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/textView_showName"
+	        android:layout_marginTop="15dp"
+	        android:text="@string/text_email"
+	        android:textSize="19sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/textView_showUsername"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView_username"
+	        android:layout_alignBottom="@+id/textView_username"
+	        android:layout_toRightOf="@+id/textView_education"
+	        android:text="@string/text_nothing"
+	        android:textSize="19sp" />
 
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-	    	
-            <TextView
-		        android:id="@+id/textView_email"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="15dp"
-		        android:text="@string/text_email"
-		        android:textSize="19sp"
-		        android:textStyle="bold" />
-            
-            <TextView
-		        android:id="@+id/textView_showEmail"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/text_nothing"
-		        android:textSize="19sp" />
-        </TableRow>
+	    <Button
+	        android:id="@+id/button_edit"
+	        style="@style/defaultButton"
+	        android:layout_width="165dp"
+	        android:layout_below="@+id/textView_showUsername"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="23dp"
+	        android:text="@string/text_edit" />
 
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <TextView
-		        android:id="@+id/textView_age"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="15dp"
-		        android:text="@string/text_age"
-		        android:textSize="19sp"
-		        android:textStyle="bold" />
-            
-            <TextView
-		        android:id="@+id/textView_showAge"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/text_nothing"
-		        android:textSize="19sp" />
-        </TableRow>
+	    <Button
+	        android:id="@+id/button_delete"
+	        style="@style/defaultButton"
+	        android:layout_width="165dp"
+	        android:layout_alignLeft="@+id/button_edit"
+	        android:layout_below="@+id/button_edit"
+	        android:onClick="clickDelete"
+	        android:layout_marginTop="20dp"
+	        android:text="@string/text_exclude" />
 
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <TextView
-		        android:id="@+id/textView_education"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="15dp"
-		        android:text="@string/text_education"
-		        android:textSize="19sp"
-		        android:textStyle="bold" />
-            
-            <TextView
-		        android:id="@+id/textView_showEducation"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:text="@string/text_nothing"
-		        android:textSize="19sp" />
-        </TableRow>
-        
-        <TableRow
-            android:id="@+id/tableRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <TextView
-		        android:id="@+id/textView_sex"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="15dp"
-		        android:text="@string/text_sex"
-		        android:textSize="19sp"
-		        android:textStyle="bold" />
-            
-            <TextView
-		        android:id="@+id/textView_showSex"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/text_nothing"
-		        android:textSize="19sp" />		
-		</TableRow>
-		
-        <TableRow
-            android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <TextView
-		        android:id="@+id/textView_username"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-				android:layout_marginTop="15dp"
-		        android:text="@string/text_username"
-		        android:textSize="19sp"
-		        android:textStyle="bold" />
-            
-            <TextView
-		        android:id="@+id/textView_showUsername"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/text_nothing"
-		        android:textSize="19sp" />
-		</TableRow>
-		
-        <TableRow
-            android:id="@+id/tableRow7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" 
-            android:layout_gravity="center">
-            
-            <Button
-                android:id="@+id/button_edit"
-                style="@style/defaultButton"
-                android:layout_width="165dp"
-                android:layout_height="wrap_content"
-                android:text="@string/text_edit" />
-
-		</TableRow>
-		
-        <TableRow
-            android:id="@+id/tableRow8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <Button
-                android:id="@+id/button_delete"
-                style="@style/defaultButton"
-                android:layout_width="165dp"
-                android:layout_height="wrap_content"
-                android:onClick="clickDelete"
-                android:text="@string/text_exclude" />
-
-		</TableRow>
-            
-    </TableLayout>
-
+	</RelativeLayout>
 </ScrollView>
