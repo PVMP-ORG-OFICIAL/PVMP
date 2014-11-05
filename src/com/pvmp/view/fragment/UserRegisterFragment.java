@@ -5,23 +5,22 @@
 package com.pvmp.view.fragment;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Button;
-
-
-import com.pvmp.util.MessageHandling;
-import com.pvmp.util.Util;
-import com.pvmp.models.User;
-import com.pvmp.view.PVMPView;
-import com.pvmp.view.ViewObserverInterface;
-import com.pvmp.controller.PVMPController;
 
 import com.pvmp.R;
+import com.pvmp.controller.PVMPController;
+import com.pvmp.models.User;
+import com.pvmp.util.MessageHandling;
+import com.pvmp.util.Util;
+import com.pvmp.view.PVMPView;
+import com.pvmp.view.ViewObserverInterface;
 
 /**
 * @class UserRegisterFragment
@@ -40,6 +39,7 @@ public class UserRegisterFragment extends FragmentView
 	private PVMPView mainActivity; /**<*/
 	public Context context; /**<*/
 	private Button register;
+	private InputMethodManager imm;
 
 	private PVMPController controller;
 	
@@ -59,6 +59,8 @@ public class UserRegisterFragment extends FragmentView
 		controller.setView(UserRegisterFragment.this.mainActivity);
 
 		userBuild = new User();
+		
+		imm = (InputMethodManager)mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
 		
 		buildScreenComponent(rootView);
 		return rootView;
@@ -95,7 +97,8 @@ public class UserRegisterFragment extends FragmentView
 
 			switch(validationResult) 
 			{
-				case 0:	
+				case 0:
+					imm.hideSoftInputFromWindow(userPassword.getWindowToken(), 0);
 					userBuild.setDefaultUser("S");
 					controller.registerUser(userBuild);
 					controller.callDisplayFragment(ViewObserverInterface.CATEGORY);
