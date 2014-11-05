@@ -36,6 +36,7 @@ public class LoginFragment extends FragmentView
 	private Button buttonLogin;
 	private Button buttonRegister;
 	private Button buttonGuest;
+	private InputMethodManager imm;
 
 	private PVMPController controller;
 	
@@ -62,6 +63,9 @@ public class LoginFragment extends FragmentView
 		controller.setView(LoginFragment.this.mainActivity);
 		//Initialize the elements
 		this.buildScreenComponent(rootView);
+		
+		imm = (InputMethodManager)mainActivity.getSystemService(
+          		 Context.INPUT_METHOD_SERVICE);
 
 		return rootView;
 	}
@@ -96,8 +100,6 @@ public class LoginFragment extends FragmentView
 			userToBeLogged = LoginFragment.this.controller.verifyMatchingUserPassword(username, password);
 			
 			if(userToBeLogged != null){
-				InputMethodManager imm = (InputMethodManager)mainActivity.getSystemService(
-               		 Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 				userToBeLogged.setDefaultUser("S");
 				controller.editUser(userToBeLogged);
@@ -118,6 +120,7 @@ public class LoginFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
+			imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 			mainActivity.displayFragment(ViewObserverInterface.REGISTER);
 		}
 	}
@@ -127,6 +130,7 @@ public class LoginFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
+			imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 			Util.debug("VISISTANTE PUSHED!!!");
 		}
 	}
