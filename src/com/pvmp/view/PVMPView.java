@@ -315,8 +315,14 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
 			
-			if (_position != PROPOSITION)
+			if (_position != CATEGORY && _position != LOGOUT && _position != LOGIN)
+			{
 				fragmentTransaction.addToBackStack(null);
+			}
+			else
+			{
+				fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			}
 			
 			fragmentTransaction.commit();
 			
