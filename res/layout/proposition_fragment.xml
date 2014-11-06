@@ -10,38 +10,30 @@
         android:layout_width="fill_parent"
         android:layout_height="300sp"
         android:layout_margin="4dip" >
-
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="370dp"
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/category2"
+                android:id="@+id/proposition_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/proposition_category"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="15dp"
+                android:text="@string/text_nothing"
                 android:textSize="20sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="406dp"
-            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/category1"
+                android:id="@+id/proposition_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/proposition_category"
-                android:textSize="20sp" />
-        </RelativeLayout>
+                android:text="@string/text_nothing" />
 
+        </RelativeLayout>
     </ViewFlipper>
 
     <Button

@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import com.pvmp.R;
 import com.pvmp.models.Proposition;
-import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,8 +18,8 @@ public class PropositionFragment extends FragmentView
 {
 	private PVMPView view;
 	private ArrayList<Proposition> propositions;
-	private TextView categoryName1;
-	private TextView categoryName2;
+	private TextView textPropositionCount;
+	private TextView categoryName;
 	private ViewFlipper viewFlipper;
 	private Button nextButton;
 	private Button previousButton;
@@ -47,11 +45,11 @@ public class PropositionFragment extends FragmentView
 	@Override
 	public void buildScreenComponent(View _view) 
 	{
-		this.categoryName1 = (TextView) _view.findViewById(R.id.category1);
-		this.categoryName2 = (TextView) _view.findViewById(R.id.category2);
+		this.categoryName = (TextView) _view.findViewById(R.id.proposition_category);
+		this.textPropositionCount = (TextView) _view.findViewById(R.id.proposition_count);
 		this.nextButton = (Button) _view.findViewById(R.id.button_next);
 		this.previousButton = (Button) _view.findViewById(R.id.button_previous);
-		this.viewFlipper = (ViewFlipper)_view.findViewById(R.id.proposition_flipper);
+		this.viewFlipper = (ViewFlipper) _view.findViewById(R.id.proposition_flipper);
 		
 		this.nextButton.setOnClickListener(new HandleNext());
 		this.previousButton.setOnClickListener(new HandlePrevious());
@@ -61,37 +59,28 @@ public class PropositionFragment extends FragmentView
 	{
 		//Testing if the propositions' IDs are correct based on the category clicked.
 		String text = Integer.toString(propositions.get(count).getId());
-		if(count%2 == 0 || count == 0)
-		{
-			categoryName2.setText(text);
-		}
-		else
-		{
-			categoryName1.setText(text);
-		}
+		this.textPropositionCount.setText("#"+(count+1));
+		this.categoryName.setText(text);
 	}
-	
-	
 	
 	private class HandleNext implements View.OnClickListener
 	{
-
 		@Override
 		public void onClick(View v) 
 		{
 			if(count < limit - 1)
 			{
 				count++;
-				viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
-				viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
-			
-				updateScreenComponent();
-				viewFlipper.showNext();
 			}
-			else
+			else 
 			{
-				MessageHandling.showToast("Não há mais proposições posteriores", view.getApplicationContext());
+				count = 0;
 			}
+			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
+			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
+		
+			updateScreenComponent();
+			viewFlipper.showNext();
 		}
 		
 	}
@@ -105,16 +94,16 @@ public class PropositionFragment extends FragmentView
 			if(count > 0)
 			{
 				count--;
-				viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
-				viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);
-			
-				updateScreenComponent();
-				viewFlipper.showPrevious();
 			}
-			else
+			else 
 			{
-				MessageHandling.showToast("Não há mais proposições anteriores", view.getApplicationContext());
+				count = limit - 1;
 			}
+			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
+			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);
+		
+			updateScreenComponent();
+			viewFlipper.showPrevious();
 		}
 		
 	}
