@@ -119,17 +119,19 @@ public class Proposition extends DAOAbstract
 	}
 
 	@Override
-	public  Proposition contentValuesToModel(ContentValues _contentValues) 
+	public Proposition contentValuesToModel(ContentValues _contentValues) 
 	{
-		this.id = _contentValues.getAsInteger(COLUMN_ID_PROP);
-        this.year = _contentValues.getAsString(COLUMN_YEAR);
-        this.menu = _contentValues.getAsString(COLUMN_MENU);
-        this.author = _contentValues.getAsString(COLUMN_AUTHOR);
-        this.acronym = _contentValues.getAsString(COLUMN_ACRONYM);
-        this.situation = _contentValues.getAsString(COLUMN_SITUATION);
-        this.number = _contentValues.getAsInteger(COLUMN_NUMBER);
-        this.category = _contentValues.getAsString(COLUMN_CATEGORY);
+		Proposition proposition = new Proposition ();
+		
+		proposition.setId(_contentValues.getAsInteger(COLUMN_ID_PROP));
+		proposition.setYear(_contentValues.getAsString(COLUMN_YEAR));
+		proposition.setMenu(_contentValues.getAsString(COLUMN_MENU));
+		proposition.setAuthor(_contentValues.getAsString(COLUMN_AUTHOR));
+		proposition.setAcronym(_contentValues.getAsString(COLUMN_ACRONYM));
+		proposition.setSituation(_contentValues.getAsString(COLUMN_SITUATION));
+		proposition.setNumber(_contentValues.getAsInteger(COLUMN_NUMBER));
+		proposition.setCategory(_contentValues.getAsString(COLUMN_CATEGORY));
         
-        return this;
+        return proposition;
 	}
 }

@@ -17,6 +17,7 @@ public class Vote extends DAOAbstract
 	private Voting voting;
 	
 	public Vote () {
+		super();
 		this.TABLE_NAME = "Vote";
 		this.result = null;
 		this.deputy = null;

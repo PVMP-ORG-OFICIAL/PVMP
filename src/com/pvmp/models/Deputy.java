@@ -21,6 +21,8 @@ public class Deputy extends DAOAbstract
 	private ArrayList <Vote> votes;
 	
 	public Deputy () {
+		super();
+		this.TABLE_NAME = "Deputy";
 		this.name = null;
 		this.federativeUnit = null;
 		this.party = null;

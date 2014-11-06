@@ -431,15 +431,17 @@ public class User extends DAOAbstract
 	@Override
 	public User contentValuesToModel(ContentValues _contentValues) 
 	{
-		this.username = _contentValues.getAsString(COLUMN_USERNAME);
-        this.password = _contentValues.getAsString(COLUMN_PASSWORD);
-        this.name = _contentValues.getAsString(COLUMN_NAME);
-        this.email = _contentValues.getAsString(COLUMN_EMAIL);
-        this.age = _contentValues.getAsInteger(COLUMN_AGE);
-        this.education = _contentValues.getAsString(COLUMN_EDUCATION);
-        this.sex = _contentValues.getAsString(COLUMN_SEX);
-        this.defaultUser = _contentValues.getAsString(COLUMN_DEFAULT);
+		User user = new User();
+		
+		user.setUsername(_contentValues.getAsString(COLUMN_USERNAME));
+		user.setPassword(_contentValues.getAsString(COLUMN_PASSWORD));
+		user.setName(_contentValues.getAsString(COLUMN_NAME));
+		user.setEmail(_contentValues.getAsString(COLUMN_EMAIL));
+		user.setAge(_contentValues.getAsInteger(COLUMN_AGE));
+		user.setEducation(_contentValues.getAsString(COLUMN_EDUCATION));
+		user.setSex(_contentValues.getAsString(COLUMN_SEX));
+		user.setDefaultUser(_contentValues.getAsString(COLUMN_DEFAULT));
         
-        return this;
+        return user;
 	}
 }

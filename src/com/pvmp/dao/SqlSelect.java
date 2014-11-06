@@ -19,6 +19,7 @@ public final class SqlSelect extends SqlInstructionQuery
 	{
 		this.columns = new ArrayList<String>();
 		this.expression = null;
+		this.entities = new ArrayList<String>();
 	}
 	
 	@Override
@@ -35,9 +36,12 @@ public final class SqlSelect extends SqlInstructionQuery
 			for (String column : this.columns) 
 			{
 				expression += column;
-				if (!column.equals(this.columns.get(this.columns.size() -1))) 
+				if (this.columns.size() > 1)
 				{
-					expression += ", ";
+					if (!column.equals(this.columns.get(this.columns.size() -1))) 
+					{
+						expression += ", ";
+					}
 				}
 			}
 		}
@@ -47,9 +51,12 @@ public final class SqlSelect extends SqlInstructionQuery
 		for (String entity : this.entities)
 		{
 			expression += entity;
-			if (!entity.equals(this.columns.get(this.entities.size() -1))) 
+			if (this.entities.size() > 1) 
 			{
-				expression += ", ";
+				if (!entity.equals(this.columns.get(this.entities.size() -1))) 
+				{
+					expression += ", ";
+				}
 			}
 		}
 		

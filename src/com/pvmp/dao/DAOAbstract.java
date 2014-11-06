@@ -98,8 +98,7 @@ public abstract class DAOAbstract
 
 		for (int i = 0; i < arrayContentValues.size(); i++)
 		{
-			DAOAbstract legislativeObject = LegislativeFactory.getLegislative(this.getClass().getSimpleName());
-			arrayModels.add(legislativeObject.contentValuesToModel(arrayContentValues.get(i)));
+			arrayModels.add(this.contentValuesToModel(arrayContentValues.get(i)));
 		}
 		
 		return arrayModels;

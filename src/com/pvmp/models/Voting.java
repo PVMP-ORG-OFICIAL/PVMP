@@ -22,6 +22,7 @@ public class Voting extends DAOAbstract
 	
 
 	public Voting() {
+		super();
 		this.TABLE_NAME = "Voting";
 		this.proposition = null;
 		this.summary = null;
