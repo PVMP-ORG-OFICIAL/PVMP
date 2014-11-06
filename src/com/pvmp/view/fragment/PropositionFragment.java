@@ -2,13 +2,14 @@ package com.pvmp.view.fragment;
 
 import java.util.ArrayList;
 
+import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.R;
+import com.pvmp.controller.PVMPController;
 import com.pvmp.models.Proposition;
 import com.pvmp.view.PVMPView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.ViewFlipper;
 public class PropositionFragment extends FragmentView 
 {
 	private PVMPView view;
+	private PVMPController controller;
 	private ArrayList<Proposition> propositions;
 	private TextView textPropositionCount;
 	private TextView categoryName;
@@ -26,6 +28,7 @@ public class PropositionFragment extends FragmentView
 	private int count;
 	private Button button_next;
 	private Button button_previous;
+	private PieChart yesNoVotesChart;
 	//private float firstX;
 	//private float currentX;
 
@@ -35,6 +38,7 @@ public class PropositionFragment extends FragmentView
 		View rootView = _inflater.inflate(R.layout.proposition_fragment, _container, false);
  
 		this.view = (PVMPView) getActivity();
+		this.controller = new PVMPController(this.view.getApplicationContext());
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
 		count = 0;
@@ -104,6 +108,7 @@ public class PropositionFragment extends FragmentView
 		this.button_next = (Button) _view.findViewById(R.id.button_next);
 		this.button_previous = (Button) _view.findViewById(R.id.button_previous);
 		this.viewFlipper = (ViewFlipper) _view.findViewById(R.id.proposition_flipper);
+		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
 		
 		this.button_next.setOnClickListener(new HandleNext());
 		this.button_previous.setOnClickListener(new HandlePrevious());
@@ -113,6 +118,8 @@ public class PropositionFragment extends FragmentView
 	{
 		//Testing if the propositions' IDs are correct based on the category clicked.
 		String text = (propositions.get(count).getMenu());
+		
+		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado");
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
 	}

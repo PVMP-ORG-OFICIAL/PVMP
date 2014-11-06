@@ -11,10 +11,17 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.Typeface;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Legend;
+import com.github.mikephil.charting.utils.Legend.LegendPosition;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
 import com.pvmp.models.Vote;
+import com.pvmp.models.Voting;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.util.Util;
 import com.pvmp.models.PVMPmodel;
@@ -26,7 +33,7 @@ import com.pvmp.models.PVMPmodel;
 public class PVMPController implements ControllerInterface
 {
 	ViewObserverInterface view;
-	ModelSubjectInterface model;
+	PVMPmodel model;
 
 	public PVMPController()
 	{
@@ -56,7 +63,7 @@ public class PVMPController implements ControllerInterface
 	*/
 	public void setModel(ModelSubjectInterface _model)
 	{
-		this.model = _model;
+		//this.model = _model;
 	}
 
 	@Override
@@ -204,12 +211,38 @@ public class PVMPController implements ControllerInterface
 		return results;
 	}
 	
+	public PieChart prepareGraphicData (Proposition _proposition, PieChart _chart)
+	{
+		Voting voting = new Voting();
+		ArrayList<Vote> votes = new ArrayList<Vote>();
+		ArrayList<Float> votesPercentage = new ArrayList<Float>();
+		ArrayList<String> slicesTitles = new ArrayList<String>();
+		ArrayList<Entry> slicesValues = new ArrayList<Entry>();
+		PieDataSet pieDataSet;
+		
+		voting = this.model.getPropositionVoting(_proposition);
+		votes = this.model.getVotingVotes(voting);
+		votesPercentage = this.calculateVotesResultPercentage(votes);
+		
+		slicesTitles.add("Sim");
+		slicesTitles.add("Não");
+		
+		slicesValues.add(new Entry(votesPercentage.get(0), 0));
+		slicesValues.add(new Entry(votesPercentage.get(1), 1));
+		
+		pieDataSet = new PieDataSet(slicesValues, "");
+		pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+		pieDataSet.setSliceSpace(2f);
+		_chart.setData(new PieData(slicesTitles, pieDataSet));
+		
+		return _chart;
+	}
 	/**
 	 * @brief Create a graphic... (Incomplete)
 	 * */
-	public void createGraphic (Proposition _proposition, PieChart _chart, String _centerText,
-							 int _color)
+	public PieChart createGraphic (Proposition _proposition, PieChart _chart, String _centerText)
 	{
+		_chart = prepareGraphicData(_proposition, _chart);
 		_chart.setDescription("");
 		
 		Typeface tf = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
@@ -225,5 +258,14 @@ public class PVMPController implements ControllerInterface
 	    _chart.setHoleRadius(45f); 
 	    _chart.setTransparentCircleRadius(50f);
 	    _chart.setRotationEnabled(false);
+	    
+	    _chart.setScrollContainer(true);
+	    _chart.animateXY(800, 800);
+        
+	    Legend legend = _chart.getLegend();
+	    legend.setPosition(LegendPosition.RIGHT_OF_CHART);
+	    legend.setFormSize(15f);
+	    
+	    return _chart;
 	}
 }
