@@ -44,7 +44,7 @@ public class Vote extends DAOAbstract
 		return this.voting;
 	}
 
-	public void setProposition(Voting _voting) {
+	public void setVoting(Voting _voting) {
 		this.voting = _voting;
 	}
 

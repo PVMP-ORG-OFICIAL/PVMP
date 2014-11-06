@@ -63,7 +63,7 @@ public class Voting extends DAOAbstract
 		this.votes = _votes;
 	}
 	
-	public Integer getCodeSessiom() {
+	public Integer getCodeSession() {
 		return this.codeSession;
 	}
 

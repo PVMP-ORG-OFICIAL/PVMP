@@ -5,6 +5,7 @@
 package com.pvmp.models;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -14,7 +15,6 @@ import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.util.Util;
 
 /**
 * @class PVMPModel
@@ -66,7 +66,6 @@ public class PVMPmodel implements ModelSubjectInterface
 		selectExpression.addEntity(user.TABLE_NAME);
 		selectExpression.setExpression(usernameFilter);
 		
-		Util.debug("passou aqui");
 		users = user.selectDB(selectExpression, this.context);
 		
 		if(users.size() == 0)
@@ -114,7 +113,7 @@ public class PVMPmodel implements ModelSubjectInterface
 			selectExpression.setExpression(filterConcatenator);
 		}
 
-		abstractPropositions =  proposition.selectDB(selectExpression, this.context);
+		abstractPropositions = proposition.selectDB(selectExpression, this.context);
 
 		int i = 0;
 		while(i < abstractPropositions.size()){
@@ -123,6 +122,65 @@ public class PVMPmodel implements ModelSubjectInterface
 		}
 
 		return propositions;
+	}
+	
+	public Voting getPropositionVoting (Proposition _proposition) 
+	{
+		if (_proposition == null) {
+			throw new NullPointerException("Null value at PVMPmodel.getPropositionVoting");
+		}
+		
+		Voting voting = new Voting();
+		ArrayList<DAOAbstract> abstractVotings = new ArrayList<DAOAbstract>();
+		
+		SqlSelect selectExpression = new SqlSelect();
+		selectExpression.addEntity(voting.TABLE_NAME);
+		
+		Filter propositionIdFilter = new Filter("id_prop", "=");
+		propositionIdFilter.setValue(_proposition.getId());
+		
+		abstractVotings = voting.selectDB(selectExpression, this.context); 
+		
+		if (abstractVotings.size() == 1)
+		{
+			voting = (Voting) abstractVotings.get(0);
+			voting.setProposition(_proposition);
+		}
+		else 
+		{
+			throw new NoSuchElementException("No value at PVMPmodel.getPropositionVoting");
+		}
+		
+		return voting;
+	}
+	
+	public ArrayList<Vote> getVotingVotes (Voting _voting) 
+	{
+		if (_voting == null)
+		{
+			throw new NullPointerException("Null value at PVMPmodel.getVotingVotes");
+		}
+		Vote vote = new Vote();
+		
+		ArrayList<DAOAbstract> abstractVotes = new ArrayList<DAOAbstract>();
+		ArrayList<Vote> votes = new ArrayList<Vote>();
+		
+		SqlSelect selectExpression = new SqlSelect();
+		selectExpression.addEntity("Vote");
+		
+		Filter votingCodeFilter = new Filter("code_session", "=");
+		votingCodeFilter.setValue(_voting.getCodeSession());
+		
+		abstractVotes = vote.selectDB(selectExpression, this.context);
+		for (int i = 0; i < abstractVotes.size(); i++)
+		{
+			vote = new Vote();
+			vote = (Vote) abstractVotes.get(i);
+			vote.setVoting(_voting);
+			votes.add(vote);
+		}
+		
+		return votes;
 	}
 	
 	public User verifyMatchingUserPassword (String _userName, String _password) 
