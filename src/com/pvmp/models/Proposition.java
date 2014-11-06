@@ -6,7 +6,7 @@ import com.pvmp.dao.DAOAbstract;
 
 public class Proposition extends DAOAbstract
 {
-
+	// !--- DATABASE ATTRIBUTES ---! \\ 
 	public static final String COLUMN_ID_PROP = "id_prop";
 	public static final String COLUMN_YEAR = "year";
 	public static final String COLUMN_MENU = "menu";
@@ -16,6 +16,7 @@ public class Proposition extends DAOAbstract
 	public static final String COLUMN_NUMBER = "number";
 	public static final String COLUMN_CATEGORY = "category";
 	
+	// !--- OTHER ATTRIBUTES ---! \\
 	private Integer id;
 	private String year;
 	private String menu;
