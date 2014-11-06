@@ -162,7 +162,7 @@ public class PVMPController implements ControllerInterface
 		return propositions;
 	}
 	
-	public void createGraph (Proposition _proposition, PieChart _chart, String _centerText,
+	public void createGraphic (Proposition _proposition, PieChart _chart, String _centerText,
 							 int _color)
 	{
 		_chart.setDescription("");

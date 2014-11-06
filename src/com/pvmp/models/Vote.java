@@ -57,9 +57,12 @@ public class Vote extends DAOAbstract
 	public Vote contentValuesToModel(ContentValues _contentValues) 
 	{
 		Vote vote = new Vote();
+		Deputy deputy = new Deputy();
+		
+		vote.setDeputy(deputy);
 		
 		vote.setResult(_contentValues.getAsString(COLUMN_VOTE_RESULT));
-		
+		vote.getDeputy().setIdRegistration(_contentValues.getAsInteger(COLUMN_ID_REGISTRATION));
 		return vote;
 	}
 	

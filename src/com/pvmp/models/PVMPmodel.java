@@ -123,7 +123,7 @@ public class PVMPmodel implements ModelSubjectInterface
 
 		return propositions;
 	}
-	
+	//This might be changed or removed
 	public Voting getPropositionVoting (Proposition _proposition) 
 	{
 		if (_proposition == null) {
@@ -139,6 +139,8 @@ public class PVMPmodel implements ModelSubjectInterface
 		Filter propositionIdFilter = new Filter("id_prop", "=");
 		propositionIdFilter.setValue(_proposition.getId());
 		
+		selectExpression.setExpression(propositionIdFilter);
+		
 		abstractVotings = voting.selectDB(selectExpression, this.context); 
 		
 		if (abstractVotings.size() == 1)
@@ -153,7 +155,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		return voting;
 	}
-	
+	//This might be changed or removed
 	public ArrayList<Vote> getVotingVotes (Voting _voting) 
 	{
 		if (_voting == null)
@@ -171,7 +173,10 @@ public class PVMPmodel implements ModelSubjectInterface
 		Filter votingCodeFilter = new Filter("code_session", "=");
 		votingCodeFilter.setValue(_voting.getCodeSession());
 		
+		selectExpression.setExpression(votingCodeFilter);
+		
 		abstractVotes = vote.selectDB(selectExpression, this.context);
+		
 		for (int i = 0; i < abstractVotes.size(); i++)
 		{
 			vote = new Vote();
@@ -179,8 +184,80 @@ public class PVMPmodel implements ModelSubjectInterface
 			vote.setVoting(_voting);
 			votes.add(vote);
 		}
+		_voting.setVotes(votes);
 		
 		return votes;
+	}
+	
+	public Deputy getDeputyVoteOnSession (Vote _vote) 
+	{
+		if (_vote == null)
+		{
+			throw new NullPointerException("Null value at PVMPmodel.getVoteDeputy");
+		}
+		
+		Deputy deputy = _vote.getDeputy();
+		ArrayList<DAOAbstract> deputies = new ArrayList<DAOAbstract>();
+		
+		SqlSelect selectExpression = new SqlSelect();
+		selectExpression.addEntity(deputy.TABLE_NAME);
+		
+		Filter codeSessionFilter = new Filter("code_session", "=");
+		codeSessionFilter.setValue(_vote.getVoting().getCodeSession());
+		
+		Filter deputyIdFilter = new Filter("id_registration", "=");
+		deputyIdFilter.setValue(deputy.getIdRegistration());
+		
+		Criteria filterJoiner = new Criteria();
+		filterJoiner.add(codeSessionFilter, Expression.AND_OPERATOR);
+		filterJoiner.add(deputyIdFilter, Expression.AND_OPERATOR);
+		
+		selectExpression.setExpression(filterJoiner);
+		
+		deputies = deputy.selectDB(selectExpression, this.context); 
+		
+		if (deputies.size() == 1)
+		{
+			deputy = (Deputy) deputies.get(0);
+		}
+		else 
+		{
+			throw new NoSuchElementException("No value at PVMPmodel.getDeputyVoteOnSession");
+		}
+		
+		return deputy;
+	}
+	
+	public Party getDeputyParty (Deputy _deputy)
+	{
+		if (_deputy == null)
+		{
+			throw new NullPointerException("Null value at PVMPmodel.getVoteDeputy");
+		}
+
+		Party party = _deputy.getParty();
+		ArrayList<DAOAbstract> parties = new ArrayList<DAOAbstract>();
+		
+		SqlSelect selectExpression = new SqlSelect();
+		selectExpression.addEntity(party.TABLE_NAME);
+		
+		Filter numberPartyFilter = new Filter("number_party", "=");
+		numberPartyFilter.setValue(party.getNumber());
+		
+		selectExpression.setExpression(numberPartyFilter);
+		
+		parties = party.selectDB(selectExpression, this.context); 
+		
+		if (parties.size() == 1)
+		{
+			party = (Party) parties.get(0);
+		}
+		else 
+		{
+			throw new NoSuchElementException("No value at PVMPmodel.getDeputyParty");
+		}
+		
+		return party;
 	}
 	
 	public User verifyMatchingUserPassword (String _userName, String _password) 

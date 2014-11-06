@@ -79,10 +79,13 @@ public class Deputy extends DAOAbstract
 	public Deputy contentValuesToModel(ContentValues _contentValues) 
 	{
 		Deputy deputy = new Deputy();
+		Party party = new Party();
+		deputy.setParty(party);
 		
 		deputy.setIdRegistration(_contentValues.getAsInteger(COLUMN_ID_REGISTRATION));
 		deputy.setName(_contentValues.getAsString(COLUMN_NAME));
 		deputy.setFederativeUnit(_contentValues.getAsString(COLUMN_FEDERATIVE_UNIT));
+		deputy.getParty().setNumber(_contentValues.getAsInteger(COLUMN_NUMBER_PARTY));
 		
 		return deputy;
 	}
