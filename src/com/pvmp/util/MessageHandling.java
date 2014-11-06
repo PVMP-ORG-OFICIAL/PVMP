@@ -8,20 +8,20 @@ import android.widget.Toast;
 
 
 public class MessageHandling {
-	public static final String INVALID_NAME = "Nome inv·lido.";
+	public static final String INVALID_NAME = "Nome inv√°lido.";
 	public static final String NAME_LENGHT = "Seu nome deve ter de 3 a 50 caracteres.";
-	public static final String EMAIL_FORMAT = "Formato de email inv·lido.";
-	public static final String EMAIL_LENGHT = "Seu email deve ter no m·ximo 40 caracteres.";
+	public static final String EMAIL_FORMAT = "Formato de email inv√°lido.";
+	public static final String EMAIL_LENGHT = "Seu email deve ter no m√°ximo 40 caracteres.";
 	public static final String AGE_RANGE = "Sua idade tem de estar entre o intervalo 10-99.";
 	public static final String PASSWORD_LENGHT = "Sua senha deve ter de 6 a 15 caracteres.";
-	public static final String PASSWORD_FORMAT = "Sua senha deve ser formada apenas por letras e n˙meros.";
-	public static final String PASSWORD_NOT_MATCH = "Senha antiga n„o correspondente.";
-	public static final String EXISTING_EMAIL = "Email j· existente";
-	public static final String EXISTING_USERNAME = "Nome de usu·rio j· existente";
-	public static final String USERNAME_LENGHT  = "Senha antiga n„o correspondente.";
-	public static final String USERNAME_FIRST_CHAR = "Seu nome de usu·rio deve comeÁar com uma letra.";
-	public static final String USERNAME_FORMAT = "Seu nome de usu·rio deve ser composto apenas de letras e n˙meros.";
-	public static final String ERROR_LOGIN = "Nome de usu·rio e/ou senha n„o correspondem";
+	public static final String PASSWORD_FORMAT = "Sua senha deve ser formada apenas por letras e n√∫meros.";
+	public static final String PASSWORD_NOT_MATCH = "Senha antiga n√£o correspondente.";
+	public static final String EXISTING_EMAIL = "Email j√° existente";
+	public static final String EXISTING_USERNAME = "Nome de usu√°rio j√° existente";
+	public static final String USERNAME_LENGHT  = "Senha antiga n√£o correspondente.";
+	public static final String USERNAME_FIRST_CHAR = "Seu nome de usu√°rio deve come√ßar com uma letra.";
+	public static final String USERNAME_FORMAT = "Seu nome de usu√°rio deve ser composto apenas de letras e n√∫meros.";
+	public static final String ERROR_LOGIN = "Nome de usu√°rio e/ou senha n√£o correspondem";
 	
 	public static final String SUCCESSFUL_REGISTER = "Cadastro realizado com sucesso!";
 	public static final String PASSWORD_SUCCESSFUL_CHANGE = "Senha alterada com sucesso.";
