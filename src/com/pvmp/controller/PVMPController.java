@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Typeface;
 
+import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
@@ -145,7 +147,8 @@ public class PVMPController implements ControllerInterface
 	}
 
 	@Override
-	public ArrayList<Proposition> getPropositions(String _columnName, String _value) {
+	public ArrayList<Proposition> getPropositions(String _columnName, String _value) 
+	{
 		//_value might be null
 		if (_columnName == null)
 		{
@@ -157,5 +160,25 @@ public class PVMPController implements ControllerInterface
 		propositions = this.model.getPropositions(_columnName, _value);
 		
 		return propositions;
+	}
+	
+	public void createGraph (Proposition _proposition, PieChart _chart, String _centerText,
+							 int _color)
+	{
+		_chart.setDescription("");
+		
+		Typeface tf = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
+	    Typeface tfCenter = Typeface.SANS_SERIF;
+	    
+	    _chart.setValueTypeface(tf);
+	    _chart.setUsePercentValues(true);
+	    _chart.setValueTextSize(15f);
+	    _chart.setCenterText(_centerText);
+	    _chart.setCenterTextTypeface(tfCenter);
+	    _chart.setCenterTextSize(22f);
+	     
+	    _chart.setHoleRadius(45f); 
+	    _chart.setTransparentCircleRadius(50f);
+	    _chart.setRotationEnabled(false);
 	}
 }
