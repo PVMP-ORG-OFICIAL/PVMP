@@ -53,7 +53,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 		this.whereFilter.setValue("juca123");
 		
 		this.queryExpression.setExpression(this.whereFilter);
-		this.queryExpression.setEntity(user.TABLE_NAME);
+		this.queryExpression.addEntity(user.TABLE_NAME);
 		
 		this.users = new ArrayList<DAOAbstract>();
 	}

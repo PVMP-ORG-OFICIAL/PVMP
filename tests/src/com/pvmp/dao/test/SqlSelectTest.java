@@ -40,7 +40,7 @@ public class SqlSelectTest extends TestCase {
 	 * */
 	public void testGetInstruction ()
 	{
-		this.sqlSelect.setEntity("USUARIO");
+		this.sqlSelect.addEntity("USUARIO");
 		this.sqlSelect.addColumn("nome");
 		this.sqlSelect.addColumn("email");
 		this.sqlSelect.setExpression(this.c2);
@@ -61,7 +61,7 @@ public class SqlSelectTest extends TestCase {
 	 *        to the sqlSelect object.
 	 * */
 	public void testGetInstructionAllColumns () {
-		this.sqlSelect.setEntity("USUARIO");
+		this.sqlSelect.addEntity("USUARIO");
 		this.sqlSelect.setExpression(this.c2);
 		
 		this.c1.add(this.f1, Expression.AND_OPERATOR);
