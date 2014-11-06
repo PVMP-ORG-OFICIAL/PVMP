@@ -76,6 +76,7 @@ public class SettingsFragment extends FragmentView
 		this.userName = (TextView) _view.findViewById(R.id.textView_showUsername);
 		this.buttonEdit = (Button) _view.findViewById(R.id.button_edit);
 		this.buttonDelete = (Button) _view.findViewById(R.id.button_delete);
+		this.passwordConfirm = (EditText) _view.findViewById(R.id.passwordConfirm);
 		
 		this.buttonEdit.setOnClickListener(new HandleEdit());
 		this.buttonDelete.setOnClickListener(new HandleDelete());
@@ -105,8 +106,9 @@ public class SettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			String password = passwordConfirm.getText().toString(); 
-			if(firstTime){	
+			String password = passwordConfirm.getText().toString();
+			
+			if(firstTime){
 				passwordConfirm.setVisibility(1);
 				MessageHandling.showToast(MessageHandling.PASSWORD_CONFIRM_TO_DELETE, context);
 				firstTime = false;
