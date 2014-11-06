@@ -14,6 +14,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
+import com.pvmp.models.Vote;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.util.Util;
 import com.pvmp.models.PVMPmodel;
@@ -162,6 +163,50 @@ public class PVMPController implements ControllerInterface
 		return propositions;
 	}
 	
+	/**
+	 * @param _votes
+	 * @brief Calculates the percentage of "Yes votes" and "No votes" a voting has and 
+	 * 		  returns them into an ArrayList.
+	 * */
+	public ArrayList<Float> calculateVotesResultPercentage (ArrayList<Vote> _votes)
+	{
+		if (_votes == null)
+		{
+			throw new NullPointerException ("Null pointer at PVMPController.calculateVotes().");
+		}
+		
+		ArrayList<Float> results = new ArrayList<Float>();
+		
+		Float yesVotes = 0f, noVotes = 0f, totalVotes = 0f;
+		Float yesPercentage, noPercentage;
+		
+		for (int i = 0; i < _votes.size(); i++)
+		{
+			String currentResult = new String();
+			currentResult = _votes.get(i).getResult().trim();
+			
+			if (currentResult.equals("Sim"))
+			{
+				yesVotes++;
+			}
+			else if (currentResult.equals("Não"))
+			{
+				noVotes++;
+			}
+		}
+		totalVotes = yesVotes + noVotes;
+		
+		yesPercentage = (yesVotes*100)/totalVotes;
+		noPercentage = (noVotes*100)/totalVotes;
+		
+		results.add(yesPercentage); results.add(noPercentage);
+		
+		return results;
+	}
+	
+	/**
+	 * @brief Create a graphic... (Incomplete)
+	 * */
 	public void createGraphic (Proposition _proposition, PieChart _chart, String _centerText,
 							 int _color)
 	{
