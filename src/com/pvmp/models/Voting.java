@@ -15,6 +15,7 @@ public class Voting extends DAOAbstract
 	public static final String COLUMN_ID_PROP = "id_prop";
 	
 	// !--- OTHER ATTRIBUTES ---! \\
+	private Integer codeSession;
 	private Proposition proposition;
 	private String summary;
 	private String date;
@@ -61,6 +62,14 @@ public class Voting extends DAOAbstract
 	public void setVotes(ArrayList<Vote> _votes) {
 		this.votes = _votes;
 	}
+	
+	public Integer getCodeSessiom() {
+		return this.codeSession;
+	}
+
+	public void setCodeSession(Integer codeSession) {
+		this.codeSession = codeSession;
+	}
 
 	@Override
 	public ContentValues generateContentValues() {
@@ -68,8 +77,15 @@ public class Voting extends DAOAbstract
 	}
 
 	@Override
-	public DAOAbstract contentValuesToModel(ContentValues _contentValues) {
-		return null;
+	public Voting contentValuesToModel(ContentValues _contentValues) 
+	{
+		Voting voting = new Voting();
+		
+		voting.setCodeSession(_contentValues.getAsInteger(COLUMN_CODE_SESSION));
+		voting.setSummary(_contentValues.getAsString(COLUMN_SUMMARY));
+		voting.setDate(_contentValues.getAsString(COLUMN_DATE));
+		
+		return voting;
 	}
 
 }

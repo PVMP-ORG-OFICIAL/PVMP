@@ -12,7 +12,7 @@ public class Vote extends DAOAbstract
 	public static final String COLUMN_ID_REGISTRATION = "id_registration";
 	
 	// !--- OTHER ATTRIBUTES ---! \\
-	private Boolean result;
+	private String result;
 	private Deputy deputy;
 	private Voting voting;
 	
@@ -24,11 +24,11 @@ public class Vote extends DAOAbstract
 		this.voting = null;
 	}
 
-	public Boolean getResult() {
-		return result;
+	public String getResult() {
+		return this.result;
 	}
 
-	public void setResult(Boolean _result) {
+	public void setResult(String _result) {
 		this.result = _result;
 	}
 
@@ -54,8 +54,13 @@ public class Vote extends DAOAbstract
 	}
 
 	@Override
-	public DAOAbstract contentValuesToModel(ContentValues _contentValues) {
-		return null;
+	public Vote contentValuesToModel(ContentValues _contentValues) 
+	{
+		Vote vote = new Vote();
+		
+		vote.setResult(_contentValues.getAsString(COLUMN_VOTE_RESULT));
+		
+		return vote;
 	}
 	
 }

@@ -102,20 +102,10 @@ public class Proposition extends DAOAbstract
 		this.category = category;
 	}
 
+	@Override
 	public ContentValues generateContentValues() 
 	{
-		ContentValues values = new ContentValues();
-		
-		values.put(COLUMN_ID_PROP, this.id);
-		values.put(COLUMN_YEAR, this.year);
-		values.put(COLUMN_MENU, this.menu);
-		values.put(COLUMN_AUTHOR, this.author);
-		values.put(COLUMN_ACRONYM, this.acronym);
-		values.put(COLUMN_SITUATION, this.situation);
-		values.put(COLUMN_NUMBER, this.number);
-		values.put(COLUMN_CATEGORY, this.category);
-		
-		return values;
+		return null;
 	}
 
 	@Override

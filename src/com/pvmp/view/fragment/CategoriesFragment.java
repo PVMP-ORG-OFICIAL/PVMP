@@ -18,7 +18,6 @@ import android.widget.ListView;
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.models.Proposition;
-import com.pvmp.util.Util;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.adapter.CategoryDrawerAdapter;
@@ -132,14 +131,6 @@ public class CategoriesFragment extends FragmentView
 			}
 			
 			ArrayList<Proposition> propositions = controller.getPropositions("Category", title);
-			
-			//debugger
-			for (int i = 0; i < propositions.size(); i++)
-			{
-				Proposition p = new Proposition();
-				p = propositions.get(i);
-				Util.debug("Prop"+(i+1)+" : "+p.getId());
-			}
 			
 			PVMPView.propositions = propositions;
 			

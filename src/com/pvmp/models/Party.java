@@ -10,7 +10,7 @@ public class Party extends DAOAbstract
 {
 	// !--- DATABASE ATTRIBUTES ---! \\ 
 	public static final String COLUMN_NUMBER_PARTY = "number_party";
-	public static final String COLUMN_NAME = "acronym";
+	public static final String COLUMN_ACRONYM = "acronym";
 
 	// !--- OTHER ATTRIBUTES ---! \\
 	private Integer number;
@@ -55,8 +55,14 @@ public class Party extends DAOAbstract
 	}
 
 	@Override
-	public DAOAbstract contentValuesToModel(ContentValues _contentValues) {
-		return null;
+	public Party contentValuesToModel(ContentValues _contentValues) 
+	{
+		Party party = new Party();
+		
+		party.setNumber(_contentValues.getAsInteger(COLUMN_NUMBER_PARTY));
+		party.setAcronym(_contentValues.getAsString(COLUMN_ACRONYM));
+		
+		return party;
 	}
 
 }

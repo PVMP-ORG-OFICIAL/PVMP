@@ -15,6 +15,7 @@ public class Deputy extends DAOAbstract
 	public static final String COLUMN_NUMBER_PARTY = "number_party";
 	
 	// !--- OTHER ATTRIBUTES ---! \\
+	private Integer idRegistration;
 	private String name;
 	private String federativeUnit;
 	private Party party;
@@ -28,7 +29,15 @@ public class Deputy extends DAOAbstract
 		this.party = null;
 		this.votes = new ArrayList<Vote>();
 	}
+	
+	public Integer getIdRegistration() {
+		return idRegistration;
+	}
 
+	public void setIdRegistration(Integer idRegistration) {
+		this.idRegistration = idRegistration;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -67,7 +76,14 @@ public class Deputy extends DAOAbstract
 	}
 
 	@Override
-	public DAOAbstract contentValuesToModel(ContentValues _contentValues) {
-		return null;
+	public Deputy contentValuesToModel(ContentValues _contentValues) 
+	{
+		Deputy deputy = new Deputy();
+		
+		deputy.setIdRegistration(_contentValues.getAsInteger(COLUMN_ID_REGISTRATION));
+		deputy.setName(_contentValues.getAsString(COLUMN_NAME));
+		deputy.setFederativeUnit(_contentValues.getAsString(COLUMN_FEDERATIVE_UNIT));
+		
+		return deputy;
 	}
 }
