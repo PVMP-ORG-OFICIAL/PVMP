@@ -42,7 +42,16 @@ public final class SqlSelect extends SqlInstructionQuery
 			}
 		}
 		
-		expression += " FROM " + this.entity;
+		expression += " FROM ";
+		
+		for (String entity : this.entities)
+		{
+			expression += entity;
+			if (!entity.equals(this.columns.get(this.entities.size() -1))) 
+			{
+				expression += ", ";
+			}
+		}
 		
 		if (this.expression != null) 
 		{
@@ -60,6 +69,10 @@ public final class SqlSelect extends SqlInstructionQuery
 	 * */
 	public void addColumn (String _column) {
 		this.columns.add(_column);
+	}
+	
+	public void addEntity (String _entity) {
+		this.entities.add(_entity);
 	}
 	
 	/**

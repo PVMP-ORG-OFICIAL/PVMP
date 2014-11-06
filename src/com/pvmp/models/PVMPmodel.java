@@ -63,7 +63,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		User user = new User();
 		
-		selectExpression.setEntity(user.TABLE_NAME);
+		selectExpression.addEntity(user.TABLE_NAME);
 		selectExpression.setExpression(usernameFilter);
 		
 		Util.debug("passou aqui");
@@ -97,7 +97,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		Criteria filterConcatenator = new Criteria();
 		Proposition proposition = new Proposition();
 		
-		selectExpression.setEntity("Proposition");
+		selectExpression.addEntity("Proposition");
 		
 		if (_value != null) 
 		{
