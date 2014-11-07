@@ -202,6 +202,12 @@ public class User extends DAOAbstract
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param password
+	 * @return
+	 * @brief
+	 */
 	public static boolean validatePasswordFormat (String password) {
 		if(password.matches("[a-zA-Z0-9]+"))
 			return true;
@@ -388,6 +394,10 @@ public class User extends DAOAbstract
 		if(!User.validateUsernameFormat(_user.getUsername()))
 		{
 			return 11;
+		}
+		if (!User.validatePasswordFormat(_user.getPassword()))
+		{
+			return 12;
 		}
 		
 		return 0;

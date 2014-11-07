@@ -31,6 +31,10 @@ public class MessageHandling {
 	
 	private static Toast toast = null;
 	
+	/**
+	 * @param text
+	 * @param context
+	 */
 	public static void showToast (CharSequence text, Context context) {
 		int duration = Toast.LENGTH_LONG;
 		if (toast == null) 
@@ -45,12 +49,20 @@ public class MessageHandling {
 		}
 	}
 	
+	/**
+	 * @param editText
+	 */
 	public static void requestAttention (EditText editText) {
 		editText.setText("");
 		editText.setFocusableInTouchMode(true);
 		editText.requestFocus();
 	}
 	
+	/**
+	 * @param editText
+	 * @param text
+	 * @param context
+	 */
 	public static void genericError (EditText editText, CharSequence text, Context context) {
 		if (editText != null) {
 			showToast(text, context);
@@ -58,6 +70,14 @@ public class MessageHandling {
 		}
 	}
 	
+	/** 
+	 * @param et1
+	 * @param et2
+	 * @param et3
+	 * @param et4
+	 * @param validationResult
+	 * @param context
+	 */
 	public static void displayEditError (EditText et1, EditText et2, EditText et3,
 										 EditText et4, int validationResult,
 										 Context context) {
@@ -83,6 +103,15 @@ public class MessageHandling {
 		}
 	}
 	
+	/**
+	 * @param et1
+	 * @param et2
+	 * @param et3
+	 * @param et4
+	 * @param et5
+	 * @param validationResult
+	 * @param context
+	 */
 	public static void displayRegisterError(EditText et1, EditText et2, EditText et3,
 										    EditText et4, EditText et5, int validationResult,
 										    Context context) {
@@ -103,6 +132,9 @@ public class MessageHandling {
 					break;
 				case 11:
 					MessageHandling.genericError(et1, USERNAME_FORMAT, context);
+					break;
+				case 12:
+					MessageHandling.genericError(et3, PASSWORD_FORMAT, context);
 					break;
 		    }
 	    }
