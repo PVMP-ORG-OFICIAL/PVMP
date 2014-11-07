@@ -32,9 +32,10 @@
 		android:text="@string/button_next" />
      
 	<ScrollView
+	    android:id="@+id/proposition_scroll_view"
    	    android:layout_width="match_parent"
    	    android:layout_height="wrap_content"
-   	    android:layout_marginTop="10dp" >
+   	    android:layout_marginTop="0dp" >
 	    
 	    <ViewFlipper
 	        android:id="@+id/proposition_flipper"

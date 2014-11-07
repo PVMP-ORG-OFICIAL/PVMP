@@ -15,8 +15,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Legend;
-import com.github.mikephil.charting.utils.Legend.LegendPosition;
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
@@ -232,7 +230,7 @@ public class PVMPController implements ControllerInterface
 		
 		pieDataSet = new PieDataSet(slicesValues, "");
 		pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-		pieDataSet.setSliceSpace(2f);
+		pieDataSet.setSliceSpace(0f);
 		_chart.setData(new PieData(slicesTitles, pieDataSet));
 		
 		return _chart;

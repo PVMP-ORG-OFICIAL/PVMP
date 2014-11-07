@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -29,6 +30,7 @@ public class PropositionFragment extends FragmentView
 	private Button button_next;
 	private Button button_previous;
 	private PieChart yesNoVotesChart;
+	private ScrollView propositionScrollView;
 	//private float firstX;
 	//private float currentX;
 
@@ -41,75 +43,13 @@ public class PropositionFragment extends FragmentView
 		this.controller = new PVMPController(this.view.getApplicationContext());
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
-		count = 0;
-		
-		 
+		this.count = 0;
 		
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
 		this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.proposition_flipper);
 		
-		if (_savedInstanceState != null) {
-	        int flipperPosition = _savedInstanceState.getInt("TAB_NUMBER");
-	        viewFlipper.setDisplayedChild(0);
-	    }
-		
-		/*rootView.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View rootView, MotionEvent event) {
-            	
-                switch(event.getAction())
-                {
-                	case MotionEvent.ACTION_DOWN:
-                		firstX = event.getX();
-                		break;
-                	case MotionEvent.ACTION_UP:
-                		currentX = event.getX();
-                		if(firstX > currentX)
-                		{
-                			if(count < limit - 1)
-                			{
-                				count++;
-                			}
-                			else 
-                			{
-                				count = 0;
-                			}
-                			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
-                			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
-                		
-                			updateScreenComponent();
-                			viewFlipper.showNext();
-                		}
-                		
-                		if(firstX < currentX)
-                		{
-                			if(count > 0)
-                			{
-                				count--;
-                			}
-                			else 
-                			{
-                				count = limit - 1;
-                			}
-                			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
-                			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);
-                		
-                			updateScreenComponent();
-                			viewFlipper.showPrevious();
-                		}
-                    //do something
-                }
-                return true;
-            }
-    });*/
-		
 		return rootView;
-	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-	    int position = viewFlipper.getDisplayedChild();
-	    savedInstanceState.putInt("TAB_NUMBER", position);
 	}
 
 	@Override
@@ -119,7 +59,7 @@ public class PropositionFragment extends FragmentView
 		this.textPropositionCount = (TextView) _view.findViewById(R.id.proposition_count2);
 		this.button_next = (Button) _view.findViewById(R.id.button_next);
 		this.button_previous = (Button) _view.findViewById(R.id.button_previous);
-
+		this.propositionScrollView = (ScrollView) _view.findViewById(R.id.proposition_scroll_view);
 		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
 		
 		this.button_next.setOnClickListener(new HandleNext());
@@ -131,6 +71,7 @@ public class PropositionFragment extends FragmentView
 		//Testing if the propositions' IDs are correct based on the category clicked.
 		String text = (propositions.get(count).getMenu());
 		
+		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
 		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado");
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
