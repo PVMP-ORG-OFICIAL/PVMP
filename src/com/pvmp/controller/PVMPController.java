@@ -15,7 +15,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.pvmp.models.Deputy;
 import com.pvmp.models.ModelSubjectInterface;
+import com.pvmp.models.Party;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
 import com.pvmp.models.Vote;
@@ -30,8 +32,10 @@ import com.pvmp.models.PVMPmodel;
 */
 public class PVMPController implements ControllerInterface
 {
-	ViewObserverInterface view;
-	PVMPmodel model;
+	public static final String YES_VOTES = "Sim";
+	public static final String NO_VOTES = "Não";
+	private ViewObserverInterface view;
+	private PVMPmodel model;
 
 	public PVMPController()
 	{
@@ -169,6 +173,36 @@ public class PVMPController implements ControllerInterface
 	}
 	
 	/**
+	 * 
+	 * */
+	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _vote)
+	{
+		ArrayList<Vote> votes = new ArrayList<Vote>();
+		for (Vote vote : _votes) 
+		{
+			String voteResult = vote.getResult().trim();
+			
+			if(voteResult.equals(_vote))
+			{
+				votes.add(vote);
+			}
+		}
+		return votes;
+	}
+	
+	/**
+	 * 
+	 * */
+	public int countVotesNumber (ArrayList<Vote> _votes, String _vote)
+	{
+		if (_votes == null || _vote == null)
+		{
+			throw new NullPointerException ("Null pointer at PVMPController.countVotesNumber().");
+		}
+		
+		return this.selectVotesByType(_votes, _vote).size();
+	}
+	/**
 	 * @param _votes
 	 * @brief Calculates the percentage of "Yes votes" and "No votes" a voting has and 
 	 * 		  returns them into an ArrayList.
@@ -182,33 +216,78 @@ public class PVMPController implements ControllerInterface
 		
 		ArrayList<Float> results = new ArrayList<Float>();
 		
-		Float yesVotes = 0f, noVotes = 0f, totalVotes = 0f;
-		Float yesPercentage, noPercentage;
+		float yesVotes = 0f, noVotes = 0f, totalVotes = 0f;
+		float yesPercentage, noPercentage;
 		
-		for (int i = 0; i < _votes.size(); i++)
-		{
-			String currentResult = new String();
-			currentResult = _votes.get(i).getResult().trim();
-			
-			if (currentResult.equals("Sim"))
-			{
-				yesVotes++;
-			}
-			else if (currentResult.equals("Não"))
-			{
-				noVotes++;
-			}
-		}
+		yesVotes = (float) this.countVotesNumber(_votes, YES_VOTES);
+		noVotes = (float) this.countVotesNumber(_votes, NO_VOTES);
+
 		totalVotes = yesVotes + noVotes;
 		
-		yesPercentage = (yesVotes*100)/totalVotes;
-		noPercentage = (noVotes*100)/totalVotes;
+		yesPercentage = (yesVotes*100f)/totalVotes;
+		noPercentage = (noVotes*100f)/totalVotes;
 		
 		results.add(yesPercentage); results.add(noPercentage);
 		
 		return results;
 	}
 	
+	/**
+	 * 
+	 * */
+	public ArrayList<float> calculatePartiesResultPercentage (ArrayList<Vote> _votes, String _vote){
+		float votesNumber = (float) this.countVotesNumber(_votes, _vote);		
+		ArrayList<Vote> votes = this.selectVotesByType(_votes, _vote);
+		ArrayList<Deputy> deputies = new ArrayList<Deputy>();
+		ArrayList<Party> parties = new ArrayList<Party>();
+		ArrayList<int[]> results = new ArrayList<int[]>();
+		int aux = 0;
+		
+		
+		for(Vote vote : votes)
+		{
+			Deputy deputy = new Deputy();
+			deputy = this.model.getDeputyVoteOnSession(vote);
+			deputies.add(deputy);
+		}
+		
+		for(Deputy deputy : deputies)
+		{
+			Party party = new Party();
+			party = this.model.getDeputyParty(deputy);
+			parties.add(party);
+		}
+		
+		for(Party party : parties)
+		{
+			if (results.size() == 0)
+			{
+				int [] result = {party.getNumber(), 1};
+				results.add(result);
+			}
+			else
+			{
+				aux = 0;
+				for (int[] result : results)
+				{
+					if(result[0] == party.getNumber())
+					{
+						result[1]++;
+						aux++;
+					}
+				}
+				if(aux == 0)
+				{
+					int [] result = {party.getNumber(), 1};
+					results.add(result);
+				}
+			}
+		}
+		
+	}
+	
+	/**
+	 * */
 	public PieChart prepareGraphicData (Proposition _proposition, PieChart _chart)
 	{
 		Voting voting = new Voting();
@@ -259,10 +338,6 @@ public class PVMPController implements ControllerInterface
 	    
 	    _chart.setScrollContainer(true);
 	    _chart.animateXY(800, 800);
-        
-	    //Legend legend = _chart.getLegend();
-	    //legend.setPosition(LegendPosition.RIGHT_OF_CHART);
-	    //legend.setFormSize(15f);
 	    
 	    return _chart;
 	}

@@ -123,6 +123,8 @@ public class PVMPmodel implements ModelSubjectInterface
 
 		return propositions;
 	}
+	
+	
 	//This might be changed or removed
 	public Voting getPropositionVoting (Proposition _proposition) 
 	{
@@ -226,6 +228,34 @@ public class PVMPmodel implements ModelSubjectInterface
 		}
 		
 		return deputy;
+	}
+	
+	public String getPartyAcronym (int partyNumber)
+	{
+		Party party = new Party();
+		
+		String acronym = null;
+		SqlSelect selectExpression = new SqlSelect();
+		selectExpression.addEntity(party.TABLE_NAME);
+		selectExpression.addColumn("acronym");
+		Filter numberPartyFilter = new Filter("number_party", "=");
+		numberPartyFilter.setValue(partyNumber);
+		selectExpression.setExpression(numberPartyFilter);
+		
+		ArrayList<DAOAbstract> parties = party.selectDB(selectExpression, this.context);
+		
+		if (parties.size() == 1)
+		{
+			party = (Party) parties.get(0);
+		}
+		else 
+		{
+			throw new NoSuchElementException("No value at PVMPmodel.getDeputyParty");
+		}
+		
+		acronym = party.getAcronym();
+		
+		return acronym;
 	}
 	
 	public Party getDeputyParty (Deputy _deputy)
