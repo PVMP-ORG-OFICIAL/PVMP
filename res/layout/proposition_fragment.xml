@@ -39,8 +39,7 @@
 	    <ViewFlipper
 	        android:id="@+id/proposition_flipper"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="4dip">
+	        android:layout_height="wrap_content" >
 	        
 			<LinearLayout 
 			    android:id="@+id/flipper_linear"
@@ -48,16 +47,69 @@
 			    android:layout_height="wrap_content"
 			    android:orientation="vertical">
 			    
+			    <TextView
+			        android:id="@+id/proposition_info"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:text="@string/proposition_info"
+			        android:layout_marginTop="0dp"
+			        android:textSize="20sp"
+			        android:background="#AAAAAA"
+			        android:gravity="center" />
+			    
 		        <TextView
 		            android:id="@+id/proposition_category"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
 		            android:text="@string/text_nothing" />
+
+				<TextView
+			        android:id="@+id/graph_title"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:text="@string/voting_title"
+			        android:layout_marginTop="10dp"
+			        android:textSize="20sp"
+			        android:background="#AAAAAA"
+			        android:gravity="center" />
 		
 				<com.github.mikephil.charting.charts.PieChart
 		            android:id="@+id/yes_no_votes_chart"
-		            android:layout_width="match_parent"
-		            android:layout_height="500dp" />
+		            android:layout_width="wrap_content"
+		            android:layout_height="350dp"
+		            android:layout_marginBottom="20dp" />
+				
+				<TextView
+			        android:id="@+id/yes_chart_title"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:text="@string/yes_chart_title"
+			        android:layout_marginTop="10dp"
+			        android:textSize="20sp"
+			        android:background="#AAAAAA"
+			        android:gravity="center" />
+				
+				<com.github.mikephil.charting.charts.PieChart
+		            android:id="@+id/yes_votes_chart"
+		            android:layout_width="wrap_content"
+		            android:layout_height="350dp"
+		            android:layout_marginBottom="20dp" />
+				
+				<TextView
+			        android:id="@+id/no_chart_title"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:text="@string/no_chart_title"
+			        android:layout_marginTop="10dp"
+			        android:textSize="20sp"
+			        android:background="#AAAAAA"
+			        android:gravity="center" />
+				
+				<com.github.mikephil.charting.charts.PieChart
+		            android:id="@+id/no_votes_chart"
+		            android:layout_width="wrap_content"
+		            android:layout_height="350dp"
+		            android:layout_marginBottom="20dp" />
 			</LinearLayout>
 		</ViewFlipper>
 	</ScrollView>

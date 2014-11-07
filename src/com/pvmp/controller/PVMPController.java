@@ -262,9 +262,9 @@ public class PVMPController implements ControllerInterface
 	    _chart.setScrollContainer(true);
 	    _chart.animateXY(800, 800);
         
-	    Legend legend = _chart.getLegend();
-	    legend.setPosition(LegendPosition.RIGHT_OF_CHART);
-	    legend.setFormSize(15f);
+	    //Legend legend = _chart.getLegend();
+	    //legend.setPosition(LegendPosition.RIGHT_OF_CHART);
+	    //legend.setFormSize(15f);
 	    
 	    return _chart;
 	}

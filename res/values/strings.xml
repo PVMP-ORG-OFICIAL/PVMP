@@ -28,6 +28,10 @@
     <string name="text_new_password">Nova Senha</string>
     <string name="text_save">Salvar</string>
     <string name="textView_errorLogin">Usuario e/ou Senha incorreto(s).</string>
+    <string name="voting_title">Resultado</string>
+    <string name="yes_chart_title">Sim</string>
+    <string name="no_chart_title">Não</string>
+    <string name="proposition_info">Informações</string>
     
     <!-- Field hint -->
     <string name="text_name_hint">Inserir o seu nome</string>
