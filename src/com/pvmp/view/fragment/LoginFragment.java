@@ -108,6 +108,8 @@ public class LoginFragment extends FragmentView
 			else{
 				userToBeLogged = new User();
 				MessageHandling.showToast(MessageHandling.ERROR_LOGIN, context);
+				MessageHandling.requestAttention(editTextPassword);
+				MessageHandling.requestAttention(editTextUsername);
 			}
 			
 		}

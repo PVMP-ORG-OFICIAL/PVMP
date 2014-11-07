@@ -122,6 +122,7 @@ public class SettingsFragment extends FragmentView
 			else
 			{
 				MessageHandling.showToast(MessageHandling.PASSWORD_NOT_MATCH, context);
+				MessageHandling.requestAttention(passwordConfirm);
 			}
 		}
 	}
