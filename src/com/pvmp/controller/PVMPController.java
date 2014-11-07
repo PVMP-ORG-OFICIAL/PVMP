@@ -196,7 +196,7 @@ public class PVMPController implements ControllerInterface
 			{
 				yesVotes++;
 			}
-			else if (currentResult.equals("Não"))
+			else if (currentResult.equals("NÃ£o"))
 			{
 				noVotes++;
 			}
@@ -225,7 +225,7 @@ public class PVMPController implements ControllerInterface
 		votesPercentage = this.calculateVotesResultPercentage(votes);
 		
 		slicesTitles.add("Sim");
-		slicesTitles.add("Não");
+		slicesTitles.add("NÃ£o");
 		
 		slicesValues.add(new Entry(votesPercentage.get(0), 0));
 		slicesValues.add(new Entry(votesPercentage.get(1), 1));

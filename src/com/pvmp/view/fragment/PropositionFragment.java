@@ -47,6 +47,12 @@ public class PropositionFragment extends FragmentView
 		
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
+		this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.proposition_flipper);
+		
+		if (_savedInstanceState != null) {
+	        int flipperPosition = _savedInstanceState.getInt("TAB_NUMBER");
+	        viewFlipper.setDisplayedChild(0);
+	    }
 		
 		/*rootView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View rootView, MotionEvent event) {
@@ -99,6 +105,12 @@ public class PropositionFragment extends FragmentView
 		
 		return rootView;
 	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+	    int position = viewFlipper.getDisplayedChild();
+	    savedInstanceState.putInt("TAB_NUMBER", position);
+	}
 
 	@Override
 	public void buildScreenComponent(View _view) 
@@ -107,7 +119,7 @@ public class PropositionFragment extends FragmentView
 		this.textPropositionCount = (TextView) _view.findViewById(R.id.proposition_count2);
 		this.button_next = (Button) _view.findViewById(R.id.button_next);
 		this.button_previous = (Button) _view.findViewById(R.id.button_previous);
-		this.viewFlipper = (ViewFlipper) _view.findViewById(R.id.proposition_flipper);
+
 		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
 		
 		this.button_next.setOnClickListener(new HandleNext());
