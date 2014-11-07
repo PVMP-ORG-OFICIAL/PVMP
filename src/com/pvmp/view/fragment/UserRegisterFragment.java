@@ -35,6 +35,7 @@ public class UserRegisterFragment extends FragmentView
 	private RadioGroup sex;
 	private EditText userName;
 	private EditText userPassword;
+	private EditText userPasswordConfirm;
 	private static User userBuild;
 	private PVMPView mainActivity; /**<*/
 	public Context context; /**<*/
@@ -79,6 +80,7 @@ public class UserRegisterFragment extends FragmentView
 		this.sex = (RadioGroup) _view.findViewById(R.id.radiogroup_sex);
 		this.userName = (EditText) _view.findViewById(R.id.user_login);
 		this.userPassword = (EditText) _view.findViewById(R.id.password);
+		this.userPasswordConfirm = (EditText) _view.findViewById(R.id.password_confirm);
 		this.register = (Button) _view.findViewById(R.id.confirm);
 	
 		this.register.setOnClickListener(new HandleRegister());
@@ -93,22 +95,31 @@ public class UserRegisterFragment extends FragmentView
 		{
 			updateScreenComponent();
 			Util.debug("UserRegisterFragment: Register button clicked!!");
-			int validationResult = User.validationResult(userBuild, context);
-
-			switch(validationResult) 
+			if(userPassword.getText().toString().equals(userPasswordConfirm.getText().toString()))
 			{
-				case 0:
-					imm.hideSoftInputFromWindow(userPassword.getWindowToken(), 0);
-					userBuild.setDefaultUser("S");
-					controller.registerUser(userBuild);
-					controller.callDisplayFragment(ViewObserverInterface.CATEGORY);
-					MessageHandling.showToast(MessageHandling.SUCCESSFUL_REGISTER, context);
-					return;
+				int validationResult = User.validationResult(userBuild, context);
+
+				switch(validationResult) 
+				{
+					case 0:
+						imm.hideSoftInputFromWindow(userPassword.getWindowToken(), 0);
+						userBuild.setDefaultUser("S");
+						controller.registerUser(userBuild);
+						controller.callDisplayFragment(ViewObserverInterface.CATEGORY);
+						MessageHandling.showToast(MessageHandling.SUCCESSFUL_REGISTER, context);
+						return;
 					
-				default:
-					MessageHandling.displayRegisterError(userName, userEmail, name, userPassword, 
-							userAge, validationResult, context);
-				break;
+					default:
+						MessageHandling.displayRegisterError(userName, userEmail, name, userPassword, 
+								userAge, validationResult, context);
+						break;
+				}
+			}
+			else
+			{
+				MessageHandling.showToast(MessageHandling.PASSWORD_CONFIRM_NOT_MATCH, context);
+				MessageHandling.requestAttention(userPasswordConfirm);
+				MessageHandling.requestAttention(userPassword);
 			}
 		}
 	}

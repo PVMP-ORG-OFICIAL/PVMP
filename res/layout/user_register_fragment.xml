@@ -145,7 +145,16 @@
 			android:inputType = "textPassword"
 			android:drawableLeft = "@drawable/ic_password"/>
 
+		<EditText
+		    style = "@style/textInput"
+		    android:layout_marginTop="5dp"
+		    android:id="@+id/password_confirm"
+		    android:hint  = "@string/text_password_confirmation_hint" 
+		    android:inputType="textPassword"
+		    android:drawableLeft = "@drawable/ic_password" />
+
 		<!-- CONFIRM BUTTON -->
+
 			<Button
 			android:id  = "@+id/confirm"
 			style="@style/defaultButton"

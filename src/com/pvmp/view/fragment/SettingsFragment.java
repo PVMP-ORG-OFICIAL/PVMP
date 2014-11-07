@@ -76,7 +76,7 @@ public class SettingsFragment extends FragmentView
 		this.userName = (TextView) _view.findViewById(R.id.textView_showUsername);
 		this.buttonEdit = (Button) _view.findViewById(R.id.button_edit);
 		this.buttonDelete = (Button) _view.findViewById(R.id.button_delete);
-		this.passwordConfirm = (EditText) _view.findViewById(R.id.passwordConfirm);
+		this.passwordConfirm = (EditText) _view.findViewById(R.id.passwordVerify);
 		
 		this.buttonEdit.setOnClickListener(new HandleEdit());
 		this.buttonDelete.setOnClickListener(new HandleDelete());

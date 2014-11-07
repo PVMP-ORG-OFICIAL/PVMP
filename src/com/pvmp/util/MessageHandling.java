@@ -22,6 +22,7 @@ public class MessageHandling {
 	public static final String USERNAME_FIRST_CHAR = "Seu nome de usuário deve começar com uma letra.";
 	public static final String USERNAME_FORMAT = "Seu nome de usuário deve ser composto apenas de letras e números.";
 	public static final String ERROR_LOGIN = "Nome de usuário e/ou senha não correspondem";
+	public static final String PASSWORD_CONFIRM_NOT_MATCH = "As duas senhas não correspondem";
 	
 	public static final String SUCCESSFUL_REGISTER = "Cadastro realizado com sucesso!";
 	public static final String PASSWORD_SUCCESSFUL_CHANGE = "Senha alterada com sucesso.";
