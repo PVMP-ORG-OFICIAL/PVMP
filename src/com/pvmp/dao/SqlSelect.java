@@ -51,12 +51,9 @@ public final class SqlSelect extends SqlInstructionQuery
 		for (String entity : this.entities)
 		{
 			expression += entity;
-			if (this.entities.size() > 1) 
+			if (!entity.equals(this.entities.get(this.entities.size() -1))) 
 			{
-				if (!entity.equals(this.columns.get(this.entities.size() -1))) 
-				{
-					expression += ", ";
-				}
+				expression += ", ";
 			}
 		}
 		

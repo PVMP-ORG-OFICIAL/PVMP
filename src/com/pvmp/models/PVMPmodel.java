@@ -15,6 +15,7 @@ import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
+import com.pvmp.util.Util;
 
 /**
 * @class PVMPModel
@@ -170,7 +171,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		ArrayList<Vote> votes = new ArrayList<Vote>();
 		
 		SqlSelect selectExpression = new SqlSelect();
-		selectExpression.addEntity("Vote");
+		selectExpression.addEntity(vote.TABLE_NAME);
 		
 		Filter votingCodeFilter = new Filter("code_session", "=");
 		votingCodeFilter.setValue(_voting.getCodeSession());
@@ -204,17 +205,12 @@ public class PVMPmodel implements ModelSubjectInterface
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(deputy.TABLE_NAME);
 		
-		Filter codeSessionFilter = new Filter("code_session", "=");
-		codeSessionFilter.setValue(_vote.getVoting().getCodeSession());
+		Util.debug("Deputy ID: " + deputy.getIdRegistration());
 		
 		Filter deputyIdFilter = new Filter("id_registration", "=");
 		deputyIdFilter.setValue(deputy.getIdRegistration());
 		
-		Criteria filterJoiner = new Criteria();
-		filterJoiner.add(codeSessionFilter, Expression.AND_OPERATOR);
-		filterJoiner.add(deputyIdFilter, Expression.AND_OPERATOR);
-		
-		selectExpression.setExpression(filterJoiner);
+		selectExpression.setExpression(deputyIdFilter);
 		
 		deputies = deputy.selectDB(selectExpression, this.context); 
 		

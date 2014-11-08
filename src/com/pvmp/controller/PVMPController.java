@@ -191,18 +191,6 @@ public class PVMPController implements ControllerInterface
 	}
 	
 	/**
-	 * 
-	 * */
-	public int countVotesNumber (ArrayList<Vote> _votes, String _vote)
-	{
-		if (_votes == null || _vote == null)
-		{
-			throw new NullPointerException ("Null pointer at PVMPController.countVotesNumber().");
-		}
-		
-		return this.selectVotesByType(_votes, _vote).size();
-	}
-	/**
 	 * @param _votes
 	 * @brief Calculates the percentage of "Yes votes" and "No votes" a voting has and 
 	 * 		  returns them into an ArrayList.
@@ -219,8 +207,8 @@ public class PVMPController implements ControllerInterface
 		float yesVotes = 0f, noVotes = 0f, totalVotes = 0f;
 		float yesPercentage, noPercentage;
 		
-		yesVotes = (float) this.countVotesNumber(_votes, YES_VOTES);
-		noVotes = (float) this.countVotesNumber(_votes, NO_VOTES);
+		yesVotes = (float) this.selectVotesByType(_votes, YES_VOTES).size();
+		noVotes = (float) this.selectVotesByType(_votes, NO_VOTES).size();
 
 		totalVotes = yesVotes + noVotes;
 		
@@ -235,8 +223,10 @@ public class PVMPController implements ControllerInterface
 	/**
 	 * 
 	 * */
-	public ArrayList<float> calculatePartiesResultPercentage (ArrayList<Vote> _votes, String _vote){
-		float votesNumber = (float) this.countVotesNumber(_votes, _vote);		
+	//This little kid here need to (and will) be refatored. (Not done yet)
+	public ArrayList<float[]> calculatePartiesResultPercentage (ArrayList<Vote> _votes, String _vote)
+	{
+		float votesNumber = (float) this.selectVotesByType(_votes, _vote).size();
 		ArrayList<Vote> votes = this.selectVotesByType(_votes, _vote);
 		ArrayList<Deputy> deputies = new ArrayList<Deputy>();
 		ArrayList<Party> parties = new ArrayList<Party>();
@@ -248,6 +238,7 @@ public class PVMPController implements ControllerInterface
 		{
 			Deputy deputy = new Deputy();
 			deputy = this.model.getDeputyVoteOnSession(vote);
+			if (deputy != null)
 			deputies.add(deputy);
 		}
 		
@@ -268,12 +259,15 @@ public class PVMPController implements ControllerInterface
 			else
 			{
 				aux = 0;
-				for (int[] result : results)
+				for (int i = 0; i < results.size(); i++)
 				{
+					int[] result = new int[]{results.get(i)[0], results.get(i)[1]};
 					if(result[0] == party.getNumber())
 					{
 						result[1]++;
+						results.set(i, result);
 						aux++;
+						break;
 					}
 				}
 				if(aux == 0)
@@ -284,6 +278,12 @@ public class PVMPController implements ControllerInterface
 			}
 		}
 		
+		for (int i = 0; i < results.size(); i++) {
+			Util.debug("Partido: " + this.model.getPartyAcronym(results.get(i)[0])
+						+ ". Qtd: " + results.get(i)[1]);
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -299,6 +299,7 @@ public class PVMPController implements ControllerInterface
 		
 		voting = this.model.getPropositionVoting(_proposition);
 		votes = this.model.getVotingVotes(voting);
+		//calculatePartiesResultPercentage(votes, YES_VOTES);
 		votesPercentage = this.calculateVotesResultPercentage(votes);
 		
 		slicesTitles.add("Sim");
