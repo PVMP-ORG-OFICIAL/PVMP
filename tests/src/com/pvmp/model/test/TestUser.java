@@ -76,22 +76,6 @@ public class TestUser extends TestCase {
 		assertEquals(user1.getSex(), "Feminino");
 	}
 
-	public void testVerifyExistingUser() {
-		fail("Not yet implemented");
-	}
-
-	public void testValidateExistingEmail() {
-		fail("Not yet implemented");
-	}
-
-	public void testValidateExistingUser() {
-		fail("Not yet implemented");
-	}
-
-	public void testValidatePassword() {
-		fail("Not yet implemented");
-	}
-
 	public void testValidateNameFormat() {
 		assertEquals(User.validateNameFormat("Lucas V Mattioli"), true);
 		assertEquals(User.validateNameFormat("Jonathan"), true);
@@ -158,9 +142,4 @@ public class TestUser extends TestCase {
 		assertEquals(User.validateUsernameFormat("0*"),false);
 		assertEquals(User.validateUsernameFormat("aoo1234d"),true);
 	}
-
-	public void testValidationResult() {
-		fail("Not yet implemented");
-	}
-
 }
