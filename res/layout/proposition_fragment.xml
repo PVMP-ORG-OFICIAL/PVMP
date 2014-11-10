@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:columnCount="1"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <Button
         style="@style/defaultButton"
         android:id="@+id/button_previous"
+        android:textSize="12sp"
+        android:layout_height="35dp"
         android:layout_width="125dp"
         android:layout_row="0"
         android:layout_column="0"
+        android:layout_gravity="left|top"
         android:text="@string/button_previous" />
     
     <TextView
@@ -22,10 +25,11 @@
    	    android:text="@string/text_nothing" />
     
 	<Button
-		style="@style/defaultButton"
+	    style="@style/defaultButton"
 		android:id="@+id/button_next"
+		android:textSize="12sp"
 		android:layout_width="125dp"
-		android:layout_height="wrap_content"
+		android:layout_height="35dp"
 		android:layout_column="0"
 		android:layout_gravity="right|top"
 		android:layout_row="0"
