@@ -100,6 +100,11 @@ public final class Filter extends Expression
 			Integer value = (Integer)_value;
 			return Integer.toString(value);
 		}
+		else if (_value instanceof Float)
+		{
+			Float value = (Float)_value;
+			return Float.toString(value);
+		}
 		else if (_value instanceof Boolean)
 		{
 			Boolean value = (Boolean)_value;

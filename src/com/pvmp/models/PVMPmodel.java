@@ -33,8 +33,6 @@ public class PVMPmodel implements ModelSubjectInterface
 	public PVMPmodel(Context _context)
 	{
 		this.context = _context;
-		//must change to the new DAO
-		//PersistenceHelper.getInstance(this.context);
 		this.observers = new ArrayList<ListenerObserverInterface>();
 	}
 
@@ -220,13 +218,14 @@ public class PVMPmodel implements ModelSubjectInterface
 		}
 		else 
 		{
-			throw new NoSuchElementException("No value at PVMPmodel.getDeputyVoteOnSession");
+			return null;
+			//throw new NoSuchElementException("No value at PVMPmodel.getDeputyVoteOnSession");
 		}
 		
 		return deputy;
 	}
 	
-	public String getPartyAcronym (int partyNumber)
+	public String getPartyAcronym (float partyNumber)
 	{
 		Party party = new Party();
 		
@@ -234,8 +233,10 @@ public class PVMPmodel implements ModelSubjectInterface
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(party.TABLE_NAME);
 		selectExpression.addColumn("acronym");
+		
 		Filter numberPartyFilter = new Filter("number_party", "=");
 		numberPartyFilter.setValue(partyNumber);
+		
 		selectExpression.setExpression(numberPartyFilter);
 		
 		ArrayList<DAOAbstract> parties = party.selectDB(selectExpression, this.context);

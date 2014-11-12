@@ -2,7 +2,6 @@ package com.pvmp;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.widget.ImageView;
 
 /**
  * This is a simple framework for a test of an Application.  See

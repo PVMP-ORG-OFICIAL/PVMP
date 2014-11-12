@@ -1,7 +1,6 @@
 package com.pvmp.model.test;
 
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 
 import junit.framework.TestCase;
 

@@ -32,6 +32,7 @@ import com.pvmp.models.PVMPmodel;
 */
 public class PVMPController implements ControllerInterface
 {
+	public static final String ALL_VOTES = "Todos";
 	public static final String YES_VOTES = "Sim";
 	public static final String NO_VOTES = "Não";
 	private ViewObserverInterface view;
@@ -175,14 +176,14 @@ public class PVMPController implements ControllerInterface
 	/**
 	 * 
 	 * */
-	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _vote)
+	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _tag)
 	{
 		ArrayList<Vote> votes = new ArrayList<Vote>();
 		for (Vote vote : _votes) 
 		{
 			String voteResult = vote.getResult().trim();
 			
-			if(voteResult.equals(_vote))
+			if(voteResult.equals(_tag))
 			{
 				votes.add(vote);
 			}
@@ -224,13 +225,13 @@ public class PVMPController implements ControllerInterface
 	 * 
 	 * */
 	//This little kid here need to (and will) be refatored. (Not done yet)
-	public ArrayList<float[]> calculatePartiesResultPercentage (ArrayList<Vote> _votes, String _vote)
+	public ArrayList<float[]> calculatePartiesResultPercentage (ArrayList<Vote> _votes, String _tag)
 	{
-		float votesNumber = (float) this.selectVotesByType(_votes, _vote).size();
-		ArrayList<Vote> votes = this.selectVotesByType(_votes, _vote);
+		ArrayList<Vote> votes = this.selectVotesByType(_votes, _tag);
+		float totalVotes = (float) votes.size();
 		ArrayList<Deputy> deputies = new ArrayList<Deputy>();
 		ArrayList<Party> parties = new ArrayList<Party>();
-		ArrayList<int[]> results = new ArrayList<int[]>();
+		ArrayList<float[]> results = new ArrayList<float[]>();
 		int aux = 0;
 		
 		
@@ -239,7 +240,7 @@ public class PVMPController implements ControllerInterface
 			Deputy deputy = new Deputy();
 			deputy = this.model.getDeputyVoteOnSession(vote);
 			if (deputy != null)
-			deputies.add(deputy);
+				deputies.add(deputy);
 		}
 		
 		for(Deputy deputy : deputies)
@@ -253,7 +254,7 @@ public class PVMPController implements ControllerInterface
 		{
 			if (results.size() == 0)
 			{
-				int [] result = {party.getNumber(), 1};
+				float [] result = {party.getNumber(), 1};
 				results.add(result);
 			}
 			else
@@ -261,7 +262,7 @@ public class PVMPController implements ControllerInterface
 				aux = 0;
 				for (int i = 0; i < results.size(); i++)
 				{
-					int[] result = new int[]{results.get(i)[0], results.get(i)[1]};
+					float[] result = new float[]{results.get(i)[0], results.get(i)[1]};
 					if(result[0] == party.getNumber())
 					{
 						result[1]++;
@@ -272,44 +273,84 @@ public class PVMPController implements ControllerInterface
 				}
 				if(aux == 0)
 				{
-					int [] result = {party.getNumber(), 1};
+					float[] result = {party.getNumber(), 1};
 					results.add(result);
 				}
 			}
+		}
+		aux = 0;
+		for (float[] result : results) {
+			result[1] = (result[1]*100f)/totalVotes;
+			results.set(aux, result);
+			aux++;
 		}
 		
 		for (int i = 0; i < results.size(); i++) {
 			Util.debug("Partido: " + this.model.getPartyAcronym(results.get(i)[0])
 						+ ". Qtd: " + results.get(i)[1]);
 		}
-		
-		return null;
+
+		return results;
 	}
 	
 	/**
 	 * */
-	public PieChart prepareGraphicData (Proposition _proposition, PieChart _chart)
+	public PieChart prepareGraphicData (Proposition _proposition, PieChart _chart, String _tag)
 	{
+		int contador;
 		Voting voting = new Voting();
 		ArrayList<Vote> votes = new ArrayList<Vote>();
+		ArrayList<float[]> results = new ArrayList<float[]>();
 		ArrayList<Float> votesPercentage = new ArrayList<Float>();
 		ArrayList<String> slicesTitles = new ArrayList<String>();
 		ArrayList<Entry> slicesValues = new ArrayList<Entry>();
+		float totalOthers = 0;
 		PieDataSet pieDataSet;
 		
 		voting = this.model.getPropositionVoting(_proposition);
 		votes = this.model.getVotingVotes(voting);
-		//calculatePartiesResultPercentage(votes, YES_VOTES);
-		votesPercentage = this.calculateVotesResultPercentage(votes);
 		
-		slicesTitles.add("Sim");
-		slicesTitles.add("Não");
+		if (_tag.equals(ALL_VOTES)) 
+		{
+			votesPercentage = this.calculateVotesResultPercentage(votes);
+			slicesTitles.add("Sim");
+			slicesTitles.add("Não");
+		}
+		else 
+		{
+			results = calculatePartiesResultPercentage(votes, _tag);
+			for (int i = 0; i < results.size(); i++) 
+			{
+				float actualValue = results.get(i)[1];
+				
+				if (actualValue >= 10) 
+				{
+					slicesTitles.add(this.model.getPartyAcronym(results.get(i)[0]));
+					votesPercentage.add(results.get(i)[1]);
+				}
+				else 
+				{
+					totalOthers += actualValue;
+				}
+			}
+			slicesTitles.add("Outros");
+			votesPercentage.add(totalOthers);
+		}
 		
-		slicesValues.add(new Entry(votesPercentage.get(0), 0));
-		slicesValues.add(new Entry(votesPercentage.get(1), 1));
+		contador = 0;
+		for (float votePercentage : votesPercentage) 
+		{
+			slicesValues.add(new Entry(votePercentage, contador));
+			contador++;
+		}
 		
 		pieDataSet = new PieDataSet(slicesValues, "");
-		pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+		if (_tag.equals(ALL_VOTES))
+			pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+		else if(_tag.equals(YES_VOTES))
+			pieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+		else
+			pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 		pieDataSet.setSliceSpace(0f);
 		_chart.setData(new PieData(slicesTitles, pieDataSet));
 		
@@ -318,9 +359,10 @@ public class PVMPController implements ControllerInterface
 	/**
 	 * @brief Create a graphic... (Incomplete)
 	 * */
-	public PieChart createGraphic (Proposition _proposition, PieChart _chart, String _centerText)
+	public PieChart createGraphic (Proposition _proposition, PieChart _chart,
+								   String _centerText, String _tag)
 	{
-		_chart = prepareGraphicData(_proposition, _chart);
+		_chart = prepareGraphicData(_proposition, _chart, _tag);
 		_chart.setDescription("");
 		
 		Typeface tf = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
@@ -338,6 +380,7 @@ public class PVMPController implements ControllerInterface
 	    _chart.setRotationEnabled(false);
 	    
 	    _chart.setScrollContainer(true);
+	    
 	    _chart.animateXY(800, 800);
 	    
 	    return _chart;

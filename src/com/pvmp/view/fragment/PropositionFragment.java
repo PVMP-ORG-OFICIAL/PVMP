@@ -30,6 +30,8 @@ public class PropositionFragment extends FragmentView
 	private Button button_next;
 	private Button button_previous;
 	private PieChart yesNoVotesChart;
+	private PieChart yesVotesChart;
+	private PieChart noVotesChart;
 	private ScrollView propositionScrollView;
 	//private float firstX;
 	//private float currentX;
@@ -61,6 +63,8 @@ public class PropositionFragment extends FragmentView
 		this.button_previous = (Button) _view.findViewById(R.id.button_previous);
 		this.propositionScrollView = (ScrollView) _view.findViewById(R.id.proposition_scroll_view);
 		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
+		this.yesVotesChart = (PieChart) _view.findViewById(R.id.yes_votes_chart);
+		this.noVotesChart = (PieChart) _view.findViewById(R.id.no_votes_chart);
 		
 		this.button_next.setOnClickListener(new HandleNext());
 		this.button_previous.setOnClickListener(new HandlePrevious());
@@ -72,7 +76,9 @@ public class PropositionFragment extends FragmentView
 		String text = (propositions.get(count).getMenu());
 		
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
-		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado");
+		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado", PVMPController.ALL_VOTES);
+		this.yesVotesChart = this.controller.createGraphic(propositions.get(count), this.yesVotesChart, "Sim", PVMPController.YES_VOTES);
+		this.noVotesChart = this.controller.createGraphic(propositions.get(count), this.noVotesChart, "Não", PVMPController.NO_VOTES);
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
 	}
