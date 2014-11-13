@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.ListView;
 
 import com.pvmp.util.Util;
 import com.pvmp.models.Proposition;
+import com.pvmp.models.PropositionWrapper;
 import com.pvmp.models.User;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
 import com.pvmp.view.model.AbstractDrawerItem;
@@ -33,7 +35,8 @@ import com.pvmp.view.model.NavigationDrawerItem;
 import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
 import com.pvmp.view.fragment.EditSettingsFragment;
-import com.pvmp.view.fragment.PropositionFragment;
+import com.pvmp.view.fragment.PropositionActivity;
+//import com.pvmp.view.fragment.PropositionFragment;
 import com.pvmp.view.fragment.UserRegisterFragment;
 import com.pvmp.view.fragment.FeedBackFragment;
 import com.pvmp.view.fragment.PartyFragment;
@@ -142,6 +145,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.navigationDrawerItems = new ArrayList<AbstractDrawerItem>();
 
 		return;
+	}
+	
+	public ArrayList<Proposition> getPropositions (){
+		return propositions;
 	}
 
 	public void updateUser(User _user)
@@ -302,7 +309,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				fragment = new EditSettingsFragment();
 				break;
 			case PROPOSITION:
-				fragment = new PropositionFragment();
+				Intent intent = new Intent(this, PropositionActivity.class);
+				intent.putExtra("propositions", new PropositionWrapper(propositions));
+				startActivity(intent);
+				//fragment = new PropositionFragment();
 				break;
 			default:
 				break;

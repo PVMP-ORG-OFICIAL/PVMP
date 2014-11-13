@@ -36,6 +36,11 @@
 							<category android:name="android.intent.category.DEFAULT" />
 						</intent-filter>
         </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name="com.pvmp.view.fragment.PropositionActivity"
+            android:configChanges="keyboardHidden|orientation">
+        </activity>
 
     </application>
 </manifest> 
