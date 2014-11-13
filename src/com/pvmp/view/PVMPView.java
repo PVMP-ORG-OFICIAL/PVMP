@@ -53,7 +53,7 @@ import com.pvmp.R;
 */
 public class PVMPView extends Activity implements ViewObserverInterface 
 {
-	private static User user;/**< */
+	public static User user;/**< */
 	//Might change.
 	public static ArrayList<Proposition> propositions;
 

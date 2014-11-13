@@ -35,7 +35,7 @@ public class SettingsFragment extends FragmentView
 	private EditText passwordConfirm;
 	private Button buttonEdit;
 	private Button buttonDelete;
-	private static User loggedUser;
+	private User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
 	boolean firstTime = true;
@@ -56,9 +56,9 @@ public class SettingsFragment extends FragmentView
 		this.context = mainActivity.getApplicationContext();
 		
 		this.controller = new PVMPController(context);
-		controller.setView(SettingsFragment.this.mainActivity);
+		this.controller.setView(SettingsFragment.this.mainActivity);
 		
-		loggedUser = this.controller.openSession();
+		this.loggedUser = PVMPView.user;
 		
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
@@ -97,7 +97,7 @@ public class SettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			mainActivity.displayFragment(ViewObserverInterface.EDIT);
+			SettingsFragment.this.mainActivity.displayFragment(ViewObserverInterface.EDIT);
 		}
 	}
 	
@@ -106,23 +106,23 @@ public class SettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			String password = passwordConfirm.getText().toString();
+			String password = SettingsFragment.this.passwordConfirm.getText().toString();
 			
 			if(firstTime){
-				passwordConfirm.setVisibility(1);
+				SettingsFragment.this.passwordConfirm.setVisibility(1);
 				MessageHandling.showToast(MessageHandling.PASSWORD_CONFIRM_TO_DELETE, context);
-				firstTime = false;
+				SettingsFragment.this.firstTime = false;
 			}
-			else if(loggedUser.getPassword().equals(password))
+			else if(SettingsFragment.this.loggedUser.getPassword().equals(password))
 			{
-				controller.deleteUser(loggedUser);
+				SettingsFragment.this.controller.deleteUser(loggedUser);
 				MessageHandling.showToast(MessageHandling.SUCCESSFUL_DELETE, context);
-				mainActivity.displayFragment(ViewObserverInterface.LOGIN);
+				SettingsFragment.this.mainActivity.displayFragment(ViewObserverInterface.LOGIN);
 			}
 			else
 			{
 				MessageHandling.showToast(MessageHandling.PASSWORD_NOT_MATCH, context);
-				MessageHandling.requestAttention(passwordConfirm);
+				MessageHandling.requestAttention(SettingsFragment.this.passwordConfirm);
 			}
 		}
 	}

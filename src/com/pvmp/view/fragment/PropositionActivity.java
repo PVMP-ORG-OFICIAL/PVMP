@@ -23,7 +23,7 @@ public class PropositionActivity extends Activity{
 	private TextView textPropositionCount;
 	private TextView categoryName;
 	private ViewFlipper viewFlipper;
-	PropositionWrapper pw;
+	private PropositionWrapper propositionWrapper;
 	private int limit;
 	private int count = 0;
 	private Button button_next;
@@ -49,10 +49,10 @@ public class PropositionActivity extends Activity{
 		setContentView(R.layout.proposition_fragment);
 		this.viewFlipper = (ViewFlipper) findViewById(R.id.proposition_flipper);
 		
-		pw = (PropositionWrapper) getIntent().getSerializableExtra("propositions");
-		this.propositions = pw.getPropositions();
+		this.propositionWrapper = (PropositionWrapper) getIntent().getSerializableExtra("propositions");
+		this.propositions = propositionWrapper.getPropositions();
 		
-		limit = propositions.size();
+		this.limit = propositions.size();
 		//this.proposition = (Proposition) getIntent().getSerializableExtra("proposition");
 		this.controller = new PVMPController(getApplicationContext());
 		this.buildScreenComponent();

@@ -35,7 +35,7 @@ public class EditSettingsFragment extends FragmentView
 	private EditText oldPassword;
 	private EditText newPassword;
 	private Button buttonSave;
-	private static User loggedUser;
+	private User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
 	private InputMethodManager imm;
@@ -55,9 +55,9 @@ public class EditSettingsFragment extends FragmentView
 		this.context = mainActivity.getApplicationContext();
 		
 		this.controller = new PVMPController(context);
-		controller.setView(EditSettingsFragment.this.mainActivity);
+		this.controller.setView(EditSettingsFragment.this.mainActivity);
 		
-		loggedUser = this.controller.openSession();
+		this.loggedUser = PVMPView.user;
 		
 		this.buildScreenComponent(rootView);
 		this.initialUpdateScreenComponent();
