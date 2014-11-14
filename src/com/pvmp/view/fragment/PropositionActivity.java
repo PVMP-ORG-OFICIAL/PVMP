@@ -10,10 +10,12 @@ import com.pvmp.models.PropositionWrapper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
 public class PropositionActivity extends Activity{
@@ -26,12 +28,15 @@ public class PropositionActivity extends Activity{
 	private PropositionWrapper propositionWrapper;
 	private int limit;
 	private int count = 0;
+	private float firstX;
+	private float lastX;
 	private Button button_next;
 	private Button button_previous;
 	private PieChart yesNoVotesChart;
 	private PieChart yesVotesChart;
 	private PieChart noVotesChart;
 	private ScrollView propositionScrollView;
+	private ToggleButton tb1, tb2, tb3;
 	
 	public PropositionActivity()
 	{}
@@ -62,9 +67,11 @@ public class PropositionActivity extends Activity{
 		return;
 	}
 	
-	
 	public void buildScreenComponent() 
 	{
+		this.tb1 = (ToggleButton) findViewById(R.id.toggleButton_like);
+		this.tb2 = (ToggleButton) findViewById(R.id.toggleButton_dislike);
+		this.tb3 = (ToggleButton) findViewById(R.id.toggleButton_clown);
 		this.categoryName = (TextView) findViewById(R.id.proposition_category);
 		this.textPropositionCount = (TextView) findViewById(R.id.proposition_count2);
 		this.button_next = (Button) findViewById(R.id.button_next);
@@ -76,6 +83,9 @@ public class PropositionActivity extends Activity{
 		
 		this.button_next.setOnClickListener(new HandleNext());
 		this.button_previous.setOnClickListener(new HandlePrevious());
+		this.tb1.setOnClickListener(new HandleLike());
+		this.tb2.setOnClickListener(new HandleDislike());
+		this.tb3.setOnClickListener(new HandleClown());
 	}
 	
 	public void updateScreenComponent()
@@ -98,6 +108,52 @@ public class PropositionActivity extends Activity{
 		_savedInstanceState.putInt("count", currentProposition);
 	}
 	
+	/*public boolean onTouchEvent(MotionEvent touchEvent)
+	{
+		switch(touchEvent.getAction())
+		{
+			case MotionEvent.ACTION_DOWN:
+				firstX = touchEvent.getX();
+				break;
+			case MotionEvent.ACTION_UP:
+				lastX = touchEvent.getX();
+				
+				if(firstX > lastX)
+				{
+					if(count < limit - 1)
+					{
+						count++;
+					}
+					else 
+					{
+						count = 0;
+					}
+					viewFlipper.setInAnimation(getApplicationContext(), R.anim.in_from_right);
+					viewFlipper.setOutAnimation(getApplicationContext(), R.anim.out_to_left);
+				
+					updateScreenComponent();
+					viewFlipper.showNext();
+				}
+				else
+				{
+					if(count > 0)
+					{
+						count--;
+					}
+					else 
+					{
+						count = limit - 1;
+					}
+					viewFlipper.setInAnimation(getApplicationContext(), R.anim.in_from_left);
+					viewFlipper.setOutAnimation(getApplicationContext(), R.anim.out_to_right);
+				
+					updateScreenComponent();
+					viewFlipper.showPrevious();
+				}
+		}
+		return false;
+	}*/
+	
 	private class HandleNext implements View.OnClickListener
 	{
 		@Override
@@ -117,7 +173,6 @@ public class PropositionActivity extends Activity{
 			updateScreenComponent();
 			viewFlipper.showNext();
 		}
-		
 	}
 	
 	private class HandlePrevious implements View.OnClickListener
@@ -143,4 +198,36 @@ public class PropositionActivity extends Activity{
 		
 	}
 	
+	private class HandleLike implements View.OnClickListener
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			tb2.setChecked(false);
+			tb3.setChecked(false);
+		}
+	}
+	
+	private class HandleDislike implements View.OnClickListener
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			tb1.setChecked(false);
+			tb3.setChecked(false);
+		}
+	}
+	
+	private class HandleClown implements View.OnClickListener
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			tb1.setChecked(false);
+			tb2.setChecked(false);
+		}
+	}
 }

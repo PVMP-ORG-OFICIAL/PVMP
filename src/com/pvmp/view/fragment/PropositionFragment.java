@@ -8,15 +8,14 @@ import com.pvmp.controller.PVMPController;
 import com.pvmp.models.Proposition;
 import com.pvmp.view.PVMPView;
 
-import android.app.ActionBar.Tab;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
-import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
 public class PropositionFragment extends FragmentView 
@@ -34,8 +33,10 @@ public class PropositionFragment extends FragmentView
 	private PieChart yesNoVotesChart;
 	private PieChart yesVotesChart;
 	private PieChart noVotesChart;
+	private ToggleButton button_like;
+	private ToggleButton button_dislike;
+	private ToggleButton button_clown;
 	private ScrollView propositionScrollView;
-	private TextView feedback_bar;
 	//private float firstX;
 	//private float currentX;
 
@@ -68,9 +69,15 @@ public class PropositionFragment extends FragmentView
 		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
 		this.yesVotesChart = (PieChart) _view.findViewById(R.id.yes_votes_chart);
 		this.noVotesChart = (PieChart) _view.findViewById(R.id.no_votes_chart);
+		this.button_like = (ToggleButton) _view.findViewById(R.id.toggleButton_like);
+		this.button_dislike = (ToggleButton) _view.findViewById(R.id.toggleButton_dislike);
+		this.button_clown = (ToggleButton) _view.findViewById(R.id.toggleButton_clown);
 		
 		this.button_next.setOnClickListener(new HandleNext());
 		this.button_previous.setOnClickListener(new HandlePrevious());
+		this.button_like.setOnClickListener(new HandleLike());
+		this.button_dislike.setOnClickListener(new HandleDislike());
+		this.button_clown.setOnClickListener(new HandleClown());
 	}
 
 	public void updateScreenComponent()
@@ -129,5 +136,38 @@ public class PropositionFragment extends FragmentView
 			viewFlipper.showPrevious();
 		}
 		
+	}
+	
+	private class HandleLike implements View.OnClickListener
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			button_dislike.setChecked(false);
+			button_clown.setChecked(false);
+		}
+	}
+	
+	private class HandleDislike implements View.OnClickListener
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			button_like.setChecked(false);
+			button_clown.setChecked(false);
+		}
+	}
+	
+	private class HandleClown implements View.OnClickListener
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			button_like.setChecked(false);
+			button_dislike.setChecked(false);
+		}
 	}
 }

@@ -36,6 +36,7 @@ import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
 import com.pvmp.view.fragment.EditSettingsFragment;
 import com.pvmp.view.fragment.PropositionActivity;
+import com.pvmp.view.fragment.PropositionFragment;
 //import com.pvmp.view.fragment.PropositionFragment;
 import com.pvmp.view.fragment.UserRegisterFragment;
 import com.pvmp.view.fragment.FeedBackFragment;
@@ -309,10 +310,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				fragment = new EditSettingsFragment();
 				break;
 			case PROPOSITION:
-				Intent intent = new Intent(this, PropositionActivity.class);
+				/*Intent intent = new Intent(this, PropositionActivity.class);
 				intent.putExtra("propositions", new PropositionWrapper(propositions));
-				startActivity(intent);
-				//fragment = new PropositionFragment();
+				startActivity(intent);*/
+				fragment = new PropositionFragment();
 				break;
 			default:
 				break;
