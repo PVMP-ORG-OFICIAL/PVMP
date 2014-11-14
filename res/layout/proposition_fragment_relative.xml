@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- android:background="@drawable/path" -->
+
+    <Button
+        android:id="@+id/button_previous"
+        style="@style/defaultButton"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:text="@string/button_previous" />
+
+    <TextView
+        android:id="@+id/proposition_count2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_previous"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/text_nothing" />
+
+    <Button
+        android:id="@+id/button_next"
+        style="@style/defaultButton"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/button_next" />
+
+    <ScrollView
+        android:id="@+id/proposition_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="384dp"
+        android:layout_below="@+id/button_previous"
+        android:layout_marginTop="0dp" >
+
+        <ViewFlipper
+            android:id="@+id/proposition_flipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/flipper_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/proposition_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:background="#AAAAAA"
+                    android:gravity="center"
+                    android:text="@string/proposition_info"
+                    android:textSize="20sp" />
+
+                <com.pvmp.util.TextViewEx
+                    android:id="@+id/proposition_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/text_nothing" />
+
+                <TextView
+                    android:id="@+id/graph_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="#AAAAAA"
+                    android:gravity="center"
+                    android:text="@string/voting_title"
+                    android:textSize="20sp" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/yes_no_votes_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="273dp"
+                    android:layout_marginBottom="20dp" />
+
+                <TextView
+                    android:id="@+id/yes_chart_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="#AAAAAA"
+                    android:gravity="center"
+                    android:text="@string/yes_chart_title"
+                    android:textSize="20sp" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/yes_votes_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="350dp"
+                    android:layout_marginBottom="20dp" />
+
+                <TextView
+                    android:id="@+id/no_chart_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="#AAAAAA"
+                    android:gravity="center"
+                    android:text="@string/no_chart_title"
+                    android:textSize="20sp" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/no_votes_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="350dp"
+                    android:layout_marginBottom="20dp" />
+            </LinearLayout>
+        </ViewFlipper>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/relative_layout_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/proposition_scroll_view" >
+
+        <ToggleButton
+            android:id="@+id/toggleButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="@string/like_button"
+            android:textOn="@string/like_button" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="@string/dislike_button"
+            android:textOn="@string/dislike_button" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="top"
+            android:textOff="@string/clown_button"
+            android:textOn="@string/clown_button" />
+
+    </LinearLayout>
+
+</RelativeLayout>

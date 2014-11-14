@@ -8,12 +8,14 @@ import com.pvmp.controller.PVMPController;
 import com.pvmp.models.Proposition;
 import com.pvmp.view.PVMPView;
 
+import android.app.ActionBar.Tab;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -33,13 +35,14 @@ public class PropositionFragment extends FragmentView
 	private PieChart yesVotesChart;
 	private PieChart noVotesChart;
 	private ScrollView propositionScrollView;
+	private TextView feedback_bar;
 	//private float firstX;
 	//private float currentX;
 
 	@Override
 	public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) 
 	{
-		View rootView = _inflater.inflate(R.layout.proposition_fragment, _container, false);
+		View rootView = _inflater.inflate(R.layout.proposition_fragment_relative, _container, false);
  
 		this.view = (PVMPView) getActivity();
 		this.controller = new PVMPController(this.view.getApplicationContext());
@@ -63,8 +66,12 @@ public class PropositionFragment extends FragmentView
 		this.button_previous = (Button) _view.findViewById(R.id.button_previous);
 		this.propositionScrollView = (ScrollView) _view.findViewById(R.id.proposition_scroll_view);
 		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
+<<<<<<< Updated upstream
 		this.yesVotesChart = (PieChart) _view.findViewById(R.id.yes_votes_chart);
 		this.noVotesChart = (PieChart) _view.findViewById(R.id.no_votes_chart);
+=======
+		this.feedback_bar = (TextView) _view.findViewById(R.id.feedback_bar);
+>>>>>>> Stashed changes
 		
 		this.button_next.setOnClickListener(new HandleNext());
 		this.button_previous.setOnClickListener(new HandlePrevious());

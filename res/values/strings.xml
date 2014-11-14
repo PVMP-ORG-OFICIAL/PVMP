@@ -33,6 +33,10 @@
     <string name="no_chart_title">Votos Contra</string>
     <string name="proposition_info">Informações da Proposição</string>
     
+    <string name="like_button">Gostei</string>
+    <string name="dislike_button">Não Gostei</string>
+    <string name="clown_button">Palhaçada</string>
+
     <!-- Field hint -->
     <string name="text_name_hint">Inserir o seu nome</string>
     <string name="text_email_hint">Inserir o seu email</string>
