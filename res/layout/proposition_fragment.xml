@@ -117,35 +117,36 @@
 		</ScrollView>
 	</ViewFlipper>
 	
-    <GridLayout
+    <RelativeLayout
         android:id="@+id/grid_layout_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:columnCount="3">
+        android:layout_alignParentBottom="true">
         
         <ToggleButton
             android:id="@+id/toggleButton_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textOff="@string/like_button"
-            android:textOn="@string/like_button"
-            android:layout_column="0"/>
-
-        <ToggleButton
-            android:id="@+id/toggleButton_dislike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="@string/dislike_button"
-            android:textOn="@string/dislike_button"
-            android:layout_column="1"/>
+            android:textOn="@string/like_button"/>
 
         <ToggleButton
             android:id="@+id/toggleButton_clown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:textOff="@string/clown_button"
-            android:textOn="@string/clown_button"
-            android:layout_column="2"/>
-   </GridLayout>
+            android:textOn="@string/clown_button" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton_dislike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textOff="@string/dislike_button"
+            android:textOn="@string/dislike_button" />
+
+   </RelativeLayout>
 </RelativeLayout>
