@@ -92,7 +92,6 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		
 		//Start the party!!! 
 		user = this.controller.openSession();
-		propositions = null;
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
@@ -132,6 +131,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		if (_savedInstanceState == null)
 		{
 			//On first time display view for first navigation item
+			propositions = null;
 			this.controller.openApplication();
 		}
 		
