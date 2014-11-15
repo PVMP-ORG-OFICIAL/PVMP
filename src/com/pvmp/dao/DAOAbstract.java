@@ -98,11 +98,6 @@ public abstract class DAOAbstract
 
 		arrayContentValues = PVMPDatabase.selectDB(_queryExpression, _context);
 		
-		if (arrayContentValues.size() == 0) 
-		{
-			return null;
-		}
-		Util.debug("tamanho content" + arrayContentValues.size());
 		for (int i = 0; i < arrayContentValues.size(); i++)
 		{
 			arrayModels.add(this.contentValuesToModel(arrayContentValues.get(i)));

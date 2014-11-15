@@ -143,7 +143,7 @@ public class FeedbackController {
 		expression.setExpression(criteria);
 		
 		feedbacks = feedback.selectDB(expression, this.context);
-		if (feedbacks == null)
+		if (feedbacks.size() == 0)
 		{
 			return null;
 		}

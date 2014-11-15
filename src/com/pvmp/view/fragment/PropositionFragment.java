@@ -97,6 +97,7 @@ public class PropositionFragment extends FragmentView
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
 		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(count).getId());
+		this.updateFeedback(existingFeedback);
 	}
 	
 	public void takeFeedback()
@@ -115,10 +116,42 @@ public class PropositionFragment extends FragmentView
 		{
 			this.opinion = "c";
 		}
+		else {
+			return;
+		}
 		
 		if(!opinion.equals(""))
 		{
 			this.feedbackController.saveFeedback(opinion, PVMPView.user, target);
+		}
+	}
+	
+	public void setOpinionButtons(boolean like, boolean dislike, boolean clown)
+	{
+		this.button_like.setChecked(like);
+		this.button_dislike.setChecked(dislike);
+		this.button_clown.setChecked(clown);
+	}
+	
+	public void updateFeedback(Feedback _feedback)
+	{
+		if(_feedback == null)
+		{
+			this.setOpinionButtons(false, false, false);
+			MessageHandling.showToast("Setou falso", view.getApplicationContext());
+			return;
+		}
+		else if(_feedback.getOpinion().equals("l"))
+		{
+			this.setOpinionButtons(true, false, false);
+		}
+		else if(_feedback.getOpinion().equals("d"))
+		{
+			this.setOpinionButtons(false, true, false);
+		}
+		else if (_feedback.getOpinion().equals("c"))
+		{
+			this.setOpinionButtons(false, false, true);
 		}
 	}
 	
@@ -127,6 +160,7 @@ public class PropositionFragment extends FragmentView
 		@Override
 		public void onClick(View v) 
 		{
+			takeFeedback();
 			if(count < limit - 1)
 			{
 				count++;
@@ -138,10 +172,10 @@ public class PropositionFragment extends FragmentView
 			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
 			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
 		
+			MessageHandling.showToast(opinion, view.getApplicationContext());
 			updateScreenComponent();
 			viewFlipper.showNext();
-			takeFeedback();
-			MessageHandling.showToast(opinion, view.getApplicationContext());
+			
 		}
 		
 	}
@@ -152,6 +186,7 @@ public class PropositionFragment extends FragmentView
 		@Override
 		public void onClick(View v) 
 		{
+			takeFeedback();
 			if(count > 0)
 			{
 				count--;
@@ -162,11 +197,11 @@ public class PropositionFragment extends FragmentView
 			}
 			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
 			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);
-		
+			
+			MessageHandling.showToast(opinion, view.getApplicationContext());
 			updateScreenComponent();
 			viewFlipper.showPrevious();
-			takeFeedback();
-			MessageHandling.showToast(opinion, view.getApplicationContext());
+			
 		}
 		
 	}
