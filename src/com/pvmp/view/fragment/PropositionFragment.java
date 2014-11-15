@@ -117,12 +117,23 @@ public class PropositionFragment extends FragmentView
 			this.opinion = "c";
 		}
 		else {
+			if(this.existingFeedback != null)
+			{
+				this.feedbackController.deleteFeedback(PVMPView.user, this.target);
+			}
 			return;
 		}
 		
 		if(!opinion.equals(""))
 		{
-			this.feedbackController.saveFeedback(opinion, PVMPView.user, target);
+			if(this.existingFeedback != null)
+			{
+				this.feedbackController.editFeedback(this.opinion, PVMPView.user, this.target);
+			}
+			else
+			{
+				this.feedbackController.saveFeedback(this.opinion, PVMPView.user, this.target);
+			}
 		}
 	}
 	
