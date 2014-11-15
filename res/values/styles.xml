@@ -73,5 +73,11 @@
     <item name = "android:background"> @drawable/custom_btn_orange </item>
     <item name = "android:padding"> 10dp </item>
   </style>
+  
+  <!-- ToggleButton -->
+  <style name="toggleButton" parent="@android:Theme.Black">
+      <item name="android:textOn"/>
+      <item name="android:textOff"/>
+  </style>
 
 </resources>

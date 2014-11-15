@@ -121,32 +121,32 @@
         android:id="@+id/grid_layout_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#AAAAAA">
         
         <ToggleButton
             android:id="@+id/toggleButton_like"
+            style="@style/toggleButton"
+            android:background="@drawable/ic_toggle_bg_like"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="@string/like_button"
-            android:textOn="@string/like_button"/>
+            android:layout_height="wrap_content"/>
 
         <ToggleButton
             android:id="@+id/toggleButton_clown"
+            style="@style/toggleButton"
+            android:background="@drawable/ic_toggle_bg_clown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:textOff="@string/clown_button"
-            android:textOn="@string/clown_button" />
+            android:layout_alignParentTop="true" />
 
         <ToggleButton
             android:id="@+id/toggleButton_dislike"
+            style="@style/toggleButton"
+            android:background="@drawable/ic_toggle_bg_dislike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textOff="@string/dislike_button"
-            android:textOn="@string/dislike_button" />
-
+            android:layout_centerHorizontal="true" />
    </RelativeLayout>
 </RelativeLayout>
