@@ -96,6 +96,8 @@ public class PVMPmodel implements ModelSubjectInterface
 		Proposition proposition = new Proposition();
 		
 		selectExpression.addEntity("Proposition");
+		selectExpression.addColumn(Proposition.COLUMN_MENU);
+		selectExpression.addColumn(Proposition.COLUMN_ID_PROP);
 		
 		if (_value != null) 
 		{
@@ -136,6 +138,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(voting.TABLE_NAME);
+		selectExpression.addColumn(Voting.COLUMN_CODE_SESSION);
 		
 		Filter propositionIdFilter = new Filter("id_prop", "=");
 		propositionIdFilter.setValue(_proposition.getId());
@@ -170,6 +173,8 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(vote.TABLE_NAME);
+		selectExpression.addColumn(Vote.COLUMN_VOTE_RESULT);
+		selectExpression.addColumn(Vote.COLUMN_ID_REGISTRATION);
 		
 		Filter votingCodeFilter = new Filter("code_session", "=");
 		votingCodeFilter.setValue(_voting.getCodeSession());
@@ -202,6 +207,8 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(deputy.TABLE_NAME);
+		selectExpression.addColumn(Deputy.COLUMN_NUMBER_PARTY);
+		selectExpression.addColumn(Deputy.COLUMN_NAME);
 		
 		Util.debug("Deputy ID: " + deputy.getIdRegistration());
 		

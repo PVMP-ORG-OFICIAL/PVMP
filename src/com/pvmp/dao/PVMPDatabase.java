@@ -136,6 +136,8 @@ public class PVMPDatabase
         		DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
         		arrayContentValues.add(contentValues);
         	}while (cursor.moveToNext());
+        	
+        	cursor.close();
         }
         
 		return arrayContentValues;

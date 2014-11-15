@@ -103,6 +103,7 @@ public class LoginFragment extends FragmentView
                 imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 				userToBeLogged.setDefaultUser("S");
 				controller.editUser(userToBeLogged);
+				PVMPView.user = userToBeLogged;
 				mainActivity.displayFragment(ViewObserverInterface.CATEGORY);
 			}
 			else{

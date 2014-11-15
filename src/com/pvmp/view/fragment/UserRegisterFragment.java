@@ -105,6 +105,7 @@ public class UserRegisterFragment extends FragmentView
 						imm.hideSoftInputFromWindow(userPassword.getWindowToken(), 0);
 						userBuild.setDefaultUser("S");
 						controller.registerUser(userBuild);
+						PVMPView.user = userBuild;
 						controller.callDisplayFragment(ViewObserverInterface.CATEGORY);
 						MessageHandling.showToast(MessageHandling.SUCCESSFUL_REGISTER, context);
 						return;
