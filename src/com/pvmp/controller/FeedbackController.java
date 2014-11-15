@@ -1,8 +1,12 @@
 package com.pvmp.controller;
 
+import java.util.ArrayList;
+
 import com.pvmp.dao.Criteria;
+import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
+import com.pvmp.dao.SqlSelect;
 import com.pvmp.models.Feedback;
 import com.pvmp.models.User;
 import com.pvmp.util.MessageHandling;
@@ -119,4 +123,34 @@ public class FeedbackController {
 		
 		return filtersJoiner;
 	}
+	
+	public Feedback selectFeedback(User _user, int _target)
+	{
+		
+		if (_user == null)
+		{
+			throw new NullPointerException("Null pointer at FeedbackController.selectFeedback");
+		}
+		ArrayList<DAOAbstract> feedbacks = new ArrayList<DAOAbstract>();
+		Feedback feedback = new Feedback();
+		
+		Criteria criteria = new Criteria();
+		criteria = this.generateFeedbackDatabaseIdentifier(_user, _target);
+		
+		SqlSelect expression = new SqlSelect();
+		expression.addColumn(Feedback.COLUMN_OPINION);
+		expression.addEntity(feedback.TABLE_NAME);
+		expression.setExpression(criteria);
+		
+		feedbacks = feedback.selectDB(expression, this.context);
+		if (feedbacks == null)
+		{
+			return null;
+		}
+
+		feedback = (Feedback) feedbacks.get(0);
+		
+		return feedback;
+	}
+	
 }

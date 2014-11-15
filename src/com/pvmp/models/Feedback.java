@@ -3,6 +3,7 @@ package com.pvmp.models;
 import android.content.ContentValues;
 
 import com.pvmp.dao.DAOAbstract;
+import com.pvmp.util.Util;
 
 public class Feedback extends DAOAbstract 
 {
@@ -83,7 +84,6 @@ public class Feedback extends DAOAbstract
 		Feedback feedback = new Feedback ();
 		
 		feedback.setOpinion(_contentValues.getAsString(COLUMN_OPINION));
-		feedback.setTarget(_contentValues.getAsInteger(COLUMN_PROPOSITION));
 		
 		return feedback;
 	}

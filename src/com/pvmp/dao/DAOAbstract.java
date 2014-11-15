@@ -5,6 +5,8 @@ package com.pvmp.dao;
 
 import java.util.ArrayList;
 
+import com.pvmp.util.Util;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
@@ -95,7 +97,12 @@ public abstract class DAOAbstract
 		ArrayList<DAOAbstract> arrayModels = new ArrayList<DAOAbstract>();
 
 		arrayContentValues = PVMPDatabase.selectDB(_queryExpression, _context);
-
+		
+		if (arrayContentValues.size() == 0) 
+		{
+			return null;
+		}
+		Util.debug("tamanho content" + arrayContentValues.size());
 		for (int i = 0; i < arrayContentValues.size(); i++)
 		{
 			arrayModels.add(this.contentValuesToModel(arrayContentValues.get(i)));

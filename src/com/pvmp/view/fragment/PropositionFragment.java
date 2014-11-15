@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.R;
+import com.pvmp.controller.FeedbackController;
 import com.pvmp.controller.PVMPController;
+import com.pvmp.models.Feedback;
 import com.pvmp.models.Proposition;
+import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 
 import android.os.Bundle;
@@ -28,15 +31,15 @@ public class PropositionFragment extends FragmentView
 	private ViewFlipper viewFlipper;
 	private int limit;
 	private int count;
+	private String opinion = ""; 
+	int target;
 	private Button button_next;
 	private Button button_previous;
-	private PieChart yesNoVotesChart;
-	private PieChart yesVotesChart;
-	private PieChart noVotesChart;
-	private ToggleButton button_like;
-	private ToggleButton button_dislike;
-	private ToggleButton button_clown;
+	private PieChart yesNoVotesChart, yesVotesChart, noVotesChart;
+	private ToggleButton button_like, button_dislike, button_clown;
 	private ScrollView propositionScrollView;
+	private FeedbackController feedbackController;
+	private Feedback existingFeedback;
 	//private float firstX;
 	//private float currentX;
 
@@ -47,6 +50,8 @@ public class PropositionFragment extends FragmentView
  
 		this.view = (PVMPView) getActivity();
 		this.controller = new PVMPController(this.view.getApplicationContext());
+		this.feedbackController = new FeedbackController(this.view.getApplicationContext());
+		this.existingFeedback = new Feedback();
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
 		this.count = 0;
@@ -91,6 +96,30 @@ public class PropositionFragment extends FragmentView
 		this.noVotesChart = this.controller.createGraphic(propositions.get(count), this.noVotesChart, "Não", PVMPController.NO_VOTES);
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
+		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(count).getId());
+	}
+	
+	public void takeFeedback()
+	{
+		this.target = propositions.get(count).getId();
+		
+		if(button_like.isChecked())
+		{
+			this.opinion = "l";
+		}
+		else if(button_dislike.isChecked())
+		{
+			this.opinion = "d";
+		}
+		else if(button_clown.isChecked())
+		{
+			this.opinion = "c";
+		}
+		
+		if(!opinion.equals(""))
+		{
+			this.feedbackController.saveFeedback(opinion, PVMPView.user, target);
+		}
 	}
 	
 	private class HandleNext implements View.OnClickListener
@@ -111,6 +140,8 @@ public class PropositionFragment extends FragmentView
 		
 			updateScreenComponent();
 			viewFlipper.showNext();
+			takeFeedback();
+			MessageHandling.showToast(opinion, view.getApplicationContext());
 		}
 		
 	}
@@ -134,6 +165,8 @@ public class PropositionFragment extends FragmentView
 		
 			updateScreenComponent();
 			viewFlipper.showPrevious();
+			takeFeedback();
+			MessageHandling.showToast(opinion, view.getApplicationContext());
 		}
 		
 	}

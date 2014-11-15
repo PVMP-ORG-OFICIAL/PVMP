@@ -140,6 +140,8 @@ public class PVMPDatabase
         	cursor.close();
         }
         
+        Util.debug("TAMANHO OCNTET:" + arrayContentValues.size());
+        
 		return arrayContentValues;
 	}
 	/**
