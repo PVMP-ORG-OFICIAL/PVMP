@@ -9,7 +9,7 @@ public class PersistenceHelper extends SQLiteAssetHelper
 {
 
 	public static final String DATABASE_NAME = "PVMPdatabase.db";
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
 	public static String DATABASE_DIR;
 	
 	private static PersistenceHelper instance = null;

@@ -17,6 +17,19 @@ public class Feedback extends DAOAbstract
 	private User user;
 	private int target;
 	
+	public Feedback () {
+		this.TABLE_NAME = "PropositionFeedback"; //might be temporary
+		this.opinion = null;
+		this.user = null;
+		this.target = 0;
+	}
+	
+	public Feedback (String _opinion, User _user, int _target) {
+		this.TABLE_NAME = "PropositionFeedback"; //might be temporary
+		this.opinion = _opinion;
+		this.user = _user;
+		this.target = _target;
+	}
 	public String getOpinion() 
 	{
 		return opinion;
