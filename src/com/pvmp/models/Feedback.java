@@ -3,7 +3,6 @@ package com.pvmp.models;
 import android.content.ContentValues;
 
 import com.pvmp.dao.DAOAbstract;
-import com.pvmp.util.Util;
 
 public class Feedback extends DAOAbstract 
 {

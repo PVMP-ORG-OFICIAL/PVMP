@@ -146,7 +146,5 @@ public class TestUser extends TestCase {
 		assertEquals(User.validateUsernameFormat("$aja12"),false);
 		assertEquals(User.validateUsernameFormat("0*"),false);
 		assertEquals(User.validateUsernameFormat("aoo1234d"),true);
-		assertEquals(User.validateUsernameFormat("ún124"),true);
-		assertEquals(User.validateUsernameFormat("joão"),true);
 	}
 }

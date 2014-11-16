@@ -62,6 +62,12 @@ public class PropositionFragment extends FragmentView
 		
 		return rootView;
 	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		this.takeFeedback();
+	}
 
 	@Override
 	public void buildScreenComponent(View _view) 
@@ -182,11 +188,9 @@ public class PropositionFragment extends FragmentView
 			}
 			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
 			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
-		
-			MessageHandling.showToast(opinion, view.getApplicationContext());
+
 			updateScreenComponent();
-			viewFlipper.showNext();
-			
+			viewFlipper.showNext();			
 		}
 		
 	}
@@ -209,10 +213,8 @@ public class PropositionFragment extends FragmentView
 			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
 			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);
 			
-			MessageHandling.showToast(opinion, view.getApplicationContext());
 			updateScreenComponent();
 			viewFlipper.showPrevious();
-			
 		}
 		
 	}
