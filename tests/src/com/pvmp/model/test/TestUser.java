@@ -83,6 +83,11 @@ public class TestUser extends TestCase {
 		assertEquals(User.validateNameFormat("    "), false);
 		assertEquals(User.validateNameFormat("Joao123"), false);
 		assertEquals(User.validateNameFormat("Jo&ao"), false);
+		assertEquals(User.validateNameFormat("João"), true);
+		assertEquals(User.validateNameFormat("José"), true);
+		assertEquals(User.validateNameFormat("Úrsula"), true);
+		assertEquals(User.validateNameFormat("Maitê"), true);
+		assertEquals(User.validateNameFormat("Átila Gonçalves"), true);
 	}
 
 	public void testValidateNameSize() {
@@ -141,5 +146,7 @@ public class TestUser extends TestCase {
 		assertEquals(User.validateUsernameFormat("$aja12"),false);
 		assertEquals(User.validateUsernameFormat("0*"),false);
 		assertEquals(User.validateUsernameFormat("aoo1234d"),true);
+		assertEquals(User.validateUsernameFormat("ún124"),true);
+		assertEquals(User.validateUsernameFormat("joão"),true);
 	}
 }

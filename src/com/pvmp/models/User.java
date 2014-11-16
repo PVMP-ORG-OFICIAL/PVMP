@@ -221,7 +221,7 @@ public class User extends DAOAbstract
 	*/
 	public static boolean validateNameFormat (String _name) 
 	{
-		if (_name.matches("[a-zA-Z ]+")) 
+		if (_name.matches("[a-zA-Zà-úÀ-Ú ]+")) 
 		{
 			for (int i = 0; i < _name.length(); i++) 
 			{
@@ -326,7 +326,7 @@ public class User extends DAOAbstract
 	*/
 	public static boolean validateUsernameFormat (String _username) 
 	{
-		if (_username.matches("[a-zA-Z0-9]+"))
+		if (_username.matches("[a-zA-Z0-9à-úÀ-Ú]+"))
 		{ 
 			return true;
 		}
