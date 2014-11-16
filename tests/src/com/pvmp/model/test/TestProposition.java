@@ -20,7 +20,7 @@ public class TestProposition extends TestCase {
 		
 		propositionEmpty = new Proposition();
 		propositionFull = new Proposition(10, "01/01/2014", "Da providências sobre...",
-				"Projeto de Lei", "João Pereira", "Votada", 204, "Saúde");
+				"Projeto de Lei", "João Pereira", "Votada", 204, "Saúde", null);
 	}
 
 	protected void tearDown() throws Exception {

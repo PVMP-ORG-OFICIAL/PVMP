@@ -80,10 +80,13 @@ public class Voting extends DAOAbstract
 	public Voting contentValuesToModel(ContentValues _contentValues) 
 	{
 		Voting voting = new Voting();
+		Proposition proposition = new Proposition();
 		
 		voting.setCodeSession(_contentValues.getAsInteger(COLUMN_CODE_SESSION));
 		voting.setSummary(_contentValues.getAsString(COLUMN_SUMMARY));
 		voting.setDate(_contentValues.getAsString(COLUMN_DATE));
+		proposition.setId(_contentValues.getAsInteger(COLUMN_ID_PROP));
+		voting.setProposition(proposition);
 		
 		return voting;
 	}

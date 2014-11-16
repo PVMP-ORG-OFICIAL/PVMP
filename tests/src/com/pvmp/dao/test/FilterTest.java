@@ -3,6 +3,8 @@
  * */
 package com.pvmp.dao.test;
 
+import java.util.ArrayList;
+
 import com.pvmp.dao.Filter;
 
 import junit.framework.TestCase;
@@ -27,7 +29,9 @@ public class FilterTest extends TestCase
 	@Override
 	public void setUp() throws Exception {
 		String votes[] = {"Sim", "Nao"};
-		int years[] = {2005, 2008, 2013};
+		ArrayList<Integer> years = new ArrayList<Integer>();
+		
+		years.add(2005); years.add(2008); years.add(2013);
 		
 		this.filterData = new Filter("DATA", "=");
 		this.filterData.setValue("2007-06-02");

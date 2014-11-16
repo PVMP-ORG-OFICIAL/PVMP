@@ -35,6 +35,7 @@ public class Proposition extends DAOAbstract implements Serializable
 	private String situation;
 	private Integer number;
 	private String category;
+	private Voting voting;
 	
 	public Proposition () {
 		super();
@@ -47,10 +48,12 @@ public class Proposition extends DAOAbstract implements Serializable
 		this.situation = null;
 		this.number = null;
 		this.category = null;
+		this.voting = null;
 	}
 	
 	public Proposition(Integer id, String year, String menu, String acronym,
-			String author, String situation, Integer number, String category) {
+			String author, String situation, Integer number, String category,
+			Voting voting) {
 		super();
 		this.TABLE_NAME = "Proposition";
 		this.id = id;
@@ -61,6 +64,15 @@ public class Proposition extends DAOAbstract implements Serializable
 		this.situation = situation;
 		this.number = number;
 		this.category = category;
+		this.voting = voting;
+	}
+
+	public Voting getVoting() {
+		return voting;
+	}
+
+	public void setVoting(Voting voting) {
+		this.voting = voting;
 	}
 
 	public String getAuthor() {
