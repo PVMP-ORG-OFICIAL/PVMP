@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -27,22 +26,10 @@ import android.widget.ListView;
 
 import com.pvmp.util.Util;
 import com.pvmp.models.Proposition;
-import com.pvmp.models.PropositionWrapper;
 import com.pvmp.models.User;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
 import com.pvmp.view.model.AbstractDrawerItem;
 import com.pvmp.view.model.NavigationDrawerItem;
-import com.pvmp.view.fragment.HomeFragment;
-import com.pvmp.view.fragment.LoginFragment;
-import com.pvmp.view.fragment.EditSettingsFragment;
-import com.pvmp.view.fragment.PropositionActivity;
-import com.pvmp.view.fragment.PropositionFragment;
-//import com.pvmp.view.fragment.PropositionFragment;
-import com.pvmp.view.fragment.UserRegisterFragment;
-import com.pvmp.view.fragment.FeedBackFragment;
-import com.pvmp.view.fragment.PartyFragment;
-import com.pvmp.view.fragment.SettingsFragment;
-import com.pvmp.view.fragment.CategoriesFragment;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.controller.ControllerInterface;
 import com.pvmp.controller.PVMPController;
@@ -274,49 +261,16 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("PVMPView: Start display fragment");
 		Fragment fragment = null;
 		
-		switch(_position)
-		{
-			case CATEGORY:
-				fragment = new CategoriesFragment();
-				break;
-			case PARTY:
-				fragment = new PartyFragment();
-				break;
-			case FEEDBACK:
-				fragment = new FeedBackFragment();
-				break;
-			case SETTING:
-				fragment = new SettingsFragment();
-				break;
-			case LOGOUT:
-				this.updateUser(this.controller.openSession());
-				if (user != null) 
-				{
-					user.setDefaultUser("N");
-					this.controller.editUser(user);
-				}
-				fragment = new LoginFragment();
-				break;
-			case LOGIN:
-				fragment = new LoginFragment();
-				break;
-			case REGISTER:
-				fragment = new UserRegisterFragment();
-				break;
-			case HOME:
-				fragment = new HomeFragment();
-				break;
-			case EDIT:
-				fragment = new EditSettingsFragment();
-				break;
-			case PROPOSITION:
-				/*Intent intent = new Intent(this, PropositionActivity.class);
-				intent.putExtra("propositions", new PropositionWrapper(propositions));
-				startActivity(intent);*/
-				fragment = new PropositionFragment();
-				break;
-			default:
-				break;
+		//Create the fragment
+		fragment = new FragmentFactory().generateFragment(_position);
+		
+		if (_position == LOGOUT) {
+			this.updateUser(this.controller.openSession());
+			if (user != null) 
+			{
+				user.setDefaultUser("N");
+				this.controller.editUser(user);
+			}
 		}
 
 		Util.debug("MainActivity: Create a HOME ");
@@ -359,8 +313,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 				return;
 			}
 			setTitle(this.navigationMenuTitles[_range]);
-			return;
-			
+			return;	
 		}
 		this.setTitle(getTitle());
 		return;
