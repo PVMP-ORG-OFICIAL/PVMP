@@ -5,13 +5,11 @@
 package com.pvmp.controller;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteException;
 
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
-import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.util.Util;
-import com.pvmp.models.PVMPmodel;
+import com.pvmp.view.ViewObserverInterface;
 
 /**
 * @class PVMPController
@@ -20,7 +18,6 @@ import com.pvmp.models.PVMPmodel;
 public class PVMPController implements ControllerInterface
 {
 	private ViewObserverInterface view;
-	private PVMPmodel model;
 	private UserController userController;
 
 	public PVMPController()
@@ -33,7 +30,6 @@ public class PVMPController implements ControllerInterface
 	*/
 	public PVMPController(Context _context)
 	{
-		this.model = new PVMPmodel(_context);
 		this.userController = new UserController(_context);
 	}
 
@@ -84,31 +80,12 @@ public class PVMPController implements ControllerInterface
 	}
 
 	//public void displayFragment();
-	@Override
-	public void registerUser(User _user)
-	{
-		Util.debug("PVMPController: Prepare for register new user.");
-		try {
-			this.model.saveUser(_user);
-		}catch (SQLiteException sqlE) {
-			sqlE.printStackTrace();
-		}
-
-		return;
-	}
+	
 	public void callDisplayFragment (int fragmentIndex)
 	{
 		Util.debug("PVMPController: User saved on database, change view now");
 		this.view.displayFragment(fragmentIndex);
 		Util.debug("PVMPController: finish register");
-	}
-	
-	public void editUser(User _user) {
-		this.model.editUser(_user);
-	}
-	
-	public void deleteUser(User _user) {
-		this.model.removeUser(_user);
 	}
 	
 	@Override

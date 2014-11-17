@@ -33,6 +33,7 @@ import com.pvmp.view.model.NavigationDrawerItem;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.controller.ControllerInterface;
 import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.UserController;
 import com.pvmp.R;
 
 /**
@@ -62,6 +63,8 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	//Controller and Model reference
 	private ControllerInterface controller;
 	//private ModelSubjectInterface model; <-Still not using
+	
+	private UserController userController;
 
 	public PVMPView()
 	{}
@@ -76,6 +79,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("PVMPView: Add object parameter - Controller");
 		this.controller = new PVMPController(this);
 		this.controller.setView(this);
+		this.userController = new UserController(this);
 		
 		//Start the party!!! 
 		user = this.controller.openSession();
@@ -264,7 +268,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			if (user != null) 
 			{
 				user.setDefaultUser("N");
-				this.controller.editUser(user);
+				this.userController.editUser(user);
 			}
 		}
 

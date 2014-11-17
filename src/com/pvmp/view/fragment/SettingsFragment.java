@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.UserController;
 import com.pvmp.models.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
@@ -38,7 +39,8 @@ public class SettingsFragment extends FragmentView
 	private User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
-	boolean firstTime = true;
+	private boolean firstTime = true;
+	private UserController userController;
 	
 	private PVMPController controller;
 	
@@ -55,8 +57,9 @@ public class SettingsFragment extends FragmentView
         this.mainActivity = (PVMPView) getActivity();
 		this.context = mainActivity.getApplicationContext();
 		
-		this.controller = new PVMPController(context);
+		this.controller = new PVMPController(this.context);
 		this.controller.setView(SettingsFragment.this.mainActivity);
+		this.userController = new UserController(this.context);
 		
 		this.loggedUser = PVMPView.user;
 		
@@ -115,7 +118,7 @@ public class SettingsFragment extends FragmentView
 			}
 			else if(SettingsFragment.this.loggedUser.getPassword().equals(password))
 			{
-				SettingsFragment.this.controller.deleteUser(loggedUser);
+				SettingsFragment.this.userController.removeUser(loggedUser);
 				MessageHandling.showToast(MessageHandling.SUCCESSFUL_DELETE, context);
 				SettingsFragment.this.mainActivity.displayFragment(ViewObserverInterface.LOGIN);
 			}

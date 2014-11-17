@@ -25,17 +25,6 @@ public interface ControllerInterface
 	public void displayListProposition();
 
 	/**
-	* @param _user
-	* @brief 
-	*/
-	
-	public void editUser(User _user);
-	
-	public void registerUser(User _user);
-	
-	public void deleteUser(User _user);
-
-	/**
 	* @return 
 	* @brief 
 	*/

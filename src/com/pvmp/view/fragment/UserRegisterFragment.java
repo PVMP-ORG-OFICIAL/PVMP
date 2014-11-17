@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.UserController;
 import com.pvmp.models.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
@@ -41,6 +42,7 @@ public class UserRegisterFragment extends FragmentView
 	public Context context; /**<*/
 	private Button register;
 	private InputMethodManager imm;
+	private UserController userController;
 
 	private PVMPController controller;
 	
@@ -57,6 +59,7 @@ public class UserRegisterFragment extends FragmentView
 		this.context = mainActivity.getApplicationContext();
 		
 		this.controller = new PVMPController(context);
+		this.userController = new UserController(context);
 		controller.setView(UserRegisterFragment.this.mainActivity);
 
 		userBuild = new User();
@@ -104,7 +107,7 @@ public class UserRegisterFragment extends FragmentView
 					case 0:
 						imm.hideSoftInputFromWindow(userPassword.getWindowToken(), 0);
 						userBuild.setDefaultUser("S");
-						controller.registerUser(userBuild);
+						userController.saveUser(userBuild);
 						PVMPView.user = userBuild;
 						controller.callDisplayFragment(ViewObserverInterface.CATEGORY);
 						MessageHandling.showToast(MessageHandling.SUCCESSFUL_REGISTER, context);

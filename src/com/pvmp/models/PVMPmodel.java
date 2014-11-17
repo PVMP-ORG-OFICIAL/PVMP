@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import android.content.Context;
-import android.database.SQLException;
 
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
@@ -174,65 +173,6 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		return party;
 	}
-	/**
-	* @param _user
-	* @brief
-	*/
-	public void saveUser(User _user)
-	{
-		if(_user == null)
-		{
-			return;
-		}
-		
-		try {
-			_user.insertDB(this.context);
-		}
-		catch (SQLException sqlE) {
-			sqlE.printStackTrace();
-			throw new SQLException();
-		}
-		return;
-	}
-
-	/**
-	* @param _user
-	* @brief 
-	*/
-	public void removeUser(User _user)
-	{
-		if(_user == null) 
-		{
-			return;
-		}
-		
-		Filter deleteFilter = new Filter(User.COLUMN_USERNAME, "=");
-		deleteFilter.setValue(_user.getUsername());
-		
-		_user.deleteDB(deleteFilter, this.context);
-			
-		return;
-	}
-
-	/**
-	* @param _user
-	* @brief
-	*/
-	public void editUser(User _user)
-	{
-		if(_user == null)
-		{
-			return;
-		}
-		
-		Filter editFilter = new Filter(User.COLUMN_USERNAME, "=");
-		editFilter.setValue(_user.getUsername());
-		
-		_user.updateDB(editFilter, this.context);
-
-		return;
-	}
-
 
 	/**
 	* @param _observer

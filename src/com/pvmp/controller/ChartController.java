@@ -23,10 +23,12 @@ public class ChartController
 	public static final String YES_VOTES = "Sim";
 	public static final String NO_VOTES = "Não";
 	private PVMPmodel model;
+	private VotingController votingController;
 	
 	public ChartController(Context _context)
 	{
 		this.model = new PVMPmodel(_context);
+		this.votingController = new VotingController(_context);
 	}
 	
 	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _tag)
@@ -149,7 +151,7 @@ public class ChartController
 		float totalOthers = 0;
 		PieDataSet pieDataSet;
 		
-		voting = this.model.getPropositionVoting(_proposition);
+		voting = this.votingController.getPropositionVoting(_proposition);
 		votes = this.model.getVotingVotes(voting);
 		
 		if (_tag.equals(ALL_VOTES)) 

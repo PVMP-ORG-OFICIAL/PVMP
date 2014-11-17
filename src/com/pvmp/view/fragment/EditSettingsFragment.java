@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.UserController;
 import com.pvmp.models.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
@@ -39,6 +40,7 @@ public class EditSettingsFragment extends FragmentView
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
 	private InputMethodManager imm;
+	private UserController userController;
 	
 	private PVMPController controller;
 	
@@ -54,8 +56,9 @@ public class EditSettingsFragment extends FragmentView
 		this.mainActivity = (PVMPView) getActivity();
 		this.context = mainActivity.getApplicationContext();
 		
-		this.controller = new PVMPController(context);
+		this.controller = new PVMPController(this.context);
 		this.controller.setView(EditSettingsFragment.this.mainActivity);
+		this.userController = new UserController(this.context);
 		
 		this.loggedUser = PVMPView.user;
 		
@@ -156,7 +159,7 @@ public class EditSettingsFragment extends FragmentView
 				}
 				
 				imm.hideSoftInputFromWindow(newPassword.getWindowToken(), 0);
-				controller.editUser(loggedUser);
+				userController.editUser(loggedUser);
 				mainActivity.displayFragment(ViewObserverInterface.SETTING);
 			}
 		}
