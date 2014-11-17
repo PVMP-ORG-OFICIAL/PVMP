@@ -24,11 +24,13 @@ public class ChartController
 	public static final String NO_VOTES = "Não";
 	private PVMPmodel model;
 	private VotingController votingController;
+	private PartyController partyController;
 	
 	public ChartController(Context _context)
 	{
 		this.model = new PVMPmodel(_context);
 		this.votingController = new VotingController(_context);
+		this.partyController = new PartyController(_context);
 	}
 	
 	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _tag)
@@ -92,7 +94,7 @@ public class ChartController
 		for(Deputy deputy : deputies)
 		{
 			Party party = new Party();
-			party = this.model.getDeputyParty(deputy);
+			party = this.partyController.getDeputyParty(deputy);
 			parties.add(party);
 		}
 		
@@ -132,7 +134,7 @@ public class ChartController
 		}
 		
 		for (int i = 0; i < results.size(); i++) {
-			Util.debug("Partido: " + this.model.getPartyAcronym(results.get(i)[0])
+			Util.debug("Partido: " + this.partyController.getPartyAcronym(results.get(i)[0])
 						+ ". Qtd: " + results.get(i)[1]);
 		}
 
@@ -169,7 +171,7 @@ public class ChartController
 				
 				if (actualValue >= 10) 
 				{
-					slicesTitles.add(this.model.getPartyAcronym(results.get(i)[0]));
+					slicesTitles.add(this.partyController.getPartyAcronym(results.get(i)[0]));
 					votesPercentage.add(results.get(i)[1]);
 				}
 				else 
