@@ -165,11 +165,6 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		return;
 	}
 
-	public void setController(ControllerInterface _controller)
-	{
-		this.controller = _controller;
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu _menu)
 	{

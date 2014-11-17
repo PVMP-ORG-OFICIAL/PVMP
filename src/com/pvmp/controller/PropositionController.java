@@ -13,6 +13,8 @@ public class PropositionController implements LegislativeInterface {
   public PropositionController() 
   {
   }
+  
+  
 
 
 	/**

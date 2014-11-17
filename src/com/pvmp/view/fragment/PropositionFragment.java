@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.R;
+import com.pvmp.controller.ChartController;
 import com.pvmp.controller.FeedbackController;
-import com.pvmp.controller.PVMPController;
 import com.pvmp.models.Feedback;
 import com.pvmp.models.Proposition;
-import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 
 import android.os.Bundle;
@@ -24,7 +23,7 @@ import android.widget.ViewFlipper;
 public class PropositionFragment extends FragmentView 
 {
 	private PVMPView view;
-	private PVMPController controller;
+	private ChartController controller;
 	private ArrayList<Proposition> propositions;
 	private TextView textPropositionCount;
 	private TextView categoryName;
@@ -49,7 +48,7 @@ public class PropositionFragment extends FragmentView
 		View rootView = _inflater.inflate(R.layout.proposition_fragment, _container, false);
  
 		this.view = (PVMPView) getActivity();
-		this.controller = new PVMPController(this.view.getApplicationContext());
+		this.controller = new ChartController(this.view.getApplicationContext());
 		this.feedbackController = new FeedbackController(this.view.getApplicationContext());
 		this.existingFeedback = new Feedback();
 		this.propositions = PVMPView.propositions;
@@ -97,9 +96,9 @@ public class PropositionFragment extends FragmentView
 		String text = (propositions.get(count).getMenu());
 		
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
-		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado", PVMPController.ALL_VOTES);
-		this.yesVotesChart = this.controller.createGraphic(propositions.get(count), this.yesVotesChart, "Sim", PVMPController.YES_VOTES);
-		this.noVotesChart = this.controller.createGraphic(propositions.get(count), this.noVotesChart, "Não", PVMPController.NO_VOTES);
+		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado", ChartController.ALL_VOTES);
+		this.yesVotesChart = this.controller.createGraphic(propositions.get(count), this.yesVotesChart, "Sim", ChartController.YES_VOTES);
+		this.noVotesChart = this.controller.createGraphic(propositions.get(count), this.noVotesChart, "Não", ChartController.NO_VOTES);
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
 		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(count).getId());
@@ -155,7 +154,6 @@ public class PropositionFragment extends FragmentView
 		if(_feedback == null)
 		{
 			this.setOpinionButtons(false, false, false);
-			MessageHandling.showToast("Setou falso", view.getApplicationContext());
 			return;
 		}
 		else if(_feedback.getOpinion().equals("l"))
