@@ -1,21 +1,11 @@
 package com.pvmp.models;
 
-import java.io.Serializable;
-
 import android.content.ContentValues;
 
 import com.pvmp.dao.DAOAbstract;
 
-public class Proposition extends DAOAbstract implements Serializable
+public class Proposition extends DAOAbstract 
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
-	//private static final long serialVersionUID = 1L;
 	// !--- DATABASE ATTRIBUTES ---! \\ 
 	public static final String COLUMN_ID_PROP = "id_prop";
 	public static final String COLUMN_YEAR = "year";
@@ -146,5 +136,4 @@ public class Proposition extends DAOAbstract implements Serializable
         
         return proposition;
 	}
-
 }

@@ -16,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pvmp.R;
-import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.PropositionController;
 import com.pvmp.models.Proposition;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
@@ -47,7 +47,7 @@ public class CategoriesFragment extends FragmentView
 	private CategoryDrawerAdapter adapter;
 	private PVMPView mainActivity;
 	private TypedArray navigationMenuIcons;
-	private PVMPController controller;
+	private PropositionController propositionController;
 	
 	public CategoriesFragment()
 	{}
@@ -58,7 +58,7 @@ public class CategoriesFragment extends FragmentView
 		View rootView = _inflater.inflate(R.layout.categories_fragment, _container, false);
 		
 		this.mainActivity = (PVMPView) getActivity();
-		this.controller = new PVMPController(this.mainActivity.getApplicationContext());
+		this.propositionController = new PropositionController(this.mainActivity.getApplicationContext());
 		this.buildScreenComponent(rootView);
 		this.buildListItemNavigation();
 		
@@ -117,12 +117,13 @@ public class CategoriesFragment extends FragmentView
 
 		return;
 	}
+	
 	private class CategoriesClickListener implements ListView.OnItemClickListener
 	{
 		@Override
 		public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id)
 		{
-			PVMPController controller = CategoriesFragment.this.controller;
+			PropositionController propositionController = CategoriesFragment.this.propositionController;
 			String title = null;
 			
 			if ( _position != 8)
@@ -130,7 +131,7 @@ public class CategoriesFragment extends FragmentView
 				title = CategoriesFragment.this.categoriesDrawerItems.get(_position).getTitle();
 			}
 			
-			ArrayList<Proposition> propositions = controller.getPropositions("Category", title);
+			ArrayList<Proposition> propositions = propositionController.getPropositions("Category", title);
 			
 			PVMPView.propositions = propositions;
 			

@@ -4,13 +4,10 @@
 */
 package com.pvmp.controller;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
 
 import com.pvmp.models.ModelSubjectInterface;
-import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.util.Util;
@@ -143,25 +140,4 @@ public class PVMPController implements ControllerInterface
 		
 		return user;
 	}
-
-	@Override
-	public ArrayList<Proposition> getPropositions(String _columnName, String _value) 
-	{
-		//_value might be null
-		if (_columnName == null)
-		{
-			throw new NullPointerException ("Null pointer at PVMPController.getPropositions().");
-		}
-		
-		ArrayList<Proposition> propositions = new ArrayList<Proposition>();
-		
-		propositions = this.model.getPropositions(_columnName, _value);
-		
-		return propositions;
-	}
-	
-	/**
-	 * 
-	 * */
-	
 }

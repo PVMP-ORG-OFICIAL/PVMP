@@ -4,12 +4,9 @@
 */
 package com.pvmp.models;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 
 import com.pvmp.models.User;
-import com.pvmp.models.Proposition;
 
 /**
 * @class ModelSubjectInterface
@@ -23,9 +20,6 @@ public interface ModelSubjectInterface
 	* @brief
 	*/
 	public User getUser(String _columnName, String _userName);
-
-
-	public ArrayList<Proposition> getPropositions (String _columnName, String _userName);
 
 	/**
 	* @param _user

@@ -8,7 +8,6 @@ import com.pvmp.view.ViewObserverInterface;
 
 public interface LegislativeInterface{
 
-
   public void setModel(ModelSubjectInterface _model);
 
   /**

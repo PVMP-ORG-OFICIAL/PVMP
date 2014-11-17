@@ -15,12 +15,11 @@ import com.pvmp.util.Util;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
 
-public class FeedbackController {
-	private Context context;
-	
+public class FeedbackController extends AbstractController 
+{
 	public FeedbackController (Context _context) 
 	{
-		this.context = _context;
+		super(_context);
 	}
 	
 	/**
@@ -152,5 +151,4 @@ public class FeedbackController {
 		
 		return feedback;
 	}
-	
 }
