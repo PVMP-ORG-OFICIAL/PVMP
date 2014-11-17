@@ -2,14 +2,7 @@ package com.pvmp.view.fragment;
 
 import java.util.ArrayList;
 
-import com.github.mikephil.charting.charts.PieChart;
-import com.pvmp.R;
-import com.pvmp.controller.ChartController;
-import com.pvmp.controller.FeedbackController;
-import com.pvmp.models.Feedback;
-import com.pvmp.models.Proposition;
-import com.pvmp.view.PVMPView;
-
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,20 +13,25 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.pvmp.R;
+import com.pvmp.controller.ChartController;
+import com.pvmp.controller.FeedbackController;
+import com.pvmp.models.Feedback;
+import com.pvmp.models.Proposition;
+import com.pvmp.view.ChartView;
+import com.pvmp.view.PVMPView;
+
 public class PropositionFragment extends FragmentView 
 {
+	private Context context;
 	private PVMPView view;
-	private ChartController controller;
 	private ArrayList<Proposition> propositions;
-	private TextView textPropositionCount;
-	private TextView categoryName;
+	private TextView textPropositionCount, categoryName;
 	private ViewFlipper viewFlipper;
-	private int limit;
-	private int count;
+	private int limit, target, count;
 	private String opinion = ""; 
-	int target;
-	private Button button_next;
-	private Button button_previous;
+	private Button button_next, button_previous;
 	private PieChart yesNoVotesChart, yesVotesChart, noVotesChart;
 	private ToggleButton button_like, button_dislike, button_clown;
 	private ScrollView propositionScrollView;
@@ -48,8 +46,8 @@ public class PropositionFragment extends FragmentView
 		View rootView = _inflater.inflate(R.layout.proposition_fragment, _container, false);
  
 		this.view = (PVMPView) getActivity();
-		this.controller = new ChartController(this.view.getApplicationContext());
-		this.feedbackController = new FeedbackController(this.view.getApplicationContext());
+		this.context = this.view.getApplicationContext();
+		this.feedbackController = new FeedbackController(this.context);
 		this.existingFeedback = new Feedback();
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
@@ -96,9 +94,11 @@ public class PropositionFragment extends FragmentView
 		String text = (propositions.get(count).getMenu());
 		
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
-		this.yesNoVotesChart = this.controller.createGraphic(propositions.get(count), this.yesNoVotesChart, "Resultado", ChartController.ALL_VOTES);
-		this.yesVotesChart = this.controller.createGraphic(propositions.get(count), this.yesVotesChart, "Sim", ChartController.YES_VOTES);
-		this.noVotesChart = this.controller.createGraphic(propositions.get(count), this.noVotesChart, "Não", ChartController.NO_VOTES);
+		
+		this.yesNoVotesChart = ChartView.createChart(propositions.get(count), this.yesNoVotesChart, "Resultado", ChartController.ALL_VOTES, this.context);
+		this.yesVotesChart = ChartView.createChart(propositions.get(count), this.yesVotesChart, "Sim", ChartController.YES_VOTES, this.context);
+		this.noVotesChart = ChartView.createChart(propositions.get(count), this.noVotesChart, "Não", ChartController.NO_VOTES, this.context);
+		
 		this.textPropositionCount.setText("#"+(count+1));
 		this.categoryName.setText(text);
 		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(count).getId());

@@ -3,7 +3,6 @@ package com.pvmp.controller;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Typeface;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.models.Deputy;
@@ -199,32 +198,4 @@ public class ChartController
 		
 		return _chart;
 	}
-	
-	public PieChart createGraphic (Proposition _proposition, PieChart _chart,
-			   String _centerText, String _tag)
-{
-		_chart = prepareGraphicData(_proposition, _chart, _tag);
-		_chart.setDescription("");
-
-		Typeface tf = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
-		Typeface tfCenter = Typeface.SANS_SERIF;
-
-		_chart.setValueTypeface(tf);
-		_chart.setUsePercentValues(true);
-		_chart.setValueTextSize(15f);
-		_chart.setCenterText(_centerText);
-		_chart.setCenterTextTypeface(tfCenter);
-		_chart.setCenterTextSize(22f);
-		
-		_chart.setHoleRadius(45f); 
-		_chart.setTransparentCircleRadius(50f);
-		_chart.setRotationEnabled(false);
-		
-		_chart.setScrollContainer(true);
-		
-		_chart.animateXY(800, 800);
-
-		return _chart;
-}
-	
 }
