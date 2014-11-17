@@ -21,6 +21,7 @@ public class PVMPController implements ControllerInterface
 {
 	private ViewObserverInterface view;
 	private PVMPmodel model;
+	private UserController userController;
 
 	public PVMPController()
 	{
@@ -33,6 +34,7 @@ public class PVMPController implements ControllerInterface
 	public PVMPController(Context _context)
 	{
 		this.model = new PVMPmodel(_context);
+		this.userController = new UserController(_context);
 	}
 
 	/**
@@ -56,8 +58,7 @@ public class PVMPController implements ControllerInterface
 	@Override
 	public void openApplication()
 	{
-
-		User user = this.model.getUser("default_user","S");
+		User user = this.userController.getUser("default_user","S");
 		Util.debug("PVMPController: start openApplication.");
 
 		//Verify if has user default
@@ -115,29 +116,13 @@ public class PVMPController implements ControllerInterface
 	{
 		Util.debug("PVMPController: openSession");
 		
-		User user = this.model.getUser("default_user","S");
+		User user = this.userController.getUser("default_user","S");
 		
 		if(user == null)
 		{
 			Util.debug("PVMPController: getDefaultUser Problem");
 		}
 
-		return user;
-	}
-	/**
-	 * @param _userName
-	 * @param _password
-	 * @brief
-	 * */
-	public User verifyMatchingUserPassword (String _userName, String _password) 
-	{
-		if (_userName == null || _password == null)
-		{
-			throw new NullPointerException ("Null pointer at PVMPController.verifyMatchingUserPassword().");
-		}
-
-		User user = this.model.verifyMatchingUserPassword(_userName, _password);
-		
 		return user;
 	}
 }

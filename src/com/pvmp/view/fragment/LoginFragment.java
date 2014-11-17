@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.UserController;
 import com.pvmp.models.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
@@ -39,8 +40,7 @@ public class LoginFragment extends FragmentView
 	private InputMethodManager imm;
 
 	private PVMPController controller;
-	
-	
+	private UserController userController;
 
 	public LoginFragment()
 	{
@@ -54,13 +54,15 @@ public class LoginFragment extends FragmentView
 		//Preparing the fragment
 		Util.debug("LoginFragment: onCreateView");
 		View rootView = _inflater.inflate(R.layout.login_fragment, _containter, false);
-		mainActivity = (PVMPView) getActivity();
-		context = mainActivity.getApplicationContext();
-		mainActivity.enableDrawer(false);
-		mainActivity.enableScreenInteraction(false);
+		this.mainActivity = (PVMPView) getActivity();
+		this.context = mainActivity.getApplicationContext();
+		this.mainActivity.enableDrawer(false);
+		this.mainActivity.enableScreenInteraction(false);
+		
 		this.userToBeLogged = new User();
-		this.controller = new PVMPController(context);
-		controller.setView(LoginFragment.this.mainActivity);
+		this.controller = new PVMPController(this.context);
+		this.controller.setView(LoginFragment.this.mainActivity);
+		this.userController = new UserController(this.context);
 		//Initialize the elements
 		this.buildScreenComponent(rootView);
 		
@@ -97,7 +99,7 @@ public class LoginFragment extends FragmentView
 			Util.debug("ENTRAR PUSHED!!!"); 
 			String username = editTextUsername.getText().toString();
 			String password = editTextPassword.getText().toString();
-			userToBeLogged = LoginFragment.this.controller.verifyMatchingUserPassword(username, password);
+			userToBeLogged = LoginFragment.this.userController.verifyMatchingUserPassword(username, password);
 			
 			if(userToBeLogged != null){
                 imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);

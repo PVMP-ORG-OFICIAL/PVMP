@@ -53,6 +53,5 @@ public class StartSplash extends Activity
 					finish();
 				}
 			}
-
 	}
 }

@@ -97,7 +97,7 @@ public class UserRegisterFragment extends FragmentView
 			Util.debug("UserRegisterFragment: Register button clicked!!");
 			if(userPassword.getText().toString().equals(userPasswordConfirm.getText().toString()))
 			{
-				int validationResult = User.validationResult(userBuild, context);
+				int validationResult = userBuild.validationResult(userBuild, context);
 
 				switch(validationResult) 
 				{

@@ -6,6 +6,7 @@ package com.pvmp.models;
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.pvmp.controller.UserController;
 import com.pvmp.dao.DAOAbstract;
 
 /**
@@ -31,8 +32,8 @@ public class User extends DAOAbstract
 	private String email;
 	private int age;
 	private String education;
+	private UserController userController;
 	private String sex;
-	private static PVMPmodel model;
 	private String defaultUser;
 	
 	public User()
@@ -152,45 +153,6 @@ public class User extends DAOAbstract
 		return;
 	}
 	
-	/**
-	* @param _email
-	* @param _context
-	* @return 
-	* @brief 
-	*/
-	public static boolean validateExistingEmail (String _email, Context _context)
-	{
-		model = new PVMPmodel(_context);
-		User user = new User();
-		user = model.getUser("email", _email);
-		
-		if (user == null)
-		{
-			return true;
-		}
-
-		return false;
-	}
-	
-	/**
-	* @param _username
-	* @param _context
-	* @return
-	* @brief 
-	*/
-	public static boolean validateExistingUser (String _username, Context _context)
-	{
-		User user = new User();
-		user = model.getUser("user_name", _username);
-		
-		if (user == null)
-		{
-			return true;
-		}
-		
-		return false;
-	}
-
 	/**
 	* @param _passowrd
 	* @return
@@ -339,7 +301,7 @@ public class User extends DAOAbstract
 	* @return
 	* @brief 
 	*/
-	public static int validationResult (User _user, Context _context) 
+	public int validationResult (User _user, Context _context) 
 	{
 		if (!User.validateNameFormat(_user.getName()))
 		{ 
@@ -371,12 +333,12 @@ public class User extends DAOAbstract
 			return 6;
 		}
 		
-		if(!User.validateExistingEmail(_user.getEmail(), _context))
+		if(!userController.validateExistingEmail(_user.getEmail()))
 		{
 			return 7;
 		}
 		
-		if (!User.validateExistingUser(_user.getUsername(), _context))
+		if (!userController.validateExistingUser(_user.getUsername()))
 		{
 			return 8;
 		}

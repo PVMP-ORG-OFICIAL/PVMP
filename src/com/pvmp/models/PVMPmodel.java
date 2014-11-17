@@ -39,74 +39,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		this.context = _context;
 		return;
 	}
-
-	/**
-	* @param _userName
-	* @return 
-	* @brief 
-	*/
-	public User getUser(String _columnName, String _attribute)
-	{
-		if (_attribute == null || _columnName == null)
-		{
-			throw new NullPointerException("Null value at PVMPmodel.getUser()");
-		}
-		
-		SqlSelect selectExpression = new SqlSelect();
-		ArrayList<DAOAbstract> users = new ArrayList<DAOAbstract>();
-		
-		Filter usernameFilter = new Filter(_columnName, "=");
-		usernameFilter.setValue(_attribute);
-		
-		User user = new User();
-		
-		selectExpression.addEntity(user.TABLE_NAME);
-		selectExpression.setExpression(usernameFilter);
-		
-		users = user.selectDB(selectExpression, this.context);
-		
-		if(users.size() == 0)
-			user = null;
-		else
-			user = (User) users.get(0);
-		
-		return user;
-	}
 	
-	
-	//This might be changed or removed
-	public Voting getPropositionVoting (Proposition _proposition) 
-	{
-		if (_proposition == null) {
-			throw new NullPointerException("Null value at PVMPmodel.getPropositionVoting");
-		}
-		
-		Voting voting = new Voting();
-		ArrayList<DAOAbstract> abstractVotings = new ArrayList<DAOAbstract>();
-		
-		SqlSelect selectExpression = new SqlSelect();
-		selectExpression.addEntity(voting.TABLE_NAME);
-		selectExpression.addColumn(Voting.COLUMN_CODE_SESSION);
-		
-		Filter propositionIdFilter = new Filter("id_prop", "=");
-		propositionIdFilter.setValue(_proposition.getId());
-		
-		selectExpression.setExpression(propositionIdFilter);
-		
-		abstractVotings = voting.selectDB(selectExpression, this.context); 
-		
-		if (abstractVotings.size() == 1)
-		{
-			voting = (Voting) abstractVotings.get(0);
-			voting.setProposition(_proposition);
-		}
-		else 
-		{
-			throw new NoSuchElementException("No value at PVMPmodel.getPropositionVoting");
-		}
-		
-		return voting;
-	}
 	//This might be changed or removed
 	public ArrayList<Vote> getVotingVotes (Voting _voting) 
 	{
@@ -241,19 +174,6 @@ public class PVMPmodel implements ModelSubjectInterface
 		
 		return party;
 	}
-	
-	public User verifyMatchingUserPassword (String _userName, String _password) 
-	{
-		User user = this.getUser("user_name", _userName);
-		
-		if (user != null) {
-			if(!_password.equals(user.getPassword())) {
-				user = null;
-			}
-		}
-		return user;
-	}
-
 	/**
 	* @param _user
 	* @brief

@@ -139,7 +139,7 @@ public class EditSettingsFragment extends FragmentView
 			updateScreenComponent();
 			
 			boolean passVerification = passwordsVerification();
-			int validationResult = User.validationResult(loggedUser, context);
+			int validationResult = loggedUser.validationResult(loggedUser, context);
 			
 			if (validationResult > 0 && validationResult <= 6)
 			{

@@ -15,20 +15,6 @@ import com.pvmp.models.User;
 public interface ModelSubjectInterface
 {
 	/**
-	* @param _userName
-	* @return 
-	* @brief
-	*/
-	public User getUser(String _columnName, String _userName);
-
-	/**
-	* @param _user
-	* @param _password
-	* @brief
-	*/
-	public User verifyMatchingUserPassword (String _userName, String _password);
-	
-	/**
 	* @param _user
 	* @brief
 	*/
