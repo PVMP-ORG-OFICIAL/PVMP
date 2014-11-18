@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
@@ -31,12 +34,17 @@ public class PropositionFragment extends FragmentView
 	private ViewFlipper viewFlipper;
 	private int limit, target, count;
 	private String opinion = ""; 
-	private Button button_next, button_previous;
 	private PieChart yesNoVotesChart, yesVotesChart, noVotesChart;
 	private ToggleButton button_like, button_dislike, button_clown;
 	private ScrollView propositionScrollView;
 	private FeedbackController feedbackController;
 	private Feedback existingFeedback;
+	
+	private GestureDetector gesturedetector = null;
+	private static final int SWIPE_MIN_DISTANCE = 150;
+	private static final int SWIPE_MAX_OFF_PATH = 100;
+	private static final int SWIPE_THRESHOLD_VELOCITY = 100;
+
 	//private float firstX;
 	//private float currentX;
 
@@ -57,6 +65,46 @@ public class PropositionFragment extends FragmentView
 		this.updateScreenComponent();
 		this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.proposition_flipper);
 		
+		PVMPView.gesturedetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener(){
+			
+			@Override
+			public boolean onDown(MotionEvent e) {
+				return true;
+			}
+			@Override
+			public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+					float velocityY) {
+				Log.i("PVMP", "onFling has been called!");
+				float dX = e2.getX() - e1.getX();
+				float dY = e1.getY() - e2.getY();
+				
+				if(Math.abs(dY) < SWIPE_MAX_OFF_PATH && Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY &&
+						Math.abs(dX) >= SWIPE_MIN_DISTANCE)
+				{
+					if(dX > 0)
+					{
+						HandlePrevious();
+					}
+					else
+					{
+						HandleNext();
+					}
+					
+				}
+				return super.onFling(e1, e2, velocityX, velocityY);
+			}
+		}
+		);
+
+	rootView.setOnTouchListener(new View.OnTouchListener() {
+	
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		
+		return gesturedetector.onTouchEvent(event) ;
+	}
+});
+		
 		return rootView;
 	}
 	
@@ -64,6 +112,13 @@ public class PropositionFragment extends FragmentView
 	public void onPause() {
 		super.onPause();
 		this.takeFeedback();
+		PVMPView.gesturedetector = new GestureDetector(view.getApplicationContext(), new GestureDetector.SimpleOnGestureListener(){
+			
+			@Override
+			public boolean onDown(MotionEvent e) {
+				return true;
+			}
+		});
 	}
 
 	@Override
@@ -71,8 +126,6 @@ public class PropositionFragment extends FragmentView
 	{
 		this.categoryName = (TextView) _view.findViewById(R.id.proposition_category);
 		this.textPropositionCount = (TextView) _view.findViewById(R.id.proposition_count2);
-		this.button_next = (Button) _view.findViewById(R.id.button_next);
-		this.button_previous = (Button) _view.findViewById(R.id.button_previous);
 		this.propositionScrollView = (ScrollView) _view.findViewById(R.id.proposition_scroll_view);
 		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
 		this.yesVotesChart = (PieChart) _view.findViewById(R.id.yes_votes_chart);
@@ -81,8 +134,6 @@ public class PropositionFragment extends FragmentView
 		this.button_dislike = (ToggleButton) _view.findViewById(R.id.toggleButton_dislike);
 		this.button_clown = (ToggleButton) _view.findViewById(R.id.toggleButton_clown);
 		
-		this.button_next.setOnClickListener(new HandleNext());
-		this.button_previous.setOnClickListener(new HandlePrevious());
 		this.button_like.setOnClickListener(new HandleLike());
 		this.button_dislike.setOnClickListener(new HandleDislike());
 		this.button_clown.setOnClickListener(new HandleClown());
@@ -170,11 +221,8 @@ public class PropositionFragment extends FragmentView
 		}
 	}
 	
-	private class HandleNext implements View.OnClickListener
+	public void HandleNext()
 	{
-		@Override
-		public void onClick(View v) 
-		{
 			takeFeedback();
 			if(count < limit - 1)
 			{
@@ -189,16 +237,11 @@ public class PropositionFragment extends FragmentView
 
 			updateScreenComponent();
 			viewFlipper.showNext();			
-		}
-		
 	}
 	
-	private class HandlePrevious implements View.OnClickListener
+	public void HandlePrevious() 
 	{
 
-		@Override
-		public void onClick(View v) 
-		{
 			takeFeedback();
 			if(count > 0)
 			{
@@ -213,7 +256,6 @@ public class PropositionFragment extends FragmentView
 			
 			updateScreenComponent();
 			viewFlipper.showPrevious();
-		}
 		
 	}
 	

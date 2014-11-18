@@ -303,6 +303,8 @@ public class User extends DAOAbstract
 	*/
 	public int validationResult (User _user, Context _context) 
 	{
+		
+		userController = new UserController(_context);
 		if (!User.validateNameFormat(_user.getName()))
 		{ 
 			return 1;

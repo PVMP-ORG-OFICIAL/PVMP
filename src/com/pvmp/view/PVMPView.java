@@ -18,8 +18,10 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -65,6 +67,8 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	//private ModelSubjectInterface model; <-Still not using
 	
 	private UserController userController;
+	public static GestureDetector gesturedetector = null;
+		
 
 	public PVMPView()
 	{}
@@ -80,6 +84,15 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.controller = new PVMPController(this);
 		this.controller.setView(this);
 		this.userController = new UserController(this);
+		
+		gesturedetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
+			
+			@Override
+			public boolean onDown(MotionEvent e) {
+				return true;
+			}
+		});
+
 		
 		//Start the party!!! 
 		user = this.controller.openSession();
@@ -252,6 +265,14 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		}
 		this.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 		return;
+	}
+	
+
+	public boolean dispatchTouchEvent(MotionEvent ev)
+	{
+		super.dispatchTouchEvent(ev);
+		return gesturedetector.onTouchEvent(ev);
+		
 	}
 
 	@Override
