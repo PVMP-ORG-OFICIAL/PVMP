@@ -23,14 +23,14 @@ public class ChartController
 	public static final String YES_VOTES = "Sim";
 	public static final String NO_VOTES = "Não";
 	private PVMPmodel model;
-	private VotingController votingController;
 	private PartyController partyController;
+	private DeputyController deputyController;
 	
 	public ChartController(Context _context)
 	{
 		this.model = new PVMPmodel(_context);
-		this.votingController = new VotingController(_context);
 		this.partyController = new PartyController(_context);
+		this.deputyController = new DeputyController(_context);
 	}
 	
 	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _tag)
@@ -83,13 +83,7 @@ public class ChartController
 		int aux = 0;
 		
 		
-		for(Vote vote : votes)
-		{
-			Deputy deputy = new Deputy();
-			deputy = this.model.getDeputyVoteOnSession(vote);
-			if (deputy != null)
-				deputies.add(deputy);
-		}
+		deputies = deputyController.getDeputiesVotesOnSession(votes);
 		
 		for(Deputy deputy : deputies)
 		{
@@ -153,7 +147,7 @@ public class ChartController
 		float totalOthers = 0;
 		PieDataSet pieDataSet;
 		
-		voting = this.votingController.getPropositionVoting(_proposition);
+		voting = _proposition.getVoting();
 		votes = this.model.getVotingVotes(voting);
 		
 		if (_tag.equals(ALL_VOTES)) 

@@ -63,6 +63,7 @@ public class Vote extends DAOAbstract
 		
 		vote.setResult(_contentValues.getAsString(COLUMN_VOTE_RESULT));
 		vote.getDeputy().setIdRegistration(_contentValues.getAsInteger(COLUMN_ID_REGISTRATION));
+		
 		return vote;
 	}
 	

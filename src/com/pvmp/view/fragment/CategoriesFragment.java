@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.pvmp.R;
 import com.pvmp.controller.PropositionController;
+import com.pvmp.controller.VotingController;
 import com.pvmp.models.Proposition;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
@@ -48,6 +49,7 @@ public class CategoriesFragment extends FragmentView
 	private PVMPView mainActivity;
 	private TypedArray navigationMenuIcons;
 	private PropositionController propositionController;
+	private VotingController votingController;
 	
 	public CategoriesFragment()
 	{}
@@ -59,6 +61,8 @@ public class CategoriesFragment extends FragmentView
 		
 		this.mainActivity = (PVMPView) getActivity();
 		this.propositionController = new PropositionController(this.mainActivity.getApplicationContext());
+		this.votingController = new VotingController(this.mainActivity.getApplicationContext());
+		
 		this.buildScreenComponent(rootView);
 		this.buildListItemNavigation();
 		
@@ -124,6 +128,7 @@ public class CategoriesFragment extends FragmentView
 		public void onItemClick(AdapterView<?> _parent, View _view, int _position, long _id)
 		{
 			PropositionController propositionController = CategoriesFragment.this.propositionController;
+			VotingController votingController = CategoriesFragment.this.votingController;
 			String title = null;
 			
 			if ( _position != 8)
@@ -133,6 +138,7 @@ public class CategoriesFragment extends FragmentView
 			
 			ArrayList<Proposition> propositions = propositionController.getPropositions("Category", title);
 			
+			votingController.getPropositionsVotings(propositions);
 			PVMPView.propositions = propositions;
 			
 			mainActivity.displayFragment(ViewObserverInterface.PROPOSITION);

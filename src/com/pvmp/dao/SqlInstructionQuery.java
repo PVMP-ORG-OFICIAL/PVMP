@@ -17,6 +17,7 @@ public abstract class SqlInstructionQuery
 	protected String finalExpression;
 	protected Expression expression;
 	protected ArrayList<String> entities;
+	protected String auxiliarCondition;
 	
 	public void setExpression (Expression _expression)
 	{
@@ -26,6 +27,11 @@ public abstract class SqlInstructionQuery
 	public final void setEntity(ArrayList<String> _entities) 
 	{
 		this.entities = _entities;
+	}
+	
+	public final void setAuxiliarCondition(String _auxiliarCondition)
+	{
+		this.auxiliarCondition = _auxiliarCondition;
 	}
 	
 	public final ArrayList<String> getEntities()

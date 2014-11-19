@@ -19,6 +19,7 @@ public final class SqlSelect extends SqlInstructionQuery
 	{
 		this.columns = new ArrayList<String>();
 		this.expression = null;
+		this.auxiliarCondition = null;
 		this.entities = new ArrayList<String>();
 	}
 	
@@ -60,6 +61,11 @@ public final class SqlSelect extends SqlInstructionQuery
 		if (this.expression != null) 
 		{
 			expression += " WHERE " + this.expression.dumpExpression();
+		}
+		
+		if (this.auxiliarCondition != null) 
+		{
+			expression += " " + this.auxiliarCondition;
 		}
 		
 		return expression;

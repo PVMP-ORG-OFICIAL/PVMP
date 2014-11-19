@@ -11,7 +11,6 @@ import android.content.Context;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.util.Util;
 
 /**
 * @class PVMPModel
@@ -59,6 +58,7 @@ public class PVMPmodel implements ModelSubjectInterface
 		votingCodeFilter.setValue(_voting.getCodeSession());
 		
 		selectExpression.setExpression(votingCodeFilter);
+		selectExpression.setAuxiliarCondition("ORDER BY " + Vote.COLUMN_ID_REGISTRATION + " ASC");
 		
 		abstractVotes = vote.selectDB(selectExpression, this.context);
 		
@@ -72,43 +72,6 @@ public class PVMPmodel implements ModelSubjectInterface
 		_voting.setVotes(votes);
 		
 		return votes;
-	}
-	
-	public Deputy getDeputyVoteOnSession (Vote _vote) 
-	{
-		if (_vote == null)
-		{
-			throw new NullPointerException("Null value at PVMPmodel.getVoteDeputy");
-		}
-		
-		Deputy deputy = _vote.getDeputy();
-		ArrayList<DAOAbstract> deputies = new ArrayList<DAOAbstract>();
-		
-		SqlSelect selectExpression = new SqlSelect();
-		selectExpression.addEntity(deputy.TABLE_NAME);
-		selectExpression.addColumn(Deputy.COLUMN_NUMBER_PARTY);
-		selectExpression.addColumn(Deputy.COLUMN_NAME);
-		
-		Util.debug("Deputy ID: " + deputy.getIdRegistration());
-		
-		Filter deputyIdFilter = new Filter("id_registration", "=");
-		deputyIdFilter.setValue(deputy.getIdRegistration());
-		
-		selectExpression.setExpression(deputyIdFilter);
-		
-		deputies = deputy.selectDB(selectExpression, this.context); 
-		
-		if (deputies.size() == 1)
-		{
-			deputy = (Deputy) deputies.get(0);
-		}
-		else 
-		{
-			return null;
-			//throw new NoSuchElementException("No value at PVMPmodel.getDeputyVoteOnSession");
-		}
-		
-		return deputy;
 	}
 
 	/**

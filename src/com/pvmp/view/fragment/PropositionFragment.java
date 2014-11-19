@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
@@ -65,7 +64,7 @@ public class PropositionFragment extends FragmentView
 		this.updateScreenComponent();
 		this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.proposition_flipper);
 		
-		PVMPView.gesturedetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener(){
+		PVMPView.gesturedetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
 			
 			@Override
 			public boolean onDown(MotionEvent e) {
@@ -96,14 +95,12 @@ public class PropositionFragment extends FragmentView
 		}
 		);
 
-	rootView.setOnTouchListener(new View.OnTouchListener() {
-	
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		
-		return gesturedetector.onTouchEvent(event) ;
-	}
-});
+		rootView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return gesturedetector.onTouchEvent(event) ;
+			}
+		});
 		
 		return rootView;
 	}
@@ -112,8 +109,7 @@ public class PropositionFragment extends FragmentView
 	public void onPause() {
 		super.onPause();
 		this.takeFeedback();
-		PVMPView.gesturedetector = new GestureDetector(view.getApplicationContext(), new GestureDetector.SimpleOnGestureListener(){
-			
+		PVMPView.gesturedetector = new GestureDetector(view.getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onDown(MotionEvent e) {
 				return true;
@@ -142,23 +138,23 @@ public class PropositionFragment extends FragmentView
 	public void updateScreenComponent()
 	{
 		//Testing if the propositions' IDs are correct based on the category clicked.
-		String text = (propositions.get(count).getMenu());
+		String text = "Code_session: " + (propositions.get(this.count).getVoting().getCodeSession());
 		
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
 		
-		this.yesNoVotesChart = ChartView.createChart(propositions.get(count), this.yesNoVotesChart, "Resultado", ChartController.ALL_VOTES, this.context);
-		this.yesVotesChart = ChartView.createChart(propositions.get(count), this.yesVotesChart, "Sim", ChartController.YES_VOTES, this.context);
-		this.noVotesChart = ChartView.createChart(propositions.get(count), this.noVotesChart, "Não", ChartController.NO_VOTES, this.context);
+		this.yesNoVotesChart = ChartView.createChart(propositions.get(this.count), this.yesNoVotesChart, "Resultado", ChartController.ALL_VOTES, this.context);
+		this.yesVotesChart = ChartView.createChart(propositions.get(this.count), this.yesVotesChart, "Sim", ChartController.YES_VOTES, this.context);
+		this.noVotesChart = ChartView.createChart(propositions.get(this.count), this.noVotesChart, "Não", ChartController.NO_VOTES, this.context);
 		
-		this.textPropositionCount.setText("#"+(count+1));
+		this.textPropositionCount.setText("#"+(this.count+1));
 		this.categoryName.setText(text);
-		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(count).getId());
+		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(this.count).getId());
 		this.updateFeedback(existingFeedback);
 	}
 	
 	public void takeFeedback()
 	{
-		this.target = propositions.get(count).getId();
+		this.target = propositions.get(this.count).getId();
 		
 		if(button_like.isChecked())
 		{
@@ -224,13 +220,13 @@ public class PropositionFragment extends FragmentView
 	public void HandleNext()
 	{
 			takeFeedback();
-			if(count < limit - 1)
+			if(this.count < limit - 1)
 			{
-				count++;
+				this.count++;
 			}
 			else 
 			{
-				count = 0;
+				this.count = 0;
 			}
 			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
 			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
@@ -243,13 +239,13 @@ public class PropositionFragment extends FragmentView
 	{
 
 			takeFeedback();
-			if(count > 0)
+			if(this.count > 0)
 			{
-				count--;
+				this.count--;
 			}
 			else 
 			{
-				count = limit - 1;
+				this.count = limit - 1;
 			}
 			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
 			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);

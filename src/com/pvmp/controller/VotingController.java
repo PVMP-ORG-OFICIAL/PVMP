@@ -10,6 +10,7 @@ import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.Voting;
+import com.pvmp.util.Util;
 
 public class VotingController extends AbstractController
 {
@@ -20,36 +21,49 @@ public class VotingController extends AbstractController
 	}
 	
 	//This might be changed or removed
-	public Voting getPropositionVoting (Proposition _proposition) 
+	public void getPropositionsVotings (ArrayList<Proposition> _propositions) 
 	{
-		if (_proposition == null) {
+		if (_propositions == null) {
 			throw new NullPointerException("Null value at PVMPmodel.getPropositionVoting");
 		}
 		
 		Voting voting = new Voting();
 		ArrayList<DAOAbstract> abstractVotings = new ArrayList<DAOAbstract>();
+		ArrayList<Integer> propositionsIds = new ArrayList<Integer>();
+		
+		for (int i = 0; i < _propositions.size(); i++) { 
+			propositionsIds.add(_propositions.get(i).getId());
+		}
 		
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(voting.TABLE_NAME);
 		selectExpression.addColumn(Voting.COLUMN_CODE_SESSION);
+		selectExpression.addColumn(Proposition.COLUMN_ID_PROP);
 		
-		Filter propositionIdFilter = new Filter("id_prop", "=");
-		propositionIdFilter.setValue(_proposition.getId());
+		Filter propositionIdFilter = new Filter("id_prop", "IN");
+		propositionIdFilter.setValue(propositionsIds);
 		
 		selectExpression.setExpression(propositionIdFilter);
+		selectExpression.setAuxiliarCondition("ORDER BY " + Proposition.COLUMN_ID_PROP + " ASC");
 		
 		abstractVotings = voting.selectDB(selectExpression, this.context); 
 		
-		if (abstractVotings.size() == 1)
-		{
-			voting = (Voting) abstractVotings.get(0);
-			voting.setProposition(_proposition);
-		}
-		else 
+		if (abstractVotings.size() == 0)
 		{
 			throw new NoSuchElementException("No value at PVMPmodel.getPropositionVoting");
 		}
-		
-		return voting;
+		else 
+		{
+			for (int i = 0; i < abstractVotings.size(); i++) {
+				Voting currentVoting = new Voting();
+				currentVoting = (Voting) abstractVotings.get(i);
+				
+				_propositions.get(i).setVoting(currentVoting);
+				
+				Util.debug("Code_session: " + currentVoting.getCodeSession() +
+						   "Id_propVOT: " + currentVoting.getProposition().getId()+
+						   " Id_prop: " + _propositions.get(i).getId());
+			}
+		}
 	}
 }
