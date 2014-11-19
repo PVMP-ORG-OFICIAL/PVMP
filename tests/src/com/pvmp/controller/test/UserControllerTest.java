@@ -13,6 +13,7 @@ import com.pvmp.models.User;
 
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
+import android.test.suitebuilder.annotation.SmallTest;
 
 /**
  * @class DatabaseTest
@@ -70,18 +71,19 @@ public class UserControllerTest extends AndroidTestCase
 	 * 	      Column Name that it will be selected from. After that, every attribute of user2 is
 	 * 		  compared with the this.user's attributes (which was inserted on the test above.
 	 * */
+	@SmallTest
 	public void testGetUser () 
 	{
 		this.user2 = this.userController.getUser(User.COLUMN_USERNAME, this.user.getUsername());
 		
 		//Need to find a better way to test it. like testing if the two instances (user and user2) are equal
-		assertEquals("Joao", user2.getName());
-		assertEquals("juca123", user2.getUsername());
-		assertEquals("senha1234", user2.getPassword());
-		assertEquals("email", user2.getEmail());
-		assertEquals(19, user2.getAge());
-		assertEquals("Superior", user2.getEducation());
-		assertEquals("M", user2.getSex());
+		assertEquals(user.getUsername(), user2.getUsername());
+		assertEquals(user.getName(), user2.getName());
+		assertEquals(user.getPassword(), user2.getPassword());
+		assertEquals(user.getEmail(), user2.getEmail());
+		assertEquals(user.getAge(), user2.getAge());
+		assertEquals(user.getEducation(), user2.getEducation());
+		assertEquals(user.getSex(), user2.getSex());
 	}
 	/**
 	 * @brief Tests if the Database is updated by the UserController's editUser. After editing 
@@ -94,7 +96,6 @@ public class UserControllerTest extends AndroidTestCase
 		this.user.setEducation("Medio");
 		this.user.setAge(41);
 		this.user.setSex("F");
-		this.user.setEmail("email do juca");
 		
 		this.userController.editUser(this.user);
 		
@@ -106,7 +107,6 @@ public class UserControllerTest extends AndroidTestCase
 		assertEquals("Medio", user2.getEducation());
 		assertEquals(41, user.getAge());
 		assertEquals("F", user.getSex());
-		assertEquals("email do juca", user.getEmail());
 	}
 	
 	/**
@@ -123,6 +123,27 @@ public class UserControllerTest extends AndroidTestCase
 		assertEquals(0, users.size());
 	}
 	
+	public void testVerifyMatchingUserPassword()
+	{
+		this.user2 = this.userController.verifyMatchingUserPassword("juca123", "senha1234");
+		
+		assertNotNull(user2);
+		
+		this.user2 = this.userController.verifyMatchingUserPassword("joao", "senha");
+		assertNull(user2);
+	}
+	
+	public void testValidateExistingEmail()
+	{
+		assertFalse(this.userController.validateExistingEmail(user.getEmail()));
+		assertTrue(this.userController.validateExistingEmail("emailDiferente"));
+	}
+	
+	public void testValidateExistingUser()
+	{
+		assertFalse(this.userController.validateExistingUser(this.user.getUsername()));
+		assertTrue(this.userController.validateExistingUser("nomeUsuarioQualquer"));
+	}
 	
 	public void tearDown() throws Exception 
 	{

@@ -1,6 +1,5 @@
 package com.pvmp.view.test;
 
-import com.pvmp.StartSplash;
 import com.pvmp.view.PVMPView;
 
 import android.test.ActivityInstrumentationTestCase2;
