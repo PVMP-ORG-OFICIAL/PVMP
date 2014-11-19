@@ -6,6 +6,7 @@ package com.pvmp.dao.test;
 import java.util.ArrayList;
 
 import com.pvmp.controller.PVMPController;
+import com.pvmp.controller.UserController;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
@@ -30,7 +31,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 	private ArrayList<DAOAbstract> users;
 	private PVMPController pvmpController;
 	private PVMPmodel pvmpModel;
-	
+	private UserController userController;
 	
 	@Override
 	public void setUp() throws Exception 
@@ -60,22 +61,22 @@ public class DatabaseControllerTest extends AndroidTestCase
 	
 	/**
 	 * @brief Tests if a instance is indeed inserted into the PVMPDatabase by the method registerUser()
-	 * 		  of PVMPController.
+	 * 		  of UserController.
 	 * */
 	public void testInsertDB () 
 	{
 		//insert the user in the DB.
-		this.pvmpController.registerUser(this.user);
+		this.userController.saveUser(this.user);
 	}
 	
 	/**
 	 * @brief Tests if a instance is correctly select from the PVMPDatabase. The method selectUser of
-	 * 		  PVMPController returns a user based on a attribute of its choice and the respective
+	 * 		  UserController returns a user based on a attribute of its choice and the respective
 	 * 	      Column Name that it will be selected from. After that, every attribute of user2 is
 	 * 		  compared with the this.user's attributes (which was inserted on the test above.
 	 * */
 	public void testSelectDB () {
-		this.user2 = this.pvmpModel.getUser(User.COLUMN_USERNAME, this.user.getUsername());
+		this.user2 = this.userController.getUser(User.COLUMN_USERNAME, this.user.getUsername());
 		
 		//Need to find a better way to test it. like testing if the two instances (user and user2) are equal
 		assertEquals("Joao", user2.getName());
@@ -87,7 +88,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 		assertEquals("M", user2.getSex());
 	}
 	/**
-	 * @brief Tests if the Database is updated by the PVMPController's editUser. After editing 
+	 * @brief Tests if the Database is updated by the UserController's editUser. After editing 
 	 * 		  some attributes of a instance, the method update it on the DB. Then, many asserts
 	 *        check if the attributes are the same.
 	 * */
@@ -98,7 +99,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 		this.user.setSex("F");
 		this.user.setEmail("email do juca");
 		
-		this.pvmpController.editUser(this.user);
+		this.userController.editUser(this.user);
 		
 		this.users = this.user.selectDB(this.queryExpression, this.context);
 		
@@ -118,7 +119,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 	 * */
 	public void testDeleteDB () 
 	{
-		this.pvmpController.deleteUser(this.user);
+		this.userController.removeUser(this.user);
 		
 		this.users = this.user.selectDB(this.queryExpression, this.context);
 		
