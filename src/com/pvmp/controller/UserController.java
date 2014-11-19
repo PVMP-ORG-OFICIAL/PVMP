@@ -50,56 +50,6 @@ public class UserController extends AbstractController
 		return user;
 	}
 	
-	public User verifyMatchingUserPassword (String _userName, String _password) 
-	{
-		User user = this.getUser("user_name", _userName);
-		
-		if (user != null) {
-			if(!_password.equals(user.getPassword())) {
-				user = null;
-			}
-		}
-		return user;
-	}	
-	
-	/**
-	* @param _email
-	* @param _context
-	* @return 
-	* @brief 
-	*/
-	public boolean validateExistingEmail (String _email)
-	{
-		User user = new User();
-		user = this.getUser("email", _email);
-		
-		if (user == null)
-		{
-			return true;
-		}
-
-		return false;
-	}
-	
-	/**
-	* @param _username
-	* @param _context
-	* @return
-	* @brief 
-	*/
-	public boolean validateExistingUser (String _username)
-	{
-		User user = new User();
-		user = this.getUser("user_name", _username);
-		
-		if (user == null)
-		{
-			return true;
-		}
-		
-		return false;
-	}
-	
 	/**
 	* @param _user
 	* @brief
@@ -157,5 +107,55 @@ public class UserController extends AbstractController
 		_user.updateDB(editFilter, this.context);
 
 		return;
+	}
+	
+	public User verifyMatchingUserPassword (String _userName, String _password) 
+	{
+		User user = this.getUser("user_name", _userName);
+		
+		if (user != null) {
+			if(!_password.equals(user.getPassword())) {
+				user = null;
+			}
+		}
+		return user;
+	}	
+	
+	/**
+	* @param _email
+	* @param _context
+	* @return 
+	* @brief 
+	*/
+	public boolean validateExistingEmail (String _email)
+	{
+		User user = new User();
+		user = this.getUser("email", _email);
+		
+		if (user == null)
+		{
+			return true;
+		}
+
+		return false;
+	}
+	
+	/**
+	* @param _username
+	* @param _context
+	* @return
+	* @brief 
+	*/
+	public boolean validateExistingUser (String _username)
+	{
+		User user = new User();
+		user = this.getUser("user_name", _username);
+		
+		if (user == null)
+		{
+			return true;
+		}
+		
+		return false;
 	}
 }
