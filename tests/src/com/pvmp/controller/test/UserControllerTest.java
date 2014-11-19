@@ -1,16 +1,14 @@
 /**
  * @file PVMPDatabaseTest.java
  * */
-package com.pvmp.dao.test;
+package com.pvmp.controller.test;
 
 import java.util.ArrayList;
 
-import com.pvmp.controller.PVMPController;
 import com.pvmp.controller.UserController;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.PVMPmodel;
 import com.pvmp.models.User;
 
 import android.test.AndroidTestCase;
@@ -21,7 +19,7 @@ import android.test.RenamingDelegatingContext;
  * @brief Responsible for testing the class PVMPDatabase.
  * */
 //Might be renamed to DAOAbstract
-public class DatabaseControllerTest extends AndroidTestCase
+public class UserControllerTest extends AndroidTestCase
 {
 	private RenamingDelegatingContext context;
 	private User user;
@@ -29,8 +27,6 @@ public class DatabaseControllerTest extends AndroidTestCase
 	private SqlSelect queryExpression;
 	private Filter whereFilter;
 	private ArrayList<DAOAbstract> users;
-	private PVMPController pvmpController;
-	private PVMPmodel pvmpModel;
 	private UserController userController;
 	
 	@Override
@@ -41,10 +37,9 @@ public class DatabaseControllerTest extends AndroidTestCase
 		this.context = new RenamingDelegatingContext(getContext(), "test.");
 		this.context.makeExistingFilesAndDbsAccessible();
 		
-		this.pvmpController = new PVMPController(this.context);
-		this.pvmpModel = new PVMPmodel(this.context);
+		this.userController = new UserController(this.context);
 		
-		this.user = new User("Joao", "juca123", "senha1234", "email", 19, "Superior", "M", "S");
+		this.user = new User("Joao", "juca123", "senha1234", "email", 19, "Superior", "M", "N");
 		this.user2 = new User();
 		
 		
@@ -63,7 +58,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 	 * @brief Tests if a instance is indeed inserted into the PVMPDatabase by the method registerUser()
 	 * 		  of UserController.
 	 * */
-	public void testInsertDB () 
+	public void testSaveUser () 
 	{
 		//insert the user in the DB.
 		this.userController.saveUser(this.user);
@@ -75,7 +70,8 @@ public class DatabaseControllerTest extends AndroidTestCase
 	 * 	      Column Name that it will be selected from. After that, every attribute of user2 is
 	 * 		  compared with the this.user's attributes (which was inserted on the test above.
 	 * */
-	public void testSelectDB () {
+	public void testGetUser () 
+	{
 		this.user2 = this.userController.getUser(User.COLUMN_USERNAME, this.user.getUsername());
 		
 		//Need to find a better way to test it. like testing if the two instances (user and user2) are equal
@@ -92,7 +88,8 @@ public class DatabaseControllerTest extends AndroidTestCase
 	 * 		  some attributes of a instance, the method update it on the DB. Then, many asserts
 	 *        check if the attributes are the same.
 	 * */
-	public void testUpdateDB () {
+	public void testEditUser () 
+	{
 		this.user.setName("Juca bala");
 		this.user.setEducation("Medio");
 		this.user.setAge(41);
@@ -117,7 +114,7 @@ public class DatabaseControllerTest extends AndroidTestCase
 	 * 		  PVMPDatabase correctly. If the ArrayList returned by selectDB() contains nothing, it's
 	 * 		  a signal that the instance was correctly deleted (because it was inserted on the tests above).
 	 * */
-	public void testDeleteDB () 
+	public void testRemoveUser () 
 	{
 		this.userController.removeUser(this.user);
 		
