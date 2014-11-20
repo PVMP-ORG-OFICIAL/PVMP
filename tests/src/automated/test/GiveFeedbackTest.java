@@ -33,26 +33,33 @@ public class GiveFeedbackTest extends UiAutomatorTestCase
 		selectCategory.clickAndWaitForNewWindow();
 		sleep(500);
 		
-		UiObject likeButton = new UiObject(new UiSelector().className("android.widget.ToggleButton").
-				childSelector(new UiSelector().index(0)));
+		
+		UiObject likeButton = new UiObject(new UiSelector().index(0).className("android.widget.ToggleButton"));
 		likeButton.click();
+		sleep(1000);
+		
+		getUiDevice().pressBack();
+		
+		UiObject selectOtherCategory = new UiObject(new UiSelector().index(1).className("android.widget.RelativeLayout"));
+		selectOtherCategory.clickAndWaitForNewWindow();
 		sleep(500);
 		
-		UiObject nextButton = new UiObject(new UiSelector().index(2).text("Próxima"));
-		nextButton.clickAndWaitForNewWindow();
-		sleep(200);
-		
-		UiObject didntLikeButton = new UiObject(new UiSelector().index(1));
+		UiObject didntLikeButton = new UiObject(new UiSelector().index(1).className("android.widget.ToggleButton"));
 		didntLikeButton.click();
 		sleep(1000);
 		
 		getUiDevice().pressBack();
 		
-		UiObject selectCategory1 = new UiObject(new UiSelector().index(8));
-		selectCategory1.clickAndWaitForNewWindow();
+		UiObject selectAnotherCategory = new UiObject(new UiSelector().index(8).className("android.widget.RelativeLayout"));
+		selectAnotherCategory.clickAndWaitForNewWindow();
 		
-		UiObject clownButton = new UiObject(new UiSelector().index(2));
+		UiObject clownButton = new UiObject(new UiSelector().index(2).className("android.widget.ToggleButton"));
 		clownButton.click();
+		sleep(1000);
+		
+		UiObject againClownButton = new UiObject(new UiSelector().index(2).className("android.widget.ToggleButton"));
+		againClownButton.click();
+		sleep(1000);
 		
 		getUiDevice().pressBack();
 		
@@ -62,6 +69,7 @@ public class GiveFeedbackTest extends UiAutomatorTestCase
 		UiObject exitButton = new UiObject(new UiSelector().index(1).text("Sair"));
 		exitButton.clickAndWaitForNewWindow();
 		
+		getUiDevice().pressBack();
 	}
 
 }
