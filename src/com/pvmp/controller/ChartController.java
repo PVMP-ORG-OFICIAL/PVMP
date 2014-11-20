@@ -6,12 +6,10 @@ import android.content.Context;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.models.Deputy;
-import com.pvmp.models.PVMPmodel;
 import com.pvmp.models.Party;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.Vote;
 import com.pvmp.models.Voting;
-import com.pvmp.util.Util;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -22,15 +20,15 @@ public class ChartController
 	public static final String ALL_VOTES = "Todos";
 	public static final String YES_VOTES = "Sim";
 	public static final String NO_VOTES = "Não";
-	private PVMPmodel model;
 	private PartyController partyController;
 	private DeputyController deputyController;
+	private VoteController voteController;
 	
 	public ChartController(Context _context)
 	{
-		this.model = new PVMPmodel(_context);
 		this.partyController = new PartyController(_context);
 		this.deputyController = new DeputyController(_context);
+		this.voteController = new VoteController(_context);
 	}
 	
 	public ArrayList<Vote> selectVotesByType (ArrayList<Vote> _votes, String _tag)
@@ -82,13 +80,11 @@ public class ChartController
 		ArrayList<float[]> results = new ArrayList<float[]>();
 		int aux = 0;
 		
-		
-		deputies = deputyController.getDeputiesVotesOnSession(votes);
-		
-		for(Deputy deputy : deputies)
-		{
+		deputies = this.deputyController.getDeputiesThatVotedOnSession(votes);
+		for (int i = 0; i < deputies.size(); i++) {
 			Party party = new Party();
-			party = this.partyController.getDeputyParty(deputy);
+			party = deputies.get(i).getParty();
+			
 			parties.add(party);
 		}
 		
@@ -126,11 +122,6 @@ public class ChartController
 			results.set(aux, result);
 			aux++;
 		}
-		
-		for (int i = 0; i < results.size(); i++) {
-			Util.debug("Partido: " + this.partyController.getPartyAcronym(results.get(i)[0])
-						+ ". Qtd: " + results.get(i)[1]);
-		}
 
 		return results;
 	}
@@ -148,7 +139,7 @@ public class ChartController
 		PieDataSet pieDataSet;
 		
 		voting = _proposition.getVoting();
-		votes = this.model.getVotingVotes(voting);
+		votes = this.voteController.getVotingVotes(voting);
 		
 		if (_tag.equals(ALL_VOTES)) 
 		{
@@ -165,7 +156,7 @@ public class ChartController
 				
 				if (actualValue >= 10) 
 				{
-					slicesTitles.add(this.partyController.getPartyAcronym(results.get(i)[0]));
+					slicesTitles.add(Party.parseNumber((results.get(i)[0])));
 					votesPercentage.add(results.get(i)[1]);
 				}
 				else 

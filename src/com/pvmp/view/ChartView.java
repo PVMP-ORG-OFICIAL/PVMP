@@ -37,7 +37,10 @@ public class ChartView
 		
 		_chart.setScrollContainer(true);
 		
-		_chart.animateXY(800, 800);
+		if (_tag == ChartController.ALL_VOTES)
+			_chart.animateXY(700, 700);
+		else
+			_chart.animateXY(1, 1);
 
 		return _chart;
 	}

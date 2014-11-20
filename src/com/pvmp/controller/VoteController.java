@@ -1,8 +1,4 @@
-/**
-* @file PVMPModel.java
-* @brief
-*/
-package com.pvmp.models;
+package com.pvmp.controller;
 
 import java.util.ArrayList;
 
@@ -11,33 +7,15 @@ import android.content.Context;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
+import com.pvmp.models.Vote;
+import com.pvmp.models.Voting;
 
-/**
-* @class PVMPModel
-* @brief 
-*/
-public class PVMPmodel implements ModelSubjectInterface
+public class VoteController extends AbstractController
 {
-	private ArrayList<ListenerObserverInterface> observers;
-	private Context context;
-
-	/**
-	* @param _context
-	* @brief 
-	*/
-	public PVMPmodel(Context _context)
-	{
-		this.context = _context;
-		this.observers = new ArrayList<ListenerObserverInterface>();
-	}
-
-	public void setContext(Context _context)
-	{
-		this.context = _context;
-		return;
+	public VoteController (Context _context) {
+		super(_context);
 	}
 	
-	//This might be changed or removed
 	public ArrayList<Vote> getVotingVotes (Voting _voting) 
 	{
 		if (_voting == null)
@@ -72,25 +50,5 @@ public class PVMPmodel implements ModelSubjectInterface
 		_voting.setVotes(votes);
 		
 		return votes;
-	}
-
-	/**
-	* @param _observer
-	* @brief
-	*/
-	public void registerObserver(ListenerObserverInterface _observer)
-	{
-		this.observers.add(_observer);
-
-		return;
-	}
-
-	/**
-	* @param _observer
-	* @brief
-	*/
-	public void removeObserver(ListenerObserverInterface _observer)
-	{
-		 return;
 	}
 }

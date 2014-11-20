@@ -18,7 +18,7 @@ public class DeputyController extends AbstractController
 		super(_context);
 	}
 	
-	public ArrayList<Deputy> getDeputiesVotesOnSession (ArrayList<Vote> _votes) 
+	public ArrayList<Deputy> getDeputiesThatVotedOnSession (ArrayList<Vote> _votes) 
 	{
 		if (_votes == null)
 		{
