@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,34 +23,31 @@ import com.pvmp.models.Proposition;
 import com.pvmp.view.ChartView;
 import com.pvmp.view.PVMPView;
 
-public class PropositionFragment extends FragmentView 
-{
+public class PropositionFragment extends FragmentView {
 	private Context context;
 	private PVMPView view;
 	private ArrayList<Proposition> propositions;
 	private TextView textPropositionCount, categoryName;
 	private ViewFlipper viewFlipper;
 	private int limit, target, count;
-	private String opinion = ""; 
+	private String opinion = "";
 	private PieChart yesNoVotesChart, yesVotesChart, noVotesChart;
 	private ToggleButton button_like, button_dislike, button_clown;
 	private ScrollView propositionScrollView;
 	private FeedbackController feedbackController;
 	private Feedback existingFeedback;
-	
-	private GestureDetector gesturedetector = null;
-	private static final int SWIPE_MIN_DISTANCE = 150;
-	private static final int SWIPE_MAX_OFF_PATH = 100;
-	private static final int SWIPE_THRESHOLD_VELOCITY = 100;
 
-	//private float firstX;
-	//private float currentX;
+	private GestureDetector gesturedetector = null;
+	private static final int SWIPE_MIN_DISTANCE = 100;
+	private static final int SWIPE_MAX_OFF_PATH = 100;
+	private static final int SWIPE_THRESHOLD_VELOCITY = 80;
 
 	@Override
-	public View onCreateView(LayoutInflater _inflater, ViewGroup _container, Bundle _savedInstanceState) 
-	{
-		View rootView = _inflater.inflate(R.layout.proposition_fragment, _container, false);
- 
+	public View onCreateView(LayoutInflater _inflater, ViewGroup _container,
+			Bundle _savedInstanceState) {
+		View rootView = _inflater.inflate(R.layout.proposition_fragment,
+				_container, false);
+
 		this.view = (PVMPView) getActivity();
 		this.context = this.view.getApplicationContext();
 		this.feedbackController = new FeedbackController(this.context);
@@ -59,230 +55,221 @@ public class PropositionFragment extends FragmentView
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
 		this.count = 0;
-		
+
+		this.setGestureDetector(rootView);
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
-		this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.proposition_flipper);
-		
-		PVMPView.gesturedetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
-			
-			@Override
-			public boolean onDown(MotionEvent e) {
-				return true;
-			}
-			@Override
-			public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-					float velocityY) {
-				Log.i("PVMP", "onFling has been called!");
-				float dX = e2.getX() - e1.getX();
-				float dY = e1.getY() - e2.getY();
-				
-				if(Math.abs(dY) < SWIPE_MAX_OFF_PATH && Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY &&
-						Math.abs(dX) >= SWIPE_MIN_DISTANCE)
-				{
-					if(dX > 0)
-					{
-						HandlePrevious();
-					}
-					else
-					{
-						HandleNext();
-					}
-					
-				}
-				return super.onFling(e1, e2, velocityX, velocityY);
-			}
-		}
-		);
+		this.viewFlipper = (ViewFlipper) rootView
+				.findViewById(R.id.proposition_flipper);
 
-		rootView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				return gesturedetector.onTouchEvent(event) ;
-			}
-		});
-		
 		return rootView;
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
 		this.takeFeedback();
-		PVMPView.gesturedetector = new GestureDetector(view.getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+
+		PVMPView.gesturedetector = new GestureDetector(
+				view.getApplicationContext(),
+				new GestureDetector.SimpleOnGestureListener() {
+					@Override
+					public boolean onDown(MotionEvent e) {
+						return true;
+					}
+				});
+	}
+
+	public void setGestureDetector(View _rootView) {
+		PVMPView.gesturedetector = new GestureDetector(getActivity(),
+				new GestureDetector.SimpleOnGestureListener() {
+
+					@Override
+					public boolean onDown(MotionEvent e) {
+						return true;
+					}
+
+					@Override
+					public boolean onFling(MotionEvent e1, MotionEvent e2,
+							float velocityX, float velocityY) {
+						float dX = e2.getX() - e1.getX();
+						float dY = e1.getY() - e2.getY();
+
+						if (Math.abs(dY) < SWIPE_MAX_OFF_PATH
+								&& Math.abs(velocityX) >= SWIPE_THRESHOLD_VELOCITY
+								&& Math.abs(dX) >= SWIPE_MIN_DISTANCE) {
+							if (dX > 0) {
+								HandlePrevious();
+							} else {
+								HandleNext();
+							}
+
+						}
+						return super.onFling(e1, e2, velocityX, velocityY);
+					}
+				});
+
+		_rootView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public boolean onDown(MotionEvent e) {
-				return true;
+			public boolean onTouch(View v, MotionEvent event) {
+				return gesturedetector.onTouchEvent(event);
 			}
 		});
 	}
 
 	@Override
-	public void buildScreenComponent(View _view) 
-	{
-		this.categoryName = (TextView) _view.findViewById(R.id.proposition_category);
-		this.textPropositionCount = (TextView) _view.findViewById(R.id.proposition_count2);
-		this.propositionScrollView = (ScrollView) _view.findViewById(R.id.proposition_scroll_view);
-		this.yesNoVotesChart = (PieChart) _view.findViewById(R.id.yes_no_votes_chart);
-		this.yesVotesChart = (PieChart) _view.findViewById(R.id.yes_votes_chart);
+	public void buildScreenComponent(View _view) {
+		this.categoryName = (TextView) _view
+				.findViewById(R.id.proposition_category);
+		this.textPropositionCount = (TextView) _view
+				.findViewById(R.id.proposition_count2);
+		this.propositionScrollView = (ScrollView) _view
+				.findViewById(R.id.proposition_scroll_view);
+		this.yesNoVotesChart = (PieChart) _view
+				.findViewById(R.id.yes_no_votes_chart);
+		this.yesVotesChart = (PieChart) _view
+				.findViewById(R.id.yes_votes_chart);
 		this.noVotesChart = (PieChart) _view.findViewById(R.id.no_votes_chart);
-		this.button_like = (ToggleButton) _view.findViewById(R.id.toggleButton_like);
-		this.button_dislike = (ToggleButton) _view.findViewById(R.id.toggleButton_dislike);
-		this.button_clown = (ToggleButton) _view.findViewById(R.id.toggleButton_clown);
-		
+		this.button_like = (ToggleButton) _view
+				.findViewById(R.id.toggleButton_like);
+		this.button_dislike = (ToggleButton) _view
+				.findViewById(R.id.toggleButton_dislike);
+		this.button_clown = (ToggleButton) _view
+				.findViewById(R.id.toggleButton_clown);
+
 		this.button_like.setOnClickListener(new HandleLike());
 		this.button_dislike.setOnClickListener(new HandleDislike());
 		this.button_clown.setOnClickListener(new HandleClown());
 	}
 
-	public void updateScreenComponent()
-	{
-		//Testing if the propositions' IDs are correct based on the category clicked.
-		String text = "Code_session: " + (propositions.get(this.count).getVoting().getCodeSession());
-		
+	public void updateScreenComponent() {
+		// Testing if the propositions' IDs are correct based on the category
+		// clicked.
+		String text = "Code_session: "
+				+ (propositions.get(this.count).getVoting().getCodeSession());
+
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
-		
-		this.yesNoVotesChart = ChartView.createChart(propositions.get(this.count), this.yesNoVotesChart, "Resultado", ChartController.ALL_VOTES, this.context);
-		this.yesVotesChart = ChartView.createChart(propositions.get(this.count), this.yesVotesChart, "Sim", ChartController.YES_VOTES, this.context);
-		this.noVotesChart = ChartView.createChart(propositions.get(this.count), this.noVotesChart, "Não", ChartController.NO_VOTES, this.context);
-		
-		this.textPropositionCount.setText("#"+(this.count+1));
+
+		this.yesNoVotesChart = ChartView.createChart(
+				propositions.get(this.count), this.yesNoVotesChart,
+				"Resultado", ChartController.ALL_VOTES, this.context);
+		this.yesVotesChart = ChartView.createChart(
+				propositions.get(this.count), this.yesVotesChart, "Sim",
+				ChartController.YES_VOTES, this.context);
+		this.noVotesChart = ChartView.createChart(propositions.get(this.count),
+				this.noVotesChart, "Não", ChartController.NO_VOTES,
+				this.context);
+
+		this.textPropositionCount.setText("#" + (this.count + 1));
 		this.categoryName.setText(text);
-		this.existingFeedback = this.feedbackController.selectFeedback(PVMPView.user, propositions.get(this.count).getId());
+		this.existingFeedback = this.feedbackController.selectFeedback(
+				PVMPView.user, propositions.get(this.count).getId());
 		this.updateFeedback(existingFeedback);
 	}
-	
-	public void takeFeedback()
-	{
+
+	public void takeFeedback() {
 		this.target = propositions.get(this.count).getId();
-		
-		if(button_like.isChecked())
-		{
+
+		if (button_like.isChecked()) {
 			this.opinion = "l";
-		}
-		else if(button_dislike.isChecked())
-		{
+		} else if (button_dislike.isChecked()) {
 			this.opinion = "d";
-		}
-		else if(button_clown.isChecked())
-		{
+		} else if (button_clown.isChecked()) {
 			this.opinion = "c";
-		}
-		else {
-			if(this.existingFeedback != null)
-			{
-				this.feedbackController.deleteFeedback(PVMPView.user, this.target);
+		} else {
+			if (this.existingFeedback != null) {
+				this.feedbackController.deleteFeedback(PVMPView.user,
+						this.target);
 			}
 			return;
 		}
-		
-		if(!opinion.equals(""))
-		{
-			if(this.existingFeedback != null)
-			{
-				this.feedbackController.editFeedback(this.opinion, PVMPView.user, this.target);
-			}
-			else
-			{
-				this.feedbackController.saveFeedback(this.opinion, PVMPView.user, this.target);
+
+		if (!opinion.equals("")) {
+			if (this.existingFeedback != null) {
+				this.feedbackController.editFeedback(this.opinion,
+						PVMPView.user, this.target);
+			} else {
+				this.feedbackController.saveFeedback(this.opinion,
+						PVMPView.user, this.target);
 			}
 		}
 	}
-	
-	public void setOpinionButtons(boolean like, boolean dislike, boolean clown)
-	{
+
+	public void setOpinionButtons(boolean like, boolean dislike, boolean clown) {
 		this.button_like.setChecked(like);
 		this.button_dislike.setChecked(dislike);
 		this.button_clown.setChecked(clown);
 	}
-	
-	public void updateFeedback(Feedback _feedback)
-	{
-		if(_feedback == null)
-		{
+
+	public void updateFeedback(Feedback _feedback) {
+		if (_feedback == null) {
 			this.setOpinionButtons(false, false, false);
 			return;
-		}
-		else if(_feedback.getOpinion().equals("l"))
-		{
+		} else if (_feedback.getOpinion().equals("l")) {
 			this.setOpinionButtons(true, false, false);
-		}
-		else if(_feedback.getOpinion().equals("d"))
-		{
+		} else if (_feedback.getOpinion().equals("d")) {
 			this.setOpinionButtons(false, true, false);
-		}
-		else if (_feedback.getOpinion().equals("c"))
-		{
+		} else if (_feedback.getOpinion().equals("c")) {
 			this.setOpinionButtons(false, false, true);
 		}
 	}
-	
-	public void HandleNext()
-	{
-			takeFeedback();
-			if(this.count < limit - 1)
-			{
-				this.count++;
-			}
-			else 
-			{
-				this.count = 0;
-			}
-			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_right);
-			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_left);
 
-			updateScreenComponent();
-			viewFlipper.showNext();			
-	}
-	
-	public void HandlePrevious() 
-	{
+	public void HandleNext() {
+		takeFeedback();
+		if (this.count < limit - 1) {
+			this.count++;
+		} else {
+			this.count = 0;
+		}
+		viewFlipper.setInAnimation(view.getApplicationContext(),
+				R.anim.in_from_right);
+		viewFlipper.setOutAnimation(view.getApplicationContext(),
+				R.anim.out_to_left);
 
-			takeFeedback();
-			if(this.count > 0)
-			{
-				this.count--;
-			}
-			else 
-			{
-				this.count = limit - 1;
-			}
-			viewFlipper.setInAnimation(view.getApplicationContext(), R.anim.in_from_left);
-			viewFlipper.setOutAnimation(view.getApplicationContext(), R.anim.out_to_right);
-			
-			updateScreenComponent();
-			viewFlipper.showPrevious();
-		
+		updateScreenComponent();
+		viewFlipper.showNext();
 	}
-	
-	private class HandleLike implements View.OnClickListener
-	{
-		
+
+	public void HandlePrevious() {
+
+		takeFeedback();
+		if (this.count > 0) {
+			this.count--;
+		} else {
+			this.count = limit - 1;
+		}
+		viewFlipper.setInAnimation(view.getApplicationContext(),
+				R.anim.in_from_left);
+		viewFlipper.setOutAnimation(view.getApplicationContext(),
+				R.anim.out_to_right);
+
+		updateScreenComponent();
+		viewFlipper.showPrevious();
+
+	}
+
+	private class HandleLike implements View.OnClickListener {
+
 		@Override
-		public void onClick(View v)
-		{
+		public void onClick(View v) {
 			button_dislike.setChecked(false);
 			button_clown.setChecked(false);
 		}
 	}
-	
-	private class HandleDislike implements View.OnClickListener
-	{
-		
+
+	private class HandleDislike implements View.OnClickListener {
+
 		@Override
-		public void onClick(View v)
-		{
+		public void onClick(View v) {
 			button_like.setChecked(false);
 			button_clown.setChecked(false);
 		}
 	}
-	
-	private class HandleClown implements View.OnClickListener
-	{
-		
+
+	private class HandleClown implements View.OnClickListener {
+
 		@Override
-		public void onClick(View v)
-		{
+		public void onClick(View v) {
 			button_like.setChecked(false);
 			button_dislike.setChecked(false);
 		}
