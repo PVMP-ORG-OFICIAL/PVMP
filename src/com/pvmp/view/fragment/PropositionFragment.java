@@ -221,9 +221,9 @@ public class PropositionFragment extends FragmentView {
 		} else {
 			this.count = 0;
 		}
-		viewFlipper.setInAnimation(view.getApplicationContext(),
+		viewFlipper.setInAnimation(this.context,
 				R.anim.in_from_right);
-		viewFlipper.setOutAnimation(view.getApplicationContext(),
+		viewFlipper.setOutAnimation(this.context,
 				R.anim.out_to_left);
 
 		updateScreenComponent();
@@ -238,9 +238,9 @@ public class PropositionFragment extends FragmentView {
 		} else {
 			this.count = limit - 1;
 		}
-		viewFlipper.setInAnimation(view.getApplicationContext(),
+		viewFlipper.setInAnimation(this.context,
 				R.anim.in_from_left);
-		viewFlipper.setOutAnimation(view.getApplicationContext(),
+		viewFlipper.setOutAnimation(this.context,
 				R.anim.out_to_right);
 
 		updateScreenComponent();

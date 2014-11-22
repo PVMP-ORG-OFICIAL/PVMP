@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ToggleButton
+        android:id="@+id/toggleButton_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="Equipe"
+        android:textOff="Equipe" />
+    
+    <ToggleButton
+            android:id="@+id/toggleButton_dadosAbertos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="Dados Abertos"
+            android:textOff="Dados Abertos"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    
+    <ToggleButton
+            android:id="@+id/toggleButton_icons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="Icones"
+            android:textOff="Icones"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
+    
+    <TextView
+        android:id="@+id/about_tab"
+        style="@style/aboutTitle"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toggleButton_icons"
+        android:text="@string/team_bar" />
+    
+    <ScrollView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/about_tab"
+	        android:layout_marginTop="0dp" >
+        
+		  <ViewFlipper
+		      android:id="@+id/about_flipper"
+		      android:layout_width="match_parent"
+		      android:layout_height="wrap_content"
+		      android:layout_marginBottom="10dp">
+		          
+		      <LinearLayout
+		          android:orientation="vertical" 
+		       	  android:layout_width="fill_parent"
+            	  android:layout_height="fill_parent" >
+		          
+		          <TextView
+		              android:id="@+id/management_team"
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/management_team"
+		              android:textSize="20sp"
+		              android:textColor="#999999" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/david" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/gabriel" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/caique" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/rodrigo" />
+		          
+		          <TextView
+		              android:id="@+id/development_team"
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/development_team"
+		              android:textSize="20sp"
+		              android:textColor="#999999" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/lucas" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/iago" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/jonathan" />
+
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/ana" />
+            	  	
+		      </LinearLayout>
+		      
+		      <LinearLayout 
+		          android:orientation="vertical" 
+		       	  android:layout_width="fill_parent"
+            	  android:layout_height="fill_parent" >
+		          
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/dados_abertos" />
+		          
+		      </LinearLayout>
+		      
+		      <LinearLayout 
+		          android:orientation="vertical" 
+		       	  android:layout_width="fill_parent"
+            	  android:layout_height="fill_parent" >
+		          
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/icons" />
+		          
+		      </LinearLayout>
+		</ViewFlipper>
+	</ScrollView>
+    
+    </RelativeLayout>

@@ -11,7 +11,7 @@ package com.pvmp.view;
 public interface ViewObserverInterface
 {
 	public static final int CATEGORY = 0;
-	public static final int PARTY = 1;
+	public static final int ABOUT = 1;
 	public static final int FEEDBACK = 2;
 	public static final int SETTING = 3;
 	public static final int LOGOUT = 4;

@@ -50,7 +50,7 @@
 
     <string-array name="nav_drawer_items">
         <item> Proposições </item>
-        <item> Partidos </item>
+        <item> Sobre </item>
         <item> Feedback </item>
         <item> Configurações de Conta </item>
         <item> Sair </item>
@@ -86,4 +86,17 @@
 	<string name="button_next">Próxima</string>
 	<string name="button_previous">Anterior</string>
 	<string name="text_password_confirmation">Confirme sua senha</string>
+	<string name="management_team">Time de Gerencia</string>
+	<string name="team_bar">Equipe</string>
+	<string name="david">David Carlos</string>
+	<string name="gabriel">Gabriel Augusto</string>
+	<string name="caique">Caique Pereira</string>
+	<string name="rodrigo">Rodrigo Siqueira</string>
+	<string name="development_team">Time de Desenvolvimento</string>
+	<string name="iago">Iago Rodrigues</string>
+	<string name="lucas">Lucas Mattioli</string>
+	<string name="jonathan">Jonathan Rufino</string>
+	<string name="ana">Ana Carolina</string>
+	<string name="dados_abertos">Explicação sobre os dados abertos</string>
+	<string name ="icons">Créditos para os icones</string>
 </resources>

@@ -2,12 +2,12 @@ package com.pvmp.view;
 
 import android.app.Fragment;
 
+import com.pvmp.view.fragment.AboutFragment;
 import com.pvmp.view.fragment.CategoriesFragment;
 import com.pvmp.view.fragment.EditSettingsFragment;
 import com.pvmp.view.fragment.FeedBackFragment;
 import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
-import com.pvmp.view.fragment.PartyFragment;
 import com.pvmp.view.fragment.PropositionFragment;
 import com.pvmp.view.fragment.SettingsFragment;
 import com.pvmp.view.fragment.UserRegisterFragment;
@@ -27,8 +27,8 @@ public class FragmentFactory {
 		{
 			case PVMPView.CATEGORY:
 				return new CategoriesFragment();
-			case PVMPView.PARTY:
-				return new PartyFragment();
+			case PVMPView.ABOUT:
+				return new AboutFragment();
 			case PVMPView.FEEDBACK:
 				return new FeedBackFragment();
 			case PVMPView.SETTING:
