@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.User;
@@ -296,26 +297,34 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("MainActivity: Create a HOME ");
 		if(fragment != null)
 		{
-			FragmentManager fragmentManager = getFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-			fragmentTransaction.replace(R.id.frame_container, fragment);
-			
-			if (_position != CATEGORY && _position != LOGOUT && _position != LOGIN)
+			if(_position == SETTING && user == null )
 			{
-				fragmentTransaction.addToBackStack(null);
+				MessageHandling.showToast(MessageHandling.GUEST_SETTING_WARNING, getApplicationContext());
+				this.mainDrawerLayout.closeDrawer(this.mainDrawerList);
 			}
 			else
 			{
-				fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+				fragmentTransaction.replace(R.id.frame_container, fragment);
+				
+				if (_position != CATEGORY && _position != LOGOUT && _position != LOGIN)
+				{
+					fragmentTransaction.addToBackStack(null);
+				}
+				else
+				{
+					fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				}
+				
+				fragmentTransaction.commit();
+				
+				//Update selected item and title, then close the drawer
+				this.mainDrawerList.setItemChecked(_position, true);
+				this.mainDrawerList.setSelection(_position);
+				this.setTitleBasedOnMenuItem(_position);
+				this.mainDrawerLayout.closeDrawer(this.mainDrawerList);
 			}
-			
-			fragmentTransaction.commit();
-			
-			//Update selected item and title, then close the drawer
-			this.mainDrawerList.setItemChecked(_position, true);
-			this.mainDrawerList.setSelection(_position);
-			this.setTitleBasedOnMenuItem(_position);
-			this.mainDrawerLayout.closeDrawer(this.mainDrawerList);
 		}
 		else
 		{

@@ -28,6 +28,7 @@ public class MessageHandling {
 	public static final String PASSWORD_SUCCESSFUL_CHANGE = "Senha alterada com sucesso.";
 	public static final String PASSWORD_CONFIRM_TO_DELETE = "Digite sua senha para poder excluir.";
 	public static final String SUCCESSFUL_DELETE = "Conta excluida com sucesso.";
+	public static final String GUEST_SETTING_WARNING = "Você deve estar logado para poder acessar essa área";
 	
 	private static Toast toast = null;
 	

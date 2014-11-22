@@ -135,8 +135,10 @@ public class LoginFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
+			PVMPView.user = null;
 			imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 			Util.debug("VISISTANTE PUSHED!!!");
+			mainActivity.displayFragment(ViewObserverInterface.CATEGORY);
 		}
 	}
 	

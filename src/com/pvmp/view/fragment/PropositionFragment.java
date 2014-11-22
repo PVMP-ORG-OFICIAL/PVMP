@@ -162,9 +162,18 @@ public class PropositionFragment extends FragmentView {
 
 		this.textPropositionCount.setText("#" + (this.count + 1));
 		this.categoryName.setText(text);
-		this.existingFeedback = this.feedbackController.selectFeedback(
-				PVMPView.user, propositions.get(this.count).getId());
-		this.updateFeedback(existingFeedback);
+		if(PVMPView.user != null)
+		{
+			this.existingFeedback = this.feedbackController.selectFeedback(
+					PVMPView.user, propositions.get(this.count).getId());
+			this.updateFeedback(existingFeedback);
+		}
+		else
+		{
+			this.button_clown.setChecked(false);
+			this.button_dislike.setChecked(false);
+			this.button_like.setChecked(false);
+		}
 	}
 
 	public void takeFeedback() {
@@ -177,14 +186,14 @@ public class PropositionFragment extends FragmentView {
 		} else if (button_clown.isChecked()) {
 			this.opinion = "c";
 		} else {
-			if (this.existingFeedback != null) {
+			if (this.existingFeedback != null && PVMPView.user != null) {
 				this.feedbackController.deleteFeedback(PVMPView.user,
 						this.target);
 			}
 			return;
 		}
 
-		if (!opinion.equals("")) {
+		if (!opinion.equals("") && PVMPView.user != null) {
 			if (this.existingFeedback != null) {
 				this.feedbackController.editFeedback(this.opinion,
 						PVMPView.user, this.target);
