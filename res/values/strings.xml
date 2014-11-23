@@ -51,8 +51,8 @@
     <string-array name="nav_drawer_items">
         <item> Proposições </item>
         <item> Sobre </item>
-        <item> Configurações de Conta </item>
         <item> Feedback </item>
+        <item> Configurações de Conta </item>
         <item> Sair </item>
     </string-array>
     
@@ -61,8 +61,8 @@
     <array name="nav_drawer_icons">
         <item>@drawable/ic_proposition</item>
         <item>@drawable/ic_about_32</item>
+        <item>@drawable/ic_feedback</item>
         <item>@drawable/ic_settings</item>
-         <item>@drawable/ic_feedback</item>
         <item>@drawable/ic_logout</item>
     </array>
     
