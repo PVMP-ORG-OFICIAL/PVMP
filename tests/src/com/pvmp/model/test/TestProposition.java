@@ -1,15 +1,16 @@
 package com.pvmp.model.test;
 
+import junit.framework.TestCase;
 import android.content.ContentValues;
 
 import com.pvmp.models.Proposition;
-
-import junit.framework.TestCase;
+import com.pvmp.models.Voting;
 
 public class TestProposition extends TestCase {
 	
 	private Proposition propositionEmpty;
 	private Proposition propositionFull;
+	private Voting voting;
 
 	public TestProposition(String name) {
 		super(name);
@@ -21,6 +22,7 @@ public class TestProposition extends TestCase {
 		propositionEmpty = new Proposition();
 		propositionFull = new Proposition(10, "01/01/2014", "Da providências sobre...",
 				"Projeto de Lei", "João Pereira", "Votada", 204, "Saúde", null);
+		voting = new Voting();
 	}
 
 	protected void tearDown() throws Exception {
@@ -121,6 +123,19 @@ public class TestProposition extends TestCase {
 
 	public void testGetCategory() {
 		assertEquals(propositionFull.getCategory(), "Saúde");
+	}
+	
+	public void testSetVoting() {
+		propositionEmpty.setVoting(voting);
+		
+		assertEquals(propositionEmpty.getVoting(), voting);
+	}
+	
+	public void testGetVoting() {
+		propositionFull.setVoting(voting);
+		voting.setSummary("Votação da proposição de nº 10.");
+		
+		assertEquals(propositionFull.getVoting().getSummary(), "Votação da proposição de nº 10.");
 	}
 
 	public void testContentValuesToModel() {
