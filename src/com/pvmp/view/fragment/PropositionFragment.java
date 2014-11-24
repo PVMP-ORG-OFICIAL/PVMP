@@ -160,7 +160,7 @@ public class PropositionFragment extends FragmentView {
 				this.noVotesChart, "Não", ChartController.NO_VOTES,
 				this.context);
 
-		this.textPropositionCount.setText("#" + (this.count + 1));
+		//this.textPropositionCount.setText("#" + (this.count + 1));
 		this.categoryName.setText(text);
 		if(PVMPView.user != null)
 		{

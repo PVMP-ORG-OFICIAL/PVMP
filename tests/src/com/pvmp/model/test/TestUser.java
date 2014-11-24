@@ -5,12 +5,13 @@ import junit.framework.TestCase;
 import com.pvmp.models.User;
 
 public class TestUser extends TestCase {
-
-	User user1;
-	User user2;
+	
+	private User user1;
+	private User user2;
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		
 		user1 = new User();
 		user2 = new User("Jonathan", "john", "john123", "jonathan@gmail.com",
 							23, "Superior", "Masculino", "S");
@@ -146,5 +147,26 @@ public class TestUser extends TestCase {
 		assertEquals(User.validateUsernameFormat("$aja12"),false);
 		assertEquals(User.validateUsernameFormat("0*"),false);
 		assertEquals(User.validateUsernameFormat("aoo1234d"),true);
+	}
+	
+	public void testValidatePasswordSizeValid() {
+		assertTrue(User.validatePasswordSize("john123"));
+	}
+	
+	public void testValidePasswordSizeInvalid() {
+		assertFalse(User.validatePasswordSize("abcdefghijklmn123456"));
+	}
+	
+	public void testValidatePasswordFormatValid() {
+		assertTrue(User.validatePasswordFormat("john123"));
+	}
+	
+	public void testValidatePasswordFormatInvalid() {
+		assertFalse(User.validatePasswordFormat("Abc@123_hgJs=#lasd"));
+	}
+	
+	public void testValidationResultNameFormat() {
+		user1.setName("João123");
+		//assertEquals(1, user1.validationResult(user1, context));
 	}
 }
