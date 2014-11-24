@@ -167,17 +167,14 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		//Proposition
 		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[0], 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.CATEGORY, -1)));
-		//Party
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[1], 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.ABOUT, -1)));
-		//Feedback
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[2], 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.FEEDBACK, -1)));
 		//Settings
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[3], 
+		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[1], 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.SETTING, -1)));
+		//About
+		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[2], 
+			this.navigationMenuIcons.getResourceId(ViewObserverInterface.ABOUT, -1)));
 		//Logout
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[4], 
+		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[3], 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.LOGOUT, -1)));
 
 		return;

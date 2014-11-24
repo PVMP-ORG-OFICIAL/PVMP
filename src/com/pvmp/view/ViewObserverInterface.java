@@ -11,16 +11,15 @@ package com.pvmp.view;
 public interface ViewObserverInterface
 {
 	public static final int CATEGORY = 0;
-	public static final int ABOUT = 1;
-	public static final int FEEDBACK = 2;
-	public static final int SETTING = 3;
-	public static final int LOGOUT = 4;
-	public static final int LOGIN = 5;
-	public static final int REGISTER = 6;
-	public static final int VISITOR = 7;
-	public static final int HOME = 8;
-	public static final int EDIT = 9;
-	public static final int PROPOSITION = 10;
+	public static final int SETTING = 1;
+	public static final int ABOUT = 2;
+	public static final int LOGOUT = 3;
+	public static final int LOGIN = 4;
+	public static final int REGISTER = 5;
+	public static final int VISITOR = 6;
+	public static final int HOME = 7;
+	public static final int EDIT = 8;
+	public static final int PROPOSITION = 9;
 
 	/**
 	* @param _codeFragment
