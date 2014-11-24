@@ -121,8 +121,8 @@ public class PropositionFragment extends FragmentView {
 	public void buildScreenComponent(View _view) {
 		this.categoryName = (TextView) _view
 				.findViewById(R.id.proposition_category);
-		this.textPropositionCount = (TextView) _view
-				.findViewById(R.id.proposition_count2);
+		//this.textPropositionCount = (TextView) _view
+				//.findViewById(R.id.proposition_count2);
 		this.propositionScrollView = (ScrollView) _view
 				.findViewById(R.id.proposition_scroll_view);
 		this.yesNoVotesChart = (PieChart) _view
