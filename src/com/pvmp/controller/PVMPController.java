@@ -6,7 +6,6 @@ package com.pvmp.controller;
 
 import android.content.Context;
 
-import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
 import com.pvmp.view.ViewObserverInterface;
 
@@ -20,8 +19,7 @@ public class PVMPController implements ControllerInterface
 	private UserController userController;
 
 	public PVMPController()
-	{
-	}
+	{}
 
 	/**
 	* @param _context
@@ -39,15 +37,6 @@ public class PVMPController implements ControllerInterface
 	public void setView(ViewObserverInterface _view)
 	{
 		this.view = _view;
-	}
-
-	/**
-	* @param _model
-	* @brief 
-	*/
-	public void setModel(ModelSubjectInterface _model)
-	{
-		//this.model = _model;
 	}
 
 	@Override
@@ -68,14 +57,6 @@ public class PVMPController implements ControllerInterface
 		
 		return;
 	}
-
-	@Override
-	public void displayListProposition()
-	{
-		return;	
-	}
-
-	//public void displayFragment();
 	
 	public void callDisplayFragment (int fragmentIndex)
 	{

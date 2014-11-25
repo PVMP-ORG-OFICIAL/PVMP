@@ -39,7 +39,7 @@ public final class Filter extends Expression
 	 * */
 	
 	//Expected form: ('value1', 'value2', 'value3',...)
-	private String transform(String[] _value)
+	public String transform(String[] _value)
 	{
 		if (_value == null) 
 		{
@@ -64,7 +64,7 @@ public final class Filter extends Expression
 	}
 	
 	//Expected form: (value1, value2, value3,...)
-	private String transform(ArrayList<Integer> _value)
+	public String transform(ArrayList<Integer> _value)
 	{
 		if (_value == null) 
 		{
@@ -88,7 +88,7 @@ public final class Filter extends Expression
 		return result;
 	}
 	
-	private String transform(Object _value)
+	public String transform(Object _value)
 	{
 		if (_value == null)
 		{

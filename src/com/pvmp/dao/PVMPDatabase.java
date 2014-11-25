@@ -21,20 +21,9 @@ public class PVMPDatabase
 {
 	private static SQLiteDatabase database = null;
 	
-	private PVMPDatabase() 	
-	{}
-	
-	/**
-	 * @param _context
-	 * @brief Constructor of the class. Need a context to start a PersistenceHelper
-	 * 		  instance.
-	 **/
-	private PVMPDatabase(Context _context) 
-	{
-		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
-		database = persistenceHelper.getWritableDatabase();
+	public PVMPDatabase () {
+		
 	}
-	
 	/**
 	 * @param _tableName
 	 * @param _values

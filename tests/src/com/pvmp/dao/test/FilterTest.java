@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.pvmp.dao.Filter;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
@@ -65,5 +66,57 @@ public class FilterTest extends TestCase
 		assertEquals(this.filterState2.dumpExpression(), "ESTADO IS NOT NULL");
 		assertEquals(this.filterYear2.dumpExpression(), "ANO IN (2005, 2008, 2013)");
 	}
-
+	
+	public void testTransformFloat () {
+		Float value = 3f;
+		assertEquals("3.0", filterData.transform(value));
+	}
+	public void testTransformBooleanTrue () {
+		Boolean value = true;
+		assertEquals("TRUE", filterData.transform(value));
+	}
+	public void testTransformBooleanFalse () {
+		Boolean value = false;
+		assertEquals("FALSE", filterData.transform(value));
+	}
+	public void testTransformNull () {
+		assertNull(filterData.transform(filterState1));
+	}
+	
+	public void testIfTransformThrowsException () {
+		try 
+		{
+			String[] nullValue = null;
+			filterData.transform(nullValue);
+			Assert.fail("A NullPointerException should have been throwed.");
+		}
+		catch (NullPointerException npE) 
+		{
+			//passed
+		}
+	}
+	public void testIfTransformThrowsException2 () {
+		try 
+		{
+			ArrayList<Integer> nullValue = null;
+			filterData.transform(nullValue);
+			Assert.fail("A NullPointerException should have been throwed.");
+		}
+		catch (NullPointerException npE) 
+		{
+			//passed
+		}
+	}
+	public void testIfTransformThrowsException3 () {
+		try 
+		{
+			Float nullValue = null;
+			filterData.transform(nullValue);
+			Assert.fail("A NullPointerException should have been throwed.");
+		}
+		catch (NullPointerException npE) 
+		{
+			//passed
+		}
+	}
 }
