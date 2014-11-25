@@ -243,5 +243,9 @@ public class TestUser extends AndroidTestCase {
 		user2.setUsername("Username12");
 		assertEquals(12, user2.validationResult(user2, this.context));
 	}
+	public void testValidationResultOK () {
+		this.user2 = new User("Joao", "jujuba", "senha1234", "joao@email.com", 19, "Superior", "M", "N");
+		assertEquals(0, user2.validationResult(user2, this.context));
+	}
 	
 }

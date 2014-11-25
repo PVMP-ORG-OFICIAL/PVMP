@@ -33,7 +33,6 @@ public class TestDeputyController extends AndroidTestCase
 		this.deputyController = new DeputyController(this.context);
 		
 		this.startAtributes();
-		
 	}
 	
 	public void startAtributes()
