@@ -8,7 +8,6 @@ import android.content.Context;
 
 import com.pvmp.models.ModelSubjectInterface;
 import com.pvmp.models.User;
-import com.pvmp.util.Util;
 import com.pvmp.view.ViewObserverInterface;
 
 /**
@@ -55,17 +54,14 @@ public class PVMPController implements ControllerInterface
 	public void openApplication()
 	{
 		User user = this.userController.getUser("default_user","S");
-		Util.debug("PVMPController: start openApplication.");
 
 		//Verify if has user default
 		if (user != null)
 		{
-			Util.debug("PVMPController: go to HOME");
 			this.view.displayFragment(ViewObserverInterface.CATEGORY);
 			return;
 		}
 		
-		Util.debug("PVMPController: go to LOGIN");
 		this.view.enableDrawer(false);
 		this.view.enableScreenInteraction(false);
 		this.view.displayFragment(ViewObserverInterface.LOGIN);
@@ -83,22 +79,14 @@ public class PVMPController implements ControllerInterface
 	
 	public void callDisplayFragment (int fragmentIndex)
 	{
-		Util.debug("PVMPController: User saved on database, change view now");
 		this.view.displayFragment(fragmentIndex);
-		Util.debug("PVMPController: finish register");
 	}
 	
 	@Override
 	public User openSession()
 	{
-		Util.debug("PVMPController: openSession");
 		
 		User user = this.userController.getUser("default_user","S");
-		
-		if(user == null)
-		{
-			Util.debug("PVMPController: getDefaultUser Problem");
-		}
 
 		return user;
 	}

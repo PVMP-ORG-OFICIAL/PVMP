@@ -1,5 +1,7 @@
 package com.pvmp.dao.test;
 
+import java.util.ArrayList;
+
 import com.pvmp.dao.Criteria;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
@@ -61,8 +63,14 @@ public class SqlSelectTest extends TestCase {
 	 *        to the sqlSelect object.
 	 * */
 	public void testGetInstructionAllColumns () {
-		this.sqlSelect.addEntity("USUARIO");
+		ArrayList<String> entities = new ArrayList<String>();
+		entities.add("USUARIO");
+		entities.add("ADMINISTRADOR");
+
+		this.sqlSelect.setEntity(entities);
+		this.sqlSelect.getEntities();
 		this.sqlSelect.setExpression(this.c2);
+		this.sqlSelect.setAuxiliarCondition("ORDER BY IDADE");
 		
 		this.c1.add(this.f1, Expression.AND_OPERATOR);
 		this.c1.add(this.f2, Expression.AND_OPERATOR);
@@ -70,7 +78,11 @@ public class SqlSelectTest extends TestCase {
 		this.c2.add(this.c1, Expression.OR_OPERATOR);
 		this.c2.add(this.f3, Expression.OR_OPERATOR);
 		
-		assertEquals("SELECT * FROM USUARIO WHERE ((IDADE > 35 AND IDADE < 60) OR ESCOLARIDADE = 'Superior')",
+		assertEquals("SELECT * FROM USUARIO, ADMINISTRADOR WHERE ((IDADE > 35 AND IDADE < 60) OR ESCOLARIDADE = 'Superior') ORDER BY IDADE",
 				  this.sqlSelect.getInstruction());
+	}
+	
+	public void testReturnColumns () {
+		assertNotNull(this.sqlSelect.returnColumns());
 	}
 }

@@ -10,8 +10,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
 
-import com.pvmp.util.Util;
-
 /**
 * @class StartSplash
 * @brief 
@@ -21,7 +19,6 @@ public class StartSplash extends Activity
 	@Override
 	public void onCreate(Bundle _savedInstanceState) 
 	{
-		Util.debug("MainActivity: Start - MainActivity");
 		super.onCreate(_savedInstanceState);
 
 		setContentView(R.layout.splash);
@@ -48,7 +45,6 @@ public class StartSplash extends Activity
 				finally
 				{
 					Intent intent = new Intent("com.pvmp.view.PVMPView");
-					Util.debug("StartSplash: StartActivity");
 					startActivity(intent);
 					finish();
 				}

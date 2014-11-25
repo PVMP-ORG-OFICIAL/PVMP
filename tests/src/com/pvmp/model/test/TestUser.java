@@ -209,6 +209,7 @@ public class TestUser extends AndroidTestCase {
 	public void testValidationResultExistingEmail () {
 		this.user1 = new User("Jonathan", "johnSILvestre", "john123", "jonathan@gmail.com",
 				23, "Superior", "Masculino", "S");
+		this.userC.removeUser(user2);
 		this.userC.saveUser(user2);
 		assertEquals(7, user1.validationResult(user1, this.context));
 		this.userC.removeUser(user2);
@@ -216,6 +217,7 @@ public class TestUser extends AndroidTestCase {
 	public void testValidationResultExistingUser () {
 		this.user1 = new User("Jonathan", "john", "john123", "jonathan123@gmail.com",
 				23, "Superior", "Masculino", "S");
+		this.userC.removeUser(user2);
 		this.userC.saveUser(user2);
 		assertEquals(8, user1.validationResult(user1, this.context));
 		this.userC.removeUser(user2);

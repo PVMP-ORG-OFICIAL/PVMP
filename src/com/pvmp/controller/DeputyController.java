@@ -8,7 +8,6 @@ import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.models.Deputy;
 import com.pvmp.models.Vote;
-import com.pvmp.util.Util;
 
 import android.content.Context;
 
@@ -40,8 +39,6 @@ public class DeputyController extends AbstractController
 		selectExpression.addColumn(Deputy.COLUMN_NAME);
 		selectExpression.addColumn(Deputy.COLUMN_ID_REGISTRATION);
 		
-		Util.debug("Deputy ID: " + deputy.getIdRegistration());
-		
 		Filter deputyIdFilter = new Filter("id_registration", "IN");
 		deputyIdFilter.setValue(deputiesRegistrations);
 		
@@ -61,10 +58,6 @@ public class DeputyController extends AbstractController
 				deputy = (Deputy) abstractDeputies.get(i);
 				
 				deputies.add(deputy);
-				
-				Util.debug("Vote_res: " + _votes.get(i).getResult() +
-						   " Vote_reg: " + _votes.get(i).getDeputy().getIdRegistration() +
-						   " Dep_reg: " + deputies.get(i).getIdRegistration());
 			}
 		}
 		

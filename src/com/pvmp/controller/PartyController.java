@@ -10,7 +10,6 @@ import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.models.Deputy;
 import com.pvmp.models.Party;
-import com.pvmp.util.Util;
 
 public class PartyController extends AbstractController 
 {
@@ -86,8 +85,6 @@ public class PartyController extends AbstractController
 				currentParty = (Party) abstractParties.get(i);
 				
 				parties.add(currentParty);
-				
-				Util.debug("ACRO: " + parties.get(i).getAcronym() + " NUMBER: " + parties.get(i).getNumber());
 			}
 		}
 		

@@ -20,13 +20,11 @@ public class ChartController
 	public static final String ALL_VOTES = "Todos";
 	public static final String YES_VOTES = "Sim";
 	public static final String NO_VOTES = "Não";
-	private PartyController partyController;
 	private DeputyController deputyController;
 	private VoteController voteController;
 	
 	public ChartController(Context _context)
 	{
-		this.partyController = new PartyController(_context);
 		this.deputyController = new DeputyController(_context);
 		this.voteController = new VoteController(_context);
 	}

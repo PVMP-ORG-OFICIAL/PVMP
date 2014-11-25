@@ -10,7 +10,6 @@ import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.models.Proposition;
 import com.pvmp.models.Voting;
-import com.pvmp.util.Util;
 
 public class VotingController extends AbstractController
 {
@@ -59,10 +58,6 @@ public class VotingController extends AbstractController
 				currentVoting = (Voting) abstractVotings.get(i);
 				
 				_propositions.get(i).setVoting(currentVoting);
-				
-				Util.debug("Code_session: " + currentVoting.getCodeSession() +
-						   "Id_propVOT: " + currentVoting.getProposition().getId()+
-						   " Id_prop: " + _propositions.get(i).getId());
 			}
 		}
 	}

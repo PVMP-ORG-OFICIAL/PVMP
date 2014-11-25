@@ -10,7 +10,6 @@ import com.pvmp.dao.SqlSelect;
 import com.pvmp.models.Feedback;
 import com.pvmp.models.User;
 import com.pvmp.util.MessageHandling;
-import com.pvmp.util.Util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
@@ -41,7 +40,6 @@ public class FeedbackController extends AbstractController
 			feedbackToBeSaved.insertDB(this.context);
 		}
 		catch (SQLiteException sqlE) {
-			Util.debug("SQLiteException em FeedbackController.saveFeedback");
 			MessageHandling.showToast("Erro ao salvar o feedback no banco de dados!", this.context);
 		}
 	}
@@ -68,7 +66,6 @@ public class FeedbackController extends AbstractController
 			feedbackToBeEdited.updateDB(criteriaExpression, this.context);
 		}
 		catch (SQLiteException sqlE) {
-			Util.debug("SQLiteException em FeedbackController.editFeedback");
 			MessageHandling.showToast("Erro ao editar o feedback no banco de dados!", this.context);
 		}
 	}
@@ -94,7 +91,6 @@ public class FeedbackController extends AbstractController
 			feedbackToBeDeleted.deleteDB(criteriaExpression, this.context);
 		}
 		catch (SQLiteException sqlE) {
-			Util.debug("SQLiteException em FeedbackController.deleteFeedback");
 			MessageHandling.showToast("Erro ao deletar o feedback do banco de dados!", this.context);
 		}
 	}
