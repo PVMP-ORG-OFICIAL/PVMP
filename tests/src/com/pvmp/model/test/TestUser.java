@@ -1,20 +1,28 @@
 package com.pvmp.model.test;
 
-import junit.framework.TestCase;
+import android.test.AndroidTestCase;
+import android.test.RenamingDelegatingContext;
 
+import com.pvmp.controller.UserController;
 import com.pvmp.models.User;
 
-public class TestUser extends TestCase {
+public class TestUser extends AndroidTestCase {
 	
+	private RenamingDelegatingContext context;
 	private User user1;
 	private User user2;
+	private UserController userC;
 
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		user1 = new User();
-		user2 = new User("Jonathan", "john", "john123", "jonathan@gmail.com",
+		this.context = new RenamingDelegatingContext(getContext(), "test.");
+		this.context.makeExistingFilesAndDbsAccessible();
+		
+		this.user1 = new User();
+		this.user2 = new User("Jonathan", "john", "john123", "jonathan@gmail.com",
 							23, "Superior", "Masculino", "S");
+		this.userC = new UserController(this.context);
 	}
 
 	protected void tearDown() throws Exception {
@@ -75,6 +83,14 @@ public class TestUser extends TestCase {
 	public void testSetSex() {
 		user1.setSex("Feminino");
 		assertEquals(user1.getSex(), "Feminino");
+	}
+	
+	public void testGetDefaultUser () {
+		assertEquals("S", user2.getDefaultUser());
+	}
+	public void testSetDefaultUser () {
+		user1.setDefaultUser("N");
+		assertEquals("N", user1.getDefaultUser());
 	}
 
 	public void testValidateNameFormat() {
@@ -153,7 +169,7 @@ public class TestUser extends TestCase {
 		assertTrue(User.validatePasswordSize("john123"));
 	}
 	
-	public void testValidePasswordSizeInvalid() {
+	public void testValidatePasswordSizeInvalid() {
 		assertFalse(User.validatePasswordSize("abcdefghijklmn123456"));
 	}
 	
@@ -165,8 +181,65 @@ public class TestUser extends TestCase {
 		assertFalse(User.validatePasswordFormat("Abc@123_hgJs=#lasd"));
 	}
 	
-	public void testValidationResultNameFormat() {
-		user1.setName("João123");
-		//assertEquals(1, user1.validationResult(user1, context));
+	public void testValidationResultInvalidNameFormat() {
+		user2.setName("João123");
+		assertEquals(1, user2.validationResult(user2, this.context));
 	}
+	public void testValidationResultInvalidNameSize () {
+		user2.setName("Ju");
+		assertEquals(2, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidEmailFormat () {
+		user2.setEmail("joao.hotmail");
+		assertEquals(3, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidEmailSize () {
+		String email = "oi123455123423@hotadhashdhaahuhudadasbasdsahuddmail.com";
+		user2.setEmail(email);
+		assertEquals(4, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidAge () {
+		user2.setAge(100);
+		assertEquals(5, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidPasswordSize () {
+		user2.setPassword("123456123456adadsadad");
+		assertEquals(6, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultExistingEmail () {
+		this.user1 = new User("Jonathan", "johnSILvestre", "john123", "jonathan@gmail.com",
+				23, "Superior", "Masculino", "S");
+		this.userC.saveUser(user2);
+		assertEquals(7, user1.validationResult(user1, this.context));
+		this.userC.removeUser(user2);
+	}
+	public void testValidationResultExistingUser () {
+		this.user1 = new User("Jonathan", "john", "john123", "jonathan123@gmail.com",
+				23, "Superior", "Masculino", "S");
+		this.userC.saveUser(user2);
+		assertEquals(8, user1.validationResult(user1, this.context));
+		this.userC.removeUser(user2);
+	}
+	public void testValidationResultInvalidUsernameSize () {
+		user2.setUsername("ab");
+		user2.setEmail("test9@test9.com");
+		assertEquals(9, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidUsernameFirstLetter () {
+		user2.setUsername("1joaobala");
+		user2.setEmail("test10@test10.com");
+		assertEquals(10, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidUsernameFormat () {
+		user2.setUsername("Juca-baleta**");
+		user2.setEmail("test11@test11.com");
+		assertEquals(11, user2.validationResult(user2, this.context));
+	}
+	public void testValidationResultInvalidPasswordFormat () {
+		user2.setPassword("juks**");
+		user2.setEmail("test12@test12.com");
+		user2.setUsername("Username12");
+		assertEquals(12, user2.validationResult(user2, this.context));
+	}
+	
 }

@@ -116,37 +116,38 @@ public class TestParty extends TestCase {
 	}
 	
 	public void testParseNumber() {
-		assertEquals("PRB", Party.parseNumber(10));
-		assertEquals("PP", Party.parseNumber(11));
-		assertEquals("PDT", Party.parseNumber(12));
-		assertEquals("PT", Party.parseNumber(13));
-		assertEquals("PTB", Party.parseNumber(14));
-		assertEquals("PMDB", Party.parseNumber(15));
-		assertEquals("PSTU", Party.parseNumber(16));
-		assertEquals("PSL", Party.parseNumber(17));
-		assertEquals("PTN", Party.parseNumber(19));
-		assertEquals("PSC", Party.parseNumber(20));
-		assertEquals("PCB", Party.parseNumber(21));
-		assertEquals("PR", Party.parseNumber(22));
-		assertEquals("PPS", Party.parseNumber(23));
-		assertEquals("DEM", Party.parseNumber(25));
-		assertEquals("PSDC", Party.parseNumber(27));
-		assertEquals("PRTB", Party.parseNumber(28));
-		assertEquals("PCO", Party.parseNumber(29));
-		assertEquals("PHS", Party.parseNumber(31));
-		assertEquals("PMN", Party.parseNumber(33));
-		assertEquals("PTC", Party.parseNumber(36));
-		assertEquals("PSB", Party.parseNumber(40));
-		assertEquals("PV", Party.parseNumber(43));
-		assertEquals("PRP", Party.parseNumber(44));
-		assertEquals("PSDB", Party.parseNumber(45));
-		assertEquals("PSOL", Party.parseNumber(50));
-		assertEquals("PPL", Party.parseNumber(54));
-		assertEquals("PSD", Party.parseNumber(55));
-		assertEquals("PCdoB", Party.parseNumber(65));
-		assertEquals("PTdoB", Party.parseNumber(70));
-		assertEquals("SDD", Party.parseNumber(77));
-		assertEquals("PROS", Party.parseNumber(90));		
+		assertEquals("PRB", Party.parseNumber(10f));
+		assertEquals("PP", Party.parseNumber(11f));
+		assertEquals("PDT", Party.parseNumber(12f));
+		assertEquals("PT", Party.parseNumber(13f));
+		assertEquals("PTB", Party.parseNumber(14f));
+		assertEquals("PMDB", Party.parseNumber(15f));
+		assertEquals("PSTU", Party.parseNumber(16f));
+		assertEquals("PSL", Party.parseNumber(17f));
+		assertEquals("PTN", Party.parseNumber(19f));
+		assertEquals("PSC", Party.parseNumber(20f));
+		assertEquals("PCB", Party.parseNumber(21f));
+		assertEquals("PR", Party.parseNumber(22f));
+		assertEquals("PPS", Party.parseNumber(23f));
+		assertEquals("DEM", Party.parseNumber(25f));
+		assertEquals("PSDC", Party.parseNumber(27f));
+		assertEquals("PRTB", Party.parseNumber(28f));
+		assertEquals("PCO", Party.parseNumber(29f));
+		assertEquals("PHS", Party.parseNumber(31f));
+		assertEquals("PMN", Party.parseNumber(33f));
+		assertEquals("PTC", Party.parseNumber(36f));
+		assertEquals("PSB", Party.parseNumber(40f));
+		assertEquals("PV", Party.parseNumber(43f));
+		assertEquals("PRP", Party.parseNumber(44f));
+		assertEquals("PSDB", Party.parseNumber(45f));
+		assertEquals("PSOL", Party.parseNumber(50f));
+		assertEquals("PPL", Party.parseNumber(54f));
+		assertEquals("PSD", Party.parseNumber(55f));
+		assertEquals("PCdoB", Party.parseNumber(65f));
+		assertEquals("PTdoB", Party.parseNumber(70f));
+		assertEquals("SDD", Party.parseNumber(77f));
+		assertEquals("PROS", Party.parseNumber(90f));
+		assertNull(Party.parseNumber(100f));
 	}
 
 }
