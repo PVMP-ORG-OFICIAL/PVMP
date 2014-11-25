@@ -2,7 +2,7 @@
 * @file ListenerObserverInterface.java
 * @brief 
 */
-package com.pvmp.models;
+package com.pvmp.model;
 
 /**
 * @class ListenerObserverInterface

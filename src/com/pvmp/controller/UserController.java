@@ -8,7 +8,7 @@ import android.database.SQLException;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 
 public class UserController extends AbstractController
 {

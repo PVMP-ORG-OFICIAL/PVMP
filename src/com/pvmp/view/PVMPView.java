@@ -28,8 +28,8 @@ import android.widget.ListView;
 
 import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
-import com.pvmp.models.Proposition;
-import com.pvmp.models.User;
+import com.pvmp.model.Proposition;
+import com.pvmp.model.User;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
 import com.pvmp.view.model.AbstractDrawerItem;
 import com.pvmp.view.model.NavigationDrawerItem;

@@ -9,7 +9,7 @@ import com.pvmp.controller.UserController;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;

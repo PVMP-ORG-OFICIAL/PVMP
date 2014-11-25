@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.controller.ChartController;
-import com.pvmp.models.Proposition;
+import com.pvmp.model.Proposition;
 
 public class ChartView 
 {

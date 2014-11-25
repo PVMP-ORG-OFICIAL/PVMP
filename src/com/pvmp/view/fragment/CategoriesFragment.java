@@ -18,7 +18,7 @@ import android.widget.ListView;
 import com.pvmp.R;
 import com.pvmp.controller.PropositionController;
 import com.pvmp.controller.VotingController;
-import com.pvmp.models.Proposition;
+import com.pvmp.model.Proposition;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.view.adapter.CategoryDrawerAdapter;

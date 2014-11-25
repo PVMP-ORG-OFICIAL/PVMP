@@ -1,4 +1,4 @@
-package com.pvmp.models;
+package com.pvmp.model;
 
 import android.content.ContentValues;
 

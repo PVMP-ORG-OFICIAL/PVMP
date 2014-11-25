@@ -5,8 +5,8 @@ import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
 import com.pvmp.controller.FeedbackController;
-import com.pvmp.models.Feedback;
-import com.pvmp.models.User;
+import com.pvmp.model.Feedback;
+import com.pvmp.model.User;
 
 public class FeedbackControllerTest extends AndroidTestCase 
 {

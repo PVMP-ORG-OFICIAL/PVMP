@@ -2,7 +2,7 @@ package com.pvmp.controller;
 
 import java.util.ArrayList;
 
-import com.pvmp.models.ModelSubjectInterface;
+import com.pvmp.model.ModelSubjectInterface;
 import com.pvmp.view.ViewObserverInterface;
 
 

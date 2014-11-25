@@ -1,7 +1,7 @@
 package com.pvmp.dao.test;
 
 import com.pvmp.dao.DAOAbstract;
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;

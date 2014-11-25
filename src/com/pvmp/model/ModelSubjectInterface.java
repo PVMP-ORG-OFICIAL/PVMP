@@ -2,7 +2,7 @@
 * @file ModelSubjectInterface.java
 * @brief
 */
-package com.pvmp.models;
+package com.pvmp.model;
 
 import android.content.Context;
 

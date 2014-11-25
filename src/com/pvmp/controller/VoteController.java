@@ -7,8 +7,8 @@ import android.content.Context;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.Vote;
-import com.pvmp.models.Voting;
+import com.pvmp.model.Vote;
+import com.pvmp.model.Voting;
 
 public class VoteController extends AbstractController
 {

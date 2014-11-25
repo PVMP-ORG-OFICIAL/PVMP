@@ -2,8 +2,8 @@ package com.pvmp.model.test;
 
 import android.content.ContentValues;
 
-import com.pvmp.models.Feedback;
-import com.pvmp.models.User;
+import com.pvmp.model.Feedback;
+import com.pvmp.model.User;
 
 import junit.framework.TestCase;
 

@@ -1,4 +1,4 @@
-package com.pvmp.models;
+package com.pvmp.model;
 
 import java.util.ArrayList;
 

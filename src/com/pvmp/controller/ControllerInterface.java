@@ -4,7 +4,7 @@
 */
 package com.pvmp.controller;
 
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 import com.pvmp.view.ViewObserverInterface;
 
 /**

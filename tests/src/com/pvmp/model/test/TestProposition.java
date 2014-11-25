@@ -3,8 +3,8 @@ package com.pvmp.model.test;
 import junit.framework.TestCase;
 import android.content.ContentValues;
 
-import com.pvmp.models.Proposition;
-import com.pvmp.models.Voting;
+import com.pvmp.model.Proposition;
+import com.pvmp.model.Voting;
 
 public class TestProposition extends TestCase {
 	

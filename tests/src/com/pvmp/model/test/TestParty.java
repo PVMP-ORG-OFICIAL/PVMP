@@ -6,8 +6,8 @@ import junit.framework.TestCase;
 
 import android.content.ContentValues;
 
-import com.pvmp.models.Deputy;
-import com.pvmp.models.Party;
+import com.pvmp.model.Deputy;
+import com.pvmp.model.Party;
 
 public class TestParty extends TestCase {
 	

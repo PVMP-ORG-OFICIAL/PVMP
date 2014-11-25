@@ -7,8 +7,8 @@ import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.Feedback;
-import com.pvmp.models.User;
+import com.pvmp.model.Feedback;
+import com.pvmp.model.User;
 import com.pvmp.util.MessageHandling;
 
 import android.content.Context;

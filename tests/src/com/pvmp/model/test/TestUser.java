@@ -4,7 +4,7 @@ import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
 import com.pvmp.controller.UserController;
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 
 public class TestUser extends AndroidTestCase {
 	

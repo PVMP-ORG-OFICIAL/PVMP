@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import android.content.Context;
 
 import com.github.mikephil.charting.charts.PieChart;
-import com.pvmp.models.Deputy;
-import com.pvmp.models.Party;
-import com.pvmp.models.Proposition;
-import com.pvmp.models.Vote;
-import com.pvmp.models.Voting;
+import com.pvmp.model.Deputy;
+import com.pvmp.model.Party;
+import com.pvmp.model.Proposition;
+import com.pvmp.model.Vote;
+import com.pvmp.model.Voting;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;

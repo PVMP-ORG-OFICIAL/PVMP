@@ -9,7 +9,7 @@ import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.Proposition;
+import com.pvmp.model.Proposition;
 
 public class PropositionController extends AbstractController
 {

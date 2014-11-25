@@ -17,7 +17,7 @@ import android.widget.RadioGroup;
 import com.pvmp.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.controller.UserController;
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;

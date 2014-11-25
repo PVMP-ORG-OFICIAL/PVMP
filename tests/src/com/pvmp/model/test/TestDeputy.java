@@ -6,11 +6,11 @@ import junit.framework.TestCase;
 
 import android.content.ContentValues;
 
-import com.pvmp.models.Deputy;
-import com.pvmp.models.Party;
-import com.pvmp.models.Proposition;
-import com.pvmp.models.Vote;
-import com.pvmp.models.Voting;
+import com.pvmp.model.Deputy;
+import com.pvmp.model.Party;
+import com.pvmp.model.Proposition;
+import com.pvmp.model.Vote;
+import com.pvmp.model.Voting;
 
 public class TestDeputy extends TestCase {
 	

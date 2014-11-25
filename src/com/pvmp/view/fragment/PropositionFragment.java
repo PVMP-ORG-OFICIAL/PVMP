@@ -18,8 +18,8 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.R;
 import com.pvmp.controller.ChartController;
 import com.pvmp.controller.FeedbackController;
-import com.pvmp.models.Feedback;
-import com.pvmp.models.Proposition;
+import com.pvmp.model.Feedback;
+import com.pvmp.model.Proposition;
 import com.pvmp.view.ChartView;
 import com.pvmp.view.PVMPView;
 
@@ -27,7 +27,7 @@ public class PropositionFragment extends FragmentView {
 	private Context context;
 	private PVMPView view;
 	private ArrayList<Proposition> propositions;
-	private TextView textPropositionCount, categoryName;
+	private TextView categoryName;
 	private ViewFlipper viewFlipper;
 	private int limit, target, count;
 	private String opinion = "";
@@ -145,8 +145,7 @@ public class PropositionFragment extends FragmentView {
 	public void updateScreenComponent() {
 		// Testing if the propositions' IDs are correct based on the category
 		// clicked.
-		String text = "Code_session: "
-				+ (propositions.get(this.count).getVoting().getCodeSession());
+		String text = (propositions.get(this.count).getMenu());
 
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
 

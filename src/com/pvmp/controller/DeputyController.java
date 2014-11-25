@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 import com.pvmp.dao.DAOAbstract;
 import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
-import com.pvmp.models.Deputy;
-import com.pvmp.models.Vote;
+import com.pvmp.model.Deputy;
+import com.pvmp.model.Vote;
 
 import android.content.Context;
 
