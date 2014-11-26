@@ -20,7 +20,7 @@ public class TestChartController extends AndroidTestCase
 	private RenamingDelegatingContext context;
 	private ChartController chartController;
 	private ArrayList<Deputy> deputies;
-	private ArrayList<Vote> votesTest, votesYes, votesNo;
+	private ArrayList<Vote> votesTest, votesToTestPartyPercentage;
 	private Vote voteYes, voteNo;
 	
 	private Vote vote1, vote2;
@@ -37,8 +37,7 @@ public class TestChartController extends AndroidTestCase
 		this.context.makeExistingFilesAndDbsAccessible();
 
 		this.votesTest = new ArrayList<Vote>();
-		this.votesYes = new ArrayList<Vote>();
-		this.votesNo = new ArrayList<Vote>();
+		this.votesToTestPartyPercentage = new ArrayList<Vote>();
 		this.chartController = new ChartController(this.context);
 		this.voteYes = new Vote();
 		this.voteNo = new Vote();
@@ -119,8 +118,8 @@ public class TestChartController extends AndroidTestCase
 		votesTest.add(vote1);
 		votesTest.add(vote2);
 		
-		votesYes.add(vote1);
-		votesNo.add(vote2);
+		votesToTestPartyPercentage.add(vote1);
+		votesToTestPartyPercentage.add(vote2);
 		
 		deputies.add(deputy1);
 		deputies.add(deputy2);
@@ -138,10 +137,11 @@ public class TestChartController extends AndroidTestCase
 
 	public void testSelectVotesByType() 
 	{
+		votesTest = new ArrayList<Vote>();
 		votesTest.add(voteYes);
 		votesTest.add(voteNo);
 		
-		assertEquals(2, (chartController.selectVotesByType(votesTest, ChartController.YES_VOTES)).size());
+		assertEquals(1, (chartController.selectVotesByType(votesTest, ChartController.YES_VOTES)).size());
 	}
 
 	public void testCalculateVotesResultPercentage() 
@@ -172,7 +172,7 @@ public class TestChartController extends AndroidTestCase
 	{
 		float percent = 100f;
 		
-		assertEquals(percent, (chartController.calculatePartiesResultPercentage(votesYes, ChartController.YES_VOTES).get(0)));
+		assertEquals(percent, (chartController.calculatePartiesResultPercentage(votesToTestPartyPercentage, ChartController.YES_VOTES).get(0)[1]));
 	}
 
 	/*
