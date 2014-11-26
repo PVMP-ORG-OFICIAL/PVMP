@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.controller.PropositionController;
 import com.pvmp.controller.VotingController;
 import com.pvmp.model.Proposition;

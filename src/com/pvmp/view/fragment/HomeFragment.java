@@ -1,5 +1,5 @@
 /**
-* @frile HomeFragment.java
+* @file HomeFragment.java
 * @brief
 */
 package com.pvmp.view.fragment;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.util.Util;
 import com.pvmp.view.PVMPView;
-import com.pvmp.R;
+import com.pvmp.main.R;
 
 public class HomeFragment extends Fragment 
 {

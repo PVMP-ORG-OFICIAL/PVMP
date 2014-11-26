@@ -15,7 +15,7 @@ import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
 import com.github.mikephil.charting.charts.PieChart;
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.controller.ChartController;
 import com.pvmp.controller.FeedbackController;
 import com.pvmp.model.Feedback;

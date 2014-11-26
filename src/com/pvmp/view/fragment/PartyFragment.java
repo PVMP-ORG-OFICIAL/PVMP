@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 
 /**
 * @class

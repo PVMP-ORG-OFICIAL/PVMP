@@ -6,7 +6,7 @@
 */
 package com.pvmp.main;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 
 import android.app.Activity;
 import android.os.Bundle;

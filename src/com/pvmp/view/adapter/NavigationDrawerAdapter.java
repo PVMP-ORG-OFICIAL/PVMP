@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Context;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.view.model.AbstractDrawerItem;
 import com.pvmp.view.model.NavigationDrawerItem;
 

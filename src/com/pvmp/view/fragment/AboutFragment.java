@@ -1,6 +1,6 @@
 package com.pvmp.view.fragment;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.view.PVMPView;
 
 import android.content.Context;

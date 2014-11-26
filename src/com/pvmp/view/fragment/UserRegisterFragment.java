@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.controller.PVMPController;
 import com.pvmp.controller.UserController;
 import com.pvmp.model.User;
