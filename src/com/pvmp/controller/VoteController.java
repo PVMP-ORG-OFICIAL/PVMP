@@ -32,8 +32,8 @@ public class VoteController extends AbstractController
 		selectExpression.addColumn(Vote.COLUMN_VOTE_RESULT);
 		selectExpression.addColumn(Vote.COLUMN_ID_REGISTRATION);
 		
-		Filter votingCodeFilter = new Filter("code_session", "=");
-		votingCodeFilter.setValue(_voting.getCodeSession());
+		Filter votingCodeFilter = new Filter("id_voting", "=");
+		votingCodeFilter.setValue(_voting.getIdVoting());
 		
 		selectExpression.setExpression(votingCodeFilter);
 		selectExpression.setAuxiliarCondition("ORDER BY " + Vote.COLUMN_ID_REGISTRATION + " ASC");

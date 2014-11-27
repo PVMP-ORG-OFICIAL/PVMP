@@ -9,12 +9,14 @@ import com.pvmp.dao.DAOAbstract;
 public class Voting extends DAOAbstract
 {
 	// !--- DATABASE ATTRIBUTES ---! \\ 
-	public static final String COLUMN_CODE_SESSION = "code_session";
+	public static final String COLUMN_ID_VOTING = "id_voting";
+	public static final String COLUMN_CODE_SESSION = "cod_session";
 	public static final String COLUMN_SUMMARY = "summary";
 	public static final String COLUMN_DATE = "date";
 	public static final String COLUMN_ID_PROP = "id_prop";
 	
 	// !--- OTHER ATTRIBUTES ---! \\
+	private Integer idVoting;
 	private Integer codeSession;
 	private Proposition proposition;
 	private String summary;
@@ -25,6 +27,8 @@ public class Voting extends DAOAbstract
 	public Voting() {
 		super();
 		this.TABLE_NAME = "Voting";
+		this.idVoting = null;
+		this.codeSession = null;
 		this.proposition = null;
 		this.summary = null;
 		this.date = null;
@@ -63,6 +67,14 @@ public class Voting extends DAOAbstract
 		this.votes = _votes;
 	}
 	
+	public Integer getIdVoting() {
+		return idVoting;
+	}
+
+	public void setIdVoting(Integer idVoting) {
+		this.idVoting = idVoting;
+	}
+	
 	public Integer getCodeSession() {
 		return this.codeSession;
 	}
@@ -82,6 +94,7 @@ public class Voting extends DAOAbstract
 		Voting voting = new Voting();
 		Proposition proposition = new Proposition();
 		
+		voting.setIdVoting(_contentValues.getAsInteger(COLUMN_ID_VOTING));
 		voting.setCodeSession(_contentValues.getAsInteger(COLUMN_CODE_SESSION));
 		voting.setSummary(_contentValues.getAsString(COLUMN_SUMMARY));
 		voting.setDate(_contentValues.getAsString(COLUMN_DATE));
@@ -90,5 +103,4 @@ public class Voting extends DAOAbstract
 		
 		return voting;
 	}
-
 }
