@@ -10,8 +10,8 @@ public class LoginTest extends UiAutomatorTestCase
 	public void testLoginEmptyFields() throws UiObjectNotFoundException 
 	{
 		
-		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
-		pvmp.clickAndWaitForNewWindow();
+		UiObject donc = new UiObject(new UiSelector().text("De Olho na Câmara"));
+		donc.clickAndWaitForNewWindow();
 		
 		UiObject userNameIsEmpty = new UiObject(new UiSelector().index(2).text("Nome de usuário")
 				.className("android.widget.EditText"));
