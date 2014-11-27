@@ -10,19 +10,17 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical" >
-
-		<!-- android:background	= "@drawable/path" -->
 	
 		<!-- TITLE -->
 		<TextView
 			style = "@style/title"
 			android:text = "@string/text_login"
-			android:layout_gravity = "center"/>
+			android:layout_gravity = "center" />
 	
 			<!-- USER -->
 			<TextView
 				style = "@style/textInfo"
-				android:text  = "@string/text_username"/>
+				android:text  = "@string/text_username" />
 			
 			<EditText
 			    android:id="@+id/name"
@@ -33,17 +31,16 @@
 			<!-- PASSWORD -->
 			<TextView
 				style = "@style/textInfo"
-				android:text  = "@string/text_password"/>
+				android:text  = "@string/text_password" />
 	
 			<EditText
 				style = "@style/textInput"
 				android:id    = "@+id/password"
 				android:hint  = "@string/text_password_hint" 
 				android:inputType = "textPassword"
-				android:drawableLeft = "@drawable/ic_password"/>
+				android:drawableLeft = "@drawable/ic_password" />
 	
-			<!-- CONFIRM BUTTON -->
-	
+			<!-- CONFIRM BUTTON -->	
 			<Button
 			    android:id="@+id/button_confirm"
 			    style="@style/defaultButton"
@@ -58,7 +55,7 @@
 				android:layout_width="165dp"
 				android:layout_gravity = "center"
 				android:text  = "@string/text_register"
-				android:layout_marginTop = "15dp"/>
+				android:layout_marginTop = "15dp" />
 				
 			<Button
 				style="@style/defaultButton"
@@ -66,7 +63,7 @@
 				android:layout_width="165dp"
 				android:layout_gravity = "center"
 				android:text  = "@string/text_guest"
-				android:layout_marginTop = "15dp"/>
+				android:layout_marginTop = "15dp"
+				android:layout_marginBottom="15dp" />
 	</LinearLayout>
-
 </ScrollView>

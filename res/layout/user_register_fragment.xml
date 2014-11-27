@@ -10,41 +10,40 @@
 	  android:layout_width  = "fill_parent"
 	  android:layout_height = "wrap_content"
 	  android:orientation   = "vertical" >
-		<!-- android:background	= "@drawable/path" -->
 
 		<!-- TITLE -->
 		<TextView
 			style = "@style/title"
 			android:text = "@string/text_register"
-			android:layout_gravity = "center"/>
+			android:layout_gravity = "center" />
 
 		<!-- NAME -->
 		<TextView
 			style = "@style/textInfo"
-			android:text  = "@string/text_name"/>
+			android:text  = "@string/text_name" />
 
 		<EditText
 			style = "@style/textInput"
 			android:id = "@+id/name"
 			android:hint = "@string/text_name_hint"                      
-			android:drawableLeft = "@drawable/ic_name"/> 
+			android:drawableLeft = "@drawable/ic_name" /> 
 
 		<!-- EMAIL -->
 		<TextView
 			style = "@style/textInfo"
-			android:text  = "@string/text_email"/>
+			android:text  = "@string/text_email" />
 
 		<EditText
 			style = "@style/textInput"
 			android:id    = "@+id/email"
 			android:hint  = "@string/text_email_hint"
 			android:inputType = "textEmailAddress"
-			android:drawableLeft="@drawable/ic_email"/>
+			android:drawableLeft="@drawable/ic_email" />
 		
 		<!-- AGE -->
 		<TextView
 			style = "@style/textInfo"
-			android:text  = "@string/text_age"/>
+			android:text  = "@string/text_age" />
 
 		<EditText
 		    android:id="@+id/age_user"
@@ -57,20 +56,21 @@
 		<LinearLayout 
 			android:layout_width  = "fill_parent"
 			android:layout_height = "fill_parent"
-			android:orientation   = "horizontal">
+			android:orientation   = "horizontal" >
 			
 			<LinearLayout 
 				android:layout_width  = "wrap_content"
 				android:layout_height = "wrap_content"
-				android:orientation   = "vertical">
+				android:orientation   = "vertical" >
+				
 				<TextView
 					style = "@style/textInfo"
-					android:text = "@string/text_education"/>
+					android:text = "@string/text_education" />
 			
 				<RadioGroup
 					android:id="@+id/radiogroup_education"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content">
+					android:layout_height="wrap_content" >
 
 					<RadioButton
 						android:id="@+id/radio_elementarySchool"
@@ -89,17 +89,19 @@
 						android:id="@+id/radio_graduated"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="@string/text_graduated" />
+						android:text="@string/text_graduated" />					
 				</RadioGroup>
 			</LinearLayout>
+			
 			<!-- SEX -->
 			<LinearLayout 
-				android:layout_width  = "wrap_content"
+				android:layout_width = "wrap_content"
 				android:layout_height = "wrap_content"
-				android:orientation   = "vertical">
+				android:orientation = "vertical" >
+				
 				<TextView
 					style = "@style/textInfo"
-					android:text = "@string/text_sex"/>
+					android:text = "@string/text_sex" />
 				
 				<RadioGroup
 					android:id="@+id/radiogroup_sex"
@@ -122,28 +124,29 @@
 				</RadioGroup>
 			</LinearLayout>
 		</LinearLayout>
+		
 		<!-- USER -->
 		<TextView
 			style = "@style/textInfo"
-			android:text  = "@string/text_username"/>
+			android:text  = "@string/text_username" />
 		
 		<EditText
 			style = "@style/textInput"
 			android:id = "@+id/user_login"
 			android:hint = "@string/text_user_hint"                      
-			android:drawableLeft = "@drawable/ic_name"/> 
+			android:drawableLeft = "@drawable/ic_name" /> 
 		
 		<!-- PASSWORD -->
 		<TextView
 			style = "@style/textInfo"
-			android:text  = "@string/text_password"/>
+			android:text  = "@string/text_password" />
 
 		<EditText
 			style = "@style/textInput"
 			android:id    = "@+id/password"
 			android:hint  = "@string/text_password_hint" 
 			android:inputType = "textPassword"
-			android:drawableLeft = "@drawable/ic_password"/>
+			android:drawableLeft = "@drawable/ic_password" />
 
 		<EditText
 		    style = "@style/textInput"
@@ -154,14 +157,14 @@
 		    android:drawableLeft = "@drawable/ic_password" />
 
 		<!-- CONFIRM BUTTON -->
-
-			<Button
+		<Button
 			android:id  = "@+id/confirm"
 			style="@style/defaultButton"
 			android:layout_width="165dp"
 			android:layout_gravity="center"
 			android:text  = "@string/text_register"
-			android:layout_marginTop = "15dp"/>
+			android:layout_marginTop = "15dp"
+			android:layout_marginBottom="10dp" />
 
 	</LinearLayout>
 </ScrollView>

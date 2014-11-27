@@ -18,7 +18,8 @@
 	        android:layout_height="wrap_content"
 	        android:ems="10"
 	        android:hint="@string/text_name"
-	        android:inputType="textPersonName" />
+	        android:inputType="textPersonName"
+	        android:layout_marginTop="10dp" />
 	
 	    <EditText
 	        android:id="@+id/editText_editEmail"
@@ -43,7 +44,7 @@
 	     <TextView
 			style = "@style/textInfo"
 			android:layout_marginTop = "2dp"
-			android:text = "@string/text_education"/>
+			android:text = "@string/text_education" />
 	
 	    <RadioGroup
 	        android:id="@+id/radioGroup_editEducation"
@@ -71,7 +72,7 @@
 	            android:text="@string/text_graduated" />
 	    </RadioGroup>
 	    
-	     <TextView
+	   	<TextView
 			style = "@style/textInfo"
 			android:text = "@string/text_sex"
 			android:layout_marginTop = "2dp" />
@@ -130,8 +131,6 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop = "2dp"
-	        android:text="@string/passwordWarning" />
-	
-	</LinearLayout>
-	
+	        android:text="@string/passwordWarning" />	
+	</LinearLayout>	
 </ScrollView>

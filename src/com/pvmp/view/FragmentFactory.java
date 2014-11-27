@@ -5,7 +5,6 @@ import android.app.Fragment;
 import com.pvmp.view.fragment.AboutFragment;
 import com.pvmp.view.fragment.CategoriesFragment;
 import com.pvmp.view.fragment.EditSettingsFragment;
-import com.pvmp.view.fragment.HomeFragment;
 import com.pvmp.view.fragment.LoginFragment;
 import com.pvmp.view.fragment.PropositionFragment;
 import com.pvmp.view.fragment.SettingsFragment;
@@ -35,8 +34,6 @@ public class FragmentFactory {
 				return new LoginFragment();
 			case PVMPView.REGISTER:
 				return new UserRegisterFragment();
-			case PVMPView.HOME:
-				return new HomeFragment();
 			case PVMPView.EDIT:
 				return new EditSettingsFragment();
 			case PVMPView.PROPOSITION:
