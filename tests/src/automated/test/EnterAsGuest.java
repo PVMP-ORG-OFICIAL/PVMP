@@ -10,10 +10,7 @@ public class EnterAsGuest extends UiAutomatorTestCase
 	
 	public void testGuest() throws UiObjectNotFoundException
 	{
-		
-		UiObject appsButton = new UiObject(new UiSelector().index(3).text("Apps"));
-		appsButton.clickAndWaitForNewWindow();
-		
+	
 		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
 		pvmp.clickAndWaitForNewWindow();
 		

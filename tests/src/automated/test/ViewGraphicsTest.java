@@ -11,10 +11,7 @@ public class ViewGraphicsTest extends UiAutomatorTestCase
 	
 	public void testViewGraphics() throws UiObjectNotFoundException
 	{
-		
-		UiObject appsButton = new UiObject(new UiSelector().index(3).text("Apps"));
-		appsButton.clickAndWaitForNewWindow();
-		
+
 		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
 		pvmp.clickAndWaitForNewWindow();
 		
@@ -34,20 +31,18 @@ public class ViewGraphicsTest extends UiAutomatorTestCase
 		selectCategory.clickAndWaitForNewWindow();
 		sleep(200);
 		
-		//getUiDevice().takeScreenshot(null);
+		UiObject viewFirstGraphic = new UiObject(new UiSelector().index(3).className("android.view.View"));
+		viewFirstGraphic.click();
+		sleep(500);
 		
+		UiObject viewSecondGraphic = new UiObject(new UiSelector().index(5).className("android.view.View"));
+		viewSecondGraphic.click();
+		sleep(500);
 		
-		UiObject nextButton = new UiObject(new UiSelector().index(2).text("Próxima"));
-		nextButton.clickAndWaitForNewWindow();
-		sleep(200);
-		
-		// Tirar foto
-		
-		UiObject previousButton = new UiObject(new UiSelector().index(0).text("Anterior"));
-		previousButton.clickAndWaitForNewWindow();
-		sleep(200);		
-		
-		//tirar foto
+		//scroll page to view the third graphic.
+		new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().index(7)
+				.className("android.view.View"));
+		new UiObject( new UiSelector().index(7).className("android.view.View")).click();
 		
 		getUiDevice().pressBack();
 		

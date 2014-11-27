@@ -10,10 +10,7 @@ public class GiveFeedbackTest extends UiAutomatorTestCase
 	
 	public void testGiveFeedback () throws UiObjectNotFoundException 
 	{
-		
-		UiObject appsButton = new UiObject(new UiSelector().index(3).text("Apps"));
-		appsButton.clickAndWaitForNewWindow();
-		
+	
 		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
 		pvmp.clickAndWaitForNewWindow();
 		

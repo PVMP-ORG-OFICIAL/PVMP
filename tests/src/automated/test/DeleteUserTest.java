@@ -9,9 +9,7 @@ public class DeleteUserTest extends UiAutomatorTestCase
 {
 	public void testDeletUser() throws UiObjectNotFoundException
 	{
-		UiObject appsButton = new UiObject(new UiSelector().index(3).text("Apps"));
-		appsButton.clickAndWaitForNewWindow();
-		
+	
 		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
 		pvmp.clickAndWaitForNewWindow();
 		

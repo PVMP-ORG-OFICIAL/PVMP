@@ -11,9 +11,6 @@ public class LoginTest extends UiAutomatorTestCase
 	public void testLogin() throws UiObjectNotFoundException 
 	{
 		
-		UiObject appsButton = new UiObject(new UiSelector().index(3).text("Apps"));
-		appsButton.clickAndWaitForNewWindow();
-		
 		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
 		pvmp.clickAndWaitForNewWindow();
 		
@@ -28,6 +25,11 @@ public class LoginTest extends UiAutomatorTestCase
 		UiObject enterButton = new UiObject(new UiSelector().index(5).text("Entrar"));
 		enterButton.clickAndWaitForNewWindow();
 		
+	}
+	
+	public void testLogout() throws UiObjectNotFoundException
+	{
+	
 		UiObject image = new UiObject(new UiSelector().index(1));
 		image.click();
 		
