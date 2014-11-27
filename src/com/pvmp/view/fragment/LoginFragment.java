@@ -56,8 +56,6 @@ public class LoginFragment extends FragmentView
 		View rootView = _inflater.inflate(R.layout.login_fragment, _containter, false);
 		this.mainActivity = (PVMPView) getActivity();
 		this.context = mainActivity.getApplicationContext();
-		this.mainActivity.enableDrawer(false);
-		this.mainActivity.enableScreenInteraction(false);
 		
 		this.userToBeLogged = new User();
 		this.controller = new PVMPController(this.context);
@@ -70,6 +68,13 @@ public class LoginFragment extends FragmentView
           		 Context.INPUT_METHOD_SERVICE);
 
 		return rootView;
+	}
+	
+	@Override
+	public void onResume () {
+		super.onResume();
+		this.mainActivity.enableDrawer(false);
+		this.mainActivity.enableScreenInteraction(false);
 	}
 	
 	@Override
@@ -118,8 +123,6 @@ public class LoginFragment extends FragmentView
 		}
 	}
 	
-	
-
 	private class HandleRegister implements View.OnClickListener
 	{
 		@Override

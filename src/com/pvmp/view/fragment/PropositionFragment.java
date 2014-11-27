@@ -54,8 +54,12 @@ public class PropositionFragment extends FragmentView {
 		this.existingFeedback = new Feedback();
 		this.propositions = PVMPView.propositions;
 		this.limit = propositions.size();
-		this.count = 0;
-
+		
+		if (_savedInstanceState == null)
+			this.count = 0;
+		else
+			this.count = _savedInstanceState.getInt("countValue");
+		
 		this.setGestureDetector(rootView);
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
@@ -63,6 +67,13 @@ public class PropositionFragment extends FragmentView {
 				.findViewById(R.id.proposition_flipper);
 
 		return rootView;
+	}
+	
+	@Override
+	public void onSaveInstanceState (Bundle outState) 
+	{
+		super.onSaveInstanceState(outState);
+		outState.putInt("countValue", this.count);
 	}
 
 	@Override

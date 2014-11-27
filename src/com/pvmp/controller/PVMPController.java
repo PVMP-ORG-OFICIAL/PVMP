@@ -51,11 +51,16 @@ public class PVMPController implements ControllerInterface
 			return;
 		}
 		
-		this.view.enableDrawer(false);
-		this.view.enableScreenInteraction(false);
+		this.deactivateNavigationDrawer();
 		this.view.displayFragment(ViewObserverInterface.LOGIN);
 		
 		return;
+	}
+	
+	public void deactivateNavigationDrawer () 
+	{
+		this.view.enableDrawer(false);
+		this.view.enableScreenInteraction(false);
 	}
 	
 	public void callDisplayFragment (int fragmentIndex)

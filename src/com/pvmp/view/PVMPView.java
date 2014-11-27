@@ -118,7 +118,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		//Enabling action bar app icon and bringing it a toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-
+		
 		mainDrawerToggle = new ActionBarDrawerToggle(this, this.mainDrawerLayout, 
 				R.drawable.ic_drawer,
 				R.string.app_name,
@@ -139,8 +139,19 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			this.mainTitle = getTitle();
 			this.controller.openApplication();
 		}
+		else {
+			this.mainTitle = _savedInstanceState.getCharSequence("TITLE");
+			getActionBar().setTitle(this.mainTitle);
+		}
 		
 		return;
+	}
+	
+	@Override
+	public void onSaveInstanceState (Bundle _savedInstanceState) 
+	{
+		super.onSaveInstanceState(_savedInstanceState);
+		_savedInstanceState.putCharSequence("TITLE", this.mainTitle);
 	}
 
 	private void buildIconTitleItemNavigation()
@@ -294,7 +305,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("MainActivity: Create a HOME ");
 		if(fragment != null)
 		{
-			if(_position == SETTING && user == null )
+			if(_position == SETTING && user == null)
 			{
 				MessageHandling.showToast(MessageHandling.GUEST_SETTING_WARNING, getApplicationContext());
 				this.mainDrawerLayout.closeDrawer(this.mainDrawerList);

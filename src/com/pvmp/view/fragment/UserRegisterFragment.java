@@ -70,6 +70,13 @@ public class UserRegisterFragment extends FragmentView
 		return rootView;
 	}
 	
+	@Override
+	public void onResume () {
+		super.onResume();
+		this.mainActivity.enableDrawer(false);
+		this.mainActivity.enableScreenInteraction(false);
+	}
+	
 	/**
 	* @param _view
 	* @brief 
