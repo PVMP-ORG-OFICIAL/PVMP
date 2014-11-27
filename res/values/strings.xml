@@ -84,8 +84,8 @@
 	<string name="button_next">Próxima</string>
 	<string name="button_previous">Anterior</string>
 	<string name="text_password_confirmation">Confirme sua senha</string>
-	<string name="management_team">Time de Gerencia</string>
-	<string name="team_bar">Equipe</string>
+	<string name="team">Equipe</string>
+	<string name="team_bar">Equipe e Aplicativo</string>
 	<string name="david">David Carlos</string>
 	<string name="gabriel">Gabriel Augusto</string>
 	<string name="caique">Caique Pereira</string>
@@ -96,5 +96,10 @@
 	<string name="jonathan">Jonathan Rufino</string>
 	<string name="ana">Ana Carolina</string>
 	<string name="dados_abertos">Explicação sobre os dados abertos</string>
-	<string name ="icons">Créditos para os icones</string>
+	<string name="icons">Créditos para os icones</string>
+	<string name="about_app">Sobre o Aplicativo</string>
+	<string name="text_about_app_1">O aplicativo "Para Onde Vai Meu Partido?" tem por objetivo informar melhor as pessoas
+	    sobre os partidos.</string>
+	<string name="text_about_app_2">Isso é feito através de um gráfico que mostra o posicionamento dos partidos em determinadas
+	    proposições, se eles foram a favor ou contra.</string>
 </resources>

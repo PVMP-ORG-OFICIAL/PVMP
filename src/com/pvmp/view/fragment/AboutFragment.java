@@ -15,7 +15,7 @@ import android.widget.ViewFlipper;
 public class AboutFragment extends FragmentView 
 {
 	private TextView aboutTab;
-	private ToggleButton button_team, button_dadosAbertos, button_icons;
+	private ToggleButton button_team, button_icons;
 	private int screenNumber;
 	private PVMPView view;
 	private Context context;
@@ -39,7 +39,6 @@ public class AboutFragment extends FragmentView
 	public void buildScreenComponent(View _view) 
 	{
 		this.aboutTab = (TextView) _view.findViewById(R.id.about_tab);
-		this.button_dadosAbertos = (ToggleButton) _view.findViewById(R.id.toggleButton_dadosAbertos);
 		this.button_icons = (ToggleButton) _view.findViewById(R.id.toggleButton_icons);
 		this.button_team = (ToggleButton) _view.findViewById(R.id.toggleButton_team);
 		this.viewFlipper = (ViewFlipper) _view.findViewById(R.id.about_flipper);
@@ -47,7 +46,6 @@ public class AboutFragment extends FragmentView
 		
 		this.button_team.setChecked(true);
 		
-		this.button_dadosAbertos.setOnClickListener(new HandleOpenData());
 		this.button_icons.setOnClickListener(new HandleIcons());
 		this.button_team.setOnClickListener(new HandleTeam());
 		
@@ -59,7 +57,6 @@ public class AboutFragment extends FragmentView
 		public void onClick(View v) {
 			button_team.setChecked(true);
 			button_icons.setChecked(false);
-			button_dadosAbertos.setChecked(false);
 			if(screenNumber == 1)
 			{
 				viewFlipper.setInAnimation(context,
@@ -84,45 +81,12 @@ public class AboutFragment extends FragmentView
 		}
 	}
 	
-	private class HandleOpenData implements View.OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			button_team.setChecked(false);
-			button_icons.setChecked(false);
-			button_dadosAbertos.setChecked(true);
-			
-			if(screenNumber == 2)
-			{
-				viewFlipper.setInAnimation(context,
-						R.anim.in_from_left);
-				viewFlipper.setOutAnimation(context,
-						R.anim.out_to_right);
-
-				viewFlipper.showPrevious();
-			}
-			
-			if(screenNumber == 0)
-			{
-				viewFlipper.setInAnimation(context,
-						R.anim.in_from_right);
-				viewFlipper.setOutAnimation(context,
-						R.anim.out_to_left);
-
-				viewFlipper.showNext();
-			}
-			screenNumber = 1;
-			aboutTab.setText("Dados Abertos.");
-		}
-	}
-	
 	private class HandleIcons implements View.OnClickListener {
 
 		@Override
 		public void onClick(View v) {
 			button_team.setChecked(false);
 			button_icons.setChecked(true);
-			button_dadosAbertos.setChecked(false);
 			
 			if(screenNumber == 0)
 			{

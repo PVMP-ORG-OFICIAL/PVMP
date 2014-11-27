@@ -100,7 +100,6 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
-		this.mainTitle = getTitle();
 
 		//Load Slide menu items
 		this.navigationMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
@@ -137,6 +136,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		{
 			//On first time display view for first navigation item
 			propositions = null;
+			this.mainTitle = getTitle();
 			this.controller.openApplication();
 		}
 		
@@ -331,9 +331,9 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 	private void setTitleBasedOnMenuItem(int _range)
 	{
-		if (_range < 5 && _range >= 0)
+		if (_range < 4 && _range >= 0)
 		{
-			if(_range == 4)
+			if(_range == 3)
 			{
 				setTitle(getTitle());
 				return;
@@ -341,7 +341,7 @@ public class PVMPView extends Activity implements ViewObserverInterface
 			setTitle(this.navigationMenuTitles[_range]);
 			return;	
 		}
-		this.setTitle(getTitle());
+		//this.setTitle(getTitle());
 		return;
 	}
 	

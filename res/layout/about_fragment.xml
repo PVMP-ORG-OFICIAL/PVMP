@@ -13,15 +13,6 @@
         android:textOff="Equipe" />
     
     <ToggleButton
-            android:id="@+id/toggleButton_dadosAbertos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="Dados Abertos"
-            android:textOff="Dados Abertos"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-    
-    <ToggleButton
             android:id="@+id/toggleButton_icons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +49,7 @@
 		              android:id="@+id/management_team"
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/management_team"
+		              android:text="@string/team"
 		              android:textSize="20sp"
 		              android:textColor="#999999" />
 
@@ -81,14 +72,7 @@
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
 		              android:text="@string/rodrigo" />
-		          
-		          <TextView
-		              android:id="@+id/development_team"
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/development_team"
-		              android:textSize="20sp"
-		              android:textColor="#999999" />
+
 
 		          <TextView
 		              android:layout_width="match_parent"
@@ -109,8 +93,24 @@
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
 		              android:text="@string/ana" />
-            	  	
-		      </LinearLayout>
+		          
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/about_app"
+		              android:textSize="20sp"
+		              android:textColor="#999999" />
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/text_about_app_1"/>
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/text_about_app_2"/>
+         
+         
+		          </LinearLayout>
 		      
 		      <LinearLayout 
 		          android:orientation="vertical" 
