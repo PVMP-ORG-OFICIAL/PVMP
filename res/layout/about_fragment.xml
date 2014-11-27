@@ -4,28 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <ToggleButton
-        android:id="@+id/toggleButton_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textOn="Equipe"
-        android:textOff="Equipe" />
-    
-    <ToggleButton
-            android:id="@+id/toggleButton_icons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="Icones"
-            android:textOff="Icones"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
     
     <TextView
         android:id="@+id/about_tab"
         style="@style/aboutTitle"
         android:layout_width="match_parent"
-        android:layout_below="@id/toggleButton_icons"
         android:text="@string/team_bar" />
     
     <ScrollView
@@ -33,17 +16,11 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/about_tab"
 	        android:layout_marginTop="0dp" >
-        
-		  <ViewFlipper
-		      android:id="@+id/about_flipper"
-		      android:layout_width="match_parent"
-		      android:layout_height="wrap_content"
-		      android:layout_marginBottom="10dp">
 		          
 		      <LinearLayout
 		          android:orientation="vertical" 
 		       	  android:layout_width="fill_parent"
-            	  android:layout_height="fill_parent" >
+            	  android:layout_height="wrap_content" >
 		          
 		          <TextView
 		              android:id="@+id/management_team"
@@ -52,47 +29,64 @@
 		              android:text="@string/team"
 		              android:textSize="20sp"
 		              android:textColor="#999999" />
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/text_nothing"/>
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/david" />
+		              android:text="@string/david"
+		              android:gravity="center" />
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/gabriel" />
+		              android:text="@string/gabriel"
+		              android:gravity="center" />
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/caique" />
+		              android:text="@string/caique"
+		              android:gravity="center" />
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/rodrigo" />
+		              android:text="@string/rodrigo"
+		              android:gravity="center" />
 
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/lucas" />
+		              android:text="@string/lucas"
+		              android:gravity="center" />
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/iago" />
+		              android:text="@string/iago"
+		              android:gravity="center" />
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/jonathan" />
+		              android:text="@string/jonathan"
+		              android:gravity="center" />
 
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/ana" />
+		              android:text="@string/ana"
+		              android:gravity="center" />
+		          
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/text_nothing"/>
 		          
 		          <TextView
 		              android:layout_width="match_parent"
@@ -100,6 +94,12 @@
 		              android:text="@string/about_app"
 		              android:textSize="20sp"
 		              android:textColor="#999999" />
+		          
+		          <TextView
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="@string/text_nothing"/>
+		          
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
@@ -108,34 +108,18 @@
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
 		              android:text="@string/text_about_app_2"/>
-         
-         
-		          </LinearLayout>
-		      
-		      <LinearLayout 
-		          android:orientation="vertical" 
-		       	  android:layout_width="fill_parent"
-            	  android:layout_height="fill_parent" >
-		          
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/dados_abertos" />
-		          
-		      </LinearLayout>
-		      
-		      <LinearLayout 
-		          android:orientation="vertical" 
-		       	  android:layout_width="fill_parent"
-            	  android:layout_height="fill_parent" >
-		          
+		              android:text="@string/text_about_app_3"/>
 		          <TextView
 		              android:layout_width="match_parent"
 		              android:layout_height="wrap_content"
-		              android:text="@string/icons" />
-		          
+		              android:text="@string/text_about_app_4"/>
+         
+         
 		      </LinearLayout>
-		</ViewFlipper>
-	</ScrollView>
+		      
+		</ScrollView>
     
     </RelativeLayout>

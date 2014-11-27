@@ -97,8 +97,13 @@
 	<string name="dados_abertos">Explicação sobre os dados abertos</string>
 	<string name="icons">Créditos para os icones</string>
 	<string name="about_app">Sobre o Aplicativo</string>
-	<string name="text_about_app_1">O aplicativo "Para Onde Vai Meu Partido?" tem por objetivo informar melhor as pessoas
+	<string name="text_about_app_1">O aplicativo " Para Onde Vai Meu Partido? " tem por objetivo informar melhor as pessoas
 	    sobre os partidos.</string>
-	<string name="text_about_app_2">Isso é feito através de um gráfico que mostra o posicionamento dos partidos em determinadas
-	    proposições, se eles foram a favor ou contra.</string>
+	<string name="text_about_app_2">Isso é feito através de gráficos que mostram o posicionamento dos partidos em 
+	    determinadas proposições, se esses partidos votaram a favor ou contra.</string>
+	<string name="text_about_app_3">A motivação em fazer esse aplicativo se deve ao fato do governo disponibilizar
+	    os dados referentes a essas votações em seus sites, mas a disponibilização desses dados está em uma 
+	    linguagem muito técnica, e portanto  pouco acessível aos cidadãos comuns.</string>
+	<string name="text_about_app_4">Assim, o nosso aplicativo traduz esses dados em uma forma visual mais agradável
+	    e informativo, visando sempre facilitar a interpretação para os seus usuários.</string>
 </resources>
