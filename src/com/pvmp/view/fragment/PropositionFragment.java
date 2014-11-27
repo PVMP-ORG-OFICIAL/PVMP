@@ -123,7 +123,7 @@ public class PropositionFragment extends FragmentView {
 		_rootView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				return gesturedetector.onTouchEvent(event);
+				return true;
 			}
 		});
 	}
