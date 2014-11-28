@@ -57,9 +57,9 @@
 	<!-- Navigation Drawer item Icons -->
 	<!-- Keep them in order as the title are in -->
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_proposition</item>
+        <item>@drawable/ic_proposition3</item>
         <item>@drawable/ic_settings</item>
-        <item>@drawable/ic_about_32</item>
+        <item>@drawable/ic_about</item>
         <item>@drawable/ic_logout</item>
     </array>
     
