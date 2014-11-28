@@ -34,6 +34,14 @@
                     android:gravity="center"
                     android:text="@string/proposition_info"
                     android:textSize="20sp" />
+                
+                <TextView 
+                    android:id="@+id/author_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_nothing"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp" />
 
                 <com.pvmp.util.TextViewEx
                     android:id="@+id/proposition_category"

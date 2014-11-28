@@ -154,9 +154,7 @@ public class PropositionFragment extends FragmentView {
 	}
 
 	public void updateScreenComponent() {
-		// Testing if the propositions' IDs are correct based on the category
-		// clicked.
-		String text = (propositions.get(this.count).getMenu());
+		String text = propositions.get(this.count).getMenu();
 
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
 
@@ -235,10 +233,16 @@ public class PropositionFragment extends FragmentView {
 
 	public void HandleNext() {
 		takeFeedback();
-		if (this.count < limit - 1) {
+		if (this.count < limit - 1 ) {
 			this.count++;
 		} else {
 			this.count = 0;
+		}
+		Integer idVoting = this.propositions.get(this.count).getVoting().getIdVoting();
+		if (idVoting.equals(65) || idVoting.equals(44) || idVoting.equals(12) || idVoting.equals(62)
+				|| idVoting.equals(18) || idVoting.equals(48) || idVoting.equals(50) || idVoting.equals(63)) {
+			this.HandleNext();
+			return;
 		}
 		viewFlipper.setInAnimation(this.context,
 				R.anim.in_from_right);
@@ -256,6 +260,12 @@ public class PropositionFragment extends FragmentView {
 			this.count--;
 		} else {
 			this.count = limit - 1;
+		}
+		Integer idVoting = this.propositions.get(this.count).getVoting().getIdVoting();
+		if (idVoting.equals(65) || idVoting.equals(44) || idVoting.equals(12) || idVoting.equals(62)
+				|| idVoting.equals(18) || idVoting.equals(48) || idVoting.equals(50) || idVoting.equals(63)) {
+			this.HandlePrevious();
+			return;
 		}
 		viewFlipper.setInAnimation(this.context,
 				R.anim.in_from_left);
