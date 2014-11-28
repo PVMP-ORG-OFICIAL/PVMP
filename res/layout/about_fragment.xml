@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
@@ -12,114 +13,129 @@
         android:text="@string/team_bar" />
     
     <ScrollView
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/about_tab"
-	        android:layout_marginTop="0dp" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_tab"
+        android:layout_marginTop="0dp" >
 		          
-		      <LinearLayout
-		          android:orientation="vertical" 
-		       	  android:layout_width="fill_parent"
-            	  android:layout_height="wrap_content" >
-		          
-		          <TextView
-		              android:id="@+id/management_team"
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/team"
-		              android:textSize="20sp"
-		              android:textColor="#999999" />
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_nothing"/>
+	   <LinearLayout
+		   	android:orientation="vertical" 
+			android:layout_width="fill_parent"
+		   	android:layout_height="wrap_content"
+		   	android:layout_marginLeft="10dp"
+		   	android:layout_marginRight="10dp" >
+	       
+	       <TextView
+	           android:id="@+id/management_team"
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/team"
+	           android:textSize="20sp"
+	           android:textColor="#999999" />
+	       
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_nothing"/>
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/david"
+	           android:gravity="center" />
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/gabriel"
+	           android:gravity="center" />
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/caique"
+	           android:gravity="center" />
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/rodrigo"
+	           android:gravity="center" />
 
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/david"
-		              android:gravity="center" />
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/gabriel"
-		              android:gravity="center" />
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/caique"
-		              android:gravity="center" />
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/rodrigo"
-		              android:gravity="center" />
-
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/lucas"
-		              android:gravity="center" />
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/iago"
-		              android:gravity="center" />
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/jonathan"
-		              android:gravity="center" />
-
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/ana"
-		              android:gravity="center" />
-		          
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_nothing"/>
-		          
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/about_app"
-		              android:textSize="20sp"
-		              android:textColor="#999999" />
-		          
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_nothing"/>
-		          
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_about_app_1"/>
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_about_app_2"/>
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_about_app_3"/>
-		          <TextView
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="@string/text_about_app_4"/>
-         
-         
-		      </LinearLayout>
-		      
-		</ScrollView>
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/lucas"
+	           android:gravity="center" />
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/iago"
+	           android:gravity="center" />
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/jonathan"
+	           android:gravity="center" />
+	
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/ana"
+	           android:gravity="center" />
+	       
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_nothing"/>
+	       
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/about_app"
+	           android:textSize="20sp"
+	           android:textColor="#999999" />
+	       
+	       <TextView
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_nothing"/>
+	       
+	       <com.pvmp.util.TextViewEx
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_about_app_1"/>
+	       
+	       <com.pvmp.util.TextViewEx
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_about_app_2"/>
+	       
+	       <com.pvmp.util.TextViewEx
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_about_app_3"/>
+	       
+	       <com.pvmp.util.TextViewEx
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_about_app_4"/>
+	       
+	       <TextView 
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:textSize="20sp"
+	           android:textColor="#999999"
+	           android:text="@string/text_about_app_5"/>
+	       
+	       <TextView 
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:text="@string/text_about_app_6"
+	           android:layout_marginBottom="10dp"/>         
+	   </LinearLayout>		      
+	</ScrollView>    
+</RelativeLayout>
     
-    </RelativeLayout>

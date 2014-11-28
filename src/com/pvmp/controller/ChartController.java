@@ -175,7 +175,7 @@ public class ChartController
 		}
 		
 		int[] colors_chart = {Color.parseColor("#30ba8f"),
-							  Color.parseColor("#ff2800"),
+							  Color.parseColor("#b63528"),
 							  Color.parseColor("#ff8c69"),
 							  Color.parseColor("#21abcd"),
 							  Color.parseColor("#5d8aa8"),
