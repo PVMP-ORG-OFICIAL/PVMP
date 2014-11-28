@@ -163,8 +163,10 @@ public class ChartController
 					totalOthers += actualValue;
 				}
 			}
-			slicesTitles.add("Outros");
-			votesPercentage.add(totalOthers);
+			if (totalOthers > 0.0) {
+				slicesTitles.add("Outros");
+				votesPercentage.add(totalOthers);
+			}
 		}
 		
 		contador = 0;

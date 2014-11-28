@@ -8,6 +8,7 @@ import com.pvmp.dao.Filter;
 import com.pvmp.dao.SqlSelect;
 import com.pvmp.model.Deputy;
 import com.pvmp.model.Vote;
+import com.pvmp.util.Util;
 
 import android.content.Context;
 
@@ -31,6 +32,8 @@ public class DeputyController extends AbstractController
 		
 		for (int i = 0; i < _votes.size(); i++) {
 			deputiesRegistrations.add(_votes.get(i).getDeputy().getIdRegistration());
+			Util.debug("voting: " + _votes.get(i).getVoting().getIdVoting() +
+					"dep: " + _votes.get(i).getDeputy().getIdRegistration());
 		}
 		
 		SqlSelect selectExpression = new SqlSelect();

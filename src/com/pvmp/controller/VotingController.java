@@ -36,7 +36,7 @@ public class VotingController extends AbstractController
 		
 		SqlSelect selectExpression = new SqlSelect();
 		selectExpression.addEntity(voting.TABLE_NAME);
-		selectExpression.addColumn(Voting.COLUMN_CODE_SESSION);
+		selectExpression.addColumn(Voting.COLUMN_ID_VOTING);
 		selectExpression.addColumn(Proposition.COLUMN_ID_PROP);
 		
 		Filter propositionIdFilter = new Filter("id_prop", "IN");
