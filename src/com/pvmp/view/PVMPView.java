@@ -18,28 +18,26 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
-import com.pvmp.models.User;
+import com.pvmp.model.Proposition;
+import com.pvmp.model.User;
 import com.pvmp.view.adapter.NavigationDrawerAdapter;
+import com.pvmp.view.model.AbstractDrawerItem;
 import com.pvmp.view.model.NavigationDrawerItem;
-import com.pvmp.view.fragment.HomeFragment;
-import com.pvmp.view.fragment.LoginFragment;
-import com.pvmp.view.fragment.EditSettingsFragment;
-import com.pvmp.view.fragment.UserRegisterFragment;
-import com.pvmp.view.fragment.FeedBackFragment;
-import com.pvmp.view.fragment.PartyFragment;
-import com.pvmp.view.fragment.SettingsFragment;
-import com.pvmp.view.fragment.PropositionFragment;
 import com.pvmp.view.ViewObserverInterface;
 import com.pvmp.controller.ControllerInterface;
 import com.pvmp.controller.PVMPController;
-import com.pvmp.R;
+import com.pvmp.controller.UserController;
+import com.pvmp.main.R;
 
 /**
 * @class PVMPView
@@ -47,14 +45,13 @@ import com.pvmp.R;
 */
 public class PVMPView extends Activity implements ViewObserverInterface 
 {
-	private static User user;/**< */
+	public static User user;/**< */
+	//Might change.
+	public static ArrayList<Proposition> propositions;
 
 	private DrawerLayout mainDrawerLayout; /**< */
 	private ListView mainDrawerList; /**< */
 	private ActionBarDrawerToggle mainDrawerToggle; /**< */
-
-	//Navigation drawer application title
-	private CharSequence mainDrawerTitle; 
 
 	//Used to store app title
 	private CharSequence mainTitle;
@@ -63,12 +60,16 @@ public class PVMPView extends Activity implements ViewObserverInterface
 	private String[] navigationMenuTitles;
 	private TypedArray navigationMenuIcons;
 
-	private ArrayList<NavigationDrawerItem> navigationDrawerItems;
+	private ArrayList<AbstractDrawerItem> navigationDrawerItems;
 	private NavigationDrawerAdapter adapter;
 
 	//Controller and Model reference
 	private ControllerInterface controller;
 	//private ModelSubjectInterface model; <-Still not using
+	
+	private UserController userController;
+	public static GestureDetector gesturedetector = null;
+		
 
 	public PVMPView()
 	{}
@@ -83,13 +84,22 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		Util.debug("PVMPView: Add object parameter - Controller");
 		this.controller = new PVMPController(this);
 		this.controller.setView(this);
+		this.userController = new UserController(this);
+		
+		gesturedetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
+			
+			@Override
+			public boolean onDown(MotionEvent e) {
+				return true;
+			}
+		});
+
 		
 		//Start the party!!! 
 		user = this.controller.openSession();
 
 		//1 - Adjust interface
 		setContentView(R.layout.activity_main);
-		this.mainTitle = mainDrawerTitle  = getTitle();
 
 		//Load Slide menu items
 		this.navigationMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
@@ -105,10 +115,10 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.adapter = new NavigationDrawerAdapter(getApplicationContext(), this.navigationDrawerItems);
 		this.mainDrawerList.setAdapter(this.adapter);
 
-		//Enabling action bar app icon and behaveing it a toggle button
+		//Enabling action bar app icon and bringing it a toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-
+		
 		mainDrawerToggle = new ActionBarDrawerToggle(this, this.mainDrawerLayout, 
 				R.drawable.ic_drawer,
 				R.string.app_name,
@@ -125,10 +135,23 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		if (_savedInstanceState == null)
 		{
 			//On first time display view for first navigation item
+			propositions = null;
+			this.mainTitle = getTitle();
 			this.controller.openApplication();
+		}
+		else {
+			this.mainTitle = _savedInstanceState.getCharSequence("TITLE");
+			getActionBar().setTitle(this.mainTitle);
 		}
 		
 		return;
+	}
+	
+	@Override
+	public void onSaveInstanceState (Bundle _savedInstanceState) 
+	{
+		super.onSaveInstanceState(_savedInstanceState);
+		_savedInstanceState.putCharSequence("TITLE", this.mainTitle);
 	}
 
 	private void buildIconTitleItemNavigation()
@@ -136,9 +159,13 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.navigationMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 		this.mainDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		this.mainDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-		this.navigationDrawerItems = new ArrayList<NavigationDrawerItem>();
+		this.navigationDrawerItems = new ArrayList<AbstractDrawerItem>();
 
 		return;
+	}
+	
+	public ArrayList<Proposition> getPropositions (){
+		return propositions;
 	}
 
 	public void updateUser(User _user)
@@ -150,26 +177,18 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		//Adding navigation drawer items to array
 		//Proposition
 		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[0], 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.PROPOSITION, -1)));
-		//Party
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[1], 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.PARTY, -1)));
-		//Feedback
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[2], 
-			this.navigationMenuIcons.getResourceId(ViewObserverInterface.FEEDBACK, -1)));
+			this.navigationMenuIcons.getResourceId(ViewObserverInterface.CATEGORY, -1)));
 		//Settings
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[3], 
+		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[1], 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.SETTING, -1)));
+		//About
+		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[2], 
+			this.navigationMenuIcons.getResourceId(ViewObserverInterface.ABOUT, -1)));
 		//Logout
-		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[4], 
+		this.navigationDrawerItems.add(new NavigationDrawerItem(this.navigationMenuTitles[3], 
 			this.navigationMenuIcons.getResourceId(ViewObserverInterface.LOGOUT, -1)));
 
 		return;
-	}
-
-	public void setController(ControllerInterface _controller)
-	{
-		this.controller = _controller;
 	}
 
 	@Override
@@ -256,65 +275,64 @@ public class PVMPView extends Activity implements ViewObserverInterface
 		this.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 		return;
 	}
+	
+
+	public boolean dispatchTouchEvent(MotionEvent ev)
+	{
+		super.dispatchTouchEvent(ev);
+		return gesturedetector.onTouchEvent(ev);
+		
+	}
 
 	@Override
 	public void displayFragment(int _position)
 	{
 		Util.debug("PVMPView: Start display fragment");
 		Fragment fragment = null;
-		switch(_position)
-		{
-			case PROPOSITION:
-				fragment = new PropositionFragment();
-				break;
-			case PARTY:
-				fragment = new PartyFragment();
-				break;
-			case FEEDBACK:
-				fragment = new FeedBackFragment();
-				break;
-			case SETTING:
-				fragment = new SettingsFragment();
-				break;
-			case LOGOUT:
-				this.updateUser(this.controller.openSession());
-				if (user != null) 
-				{
-					user.setDefaultUser("N");
-					this.controller.editUser(user);
-				}
-				fragment = new LoginFragment();
-				break;
-			case LOGIN:
-				fragment = new LoginFragment();
-				break;
-			case REGISTER:
-				fragment = new UserRegisterFragment();
-				break;
-			case HOME:
-				fragment = new HomeFragment();
-				break;
-			case EDIT:
-				fragment = new EditSettingsFragment();
-				break;
-			default:
-				break;
+		
+		//Create the fragment
+		fragment = new FragmentFactory().generateFragment(_position);
+		
+		if (_position == LOGOUT) {
+			this.updateUser(this.controller.openSession());
+			if (user != null) 
+			{
+				user.setDefaultUser("N");
+				this.userController.editUser(user);
+			}
 		}
 
 		Util.debug("MainActivity: Create a HOME ");
 		if(fragment != null)
 		{
-			FragmentManager fragmentManager = getFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-			fragmentTransaction.replace(R.id.frame_container, fragment);
-			fragmentTransaction.addToBackStack(null);
-			fragmentTransaction.commit();
-			
-			//Update selected item and title, then close the drawer
-			this.mainDrawerList.setItemChecked(_position, true);
-			this.mainDrawerList.setSelection(_position);
-			this.setTitleBasedOnMenuItem(_position);
-			this.mainDrawerLayout.closeDrawer(this.mainDrawerList);
+			if(_position == SETTING && user == null)
+			{
+				MessageHandling.showToast(MessageHandling.GUEST_SETTING_WARNING, getApplicationContext());
+				this.mainDrawerLayout.closeDrawer(this.mainDrawerList);
+			}
+			else
+			{
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+				fragmentTransaction.replace(R.id.frame_container, fragment);
+				
+				if (_position != CATEGORY && _position != LOGOUT && _position != LOGIN)
+				{
+					fragmentTransaction.addToBackStack(null);
+				}
+				else
+				{
+					fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				}
+				
+				fragmentTransaction.commit();
+				
+				//Update selected item and title, then close the drawer
+				this.mainDrawerList.setItemChecked(_position, true);
+				this.mainDrawerList.setSelection(_position);
+				this.setTitleBasedOnMenuItem(_position);
+				this.mainDrawerLayout.closeDrawer(this.mainDrawerList);
+			}
 		}
 		else
 		{
@@ -324,18 +342,17 @@ public class PVMPView extends Activity implements ViewObserverInterface
 
 	private void setTitleBasedOnMenuItem(int _range)
 	{
-		if (_range < 5 && _range >= 0)
+		if (_range < 4 && _range >= 0)
 		{
-			if(_range == 4)
+			if(_range == 3)
 			{
 				setTitle(getTitle());
 				return;
 			}
 			setTitle(this.navigationMenuTitles[_range]);
-			return;
-			
+			return;	
 		}
-		this.setTitle(getTitle());
+		//this.setTitle(getTitle());
 		return;
 	}
 	

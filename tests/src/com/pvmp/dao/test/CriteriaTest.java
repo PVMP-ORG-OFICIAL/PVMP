@@ -7,6 +7,7 @@ import com.pvmp.dao.Criteria;
 import com.pvmp.dao.Expression;
 import com.pvmp.dao.Filter;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
@@ -79,5 +80,22 @@ public class CriteriaTest extends TestCase
 		assertEquals("(IDADE < 16 OR IDADE > 60)", this.criteria4.dumpExpression());
 		assertEquals("(((SEXO = 'F' AND IDADE > 18) OR (SEXO = 'M' AND IDADE < 16)) AND (IDADE < 16 OR IDADE > 60))",
 				     this.criteria5.dumpExpression());
+	}
+	
+	public void testNoExpressions() {
+		criteria1 = new Criteria();
+		assertNull(criteria1.dumpExpression()); //returns null cause there is nothing on the expressions' arrayList.
+	}
+
+	public void testIfAddThrowsException () {
+		try 
+		{
+			criteria1.add(null, null);
+			Assert.fail("A NullPointerException should have been throwed.");
+		}
+		catch (NullPointerException npE) 
+		{
+			//passed
+		}
 	}
 }

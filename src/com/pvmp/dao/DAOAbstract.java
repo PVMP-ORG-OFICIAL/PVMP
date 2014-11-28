@@ -76,25 +76,27 @@ public abstract class DAOAbstract
 	/**
 	 * @param _queryExpression
 	 * @param _context
+	 * @throws Throwable 
 	 * @brief Template method for Database Select of every PVMP class that will
 	 *        extends from this abstract. Returns a ArrayList containing
 	 *        every row (might be seen as a Object) that obeys the Query Expression
 	 *        (_queryExpression).
 	 * */
 	//Study a way to make it or contentValuesToModel static, so every object returned won't depend of a single instance.
-	public final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context) 
+	public final ArrayList<DAOAbstract> selectDB(SqlSelect _queryExpression, Context _context)  
 	{
 		if (_queryExpression == null || _context == null)
 		{
 			throw new NullPointerException("Null value at DAOAbstract.selectDB()");
 		}
-		
+
+
 		ArrayList<ContentValues> arrayContentValues = new ArrayList<ContentValues>();
 		ArrayList<DAOAbstract> arrayModels = new ArrayList<DAOAbstract>();
-		
+
 		arrayContentValues = PVMPDatabase.selectDB(_queryExpression, _context);
 		
-		for (int i = 0; i < arrayContentValues.size(); i++) 
+		for (int i = 0; i < arrayContentValues.size(); i++)
 		{
 			arrayModels.add(this.contentValuesToModel(arrayContentValues.get(i)));
 		}

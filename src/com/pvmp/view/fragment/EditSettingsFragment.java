@@ -9,13 +9,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.controller.PVMPController;
-import com.pvmp.models.User;
+import com.pvmp.controller.UserController;
+import com.pvmp.model.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
@@ -34,9 +36,11 @@ public class EditSettingsFragment extends FragmentView
 	private EditText oldPassword;
 	private EditText newPassword;
 	private Button buttonSave;
-	private static User loggedUser;
+	private User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
+	private InputMethodManager imm;
+	private UserController userController;
 	
 	private PVMPController controller;
 	
@@ -52,13 +56,17 @@ public class EditSettingsFragment extends FragmentView
 		this.mainActivity = (PVMPView) getActivity();
 		this.context = mainActivity.getApplicationContext();
 		
-		this.controller = new PVMPController(context);
-		controller.setView(EditSettingsFragment.this.mainActivity);
+		this.controller = new PVMPController(this.context);
+		this.controller.setView(EditSettingsFragment.this.mainActivity);
+		this.userController = new UserController(this.context);
 		
-		loggedUser = this.controller.openSession();
+		this.loggedUser = PVMPView.user;
 		
 		this.buildScreenComponent(rootView);
 		this.initialUpdateScreenComponent();
+		
+		imm = (InputMethodManager)mainActivity.getSystemService(
+         		 Context.INPUT_METHOD_SERVICE);
 		
 		return rootView;
   }
@@ -86,25 +94,39 @@ public class EditSettingsFragment extends FragmentView
 		this.userEmail.setText(loggedUser.getEmail());
 		this.userAge.setText(Integer.toString(loggedUser.getAge()));
 		
-		switch(loggedUser.getEducation())
+		char education;
+		if(loggedUser.getEducation().equals("Fundamental"))
+			education = 'F';
+		else if(loggedUser.getEducation().equals("Ensino Medio"))
+			education = 'M';
+		else
+			education = 'S';
+		
+		switch(education)
 		{
-			case "Fundamental":
+			case 'F':
 				this.education.check(R.id.radio_editElementarySchool);
 				break;
-			case "Ensino Medio":
+			case 'M':
 				this.education.check(R.id.radio_editHighSchool);
 				break;
-			case "Superior":
+			case 'S':
 				this.education.check(R.id.radio_editGraduated);
 				break;
 		}
 		
-		switch (loggedUser.getSex())
+		char sex;
+		if(loggedUser.getSex().equals("Masculino"))
+			sex = 'M';
+		else
+			sex = 'F';
+		
+		switch (sex)
 		{
-			case "Masculino":
+			case 'M':
 				this.sex.check(R.id.radio_editMale);
 				break;
-			case "Feminino":
+			case 'F':
 				this.sex.check(R.id.radio_editFemale);
 				break;
 		}
@@ -120,7 +142,7 @@ public class EditSettingsFragment extends FragmentView
 			updateScreenComponent();
 			
 			boolean passVerification = passwordsVerification();
-			int validationResult = User.validationResult(loggedUser, context);
+			int validationResult = loggedUser.validationResult(loggedUser, context);
 			
 			if (validationResult > 0 && validationResult <= 6)
 			{
@@ -136,14 +158,12 @@ public class EditSettingsFragment extends FragmentView
 					MessageHandling.showToast(MessageHandling.PASSWORD_SUCCESSFUL_CHANGE, context);
 				}
 				
-				controller.editUser(loggedUser);
+				imm.hideSoftInputFromWindow(newPassword.getWindowToken(), 0);
+				userController.editUser(loggedUser);
 				mainActivity.displayFragment(ViewObserverInterface.SETTING);
 			}
 		}
-		
-		
-	
-}
+	}
 	
 	public void updateScreenComponent () 
 	{

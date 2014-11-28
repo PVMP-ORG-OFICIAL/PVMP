@@ -4,8 +4,8 @@
  * */
 package com.pvmp.dao;
 
+import java.util.ArrayList;
 import java.util.Locale;
-
 /**
  *  @class Filter
  *  @brief Class responsible for receiving some commands, transforming them into SQL language
@@ -39,7 +39,7 @@ public final class Filter extends Expression
 	 * */
 	
 	//Expected form: ('value1', 'value2', 'value3',...)
-	private String transform(String[] _value)
+	public String transform(String[] _value)
 	{
 		if (_value == null) 
 		{
@@ -64,7 +64,7 @@ public final class Filter extends Expression
 	}
 	
 	//Expected form: (value1, value2, value3,...)
-	private String transform(int[] _value)
+	public String transform(ArrayList<Integer> _value)
 	{
 		if (_value == null) 
 		{
@@ -73,11 +73,11 @@ public final class Filter extends Expression
 		
 		String result = "(";
 		
-		for (int i = 0; i < _value.length; i++)
+		for (int i = 0; i < _value.size(); i++)
 		{
-			result += _value[i];
+			result += _value.get(i);
 			
-			if (i != (_value.length -1))
+			if (i != (_value.size() -1))
 			{
 				result += ", ";
 			}
@@ -88,7 +88,7 @@ public final class Filter extends Expression
 		return result;
 	}
 	
-	private String transform(Object _value)
+	public String transform(Object _value)
 	{
 		if (_value == null)
 		{
@@ -99,6 +99,11 @@ public final class Filter extends Expression
 		{
 			Integer value = (Integer)_value;
 			return Integer.toString(value);
+		}
+		else if (_value instanceof Float)
+		{
+			Float value = (Float)_value;
+			return Float.toString(value);
 		}
 		else if (_value instanceof Boolean)
 		{
@@ -128,7 +133,7 @@ public final class Filter extends Expression
 		this.value = this.transform(_value);
 	}
 	
-	public void setValue(int[] _value) 
+	public void setValue(ArrayList<Integer> _value) 
 	{
 		this.value = this.transform(_value);
 	}

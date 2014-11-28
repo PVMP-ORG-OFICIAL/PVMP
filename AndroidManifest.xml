@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.pvmp"
+      package="com.pvmp.main"
       android:versionCode="1"
       android:versionName="1.0">
       
@@ -19,7 +19,8 @@
 
         <activity android:name="StartSplash"
                   android:label="@string/app_name"
-									android:noHistory="true">
+				  android:noHistory="true"
+				  android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,11 +29,17 @@
         
 				<activity
 					android:label="@string/app_name"
-          android:name="com.pvmp.view.PVMPView">
+          			android:name="com.pvmp.view.PVMPView"
+          			android:configChanges="keyboardHidden|orientation" >
 						<intent-filter>
 							<action android:name="com.pvmp.view.PVMPView"/>
 							<category android:name="android.intent.category.DEFAULT" />
 						</intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name="com.pvmp.view.fragment.PropositionActivity"
+            android:configChanges="keyboardHidden|orientation">
         </activity>
 
     </application>

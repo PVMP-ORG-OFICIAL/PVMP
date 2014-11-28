@@ -19,6 +19,8 @@ public final class SqlSelect extends SqlInstructionQuery
 	{
 		this.columns = new ArrayList<String>();
 		this.expression = null;
+		this.auxiliarCondition = null;
+		this.entities = new ArrayList<String>();
 	}
 	
 	@Override
@@ -35,18 +37,35 @@ public final class SqlSelect extends SqlInstructionQuery
 			for (String column : this.columns) 
 			{
 				expression += column;
-				if (!column.equals(this.columns.get(this.columns.size() -1))) 
+				if (this.columns.size() > 1)
 				{
-					expression += ", ";
+					if (!column.equals(this.columns.get(this.columns.size() -1))) 
+					{
+						expression += ", ";
+					}
 				}
 			}
 		}
 		
-		expression += " FROM " + this.entity;
+		expression += " FROM ";
+		
+		for (String entity : this.entities)
+		{
+			expression += entity;
+			if (!entity.equals(this.entities.get(this.entities.size() -1))) 
+			{
+				expression += ", ";
+			}
+		}
 		
 		if (this.expression != null) 
 		{
 			expression += " WHERE " + this.expression.dumpExpression();
+		}
+		
+		if (this.auxiliarCondition != null) 
+		{
+			expression += " " + this.auxiliarCondition;
 		}
 		
 		return expression;
@@ -60,6 +79,10 @@ public final class SqlSelect extends SqlInstructionQuery
 	 * */
 	public void addColumn (String _column) {
 		this.columns.add(_column);
+	}
+	
+	public void addEntity (String _entity) {
+		this.entities.add(_entity);
 	}
 	
 	/**

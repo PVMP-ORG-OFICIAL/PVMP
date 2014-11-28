@@ -8,28 +8,34 @@ import android.widget.Toast;
 
 
 public class MessageHandling {
-	public static final String INVALID_NAME = "Nome inv·lido.";
+	public static final String INVALID_NAME = "Nome inv√°lido.";
 	public static final String NAME_LENGHT = "Seu nome deve ter de 3 a 50 caracteres.";
-	public static final String EMAIL_FORMAT = "Formato de email inv·lido.";
-	public static final String EMAIL_LENGHT = "Seu email deve ter no m·ximo 40 caracteres.";
+	public static final String EMAIL_FORMAT = "Formato de email inv√°lido.";
+	public static final String EMAIL_LENGHT = "Seu email deve ter no m√°ximo 40 caracteres.";
 	public static final String AGE_RANGE = "Sua idade tem de estar entre o intervalo 10-99.";
 	public static final String PASSWORD_LENGHT = "Sua senha deve ter de 6 a 15 caracteres.";
-	public static final String PASSWORD_FORMAT = "Sua senha deve ser formada apenas por letras e n˙meros.";
-	public static final String PASSWORD_NOT_MATCH = "Senha antiga n„o correspondente.";
-	public static final String EXISTING_EMAIL = "Email j· existente";
-	public static final String EXISTING_USERNAME = "Nome de usu·rio j· existente";
-	public static final String USERNAME_LENGHT  = "Senha antiga n„o correspondente.";
-	public static final String USERNAME_FIRST_CHAR = "Seu nome de usu·rio deve comeÁar com uma letra.";
-	public static final String USERNAME_FORMAT = "Seu nome de usu·rio deve ser composto apenas de letras e n˙meros.";
-	public static final String ERROR_LOGIN = "Nome de usu·rio e/ou senha n„o correspondem";
+	public static final String PASSWORD_FORMAT = "Sua senha deve ser formada apenas por letras e n√∫meros.";
+	public static final String PASSWORD_NOT_MATCH = "Senha antiga n√£o correspondente.";
+	public static final String EXISTING_EMAIL = "Email j√° existente";
+	public static final String EXISTING_USERNAME = "Nome de usu√°rio j√° existente";
+	public static final String USERNAME_LENGHT  = "Seu nome de usu√°rio deve ter de 3 a 15 caracteres";
+	public static final String USERNAME_FIRST_CHAR = "Seu nome de usu√°rio deve come√ßar com uma letra.";
+	public static final String USERNAME_FORMAT = "Seu nome de usu√°rio deve ser composto apenas de letras e n√∫meros.";
+	public static final String ERROR_LOGIN = "Nome de usu√°rio e/ou senha n√£o correspondem";
+	public static final String PASSWORD_CONFIRM_NOT_MATCH = "As duas senhas n√£o correspondem";
 	
 	public static final String SUCCESSFUL_REGISTER = "Cadastro realizado com sucesso!";
 	public static final String PASSWORD_SUCCESSFUL_CHANGE = "Senha alterada com sucesso.";
 	public static final String PASSWORD_CONFIRM_TO_DELETE = "Digite sua senha para poder excluir.";
 	public static final String SUCCESSFUL_DELETE = "Conta excluida com sucesso.";
+	public static final String GUEST_SETTING_WARNING = "Voc√™ deve estar logado para poder acessar essa √°rea";
 	
 	private static Toast toast = null;
 	
+	/**
+	 * @param text
+	 * @param context
+	 */
 	public static void showToast (CharSequence text, Context context) {
 		int duration = Toast.LENGTH_LONG;
 		if (toast == null) 
@@ -44,12 +50,20 @@ public class MessageHandling {
 		}
 	}
 	
+	/**
+	 * @param editText
+	 */
 	public static void requestAttention (EditText editText) {
 		editText.setText("");
 		editText.setFocusableInTouchMode(true);
 		editText.requestFocus();
 	}
 	
+	/**
+	 * @param editText
+	 * @param text
+	 * @param context
+	 */
 	public static void genericError (EditText editText, CharSequence text, Context context) {
 		if (editText != null) {
 			showToast(text, context);
@@ -57,6 +71,14 @@ public class MessageHandling {
 		}
 	}
 	
+	/** 
+	 * @param et1
+	 * @param et2
+	 * @param et3
+	 * @param et4
+	 * @param validationResult
+	 * @param context
+	 */
 	public static void displayEditError (EditText et1, EditText et2, EditText et3,
 										 EditText et4, int validationResult,
 										 Context context) {
@@ -82,6 +104,15 @@ public class MessageHandling {
 		}
 	}
 	
+	/**
+	 * @param et1
+	 * @param et2
+	 * @param et3
+	 * @param et4
+	 * @param et5
+	 * @param validationResult
+	 * @param context
+	 */
 	public static void displayRegisterError(EditText et1, EditText et2, EditText et3,
 										    EditText et4, EditText et5, int validationResult,
 										    Context context) {
@@ -102,6 +133,9 @@ public class MessageHandling {
 					break;
 				case 11:
 					MessageHandling.genericError(et1, USERNAME_FORMAT, context);
+					break;
+				case 12:
+					MessageHandling.genericError(et3, PASSWORD_FORMAT, context);
 					break;
 		    }
 	    }

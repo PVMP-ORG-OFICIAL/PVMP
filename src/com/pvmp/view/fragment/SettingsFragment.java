@@ -13,9 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.controller.PVMPController;
-import com.pvmp.models.User;
+import com.pvmp.controller.UserController;
+import com.pvmp.model.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.view.PVMPView;
 import com.pvmp.view.ViewObserverInterface;
@@ -35,10 +36,11 @@ public class SettingsFragment extends FragmentView
 	private EditText passwordConfirm;
 	private Button buttonEdit;
 	private Button buttonDelete;
-	private static User loggedUser;
+	private User loggedUser;
 	private PVMPView mainActivity; /**<*/
 	private Context context; /**<*/
-	boolean firstTime = true;
+	private boolean firstTime = true;
+	private UserController userController;
 	
 	private PVMPController controller;
 	
@@ -55,10 +57,11 @@ public class SettingsFragment extends FragmentView
         this.mainActivity = (PVMPView) getActivity();
 		this.context = mainActivity.getApplicationContext();
 		
-		this.controller = new PVMPController(context);
-		controller.setView(SettingsFragment.this.mainActivity);
+		this.controller = new PVMPController(this.context);
+		this.controller.setView(SettingsFragment.this.mainActivity);
+		this.userController = new UserController(this.context);
 		
-		loggedUser = this.controller.openSession();
+		this.loggedUser = PVMPView.user;
 		
 		this.buildScreenComponent(rootView);
 		this.updateScreenComponent();
@@ -74,9 +77,9 @@ public class SettingsFragment extends FragmentView
 		this.education = (TextView) _view.findViewById(R.id.textView_showEducation);
 		this.sex = (TextView) _view.findViewById(R.id.textView_showSex);
 		this.userName = (TextView) _view.findViewById(R.id.textView_showUsername);
-		this.passwordConfirm = (EditText) _view.findViewById(R.id.editText_passwordConfirm);
 		this.buttonEdit = (Button) _view.findViewById(R.id.button_edit);
 		this.buttonDelete = (Button) _view.findViewById(R.id.button_delete);
+		this.passwordConfirm = (EditText) _view.findViewById(R.id.passwordVerify);
 		
 		this.buttonEdit.setOnClickListener(new HandleEdit());
 		this.buttonDelete.setOnClickListener(new HandleDelete());
@@ -84,7 +87,6 @@ public class SettingsFragment extends FragmentView
 	
 	public void updateScreenComponent()
 	{
-		
 		this.name.setText(loggedUser.getName());
 		this.userEmail.setText(loggedUser.getEmail());
 		this.userAge.setText(Integer.toString((loggedUser.getAge())));
@@ -98,7 +100,7 @@ public class SettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			mainActivity.displayFragment(ViewObserverInterface.EDIT);
+			SettingsFragment.this.mainActivity.displayFragment(ViewObserverInterface.EDIT);
 		}
 	}
 	
@@ -107,21 +109,23 @@ public class SettingsFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
-			String password = passwordConfirm.getText().toString(); 
-			if(firstTime){	
-				passwordConfirm.setVisibility(1);
+			String password = SettingsFragment.this.passwordConfirm.getText().toString();
+			
+			if(firstTime){
+				SettingsFragment.this.passwordConfirm.setVisibility(1);
 				MessageHandling.showToast(MessageHandling.PASSWORD_CONFIRM_TO_DELETE, context);
-				firstTime = false;
+				SettingsFragment.this.firstTime = false;
 			}
-			else if(loggedUser.getPassword().equals(password))
+			else if(SettingsFragment.this.loggedUser.getPassword().equals(password))
 			{
-				controller.deleteUser(loggedUser);
+				SettingsFragment.this.userController.removeUser(loggedUser);
 				MessageHandling.showToast(MessageHandling.SUCCESSFUL_DELETE, context);
-				mainActivity.displayFragment(ViewObserverInterface.LOGIN);
+				SettingsFragment.this.mainActivity.displayFragment(ViewObserverInterface.LOGIN);
 			}
 			else
 			{
 				MessageHandling.showToast(MessageHandling.PASSWORD_NOT_MATCH, context);
+				MessageHandling.requestAttention(SettingsFragment.this.passwordConfirm);
 			}
 		}
 	}

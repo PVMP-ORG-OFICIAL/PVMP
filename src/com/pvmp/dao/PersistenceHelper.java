@@ -1,20 +1,22 @@
 package com.pvmp.dao;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
-public class PersistenceHelper extends SQLiteOpenHelper 
+import android.content.Context;
+
+
+public class PersistenceHelper extends SQLiteAssetHelper
 {
 
-	public static final String DATABASE_NAME = "PVMP_DATABASE";
-	public static final int VERSION = 3;
+	public static final String DATABASE_NAME = "PVMPdatabase.db";
+	public static final int DATABASE_VERSION = 2;
+	public static String DATABASE_DIR;
 	
 	private static PersistenceHelper instance = null;
 	
 	private PersistenceHelper(Context _context) 
 	{
-		super(_context, DATABASE_NAME, null, VERSION);
+		super(_context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	public static PersistenceHelper getInstance(Context context) 
@@ -23,18 +25,6 @@ public class PersistenceHelper extends SQLiteOpenHelper
 		{
 			instance = new PersistenceHelper(context.getApplicationContext());
 		}
-		
 		return instance;
-	}
-	
-	public void onCreate(SQLiteDatabase db) 
-	{
-		db.execSQL(UserDAO.SCRIPT_TABLE_CREATION_USER);
-	}
-	
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
-	{
-		db.execSQL(UserDAO.SCRIPT_TABLE_DELETION);
-		onCreate(db);
 	}
 }

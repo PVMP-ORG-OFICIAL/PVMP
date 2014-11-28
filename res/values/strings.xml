@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PVMP</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">De Olho na Câmara</string>
     <string name="action_settings">Settings</string>
     <string name="text_login">Entrar</string>
     <string name="text_register">Cadastrar</string>
@@ -28,12 +27,21 @@
     <string name="text_new_password">Nova Senha</string>
     <string name="text_save">Salvar</string>
     <string name="textView_errorLogin">Usuario e/ou Senha incorreto(s).</string>
+    <string name="voting_title">Resultado da Votação</string>
+    <string name="yes_chart_title">Votos a Favor</string>
+    <string name="no_chart_title">Votos Contra</string>
+    <string name="proposition_info">Informações da Proposição</string>
     
+    <string name="like_button">Gostei</string>
+    <string name="dislike_button">Não Gostei</string>
+    <string name="clown_button">Palhaçada</string>
+
     <!-- Field hint -->
     <string name="text_name_hint">Inserir o seu nome</string>
     <string name="text_email_hint">Inserir o seu email</string>
     <string name="text_password_hint">Insira sua senha</string>
     <string name="text_user_hint">Nome de usuário</string>
+    <string name="text_password_confirmation_hint">Repita sua senha</string>
    
 	<!-- Menu strings  -->
 	<string name="drawer_open">Slider menu aberto</string>
@@ -41,24 +49,63 @@
 
     <string-array name="nav_drawer_items">
         <item> Proposições </item>
-        <item> Partidos </item>
-        <item> Feedback </item>
         <item> Configurações de Conta </item>
+        <item> Sobre </item>
         <item> Sair </item>
     </string-array>
     
 	<!-- Navigation Drawer item Icons -->
 	<!-- Keep them in order as the title are in -->
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_proposition</item>
-        <item>@drawable/ic_partido</item>
-        <item>@drawable/ic_feedback</item>
+        <item>@drawable/ic_proposition3</item>
         <item>@drawable/ic_settings</item>
+        <item>@drawable/ic_about</item>
         <item>@drawable/ic_logout</item>
+    </array>
+    
+    <array name="category_drawer_icons">
+        <item>@drawable/ic_administrator_48</item>
+        <item>@drawable/ic_conference_48</item>
+        <item>@drawable/ic_student_48</item>
+        <item>@drawable/ic_bank_48</item>
+        <item>@drawable/ic_flow_chart_48</item>
+        <item>@drawable/ic_workers_48</item>
+        <item>@drawable/ic_rel_48</item>
+        <item>@drawable/ic_lion_statue_48</item>
+        <item>@drawable/ic_add_list_48</item>
     </array>
 	
 	<!-- Content Description -->
 	<string name="desc_list_item_icon">Item Icon</string>
 	<string name="passwordWarning">Caso não queira mudar sua senha, deixe os campos de senha em branco.</string>
 	<string name="text_age_hint">Insira sua idade</string>
+	<string name="proposition_category"></string>
+	<string name="button_next">Próxima</string>
+	<string name="button_previous">Anterior</string>
+	<string name="text_password_confirmation">Confirme sua senha</string>
+	<string name="team">Equipe</string>
+	<string name="team_bar">Equipe e Aplicativo</string>
+	<string name="david">David Carlos</string>
+	<string name="gabriel">Gabriel Augusto</string>
+	<string name="caique">Caique Pereira</string>
+	<string name="rodrigo">Rodrigo Siqueira</string>
+	<string name="development_team">Time de Desenvolvimento</string>
+	<string name="iago">Iago Rodrigues</string>
+	<string name="lucas">Lucas Mattioli</string>
+	<string name="jonathan">Jonathan Rufino</string>
+	<string name="ana">Ana Carolina</string>
+	<string name="dados_abertos">Explicação sobre os dados abertos</string>
+	<string name="icons">Créditos para os icones</string>
+	<string name="about_app">Sobre o Aplicativo</string>
+	<string name="text_about_app_1"> O aplicativo - De olho na Câmara - tem por objetivo informar melhor as pessoas
+	    sobre os partidos.</string>
+	<string name="text_about_app_2"> Isso é feito através de gráficos que mostram o posicionamento dos partidos em 
+	    determinadas proposições, se esses partidos votaram a favor ou contra.</string>
+	<string name="text_about_app_3"> A motivação em fazer esse aplicativo se deve ao fato do governo disponibilizar
+	    os dados referentes a essas votações em seus sites, mas a disponibilização desses dados está em uma 
+	    linguagem muito técnica, e portanto  pouco acessível aos cidadãos comuns.</string>
+	<string name="text_about_app_4"> Assim, o nosso aplicativo traduz esses dados em uma forma visual mais agradável
+	    e informativo, visando sempre facilitar a interpretação para os seus usuários.</string>
+	<string name="text_about_app_5">Ícones</string>
+	<string name="text_about_app_6">http://www.icons8.com/</string>
 </resources>
