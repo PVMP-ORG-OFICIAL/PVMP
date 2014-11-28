@@ -11,7 +11,8 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class CategoryTest extends UiAutomatorTestCase{
 	
-public void testCategory() throws UiObjectNotFoundException{
+	public void testCategory() throws UiObjectNotFoundException
+	{
 		
 		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
 		pvmp.clickAndWaitForNewWindow();
@@ -27,9 +28,6 @@ public void testCategory() throws UiObjectNotFoundException{
 		UiObject enterButton = new UiObject(new UiSelector().index(5).text("Entrar"));
 		enterButton.clickAndWaitForNewWindow();
 		sleep(1000);
-		
-		//File path = new File("/sdcard/");
-		//getUiDevice().takeScreenshot(path);
 		
 		UiObject image = new UiObject(new UiSelector().index(1));
 		image.click();

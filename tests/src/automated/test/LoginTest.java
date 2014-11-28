@@ -33,7 +33,7 @@ public class LoginTest extends UiAutomatorTestCase
 		UiObject userNameDontExists = new UiObject(new UiSelector().index(2).text("Nome de usuário")
 				.className("android.widget.EditText"));
 		userNameDontExists.click();
-		userNameDontExists.setText("joão");
+		userNameDontExists.setText("joao");
 		
 		UiObject userPasswordExists = new UiObject(new UiSelector().index(4));
 		userPasswordExists.click();
@@ -54,7 +54,7 @@ public class LoginTest extends UiAutomatorTestCase
 		
 		UiObject userPasswordDontExists = new UiObject(new UiSelector().index(4));
 		userPasswordDontExists.click();
-		userPasswordDontExists.setText("joão123");
+		userPasswordDontExists.setText("joao123");
 		
 		UiObject enterButton = new UiObject(new UiSelector().index(5).text("Entrar"));
 		enterButton.clickAndWaitForNewWindow();

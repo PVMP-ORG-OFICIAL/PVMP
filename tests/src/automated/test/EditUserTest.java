@@ -10,11 +10,8 @@ public class EditUserTest extends UiAutomatorTestCase
 	
 	public void testEditUser() throws UiObjectNotFoundException
 	{
-		UiObject appsButton = new UiObject(new UiSelector().index(3).text("Apps"));
-		appsButton.clickAndWaitForNewWindow();
-		
-		UiObject pvmp = new UiObject(new UiSelector().text("PVMP"));
-		pvmp.clickAndWaitForNewWindow();
+		UiObject donc = new UiObject(new UiSelector().text("De Olho na Câmara"));
+		donc.clickAndWaitForNewWindow();
 		
 		UiObject userField = new UiObject (new UiSelector().index(2).text("Nome de usuário"));
 		userField.click();
@@ -31,9 +28,10 @@ public class EditUserTest extends UiAutomatorTestCase
 		UiObject image = new UiObject(new UiSelector().index(1));
 		image.click();
 		
-		UiObject settingsButton = new UiObject(new UiSelector().index(3));
+		UiObject settingsButton = new UiObject(new UiSelector().index(1).text("Configurações de Conta")
+				.className("android.widget.TextView"));
 		settingsButton.clickAndWaitForNewWindow();
-		sleep(500);
+		sleep(200);
 		
 		UiObject editButton = new UiObject(new UiSelector().index(12).text("Editar"));
 		editButton.clickAndWaitForNewWindow();
@@ -45,8 +43,6 @@ public class EditUserTest extends UiAutomatorTestCase
 		UiObject saveButton = new UiObject(new UiSelector().index(9).text("Salvar"));
 		saveButton.clickAndWaitForNewWindow();
 		sleep(100);
-		
-		//tirar foto
 		
 		UiObject image1 = new UiObject(new UiSelector().index(1));
 		image1.click();

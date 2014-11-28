@@ -18,7 +18,7 @@ public class MessageHandling {
 	public static final String PASSWORD_NOT_MATCH = "Senha antiga não correspondente.";
 	public static final String EXISTING_EMAIL = "Email já existente";
 	public static final String EXISTING_USERNAME = "Nome de usuário já existente";
-	public static final String USERNAME_LENGHT  = "Senha antiga não correspondente.";
+	public static final String USERNAME_LENGHT  = "Seu nome de usuário deve ter de 3 a 15 caracteres";
 	public static final String USERNAME_FIRST_CHAR = "Seu nome de usuário deve começar com uma letra.";
 	public static final String USERNAME_FORMAT = "Seu nome de usuário deve ser composto apenas de letras e números.";
 	public static final String ERROR_LOGIN = "Nome de usuário e/ou senha não correspondem";
