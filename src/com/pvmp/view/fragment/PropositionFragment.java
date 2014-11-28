@@ -27,7 +27,7 @@ public class PropositionFragment extends FragmentView {
 	private Context context;
 	private PVMPView view;
 	private ArrayList<Proposition> propositions;
-	private TextView categoryName;
+	private TextView authorName, categoryName;
 	private ViewFlipper viewFlipper;
 	private int limit, target, count;
 	private String opinion = "";
@@ -132,8 +132,7 @@ public class PropositionFragment extends FragmentView {
 	public void buildScreenComponent(View _view) {
 		this.categoryName = (TextView) _view
 				.findViewById(R.id.proposition_category);
-		//this.textPropositionCount = (TextView) _view
-				//.findViewById(R.id.proposition_count2);
+		this.authorName = (TextView) _view.findViewById(R.id.author_name);
 		this.propositionScrollView = (ScrollView) _view
 				.findViewById(R.id.proposition_scroll_view);
 		this.yesNoVotesChart = (PieChart) _view
@@ -154,7 +153,8 @@ public class PropositionFragment extends FragmentView {
 	}
 
 	public void updateScreenComponent() {
-		String text = propositions.get(this.count).getMenu();
+		String textAuthor = "Autor: " + propositions.get(this.count).getAuthor();
+		String textMenu = "Ementa: " + propositions.get(this.count).getMenu();
 
 		this.propositionScrollView.fullScroll(ScrollView.FOCUS_UP);
 
@@ -169,7 +169,8 @@ public class PropositionFragment extends FragmentView {
 				this.context);
 
 		//this.textPropositionCount.setText("#" + (this.count + 1));
-		this.categoryName.setText(text);
+		this.authorName.setText(textAuthor);
+		this.categoryName.setText(textMenu);
 		if(PVMPView.user != null)
 		{
 			this.existingFeedback = this.feedbackController.selectFeedback(

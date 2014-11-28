@@ -42,6 +42,7 @@ public class PropositionController extends AbstractController
 		selectExpression.addEntity("Proposition");
 		selectExpression.addColumn(Proposition.COLUMN_MENU);
 		selectExpression.addColumn(Proposition.COLUMN_ID_PROP);
+		selectExpression.addColumn(Proposition.COLUMN_AUTHOR);
 		
 		if (_value != null) 
 		{
