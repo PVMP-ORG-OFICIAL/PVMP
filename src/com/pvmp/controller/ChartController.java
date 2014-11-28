@@ -3,6 +3,7 @@ package com.pvmp.controller;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.pvmp.model.Deputy;
@@ -173,13 +174,21 @@ public class ChartController
 			contador++;
 		}
 		
+		int[] colors_chart = {Color.parseColor("#30ba8f"),
+							  Color.parseColor("#ff2800"),
+							  Color.parseColor("#ff8c69"),
+							  Color.parseColor("#21abcd"),
+							  Color.parseColor("#5d8aa8"),
+							  Color.parseColor("#de5d83"),
+							  Color.parseColor("#ffbf00")};
+		
 		pieDataSet = new PieDataSet(slicesValues, "");
 		if (_tag.equals(ALL_VOTES))
-			pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+			pieDataSet.setColors(colors_chart);
 		else if(_tag.equals(YES_VOTES))
-			pieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+			pieDataSet.setColors(colors_chart);
 		else
-			pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+			pieDataSet.setColors(colors_chart);
 		pieDataSet.setSliceSpace(0f);
 		_chart.setData(new PieData(slicesTitles, pieDataSet));
 		

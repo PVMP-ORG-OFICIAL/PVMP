@@ -16,7 +16,8 @@
 	        android:id="@+id/proposition_scroll_view"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="0dp" >
+	        android:layout_marginTop="0dp"
+	        android:background="#FFFFFF" >
 	
             <LinearLayout
                 android:id="@+id/flipper_linear"
