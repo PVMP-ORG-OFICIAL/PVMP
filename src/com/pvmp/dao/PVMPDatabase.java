@@ -6,8 +6,6 @@ package com.pvmp.dao;
 
 import java.util.ArrayList;
 
-import com.pvmp.util.Util;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -23,20 +21,9 @@ public class PVMPDatabase
 {
 	private static SQLiteDatabase database = null;
 	
-	private PVMPDatabase() 	
-	{}
-	
-	/**
-	 * @param _context
-	 * @brief Constructor of the class. Need a context to start a PersistenceHelper
-	 * 		  instance.
-	 **/
-	private PVMPDatabase(Context _context) 
-	{
-		PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(_context);
-		database = persistenceHelper.getWritableDatabase();
+	public PVMPDatabase () {
+		
 	}
-	
 	/**
 	 * @param _tableName
 	 * @param _values
@@ -48,15 +35,7 @@ public class PVMPDatabase
 	{
 		if (_tableName == null)
 		{
-			throw new NullPointerException("Null table name at PVMPDatabase.insertDB()");
-		}
-		if (_values == null)
-		{
 			throw new NullPointerException("Null values at PVMPDatabase.insertDB()");
-		}
-		if (_context == null)
-		{
-			throw new NullPointerException("Null context at PVMPDatabase.insertDB()");
 		}
 		
 		database = getWritablePVMP(_context);		
@@ -83,7 +62,6 @@ public class PVMPDatabase
 		if (_tableName == null || _values == null || _whereClause == null
 			|| _context == null)
 		{
-			Util.debug("PVMPDatabase: updateDB deu treta.");
 			throw new NullPointerException("Null value at PVMPDatabase.updateDB()");
 		}
 		
@@ -101,7 +79,6 @@ public class PVMPDatabase
 	{
 		if (_tableName == null || _whereClause == null || _context == null)
 		{
-			Util.debug("PVMPDatabase: deleteDB deu treta.");
 			throw new NullPointerException("Null value at PVMPDatabase.deleteDB()");
 		}
 		
@@ -118,7 +95,6 @@ public class PVMPDatabase
 	{	
 		if (_queryExpression == null || _context == null)
 		{
-			Util.debug("PVMPDatabase: selectDB deu treta.");
 			throw new NullPointerException("Null value at PVMPDatabase.selectDB()");
 		}
 		
@@ -136,6 +112,8 @@ public class PVMPDatabase
         		DatabaseUtils.cursorRowToContentValues(cursor, contentValues);
         		arrayContentValues.add(contentValues);
         	}while (cursor.moveToNext());
+        	
+        	cursor.close();
         }
         
 		return arrayContentValues;

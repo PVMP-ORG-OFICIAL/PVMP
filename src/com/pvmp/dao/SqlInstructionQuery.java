@@ -4,6 +4,8 @@
  * */
 package com.pvmp.dao;
 
+import java.util.ArrayList;
+
 /**
  * @class SqlInstructionQuery
  * @brief Abstract class that holds common methods for different SQL instructions
@@ -14,21 +16,27 @@ public abstract class SqlInstructionQuery
 	
 	protected String finalExpression;
 	protected Expression expression;
-	protected String entity;
+	protected ArrayList<String> entities;
+	protected String auxiliarCondition;
 	
 	public void setExpression (Expression _expression)
 	{
 		this.expression = _expression;
 	}
 	
-	public final void setEntity(String _entity) 
+	public final void setEntity(ArrayList<String> _entities) 
 	{
-		this.entity = _entity;
+		this.entities = _entities;
 	}
 	
-	public final String getEntity()
+	public final void setAuxiliarCondition(String _auxiliarCondition)
 	{
-		return this.entity;
+		this.auxiliarCondition = _auxiliarCondition;
+	}
+	
+	public final ArrayList<String> getEntities()
+	{
+		return this.entities;
 	}
 	
 	/**

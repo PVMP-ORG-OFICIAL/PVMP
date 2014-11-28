@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.pvmp.R;
+import com.pvmp.main.R;
 import com.pvmp.controller.PVMPController;
-import com.pvmp.models.User;
+import com.pvmp.controller.UserController;
+import com.pvmp.model.User;
 import com.pvmp.util.MessageHandling;
 import com.pvmp.util.Util;
 import com.pvmp.view.PVMPView;
@@ -27,18 +29,18 @@ import com.pvmp.view.ViewObserverInterface;
 public class LoginFragment extends FragmentView
 {
 
-	private EditText userName;
-	private EditText password;
+	private EditText editTextUsername;
+	private EditText editTextPassword;
 	private PVMPView mainActivity;
 	private User userToBeLogged;
 	private Context context;
 	private Button buttonLogin;
 	private Button buttonRegister;
 	private Button buttonGuest;
+	private InputMethodManager imm;
 
 	private PVMPController controller;
-	
-	
+	private UserController userController;
 
 	public LoginFragment()
 	{
@@ -52,25 +54,35 @@ public class LoginFragment extends FragmentView
 		//Preparing the fragment
 		Util.debug("LoginFragment: onCreateView");
 		View rootView = _inflater.inflate(R.layout.login_fragment, _containter, false);
-		mainActivity = (PVMPView) getActivity();
-		context = mainActivity.getApplicationContext();
-		mainActivity.enableDrawer(false);
-		mainActivity.enableScreenInteraction(false);
+		this.mainActivity = (PVMPView) getActivity();
+		this.context = mainActivity.getApplicationContext();
+		
 		this.userToBeLogged = new User();
-		this.controller = new PVMPController(context);
-		controller.setView(LoginFragment.this.mainActivity);
+		this.controller = new PVMPController(this.context);
+		this.controller.setView(LoginFragment.this.mainActivity);
+		this.userController = new UserController(this.context);
 		//Initialize the elements
 		this.buildScreenComponent(rootView);
+		
+		imm = (InputMethodManager)mainActivity.getSystemService(
+          		 Context.INPUT_METHOD_SERVICE);
 
 		return rootView;
+	}
+	
+	@Override
+	public void onResume () {
+		super.onResume();
+		this.mainActivity.enableDrawer(false);
+		this.mainActivity.enableScreenInteraction(false);
 	}
 	
 	@Override
 	public void buildScreenComponent (View _view) 
 	{
 		Util.debug("LoginFragment: Start initialize");
-		this.userName = (EditText) _view.findViewById(R.id.name);
-		this.password = (EditText) _view.findViewById(R.id.password);
+		this.editTextUsername = (EditText) _view.findViewById(R.id.name);
+		this.editTextPassword = (EditText) _view.findViewById(R.id.password);
 		//this.errorLogin 	= (TextView) _view.findViewById(R.id.textView_errorLogin);
 		this.buttonLogin 	= (Button) _view.findViewById(R.id.button_confirm);
 		this.buttonGuest 	= (Button) _view.findViewById(R.id.button_entry_guest);
@@ -90,28 +102,33 @@ public class LoginFragment extends FragmentView
 		public void onClick(View _view)
 		{
 			Util.debug("ENTRAR PUSHED!!!"); 
-			String username = userName.getText().toString();
-			String password_ = password.getText().toString();
-			userToBeLogged = userToBeLogged.verifyExistingUser(username, password_, context);
+			String username = editTextUsername.getText().toString();
+			String password = editTextPassword.getText().toString();
+			userToBeLogged = LoginFragment.this.userController.verifyMatchingUserPassword(username, password);
 			
 			if(userToBeLogged != null){
+                imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 				userToBeLogged.setDefaultUser("S");
-				controller.editUser(userToBeLogged);
-				mainActivity.displayFragment(ViewObserverInterface.HOME);
+				userController.editUser(userToBeLogged);
+				PVMPView.user = userToBeLogged;
+				mainActivity.displayFragment(ViewObserverInterface.CATEGORY);
 			}
 			else{
 				userToBeLogged = new User();
 				MessageHandling.showToast(MessageHandling.ERROR_LOGIN, context);
+				MessageHandling.requestAttention(editTextPassword);
+				MessageHandling.requestAttention(editTextUsername);
 			}
 			
 		}
 	}
-
+	
 	private class HandleRegister implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View _view)
 		{
+			imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 			mainActivity.displayFragment(ViewObserverInterface.REGISTER);
 		}
 	}
@@ -121,7 +138,10 @@ public class LoginFragment extends FragmentView
 		@Override
 		public void onClick(View _view)
 		{
+			PVMPView.user = null;
+			imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 			Util.debug("VISISTANTE PUSHED!!!");
+			mainActivity.displayFragment(ViewObserverInterface.CATEGORY);
 		}
 	}
 	

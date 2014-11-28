@@ -7,11 +7,8 @@ package com.pvmp.controller;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
 
-import com.pvmp.models.ModelSubjectInterface;
-import com.pvmp.models.User;
+import com.pvmp.model.User;
 import com.pvmp.view.ViewObserverInterface;
-import com.pvmp.util.Util;
-import com.pvmp.models.PVMPmodel;
 
 /**
 * @class PVMPController
@@ -19,12 +16,11 @@ import com.pvmp.models.PVMPmodel;
 */
 public class PVMPController implements ControllerInterface
 {
-	ViewObserverInterface view;
-	ModelSubjectInterface model;
+	private ViewObserverInterface view;
+	private UserController userController;
 
 	public PVMPController()
-	{
-	}
+	{}
 
 	/**
 	* @param _context
@@ -32,7 +28,7 @@ public class PVMPController implements ControllerInterface
 	*/
 	public PVMPController(Context _context)
 	{
-		this.model = new PVMPmodel(_context);
+		this.userController = new UserController(_context);
 	}
 
 	/**
@@ -44,54 +40,21 @@ public class PVMPController implements ControllerInterface
 		this.view = _view;
 	}
 
-	/**
-	* @param _model
-	* @brief 
-	*/
-	public void setModel(ModelSubjectInterface _model)
-	{
-		this.model = _model;
-	}
-
 	@Override
 	public void openApplication()
 	{
-			User user = this.model.getDefaultUser();
-			
-			Util.debug("PVMPController: start openApplication.");
+		User user = this.userController.getUser("default_user","S");
 
-			//Verify if has user default
-			if (user.getAge() !=0 )
-			{
-				Util.debug("PVMPController: go to HOME");
-				this.view.displayFragment(ViewObserverInterface.HOME);
-				return;
-			}
-			Util.debug("PVMPController: go to LOGIN");
-			this.view.enableDrawer(false);
-			this.view.enableScreenInteraction(false);
-			this.view.displayFragment(ViewObserverInterface.LOGIN);
-			
+		//Verify if has user default
+		if (user != null)
+		{
+			this.view.displayFragment(ViewObserverInterface.CATEGORY);
 			return;
-	}
-
-	@Override
-	public void displayListProposition()
-	{
-		return;	
-	}
-
-	//public void displayFragment();
-	@Override
-	public void registerUser(User _user)
-	{
-		Util.debug("PVMPController: Prepare for register new user.");
-		try {
-			this.model.saveUser(_user);
-		}catch (SQLiteException sqlE) {
-			sqlE.printStackTrace();
 		}
-
+		
+		this.deactivateNavigationDrawer();
+		this.view.displayFragment(ViewObserverInterface.LOGIN);
+		
 		return;
 	}
 	public void callDisplayFragment (int fragmentIndex)
@@ -101,24 +64,22 @@ public class PVMPController implements ControllerInterface
 		Util.debug("PVMPController: finish register");
 	}
 	
-	public void editUser(User _user){
-		this.model.editUser(_user);
+	public void deactivateNavigationDrawer () 
+	{
+		this.view.enableDrawer(false);
+		this.view.enableScreenInteraction(false);
 	}
 	
-	public void deleteUser(User _user){
-		this.model.removeUser(_user);
+	public void callDisplayFragment (int fragmentIndex)
+	{
+		this.view.displayFragment(fragmentIndex);
 	}
 	
-
 	@Override
 	public User openSession()
 	{
-		Util.debug("PVMPController: openSession");
-		User user = this.model.getDefaultUser();
-		if(user == null)
-		{
-			Util.debug("PVMPController: getDefaultUser Problem");
-		}
+		
+		User user = this.userController.getUser("default_user","S");
 
 		return user;
 	}
